@@ -1,0 +1,43 @@
+<main class="searchp">
+  <section class="searchp_intro">
+    <div class="searchp_intro_field">
+      <div class="field"><label class="field_lbl">Search</label><input class="field_npt">
+        
+      </div>
+    </div>
+  </section>
+  <section class="searchp_tabs">
+    <div class="tabs">
+      <div class="tabs_els">
+        <div class="simp catEl act" data-post=""><span>All</span></div>
+        <div class="simp catEl" data-post="podcast"><span>Pods</span></div>
+        <div class="simp catEl" data-post="show"><span>Shows</span></div>
+        <div class="simp catEl" data-post="post"><span>Articles</span></div>
+      </div>
+    </div>
+    <div class="totalSearch">0 results</div>
+  </section>
+  <section class="searchp_results hPosts">
+  </section>
+
+  <section class="m-cta signupmod" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+         <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+          var title = it.global.acf.signup_text[randomNum-1].title;
+          var text = it.global.acf.signup_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        </h3>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>
+      

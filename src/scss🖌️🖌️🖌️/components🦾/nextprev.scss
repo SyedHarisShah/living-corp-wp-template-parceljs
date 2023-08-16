@@ -1,0 +1,94 @@
+.m-nextprev{
+  border-top:1px solid $dark;
+  display:flex;
+  justify-content: space-between;
+  align-items: stretch;
+  .left{
+    padding-top:2.4rem;
+    padding-bottom:2.4rem;
+    padding-left:$pad;
+    padding-right: $pad;
+    width:calc(50% + 1px);
+    border-right:1px inset $dark;
+    position:relative;
+    overflow: hidden;
+    & + .right{
+      border-left:0;
+    }
+    
+    &::before{
+      content:'';
+      background:$pink;
+      @include clock;
+      backface-visibility: hidden;
+      clip-path:circle(0% at -20% 50%);
+      transition:1s all $swiftOut;
+    }
+    &:hover{
+      &::before{
+
+      clip-path:circle(200% at 0% 50%);
+      }
+    }
+  }
+  .right{
+    margin-left:auto;
+    width:50%;
+    border-left:1px solid $dark;
+    padding-top:2.4rem;
+    padding-bottom:2.4rem;
+    padding-left:$pad;
+    padding-right: $pad;
+    display:flex;
+    justify-content: flex-end;
+    position:relative;
+    overflow: hidden;
+    &::before{
+      content:'';
+      background:$pink;
+      @include clock;
+      backface-visibility: hidden;
+      clip-path:circle(0% at 120% 50%);
+      transition:1s all $swiftOut;
+    }
+    &:hover{
+      &::before{
+
+      clip-path:circle(200% at 100% 50%);
+      }
+    }
+  }
+}
+
+
+.btnarrow{
+  display:inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  position:relative;
+  z-index:3;
+  &_n{
+    display:block;
+    width:1.2rem;
+    height:1.2rem;
+    border-left:.6rem solid $dark;
+    border-bottom:.6rem solid $dark;
+    transform:rotate(45deg);
+    margin-right:1rem;
+  }
+  &_t{
+    font-family: 'bureau';
+    font-weight: 500;
+    font-size:1.8rem;
+    text-transform: uppercase;
+    @include breakPortrait{
+      font-size: 1.6rem;
+    }
+    & + .btnarrow_n{
+      margin-left:1rem;
+      margin-right: 0;
+      transform:rotate(-135deg);
+    }
+
+  }
+}

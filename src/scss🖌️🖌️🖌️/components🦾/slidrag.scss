@@ -1,0 +1,44 @@
+.m-slidrag{
+  border-top:1px solid $dark;
+  .swiper-slide{
+    width:54rem;
+    display:flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-right:1px solid $dark;
+    height:auto;
+    @include breakPortrait{
+      width:40rem;
+
+    }
+    @include breakMobile{
+      width:28rem;
+
+    }
+    .pod{
+      width:100%;
+      &_info{
+      }
+    }
+  }
+  .swiper{
+    &-wrapper{
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    &.swiper-drag{
+      svg{
+        opacity:0;
+        transition:0.001s opacity $swiftOut;
+        // transition:.6s transform $swiftOut;
+        // transform:translate(-50%,-50%) rotate(var(--app-speed)) scale(.8);
+        
+      }
+      .pod_image_hold{
+        
+
+        clip-path: ellipse(28% 44% at 50% 50%);
+      }
+    }
+  }
+}

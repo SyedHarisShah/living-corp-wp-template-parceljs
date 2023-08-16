@@ -1,0 +1,96 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="login" data-id="2")
+      main.loginp
+        .m-login
+          .left
+            .left_hold
+              .border
+              .border
+              .border
+              .left_el
+                img(src="./images/home/1.jpg")
+              .left_el
+                img(src="./images/home/2.jpg")
+              .left_el
+                img(src="./images/home/3.jpg")
+          .right
+            .right_top
+              .tabselector.simp.mouseHover(style="--main:#FEF9F3")
+                span Sign up
+              .tabselector.simp.mouseHover(style="--main:#FEF9F3")
+                span Log in
+            .right_tabs
+              .right_tabs_el.signuptab
+                .error
+                  p Email already exists
+                h2.tit1 Sign up
+                .signuptab_inputs
+                  .field
+                    label.field_lbl First Name
+                    input.field_npt.firstReg
+                    .field_err Empty field
+                  .field6
+                    .field.field-email
+                      label.field_lbl Last Name
+                      input.field_npt.lastReg
+                      .field_err Empty field
+                    .selc
+                      select.pronounReg
+                        option(hidden selected value="") Pronouns
+                        option(value="He") HE
+                        option(value="She") SHE
+
+                  .field.field-email
+                    label.field_lbl Your Email*
+                    input.field_npt.emailReg
+                    .field_err Empty field
+                  .signuptab_text
+                    h3.tit4 A password will be sent to your email
+                    .txt-bureau
+                      p Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a>PRIVACY POLICY</a>
+                  .btn.btnReg
+                    .btn_t Register
+              .right_tabs_el.logintab
+                .error.error-1
+                  p Email is wrong
+                .error.error-2
+                  p Password is wrong
+                .logintab_hold
+                  h2.tit1 Log in
+                  .logintab_inputs
+                    .field.field-email
+                      label.field_lbl Email
+                      input.field_npt.logEm.mouseHover
+                      .field_err Wrong Format : name@example.com
+                    .field.field-pass
+                      label.field_lbl password*
+                      input.field_npt.logPass.mouseHover(type="password")
+                      .field_err Empty field
+                    .chk
+                      input.mouseHover.chk_npt.logRem(type="checkbox")
+                      .chk_s
+                        .chk_i
+                      label.chk_lbl Remember me
+                    .tabselector.forget.mouseHover Forget your password?
+                    .btn.btnLogin
+                      .btn_t Log in
+              
+              .right_tabs_el.forgettab
+                .error
+                  p Email doesnt exist
+                .error.error-1
+                  p Success! You will recieve an email confirmation
+                h2.tit1 Reset
+                .forgettab_inputs
+                  .field.field-email
+                    label.field_lbl Email
+                    input.field_npt.mouseHover
+                    .field_err Empty field
+                  .btn
+                    .btn_t Register
+    script(sync type="module" src="./src/app.js")

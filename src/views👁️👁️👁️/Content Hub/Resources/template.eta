@@ -1,0 +1,14 @@
+<main class="resources">
+  <section class="m-simpleintro">
+    <div class="c-vw">
+      <h2 class="tit1"><%~ it.data.acf.title_lista %></h2>
+      <p><%~ it.data.acf.text_lista %></p>
+    </div>
+  </section>
+  <section class="m-lists">
+    <div class="m-lists_hold hPosts">
+    <%~ it.loading %>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

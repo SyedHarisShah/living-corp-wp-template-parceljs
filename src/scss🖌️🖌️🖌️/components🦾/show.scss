@@ -1,0 +1,320 @@
+
+.showa{
+  padding:2.4rem;
+  width:colSize(6);
+  @include breakMobile{
+    padding:$pad $pad 0 $pad;
+  }
+  &_hold{
+    position:relative;
+    @include ratio(1,1);
+    transition:1s all $swiftOut;
+
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      right:0;
+      top:0;
+      background:$dark;
+      transition:1s all $swiftOut;
+    }
+    
+  }
+  &_image{
+    @include clock;
+    img{
+      width:100%;
+      height:100%;
+      position:absolute;
+      left:0;
+      top:0;
+      object-fit: cover;
+    }
+    .btn{
+      @include center--x;
+      bottom:20%;
+      opacity:0;
+      transition:.6s all $swiftOut;
+      &::before{
+        opacity:1;
+        transform:translate(-.4rem,.4rem);
+  
+      }
+      &::after{
+        transform:translate(.4rem,-.4rem);
+      }
+      .btn_t{
+        transform:translate(.4rem,-.4rem);
+  
+      }
+    }
+  }
+  &:hover{
+    @include media-min(768){
+      .showa{
+        &_hold{
+          transition:.6s all $swiftOut;
+          transform:translate(2.4rem,-2.4rem);
+          &::before{
+
+            transition:.6s all $swiftOut;
+            transform:translate(-2.4rem,2.4rem);
+          }
+          .btn{
+            opacity:1;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+
+.show{
+  display:flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  padding:2.4rem $pad;
+  width:50%;
+  position:relative;
+  border-top:1px solid $dark;
+  @include breakPortrait{
+    width:100%;
+
+  }
+
+  
+  &_hold{
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-grow: 1;
+    transition:.6s all $swiftOut;
+  }
+  &_image{
+    position:relative;
+    border:1px solid $dark;
+    @include ratio(672,376);
+    overflow: hidden;
+    .btnplay{
+      pointer-events: all;
+      z-index:2;
+      @include center;
+    }
+    img{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transition:.6s all $swiftOut;
+    }
+    &:hover{
+      img{
+        transform:scale(1.1);
+      }
+    }
+  }
+  &_info{
+    background:$light;
+    padding:1.6rem 0 0;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-grow: 1;
+    @include breakPortrait{
+      padding:1.6rem 0 0;
+
+    }
+    .autor{
+      margin-top:1.6rem;
+
+    }
+    .txt-bureau{
+      margin-top:1.6rem;
+      margin-bottom:1.6rem;
+
+    }
+    &_bottom{
+      margin-top:auto;
+      padding-top:1.6rem;
+      border-top: 1px solid $dark;
+      width:100%;
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+  }
+  .shareclick{
+    position:relative;
+      
+    &_close{
+      position:absolute;
+      right:0;
+      top:50%;
+      transform:translateY(-50%);
+      width:2rem;
+      height:2rem;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      z-index:3;
+      &::before{
+        content:'';
+        position:absolute;
+        top:50%;
+        left:0;
+        display:block;
+        width:100%;
+        height:.4rem;
+        background:$dark;
+        transition:.6s all $swiftOut;
+        transform: translateY(-50%) rotate(45deg) scaleX(0);
+       
+     
+      }
+      &::after{
+        content:'';
+        position:absolute;
+        top:50%;
+        left:0;
+        display:block;
+        width:100%;
+        height:.4rem;
+        background:$dark;
+        transition:.6s all $swiftOut;
+        
+        transform:translateY(-50%) rotate(-45deg) scaleX(0);
+     
+      }
+    }
+    & > svg{
+      pointer-events: all;
+      transition:.4s all $swiftOut;
+    }
+    
+    &_icons{
+      right:100%;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:auto;
+      display:flex;
+      justify-content: flex-end;
+      padding-right: 2rem;
+      align-items: center;
+      pointer-events: none;
+
+      a{
+        display:inline-flex;
+        position:relative;
+        width:1.4rem;
+        opacity:0;
+        flex-shrink: 0;
+        transform:translateY(50%);
+        transition:.4s all $swiftOut;
+        @for $i from 1 to 5 {
+          &:nth-child(#{$i}) { transition-delay:(5-$i) * 0.1s; }
+        }
+        @include media-max(680){
+          // width:1.4rem;
+        }
+        svg{
+          width:100%;
+          position:relative;
+          *:not(g){
+            transition:.6s all $swiftOut;
+            fill:$dark;
+          }
+        }
+        &::before{
+          content:'';
+          position:absolute;
+          left:50%;
+          top:50%;
+          width:3.2rem;
+          height:3.2rem;
+          border-radius: 100%;
+          transform:translate(-50%,-50%) scale(0);
+          transition:.6s all $swiftOut;
+          
+        }
+        & + a{
+          margin-left:2rem;
+          
+         
+        }
+        &:hover{
+          &:before{
+            transform:translate(-50%,-50%) scale(1);
+
+          }
+          svg{
+            *:not(g){
+              fill:$light;
+            }
+          }
+        }
+      }
+
+      
+    }
+    &.act{
+      .shareclick_close{
+        &::before{
+          transform: translateY(-50%) rotate(45deg) scaleX(1);
+          transition-delay:.4s;
+        }
+        &::after{
+          transform: translateY(-45%) rotate(-45deg) scaleX(1);
+          transition-delay:.6s;
+        }
+        
+       
+      }
+      & > svg{
+        opacity:0;
+      }
+      .shareclick_icons{
+        pointer-events: all;
+
+      }
+      a{
+        pointer-events: all;
+        opacity:1;
+        transform:translateY(0%);
+      }
+    }
+  }
+  &:hover{
+    .show_hold{
+      transition:.6s all $swiftOut;
+      // transform:translate(1.2rem,-1.2rem);
+      .btnmore-hovered{
+        opacity:1;
+      }
+    }
+  }
+}
+
+
+@include breakDesktop{
+
+  .blocks{
+    .show:nth-child(odd){
+      border-right:1px solid $dark;
+    }
+  }
+}

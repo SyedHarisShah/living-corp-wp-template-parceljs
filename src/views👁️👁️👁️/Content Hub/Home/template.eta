@@ -1,0 +1,248 @@
+<main class="ch-home">
+      <% let item = it.data.acf.ch_intro; %>
+      <section class="ch-home_intro">
+        <div class="iO iO-slidetime"></div>
+        <div class="left">
+          <div class="left_el">
+            <div class="left_el_hold">
+              <% if(item){ %>
+                <img src="<%~ item.image %>"/>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="right_hold">
+            <% if(item){ %>
+              <h2 class="tit1"><%~ item.heading %></h2>
+              <h3 class="tit4">
+                <div class="line">
+                  <div class="word"><%~ item.subheading %></div>
+                </div>
+              </h3>
+
+              <a class="btnmore mouseHover" href="<%~ item.link ? item.link['url'] : '#' %>">
+                <div class="btnmore_t"><%~ item.link ? item.link['title'] : '' %></div>
+              </a>
+            <% } %>
+          </div>
+        </div>
+
+      </section>
+
+      <% item = it.data.acf.ch_purpose; %>
+      <section class="ch-home_purpose" id="purpose">
+        <div class="iO iO-slidetime"></div>
+        <div class="left">
+          <div class="left_hold">
+            <% if(item){ %>
+              <h2 class="tit1"><%~ item.heading %></h2>
+              <h3 class="tit4">
+                <div class="line">
+                  <div class="word"><%~ item.subheading %></div>
+                </div>
+              </h3>
+
+              <a class="btnmore mouseHover" href="<%~ item.link ? item.link['url'] : '#' %>">
+                <div class="btnmore_t"><%~ item.link ? item.link['title'] : '' %></div>
+              </a>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="right_el">
+            <div class="right_el_hold">
+              <div class="ch_list_prog-cont">
+                <div class="ch_list_prog-bar" id="ch-bar"></div>
+              </div>
+              <div class="ch_list" id="ch-list">
+                <% if(item.list){ %>
+                  <% item.list.forEach((elem) => { %>
+                    <a class="ch_item mouseHover" href="<%~ elem.link ?? '#' %>">
+                      <h4 class="tit4"><%~ elem.subheading %></h4>
+                      <h2 class="tit2"><%~ elem.heading %></h2>
+                      <span class="desc"><%~ elem.description %></span>
+                    </a>
+                  <% }); %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <% item = it.data.acf.ch_ceo_action; %>
+      <section class="ch-home_ceo_action">
+        <div class="iO iO-slidetime"></div>
+        <div class="left">
+          <div class="left_hold">
+            <% if(item){ %>
+              <h2 class="tit1"><%~ item.heading %></h2>
+              <h3 class="tit4">
+                <div class="line">
+                  <div class="word"><%~ item.subheading %></div>
+                </div>
+              </h3>
+
+              <a class="btnmore mouseHover" href="<%~ item.link ? item.link['url'] : '#' %>">
+                <div class="btnmore_t"><%~ item.link ? item.link['title'] : '' %></div>
+              </a>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="right_el">
+            <div class="right_el_hold">
+              <div class="swiper">
+                <div class="swiper-wrapper">
+                  <% if(item.list){ %>
+                    <% item.list.forEach((elem) => { %>
+                      <div class="swiper-slide">
+                        <img src="<%~ elem.image %>"/>
+                        <h2 class="tit2"><%~ elem.heading %></h2>
+                        <h4 class="tit4"><%~ elem.subheading %></h4>
+                      </div>
+                    <% }); %>
+                  <% } %>
+                </div>
+
+                <div class="swiper-button-prev mouseHover"></div>
+                <div class="swiper-button-next mouseHover"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <% item = it.data.acf.ch_action; %>
+      <section class="ch-home_actions">
+        <h2 class="tit1"><%~ item.heading %></h2>
+
+        <div class="ch-homeposts_main">
+          <% item.list.forEach(function(w,key){ %>
+            <a class="el mouseFollow" data-image="<%~ w.image_a %>" data-type="article" href="<%~ w.permalink %>">
+              <h3 class="tit2"><span><%~ w.post_title %></span></h3>
+            </a>
+          <% }) %>
+        </div>
+      </section>
+
+      <% item = it.data.acf.ch_media; %>
+      <section class="ch-home_media">
+        <div class="iO iO-slidetime"></div>
+        <div class="left">
+          <div class="left_hold">
+            <% if(item){ %>
+              <h2 class="tit1"><%~ item.heading %></h2>
+              <h3 class="tit4">
+                <div class="line">
+                  <div class="word"><%~ item.subheading %></div>
+                </div>
+              </h3>
+
+              <a class="btnmore mouseHover" href="<%~ item.link ? item.link['url'] : '#' %>">
+                <div class="btnmore_t"><%~ item.link ? item.link['title'] : '' %></div>
+              </a>
+            <% } %>
+          </div>
+          <div class="ch_list_prog-cont">
+            <div class="ch_list_prog-bar" id="ch-bar"></div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="right_el">
+            <div class="right_el_hold">
+              <div class="ch_list" id="ch-list">
+                <% if(item.list){ %>
+                  <% item.list.forEach((elem) => { %>
+                    <div class="ch_item">
+                      <h2 class="tit2"><%~ elem.post_title %></h2>
+                      <h4 class="tit4"><%~ elem.description_a || '' %></h4>
+
+                      <img src="<%~ elem.image_a %>"/>
+                      <a class="btnmore mouseHover" href="<%~ elem.permalink %>">
+                        <div class="btnmore_t">Read More</div>
+                      </a>
+                    </div>
+                  <% }); %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <% item = it.data.acf.ch_resources; %>
+      <section class="ch-home_resources">
+        <h2 class="tit1"><%~ item.heading %></h2>
+
+        <div class="ch-homeposts_main">
+          <% item.list.forEach(function(w,key){ %>
+            <a class="el mouseFollow" data-image="<%~ w.image_a %>" data-type="article" href="<%~ w.permalink %>">
+              <h3 class="tit2"><span><%~ w.post_title %></span></h3>
+            </a>
+          <% }) %>
+        </div>
+      </section>
+
+      <% item = it.data.acf.ch_latest; %>
+      <section class="ch-home_latest">
+        <div class="iO iO-slidetime"></div>
+        <div class="left">
+          <div class="left_hold">
+            <% if(item){ %>
+              <h2 class="tit1"><%~ item.heading %></h2>
+              <h3 class="tit4">
+                <div class="line">
+                  <div class="word"><%~ item.subheading %></div>
+                </div>
+              </h3>
+
+              <a class="btnmore mouseHover" href="<%~ item.link ? item.link['url'] : '#' %>">
+                <div class="btnmore_t"><%~ item.link ? item.link['title'] : '' %></div>
+              </a>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="right_el">
+            <div class="right_el_hold">
+              <div class="ch_list_prog-cont">
+                <div class="ch_list_prog-bar" id="ch-bar"></div>
+              </div>
+              <div class="ch_list" id="ch-list">
+                <% if(item.list){ %>
+                  <% item.list.forEach((elem) => { %>
+                    <a class="ch_item mouseHover" href="<%~ elem.link ?? '#' %>">
+                      <h4 class="tit4"><%~ elem.subheading %></h4>
+                      <h2 class="tit2"><%~ elem.heading %></h2>
+                      <span class="desc"><%~ elem.description %></span>
+                    </a>
+                  <% }); %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="m-cta" style="--main:#FEF9F3">
+        <div class="c-vw">
+          <div class="hold">
+            <% const contact = it.global.acf.contact_text; %>
+            <h2 class="tit1"><%~ contact.title %></h2>
+            <h3 class="tit4"><%~ contact.text %> </h3>
+            <a class="btn mouseHover" href="<%~ contact.link['url'] %>">
+              <div class="btn_t"><%~ contact.link['title'] %></div>
+            </a>
+          </div>
+        </div>
+      </section>
+  <%~ it.footer %>
+</main>

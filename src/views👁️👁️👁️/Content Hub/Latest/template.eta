@@ -1,0 +1,74 @@
+<main class="newsp">
+  <% let item = it.data.acf.ch_intro; %>
+  <section class="ch-latest_intro">
+    <div class="iO iO-slidetime"></div>
+    <div class="left">
+      <div class="left_el">
+        <div class="left_el_hold">
+          <% if(item){ %>
+            <img src="<%~ item.image %>"/>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="right_hold">
+        <% if(item){ %>
+          <h2 class="tit1"><%~ item.heading %></h2>
+          <h3 class="tit4">
+            <div class="line">
+              <div class="word"><%~ item.subheading %></div>
+            </div>
+          </h3>
+
+          <a class="btnmore mouseHover" href="<%~ item.link ? item.link['url'] : '#' %>">
+            <div class="btnmore_t"><%~ item.link ? item.link['title'] : '' %></div>
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsp_intro">
+    <div class="newsp_intro_field">
+      <div class="field"><label class="field_lbl">Search</label><input class="field_npt">
+        
+      </div>
+    </div>
+  </section>
+  <section class="newsp_tabs">
+    <div class="tabs">
+      <div class="tabs_els">
+        <div class="simp catEl act" data-post=""><span>All</span></div>
+        <div class="simp catEl" data-post="podcast"><span>Pods</span></div>
+        <div class="simp catEl" data-post="show"><span>Shows</span></div>
+        <div class="simp catEl" data-post="post"><span>Articles</span></div>
+      </div>
+    </div>
+    <div class="totalSearch">0 results</div>
+  </section>
+  <section class="newsp_results hPosts">
+  </section>
+
+  <section class="m-cta signupmod" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+         <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+          var title = it.global.acf.signup_text[randomNum-1].title;
+          var text = it.global.acf.signup_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        </h3>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>
+      

@@ -1,0 +1,234 @@
+.learnsingle {
+  &_main {
+    border-top: 1px solid $dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+
+    .tit2 {
+      padding: 4rem 2.8rem 0 var(--pad);
+      width: 100%;
+
+      @include breakPortrait {
+        padding-top: 2.4rem;
+        padding-right: 2.4rem;
+  
+      }
+  
+      @include breakMobile {
+        padding: 1.6rem 1.6rem 0;
+      }
+    }
+
+    .grid {
+      max-width: unset;
+      padding-inline: 3rem;
+    }
+
+    .hidetext {
+      overflow: hidden;
+      position: relative;
+      height: 60vh;
+
+      .wp p span {
+        font-size: 1.6rem;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 20%;
+        z-index: 3;
+        pointer-events: none;
+        transition: .6s all $swiftOut;
+        // background: linear-gradient(180deg, rgba(254,249,243,0) 0%,rgba(254,249,243,.7) 40%, rgba(254,249,243,1) 100%);
+        background: $bg;
+      }
+
+      &_click {
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 4;
+        transition: .6s all $swiftOut;
+
+        .simp {
+          flex-direction: column;
+
+          &::before {
+            bottom: 60%;
+            height: 15%;
+          }
+
+          span {
+            text-align: center;
+          }
+        }
+
+        &.act {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        @include breakPortrait {
+          bottom: 3rem;
+
+        }
+      }
+
+      &_hold {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+
+
+      }
+
+      &.act {
+        overflow: visible;
+        height: auto !important;
+
+        &::after {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+
+.podcast {
+  .autor {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.txt-bureau p.hide-underline {
+  a {
+    text-decoration: none;
+  }
+}
+
+.m-singsep {
+  border-top: 1px solid $dark;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+
+  @include breakMobile {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .left {
+    padding: 4rem 2.8rem 0 var(--pad);
+
+    @include breakPortrait {
+      padding-top: 2.4rem;
+      padding-right: 2.4rem;
+
+    }
+
+    @include breakMobile {
+      padding: 1.6rem 1.6rem 0;
+    }
+
+  }
+
+  .right {
+    padding-block: 4rem 7rem;
+    padding-left: 2.8rem;
+    padding-right: $pad;
+
+    @include breakPortrait {
+      padding-left: 2.4rem;
+    }
+
+    @include breakMobile {
+      margin-top: 1.6rem;
+      padding: $pad $pad 2.4rem;
+      border-top: 1px solid $dark;
+      border-left: 0;
+    }
+
+    .txt-bureau {
+      width: 100%;
+
+      @include breakPortrait {
+        max-width: 100%;
+      }
+
+      p {
+        &+p {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .simp {
+      margin-top: 2.4rem;
+    }
+
+    .btn {
+      margin-top: 4rem;
+
+      @include breakMobile {
+        margin-top: 2.4rem;
+      }
+    }
+  }
+
+  .rightno {
+    width: 50%;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-right: $pad;
+
+    @include breakPortrait {
+      width: 70%;
+    }
+
+    @include breakMobile {
+      margin-top: 1.6rem;
+      width: 100%;
+      padding: $pad $pad 2.4rem;
+      border-top: 1px solid $dark;
+      border-left: 0;
+    }
+
+    .txt-bureau {
+      width: 100%;
+
+      @include breakPortrait {
+        max-width: 100%;
+      }
+    }
+
+    .simp {
+      margin-top: 2.4rem;
+    }
+
+    .btn {
+      margin-top: 4rem;
+
+      @include breakMobile {
+        margin-top: 2.4rem;
+      }
+    }
+  }
+}

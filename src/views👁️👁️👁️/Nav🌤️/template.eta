@@ -1,0 +1,119 @@
+
+  <nav class="nav">
+    <div class="nav_menu">
+      <div class="nav_menu_bgs">
+      <% it.global.acf.menu_images.forEach(function(w,key){ %>
+        <% if(w.video!=false){ %>
+        <div class="nav_menu_bg"><video playsinline="" loop="" preload="none" muted="" poster="<%~ w.image %>"
+            src="<%~ w.video %>"></video></div>
+
+        <% }else{ %>
+          <div class="nav_menu_bg"><img src="<%~ w.image %>"></div>
+
+        <%
+          } 
+        }) %>
+      </div>
+      <% let count = (it.global.acf.menu_images.length);%>
+      <% const defaultPages = ["Pods", "Shows", "Articles", "Network", "Lists", "Job board", "Contact", "Shop"] %>
+      <% const defaultLinks = [it.global.acf.pods, it.global.acf.shows, it.global.acf.articles, it.global.acf.network, it.global.acf.lists, it.global.acf.jobs, it.global.acf.contact, it.global.acf.shop] %>
+      
+      <div class="nav_menu_els" style="--fontSize: <%= 64/count %>vh; --margin: <%= 16/count %>vh">
+        <% it.global.acf.menu_images.forEach(function(w,key){ 
+          let item = w.menu_link?.title || defaultPages[key];
+          let link = w.menu_link?.url || defaultLinks[key];
+          let target = w.menu_link?.target || "_self";
+
+          switch (w?.access) {
+            case 'player':
+              if (it?.global?.user?.acf?.is_player_user) break;
+              else {
+                count--;
+                return;
+              }
+            case 'content_hub':
+              if (it?.global?.user?.acf?.is_content_hub_user) break;
+              else {
+                count--;
+                return;
+              }
+            case 'both':
+              if (it?.global?.user?.acf?.is_player_user || it?.global?.user?.acf?.is_content_hub_user) break;
+              else return;
+            default:
+              break;
+          }
+          
+          if (item && link) {%>
+            <a data-type="<%~ item?.toLowerCase().split(' ')[0]%>archive" href="<%~ link %>" target="<%~ target%>" class="nav_menu_el mouseHover"><span><%~ item%></span></a>
+          <% } else {
+              count--;
+          } 
+        }) %>
+      </div>
+
+      <% /* <% count = it.global.acf.?ch_menu_links?.length;%>
+      <div class="nav_menu_els nav_menu_els--ch" style="--fontSize: <%= 64/count %>vh; --margin: <%= 16/count %>vh">
+        <% it.global.acf.?ch_menu_links?.forEach(function(w,key){ 
+          let item = w.menu_link?.title;
+          let link = w.menu_link?.url;
+          let target = w.menu_link?.target || "_self";
+          
+          if (item && link) {%>
+            <a data-type="<%~ item?.toLowerCase().split(' ')[0]%>archive" href="<%~ link %>" target="<%~ target%>" class="nav_menu_el mouseHover"><span><%~ item%></span></a>
+          <% } else {
+              count--;
+          } 
+        }) %>
+      </div> */ %>
+    </div>
+    <div class="nav_searchbar">
+      <div class="nav_searchbar_icon">
+        <%~ it.global.icons.search %>
+      </div>
+      <div class="fieldsearch nav_searchbar_input">
+        <label class="fieldsearch_lbl">Search</label>
+        <input class="fieldsearch_npt" autofocus>
+      </div>
+      <div class="nav_searchbar_close closeSearch mouseHover"><span></span><span></span></div>
+    </div>
+    <div class="nav_box">
+      <a class="nav_logo mouseHover" data-type="index" href="<%~ it.global.acf.home %>">
+        <%~ it.global.icons.logo %>
+        <%~ it.global.icons.logoxs %>
+      </a>
+      <div class="nav_burger mouseHover"><span></span><span></span><span></span></div>
+      <div class="nav_links">
+        <% 
+          const ch_menu_links = it.global?.acf?.ch_menu_links || [];
+
+          ch_menu_links?.forEach((w,key) => { 
+          let item = w.link?.title;
+          let link = w.link?.url;
+          let target = w.link?.target || "_self";
+          
+          if (item && link) {%>
+            <a data-type="<%~ item?.toLowerCase().split(' ')[0]%>archive" href="<%~ link %>" target="<%~ target%>" class="nav_link mouseHover"><%~ item%></a>
+          <% } 
+        }) %>
+      </div>
+      <div class="nav_box_right">
+        <div class="nav_search actSearch mouseHover">
+        <%~ it.global.icons.search %>
+        </div>
+        <div class="nav-mp-mobile mouseHover" style="max-height: 0%;">
+          <div class="nav_search nav_search-mp-mobile mouseHover"><%~ it.global.icons.search_2 %></div>
+          <div class="nav_burger nav_burger-mp-mobile mouseHover"><%~ it.global.icons.menu_2 %></div>
+        </div>
+      <div class="nav_buttons">
+          <a class="nav_log mouseHover" data-type="login" href="<%~ it.global.acf.login %>" id="my-account-btn">
+            <div class="nav_log_t">Sign up / log in</div>
+            <div class="nav_log_l">My account</div>
+          </a>
+          <a class="nav_sup mouseHover" href="<%~ it.global.acf.support %>">
+            <div class="nav_sup_t">Support</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>

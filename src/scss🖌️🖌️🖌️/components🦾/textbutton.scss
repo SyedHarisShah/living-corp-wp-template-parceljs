@@ -1,0 +1,29 @@
+.m-textbutton{
+  padding:4rem 0;
+  border-top:1px solid $dark;
+  @include breakMobile{
+
+  padding:2.4rem 0;
+  }
+  .c-vw{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+      
+      .tit3{
+        width:100%;
+        @include media-min(1025){
+          max-width: 50%;
+        }
+      }
+      .btn{
+        margin-top:3.2rem;
+        @include breakMobile{
+          margin-top: 1.6rem;
+        }
+      }
+      
+  }
+}

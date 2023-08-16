@@ -1,0 +1,148 @@
+.m-dualintro{
+    height:calc(var(--app-height) - $header);
+    margin-top:$header;
+    display:flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    &::before{
+      content:'';
+    }
+    @include breakPortrait{
+      flex-direction: column;
+    }
+    @include breakMobile{
+      
+    }
+    .left{
+      position:relative;
+      width:50%;
+      background:$pink;
+      padding:$pad;
+      display:flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      @include breakPortrait{
+        min-height: 36vh;
+      }
+
+      @include breakMobile{
+        min-height: 90vw;
+      }
+      &_hover{
+        position:absolute;
+        left:0;
+        top:25%;
+        right:0;
+        bottom:0;
+      }
+      &_logo{
+        @include center;
+        width:30rem;
+  
+        pointer-events: none;
+        img{
+          width:100%;
+          height:12rem;
+          object-fit: contain;
+        }
+      }
+      .bc{
+        position:absolute;
+        left:$pad;
+        top:$pad;
+      }
+      @include breakPortrait{
+        width:100%;
+        // flex-grow: 1;
+        flex-shrink: 0;
+        padding-top:5rem;
+      }
+      @include breakMobile{
+        // height:80vw;
+
+      }
+          
+      .tit4{
+        margin-top: 2.4rem;
+        @include breakPortrait{
+          margin-top: 1rem;
+        }
+        .line{
+          display: block;
+          width: 100%;
+          overflow: hidden;
+        }
+        .word{
+          display: inline-block; 
+          position: relative;
+          transform: translate(0%, 120%);
+          transition:.6s all $swiftOut;
+        }
+      }
+      .tit1{
+
+        .line{
+          position:relative;
+          overflow: hidden;
+        }
+      
+      }
+    }
+    .right{
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content: flex-end;
+      justify-content: center;
+      width:50%;
+      position:relative;
+      border-left:1px solid $dark;
+      @include breakPortrait{
+        width:100%;
+        height: 100%;
+        border-left:0;
+        border-top:1px inset $dark;
+      }
+      &_el{
+        clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+        transition:.6s all $swiftOut;
+        @include clock;
+        z-index:3;
+        img{
+          position:absolute;
+          left:0;
+          top:0;
+          width:100%;
+          height:100%;
+          filter:blur(6px);
+          object-fit: cover;
+          transform:scale(1.2);
+          transition:.6s all $swiftOut;
+        }
+        &.active{
+  
+          z-index:4;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+          img{
+            filter:blur(0);
+            transform:scale(1);
+            transition:1.8s all $swiftOut;
+          }
+        }
+      }
+  
+    }
+    &-network{
+      .left{
+        @include breakPortrait{
+          @include ratio(1,.5);
+        }
+        @include breakMobile{
+          &::after{
+            padding-bottom: 60%;
+          }
+        }
+      }
+    }
+  }

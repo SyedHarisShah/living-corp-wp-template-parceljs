@@ -1,0 +1,250 @@
+
+  .mouse {
+    width: 10px;
+    height: 10px;
+    position: fixed;
+    z-index: 360;
+    top:0;
+    left:0;
+    pointer-events: none;
+    //transition: 0.45s opacity cubic-bezier(0.55, 0, 0.1, 1), 0.1s transform ease;
+    display:none;
+    // background:$dark;
+    &_reg{
+      width:6rem;
+      position:absolute;
+      left:.6rem;
+      top:-1.8rem;
+      display:flex;
+      opacity:1;
+      transition:.2s all $swiftOut;
+      svg{
+        width:100%;
+        transform:rotate(-45deg);
+      }
+    }
+
+    &_hov{
+      width:7rem;
+      position:absolute;
+      left:-.2rem;
+      top:-1.4rem;
+      display:flex;
+      opacity:0;
+      transition:.2s all $swiftOut;
+      svg{
+        width:100%;
+        transform:rotate(-45deg);
+      }
+    }
+
+
+    &_drag{
+      width:6rem;
+      position:absolute;
+      left:-.2rem;
+      top:-1.4rem;
+      display:flex;
+      opacity:0;
+      transition:.2s all $swiftOut;
+      svg{
+        width:100%;
+        transform:rotate(-45deg);
+        transition:.3s all $swiftOut;
+        // transform:translate(-50%,20%) rotate(0);
+      }
+    }
+
+
+    &_dragin{
+      width:6rem;
+      position:absolute;
+      left:-.2rem;
+      top:-1.4rem;
+      display:flex;
+      opacity:0;
+      transition:.2s all $swiftOut;
+      svg{
+        width:100%;
+        transform:rotate(-45deg);
+        transition:.45s all $swiftOut;
+        transform:translate(-50%,20%) rotate(0);
+      }
+    }
+
+
+    &_ball{
+      width:18rem;
+      height:18rem;
+      transform:translate(-50%,-50%) scale(1);
+      transition:.45s all $swiftOut;
+      border-radius: 100%;
+      opacity:0;
+      // display:none;
+
+      span{
+        @include center;
+        z-index:4;
+        font-family: 'bureau';
+        font-weight: 500;
+        font-size:1.4rem;
+        line-height: lH(14,16);
+        text-transform: uppercase;
+        text-align: center;
+        opacity:0;
+        transition:.6s all $swiftOut;
+      }
+
+      &::before{
+        content:'';
+        position:absolute;
+        left:0;
+        top:0;
+        background:$dark;
+        width:100%;
+        height:100%;
+        border-radius: 100%;
+        transition:.6s all .45s $swiftOut;
+        opacity:0;
+        transform:translate(0,0);
+      }
+
+      &::after{
+        content:'';
+        position:absolute;
+        left:0;
+        top:0;
+        background:$light;
+        width:100%;
+        height:100%;
+        border-radius: 100%;
+        border:1px solid $dark;
+        transition:.6s all .45s $swiftOut;
+        transform:scale(0);
+      }
+
+    }
+    
+}
+
+.menu-active{
+  .mouse_ball{
+    background:$light;
+  }
+}
+
+.mouse-ball{
+  .mouse_reg{
+    opacity:0;
+  }
+  .mouse_ball{
+    opacity:1;
+    transition:none;
+    &::before{
+      transform:translate(-1.4rem,1.4rem);
+      opacity:1;
+      transition:.45s all .1s $swiftOut;
+
+    }
+    &::after{
+      transition:.45s all $swiftOut;
+      transform:scale(1);
+      
+    }
+   
+
+  }
+  
+}
+
+.mouse-drag{
+  .mouse_reg{
+    opacity:0;
+  }
+  .mouse_drag{
+    opacity:1;
+    svg{
+      transform:translate(-50%,20%) rotate(0deg);
+      // transition:.3s all $swiftOut;
+    }
+  }
+  .mouse_dragin{
+    svg{
+      transform:translate(-50%,20%) rotate(0deg);
+      // transition:.3s all $swiftOut;
+    }
+  }
+
+  &.mouse-down{
+    .mouse_drag{
+      opacity:0;
+    }
+    .mouse_dragin{
+      opacity:1;
+    }
+  }
+
+
+}
+
+
+
+.mouse-hover{
+  .mouse_reg{
+    opacity:0;
+  }
+  .mouse_hov{
+    opacity:1;
+  }
+  
+}
+
+.mouse-read{
+  .mouse_ball{
+    .read{
+      opacity:1;
+    }
+  }
+  
+}
+
+
+.mouse-watch{
+  .mouse_ball{
+    .watch{
+      opacity:1;
+    }
+  }
+  
+}
+
+
+.mouse-listen{
+  .mouse_ball{
+    .listen{
+      opacity:1;
+    }
+  }
+  
+}
+
+
+
+.mouse-scroll{
+  .mouse_ball{
+    .scrolldown{
+      opacity:1;
+    }
+  }
+  
+}
+
+
+html:not(.touch){
+    & * {
+        cursor: none !important;
+    }
+    .mouse{
+        display:block;
+    }
+}

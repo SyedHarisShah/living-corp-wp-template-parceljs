@@ -1,0 +1,100 @@
+.timer{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  
+  &_s{
+    color:transparent;
+    position:relative;
+    font-family: 'bureau';
+    font-weight: 500;
+    font-size:1.4rem;
+    @include breakMobile{
+      font-size: 1.2rem;
+    }
+    span{
+      opacity:1;
+      position:absolute;
+      left:0;
+      top:0;
+      color:$dark;
+      opacity:0;
+      transform:translateX(35%);
+      transition:.6s all $swiftOut;
+      &.active{
+        opacity:1;
+        transform:translateX(0);
+        transition:.6s all $swiftOut;
+      }
+      &.out{
+        opacity:0;
+        transform:translateX(-35%);
+        transition:.6s all $swiftOut;
+
+      }
+    }
+  }
+  &_e{
+
+    font-family: 'bureau';
+    font-weight: 500;
+    font-size:1.4rem;
+    @include breakMobile{
+      font-size: 1.2rem;
+    }
+  }
+  &_b{
+    width:100%;
+    margin:0 1.6rem;
+    position:relative;
+    height:1.2rem;
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      background:$dark;
+      width:100%;
+      height:100%;
+      border-radius: 4.5rem;
+      opacity:1;
+      transform:translate(-.2rem,.2rem);
+    }
+    &::after{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      background:$light;
+      width:100%;
+      height:100%;
+      border: 1px solid $dark;
+      border-radius: 4.5rem;
+      transform:translate(.2rem,-.2rem);
+  
+    }
+    &_f{
+      position:absolute;
+      overflow: hidden;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      border-radius: 4.5rem;
+      border: 1px solid $dark;
+      transform:translate(.2rem,-.2rem);
+      z-index:3;
+      .total{
+        position:absolute;
+        left:0;
+        top:0;
+        background:$pink;
+        width:0%;
+        height:100%;
+        border-radius: 4.5rem;
+    
+      }
+    }
+  }
+}

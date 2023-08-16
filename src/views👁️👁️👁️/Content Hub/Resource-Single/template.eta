@@ -1,0 +1,59 @@
+<main class="articlesingle">
+  <section class="m-bc">
+    <div class="c-vw">
+      <div class="bc">
+        <a class="mouseHover" href="<%~ it.global.acf?.ch_home ?? '/content-hub' %>">LC Hub</a>
+        <span>/</span><a class="mouseHover" href="<%~ it.resource_link %>">Resources</a>
+        <span>/</span><span><%~ it.data.title.rendered %></span>
+      </div>
+    </div>
+  </section>
+  <section class="m-simpleintro">
+    <div class="c-vw">
+      <h2 class="tit1"><%~ it.data.title.rendered %></h2>
+      <div class="m-simpleintro_info">
+        <div class="date"><%~ it.data.ownpost_data.date %></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="articlesingle_main">
+      <div class="grid wp">
+        <%~ it.data.content.rendered %>
+      </div>
+    </section>
+    <section class="m-share">
+      <div class="m-share_hold grid">
+        <p>share</p>
+        <div class="social">
+          <a class="mouseHover Stw" href="https://twitter.com/intent/tweet?url=<%~ it.data.link %>"><%~ it.global.icons.tw %></a>
+            <a class="mouseHover Sfb" href="https://www.facebook.com/sharer/sharer.php?u=<%~ it.data.link %>"><%~ it.global.icons.fb %></a>
+            <a class="mouseHover Sin" href="https://www.linkedin.com/shareArticle?url=<%~ it.data.link %>"><%~ it.global.icons.in %></a>
+            <a class="mouseHover Srd" href="https://www.reddit.com/submit?url=<%~ it.data.link %>"><%~ it.global.icons.reddit %></a>
+            <a class="mouseHover Stb" href="https://www.tumblr.com/share/link?url=<%~ it.data.link %>"><%~ it.global.icons.tumbler %></a>
+        </div>
+      </div>
+    </section>
+    <section class="articlesingle_more hPosts">
+    </section>
+    <section class="m-cta signupmod" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+         <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+          var title = it.global.acf.signup_text[randomNum-1].title;
+          var text = it.global.acf.signup_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        </h3>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>
+      

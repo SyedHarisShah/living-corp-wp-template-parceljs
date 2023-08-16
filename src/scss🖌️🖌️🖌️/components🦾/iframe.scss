@@ -1,0 +1,16 @@
+.m-iframe{
+  padding:4rem 0;
+  border-top:1px solid $dark;
+  &_hold{
+    margin:0 auto;
+    width:100%;
+    max-width: 1040px;
+    position:relative;
+    @include ratio(1,1);
+    iframe{
+      position:absolute;
+      left:0;
+      top:0;
+    }
+  }
+}

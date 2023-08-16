@@ -1,0 +1,77 @@
+
+<% 
+var numcol =  Math.floor((Math.random() * it.global.colors.length-1)+1)
+const shownPosts = [];
+
+it.posts.forEach(function(p,key){
+  if(numcol==3){
+    numcol=0
+  }
+  hide = ''
+  if(it.type!='' && p.type!=it.type){
+    hide='hide'
+  }
+
+  const title = p.title;
+  const description = p.description;
+
+  let match = false;
+  //check if post has been shown to prevent duplicates across categories
+  for(const el of shownPosts) {
+    if(title == el.title || description == el.description){
+      console.log('match');
+      match = true;
+      break;
+    }
+  }
+
+  //return to continue to next iteration/result
+  if(match){
+    return;
+  }
+
+  shownPosts.push({title, description});
+
+  if(p.type=="podcast"){ %>
+    <a class="result <%~ hide %> mouseHover" style="--main:<%~ it.global.colors[numcol] %>" data-type="<%~ p.type %>" data-post="<%~ p.type %>" href="<%~ p.link %>">
+      <div class="result_hold">
+        <div class="result_info">
+          <h3 class="tit3"><%~ p.title %></h3>
+          <% if(p.description){ %>
+          <div class="description">
+            <p><%~ p.description %></p>
+          </div>
+          <% } %>
+          <div class="btnplay">
+            <div class="btnplay_tri"></div>
+          </div>
+          <div class="result_info_bottom">
+            <p>By <%~ p.author %></p>
+            <div class="date"><%~ p.date %></div>
+          </div>
+        </div>
+        <div class="result_image"><img src="<%~ p.image %>"></div>
+      </div>
+    </a>
+  <% } else { %>
+    <a class="result <%~ hide %> mouseHover" style="--main:<%~ it.global.colors[numcol] %>"  data-type="<%~ p.type %>" data-post="<%~ p.type %>" href="<%~ p.link %>">
+      <div class="result_hold">
+        <div class="result_info">
+          <h3 class="tit3"><%~ p.title %></h3>
+          <% if(p.description){ %>
+          <div class="description">
+            <p><%~ p.description %></p>
+          </div>
+          <% } %>
+          <div class="date"><%~ p.date %></div>
+        <div class="btns">
+            <div class="btns_t">Read more</div>
+          </div>
+          
+        </div>
+        <div class="result_image"><img src="<%~ p.image %>"></div>
+      </div>
+    </a>
+  <% }
+  numcol++;
+}) %>

@@ -1,0 +1,172 @@
+.m-tabposts{
+  &_selector{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top:2.8rem;
+    padding-bottom:2.8rem;
+    border-top:1px solid $dark;
+    @include breakMobile{
+      flex-direction: column;
+      padding:$pad;
+      display:none;
+    }
+    &_type{
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+      @include breakMobile{
+        width:100%;
+        order:2;
+        justify-content: space-between;
+        & + .m-tabposts_selector_blocks{
+          display:none!important;
+        }
+      }
+      .tabClick{
+        &:not(.act){
+          opacity:.4;
+        }
+        &.act{
+          pointer-events: none;
+        }
+        & + .tabClick{
+          margin-left:2.4rem;
+          @include breakMobile{
+            margin-left:0;
+          }
+        }
+        &:hover{
+          opacity:1;
+        }
+      }
+    }
+
+    &_blocks{
+      display:flex;
+      margin-left:auto;
+      transition:.6s all $swiftOut;
+      &.hid{
+        opacity:0;
+        pointer-events: none!important;
+        *{
+          pointer-events: none!important;
+          
+        }
+      }
+      .blockClick{
+        width:1.6rem;
+        opacity:.4;
+        transition:.6s all $swiftOut;
+        & + .blockClick{
+          margin-left:1.6rem;
+        }
+        &.act{
+          opacity:1;
+          pointer-events: none;
+        }
+        &:hover{
+          opacity:1;
+        }
+      }
+    }
+    
+  }
+  &_hold{
+    transition:.6s all $swiftOut;
+    &.load{
+      opacity:0;
+      pointer-events: none;
+    }
+  }
+  &_pags{
+    border-top:1px solid $dark;
+    padding:2.4rem $pad 2.4rem;
+    .points{
+      text-align: center;
+      align-self: center;
+      margin-top:1.2rem;
+      margin-left:2.4rem;
+      margin-right: 2.4rem;
+      @include breakMobile{
+        margin-left:1.6rem;
+        margin-right: 1.6rem;
+      }
+    }
+    .simp{
+
+      &.inact{
+        opacity:.5;
+        pointer-events: none;
+      }
+    }
+    .simp.prev{
+      margin-right:2.4rem;
+      @include breakMobile{
+        margin-right:1.6rem;
+
+      }
+    }
+    .simp.next{
+      margin-left:2.4rem;
+      @include breakMobile{
+        margin-left:1.6rem;
+
+      }
+    }
+    .pgel{
+      
+      &-hide{
+        display:none;
+        & + .pgel{
+          margin-left:0;
+        }
+      }
+    }
+    &.hide{
+      display:none;
+    }
+  }
+  .showPosts{
+    align-items: stretch;
+    @include breakMobile{
+      align-items: flex-start;
+    }
+  }
+  .holderall{
+    min-height: 100vh;
+    .m-tabposts_hold{
+      &.artHold{
+        border-top:1px solid $dark;
+        align-items: stretch;
+        flex-wrap: wrap;
+        @include breakMobile{
+          align-items: flex-start;
+        }
+      }
+      &.showHold{
+        align-items: stretch;
+        flex-wrap: wrap;
+        @include breakMobile{
+          align-items: flex-start;
+          .show{
+            width:100%;
+          }
+        }
+      }
+      display:none;
+      &:not(.blocks){
+        flex-direction: column;
+        align-items: flex-start;
+        .podlist{
+          width:100%;
+        }
+
+      }
+      &.act{
+        display:flex;
+      }
+    }
+
+  }
+}

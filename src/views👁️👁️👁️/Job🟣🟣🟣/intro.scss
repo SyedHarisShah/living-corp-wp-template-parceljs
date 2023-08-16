@@ -1,0 +1,200 @@
+.jobs{
+  &_intro{
+    height:var(--app-height);
+    padding-top:$header;
+    display:flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    @include breakPortrait{
+      flex-direction: column;
+    }
+    @include breakMobile{
+      
+    }
+    .left{
+      position:relative;
+      width:50%;
+      background:$pink;
+      @include breakPortrait{
+        width:100%;
+        // flex-grow: 1;
+        height:38vw;
+        flex-shrink: 0;
+      }
+      @include breakMobile{
+        height:80vw;
+
+      }
+      &_el{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:$gut;
+        display:flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        overflow: hidden;
+        &_hold{
+          position:relative;
+          width:100%;
+          padding-left:$gut;
+          padding-right:4.8rem;
+          
+          .tit4{
+            margin-top: 2.4rem;
+            opacity:0;
+            @include media-min(1320){
+              max-width: 75%;
+          
+            }
+            transition:.6s all $swiftOut;
+            @include breakPortrait{
+              margin-top: 1rem;
+            }
+           
+          }
+          .tit1{
+
+            .line{
+              position:relative;
+              overflow: hidden;
+            }
+          }
+          
+        }
+        &:before{
+          content:'';
+        }
+        &.active{
+            .tit4{
+              opacity:1;
+              transition:.6s all 1s $swiftOut;
+            }
+            .btnmore{
+              transform:translateY(-2%);
+              transition:.6s all 1s $swiftOut;
+
+            }
+        }
+      }
+    }
+    .right{
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content: flex-end;
+      justify-content: center;
+      // padding-left:9.5rem;
+      @include breakDesktop{
+        width:50%;
+        padding-bottom: 4rem;
+        padding-right:2.5rem;
+        border-left:1px solid $dark;
+
+      }
+      @include breakPortrait{
+        width:100%;
+        padding:2.4rem;
+        height: 100%;
+      }
+      @include breakMobile{
+        padding:1.4rem 0;
+      }
+      &_timer{
+        padding-left:10%;
+        padding-right:10%;
+        @include breakPortrait{
+          padding-left:2.4rem;
+          padding-right:2.4rem;
+          margin-top: auto;
+
+        }
+        @include breakMobile{
+          padding-left:1.6rem;
+          padding-right:1.6rem;
+
+        }
+      }
+      &_hold{
+        overflow:hidden;
+        position:relative;
+        width:100%;
+        display:flex;
+        margin:auto 0;
+        @include breakPortrait{
+          max-width: 70vw;
+        }
+        @include breakMobile{
+          max-width: 100%;
+          transform:scale(1.15);
+        }
+        &::after{
+          content:'';
+          display:block;
+          padding-bottom: 100%;
+          @include breakPortrait{
+
+            padding-bottom: 80%;
+          }
+          @include breakMobile{
+            padding-bottom: 80%;
+          }
+        }
+        
+
+      }
+      .border{
+        @include center;
+        width:0%;
+        height:0%;
+        border:1px solid $dark;
+        &.active{
+
+        z-index:5;
+        }
+      }
+      &_el{
+        clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+        // transition:.6s all $swiftOut;
+        @include clock;
+        z-index:3;
+        img{
+          position:absolute;
+          left:0;
+          top:0;
+          width:100%;
+          height:100%;
+          filter:blur(6px);
+          object-fit: cover;
+          object-position: center;
+          // transform:scale(1.2);
+          transform:scale(1);
+          transition:.6s all $swiftOut;
+        }
+        &.active{
+
+          // clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          // transition:1.4s clip-path .3s $swiftOut;
+          z-index:4;
+          img{
+            filter:blur(0);
+            transform:scale(.8);
+            transition:1.8s all $swiftOut;
+          }
+        }
+      }
+
+    }
+    &:not(.delayed){
+      .active{
+        transition-delay:0s!important;
+        & > div{
+          transition-delay:0s!important;
+
+        }
+      }
+    }
+  }
+}

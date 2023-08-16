@@ -1,0 +1,48 @@
+<div class="player-module-page__banner">
+    <img class="player-module-page__img" src="<%~ it.module.img%>">
+    <h1 class="player-module-page__title"><%~ it.module.post_title %></h1>
+    <span class="player-module-page__byline"><%~ it.module.byline %></span>
+    <span class="player-module-page__summary"><%~ it.module.summary %></span>
+
+    <div class="player-module-page__info">
+        <span><%~ it.icons.play %> <%~ it.module.plays %></span>
+        <span><%~ it.formatDate(it.module.post_date)%></span>
+        <span><%~ it.formatDuration(it.module.duration)%></span>
+    </div>
+
+    <div class="player-module-page__buttons" data-id="<%~ it.module.ID %>">
+        <span class="player-module-page__buttons--play mouseHover module-play-btn">Play Now <%~ it.icons.play %></span>
+        <span class="player-module-page__buttons--add mouseHover module-menu-btn">Add to Playlist <%~ it.icons.menu %></span>
+    </div>
+</div>
+
+<div class="player-module-page__content">
+    <div class="player-module-page__about">
+        <h2>About this module</h2>
+        <span><%~ it.module.post_content %></span>
+    </div>
+
+    <div class="player-module-page__transcript">
+        <h2>Transcript</h2>
+        <div class="player-module-page__transcript-text"><%~ it.module.transcript %></div>
+
+        <div class="hidetext_click module-read-transcript">
+            <div class="simp mouseHover">
+                <span>EXPAND TO READ ENTIRE TRANSCRIPT</span>
+                <span><%~ it.icons.downarrow %></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="player-module-page__related">
+        <h2>Related Modules</h2>
+
+        <% let related = it.module.related || [];
+            related?.forEach((x) => { %>
+            <div class="player-module-page__related-module p-m" data-id="<%~x.ID%>" data-href="<%~ x.link%>">
+                <div id="image"><img src="<%~ x.img%>"></div>
+                <h2><%~ x.post_title %></h2>
+            </div>
+        <% }); %>
+    </div>
+</div>

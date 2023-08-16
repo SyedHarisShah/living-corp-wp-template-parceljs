@@ -1,0 +1,241 @@
+.wp{
+  img{
+    width:100%!important;
+    object-fit: cover;
+    height:100%!important;
+    & + ul{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + img{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + p{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + blockquote{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + h1,& + h2,& + h3,& + h4,& + h5,& + h6,& + h7{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+
+    }
+}
+p{
+  font-family: 'roboto';
+  font-size:1.6rem;
+  line-height: lH(16,24);
+  text-transform: initial;
+    img{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    a{
+        text-decoration: underline;
+    }
+    & + ul{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + img{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + p{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + blockquote{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + h1,& + h2,& + h3,& + h4,& + h5,& + h6,& + h7{
+        margin-top:4.8rem;
+
+    }
+    
+}
+ul{
+    li{
+
+      font-family: 'roboto';
+      font-size:1.6rem;
+      line-height: lH(16,24);
+      padding-left:1.6rem;
+      text-transform: initial;
+
+      position:relative;
+      &::before{
+          content:'·';
+          position:absolute;
+          left:.4rem;
+          top:0;
+      }
+      & + li {
+          margin-top:1.6rem;
+      }
+    }
+    a{
+        text-decoration: underline;
+    }
+    & + blockquote{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + p{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + h1,& + h2,& + h3,& + h4,& + h5,& + h6,& + h7{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+
+    }
+    
+}
+h1,h2,h3,h4,h5,h6,h7{
+  font-family: 'bureau';
+  font-weight: 500;
+  font-size:1.8rem;
+  line-height: lH(1.8,1.6);
+  text-transform: uppercase;
+  @include breakPortrait{
+    font-size: 1.6rem;
+  }
+    & + p{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + ul{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + img{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + blockquote{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + h1,& + h2,& + h3,& + h4,& + h5,& + h6,& + h7{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+
+    }
+}
+img{
+    & + ul{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + img{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + p{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + blockquote{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + h1,& + h2,& + h3,& + h4,& + h5,& + h6,& + h7{
+        margin-top:4.8rem;
+
+    }
+    
+}
+  blockquote{
+    font-family: 'bureau';
+    font-weight: 500;
+    font-size:1.8rem;
+    line-height: lH(1.8,2.4);
+    text-transform: uppercase;
+    @include breakPortrait{
+      font-size: 1.6rem;
+    }
+    & + p{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + ul{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + img{
+        margin-top:4rem;
+        @include breakMobile{
+          margin-top:2.4rem;
+        }
+    }
+    & + blockquote{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    & + h1,& + h2,& + h3,& + h4,& + h5,& + h6,& + h7{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+
+    }
+
+  }
+
+}

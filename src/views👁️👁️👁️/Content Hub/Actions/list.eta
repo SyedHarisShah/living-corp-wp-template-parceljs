@@ -1,0 +1,15 @@
+<% it.actions.forEach(function(action){ %>
+    <% if(action.children.length > 0){ %>
+        <a class="title el mouseHover" data-type="network" href="<%~ action.permalink %>">
+            <img src="<%~ action.logo_a %>"/>
+            <h2 class="tit1"><%~ action.post_title %></h2>
+        </a>
+        <div class="ch-homeposts_main" style="--main: <%~ action.color_a != '#000000' ? action.color_a : '#696969' %>;">
+        <% action.children.forEach(function(item){ %>
+            <a class="el mouseHover" data-type="network" href="<%~ item.permalink %>">
+                <h3 class="tit2"><span><%~ item.post_title %></span></h3>
+            </a>
+        <% }) %>
+        </div>
+    <% } %>
+<% }) %>

@@ -1,0 +1,247 @@
+.applyal{
+  position:fixed;
+  z-index:51;
+  
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  visibility: hidden;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s, visibility 0s .6s;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  
+  &_bg{
+    @include clock;
+    pointer-events: none;
+    background:black;
+    clip-path: circle(0% at 50% 50%);
+    transition:.6s all $swiftOut;
+    @include breakPortrait{
+
+    }
+  }
+  &_close{
+    width:4.4rem;
+    height:3rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    transform:scale(.9);
+    position:absolute;
+    right:3.2rem;
+    top:3.2rem;
+    transition:.6s all $swiftOut;
+    @include breakMobile{
+      right:0;
+      top:1rem;
+    }
+    &:hover{
+      transform:scale(1);
+      opacity:6;
+    }
+    span{
+
+      display:block;
+      width:100%;
+      height:.6rem;
+      width:100%;
+      background:$dark;
+      transition:.6s all ease;
+      @include breakPortrait{
+        height:.4rem;
+      }
+      &:first-child{
+        transform-origin: left top;
+        transform: translateY(-85%) rotate(45deg) scaleX(0);
+
+      }
+      &:last-child{
+        transform-origin: left bottom;
+        transform: rotate(-45deg) scaleX(0);
+      }
+   
+    }
+  }
+  &_success{
+    @include clock;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:$light;
+    z-index:10;
+    opacity:1;
+    transition:.6s all $swiftOut;
+    pointer-events: all;
+    .tit1{
+      margin-top:3.2rem;
+
+    }
+    .btn{
+      margin-top:3.2rem;
+    }
+  }
+  &_content{
+    position:relative;
+    z-index:52;
+    padding:7.7rem 10rem 13rem;
+    background:$light;
+    opacity:0;
+    transition:.6s all $swiftOut;
+    max-width: 80rem;
+    @include breakMobile{
+      padding:6rem $pad;
+    }
+    img{
+      position:absolute;
+      right:1.2rem;
+      bottom:-2.4rem;
+      transform:rotate(45deg);
+      pointer-events: none;
+      z-index:11;
+      @include breakMobile{
+        display:none;
+      }
+    }
+    &_text{
+
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .tit4{
+
+        text-align: center;
+      }
+      .tit1{
+        margin-top:3.4rem;
+        text-align: center;
+      }
+      .field{
+        margin-top:3.4rem;
+        width:100%;
+        &_button{
+          right:.8rem;
+          position:absolute;
+          top:.8rem;
+          z-index:4;
+          pointer-events: all;
+          @include breakMobile{
+            top:.6rem;
+          }
+          &:hover{
+          }
+          .btninput{
+            display:inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding:1.2rem 4rem;
+            height:5.6rem;
+            position:relative;
+            @include breakMobile{
+              padding:1.2rem 1.2rem;
+
+            }
+            &::before{
+              content:'';
+              position:absolute;
+              left:0;
+              top:0;
+              background:$light;
+              width:100%;
+              height:100%;
+              border-radius: 4.5rem;
+              opacity:0;
+              border: 1px solid $dark;
+              transition:.6s all $swiftOut;
+            }
+            &::after{
+              content:'';
+              position:absolute;
+              left:0;
+              top:0;
+              background:$dark;
+              width:100%;
+              height:100%;
+              border: 1px solid $dark;
+              border-radius: 4.5rem;
+              transition:.6s all $swiftOut;
+          
+            }
+            &_t{
+              color:$light;
+              font-family: 'bureau';
+              font-weight: 500;
+              font-size:1.4rem;
+              text-transform: uppercase;
+              position:relative;
+              z-index:3;
+              
+              transition:.6s all $swiftOut;
+            }
+            &:hover{
+              &::before{
+                opacity:1;
+                transform:translate(-.2rem,.2rem);
+          
+              }
+              &::after{
+                transform:translate(.2rem,-.2rem);
+              }
+              .btninput_t{
+                transform:translate(.2rem,-.2rem);
+          
+              }
+            }
+          }
+        }
+      }
+      .chk{
+        align-self: flex-start;
+      }
+    }
+  }
+  &:not(.applyal-act){
+
+   *{
+    pointer-events:none!important;
+    }
+  }  
+
+
+  &.applyal-act{
+    opacity:1!important;
+    visibility: visible;
+    pointer-events: all;
+    transition:.6s opacity $swiftOut;
+    .applyal{
+      &_bg{
+        opacity:.6;
+        pointer-events: all;
+        clip-path: circle(100% at 50% 50%);
+
+      }
+      &_content{
+        opacity:1;
+        transition:.6s all 1s $swiftOut;
+      }
+      &_close span{
+        // transition-delay:1.2s;
+        &:first-child{
+          transform: translateY(-85%) rotate(45deg) scaleX(1);
+
+        }
+        &:last-child{
+          transform: rotate(-45deg) scaleX(1);
+        }
+      }
+    }
+  }
+}

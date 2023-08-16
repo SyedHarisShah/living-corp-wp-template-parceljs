@@ -1,0 +1,58 @@
+<main class="podcast">
+  <section class="m-dualintro " >
+    <div class="left" style="background-color:<%~ it.data.acf.color %>">
+      <div class="left_hover mouseScroll"></div>
+      <div class="bc">
+        <% if(it.data.acf?.add_to_collective || it.data?.parent_data?.add_to_collective){ %>
+          <a class="mouseHover" href="<%~ it.global.acf?.ch_home ?? '/content-hub' %>">LC Hub</a>
+        <%  } else {%>
+          <a class="mouseHover" href="<%~ it.global.acf.home %>">LC</a>
+        <%  }%>
+        <span>/</span><a class="mouseHover" href="<%~ it.global.acf.shows %>">Shows</a>
+        <span>/</span><span><%~ it.data.title.rendered %></span>
+      </div>
+      <h2 class="tit1"><%~ it.data.title.rendered %></h2>
+    </div>
+    <div class="right mouseScroll">
+      <div class="right_el"><img src="<%~ it.data.acf.imageintro %>"></div>
+    </div>
+  </section>
+  <section class="m-dualsep">
+    <div class="left">
+      <h2 class="tit2"><%~ it.data.acf.title_description %></h2>
+    </div>
+    <div class="right">
+      <div class="txt-bureau">
+        <%~ it.data.acf.descriptionl %>
+        <% if(it.data.acf.iframe){ %>
+          <a href="<%~ it.data.acf.crowdcast_follow %>" class="mouseHover btn" data-color="org"><div class="btn_t">FOLLOW US ON CROWDCAST</div></a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <% if(it.data.acf.iframe && 0==1){ %>
+  <section class="m-iframe">
+    <div class="m-iframe_hold"><%~ it.data.acf.iframe %></div>
+  </section>
+  <% } %>
+  <section class="m-tabposts" style="--main:#E5855E">
+    <div class="m-tabposts_hold showPosts hPosts blocks">
+    
+    </div>
+    <div class="m-tabposts_pags pg pPosts">
+      
+    </div>
+  </section>
+  <section class="m-cta" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+        <h2 class="tit1">Sign up now</h2>
+        <h3 class="tit4">Subscribe to curated lists our editorial team has created on the topics that matter to you.
+        </h3><a class="btn mouseHover">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

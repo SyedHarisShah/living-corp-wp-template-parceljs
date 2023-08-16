@@ -1,0 +1,46 @@
+<footer class="footer">
+  <div class="c-vw">
+    <div class="footer_first">
+      <a class="footer_logo mouseHover" href="<%~ it.global.acf.home %>" data-type="index"><%~ it.global.icons.logo %></a>
+      <p><%~ it.global.acf.footer_sign_up_description %></p>
+      <div class="btn btn-i mouseHover">
+        <div class="btn_t">SIGN UP</div>
+      </div>
+    </div>
+    <div class="footer_menu">
+      <div class="tab Tab">
+        <div class="tabClick">
+          <h3 class="tit4">Menu</h3>
+        </div>
+        <div class="tabHold">
+          <div class="tabBox">
+            <div class="menu_el mouseHover"><a data-type="podcastarchive" href="<%~ it.global.acf.pods %>" class="simp" style="--main:#DF80AC"><span>PODS</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="networkarchive" href="<%~ it.global.acf.network %>" class="simp" style="--main:#DF80AC"><span>Network</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="legalterms" href="<%~ it.global.acf.legalterms %>" class="simp" style="--main:#DF80AC"><span>legal terms</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="showarchive" href="<%~ it.global.acf.shows %>" class="simp" style="--main:#DF80AC"><span>shows</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="lists" href="<%~ it.global.acf.lists %>" class="simp" style="--main:#DF80AC"><span>lists</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="privacy" href="<%~ it.global.acf.privacy %>" class="simp" style="--main:#DF80AC"><span>privacy</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="articlearchive" href="<%~ it.global.acf.articles %>" class="simp" style="--main:#DF80AC"><span>articles</span></a></div>
+            <div class="menu_el mouseHover"><a  href="<%~ it.global.acf.shop %>" class="simp" style="--main:#DF80AC"><span>shop</span></a></div>
+            <div class="menu_el mouseHover"><a data-type="login" href="<%~ it.global.acf.login %>" class="simp" style="--main:#DF80AC"><span>login</span></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer_bottom">
+      <p class="copy tit4">©<%~ it.global.acf.actualyear %>, LIVING CORPORATE, LLC</p>
+      <p class="right tit4"><%~ it.global.acf.footer_warning %></p>
+      <div class="social">
+        <a class="mouseHover Stw" href="<%~ it.global.acf.twitterlink %>"><%~ it.global.icons.tw %></a>
+        <a class="mouseHover Sap" href="<%~ it.global.acf.apple_podcast %>"><%~ it.global.icons.radar %></a>
+        <a class="mouseHover Ssp" href="<%~ it.global.acf.spotify %>"><%~ it.global.icons.spotify %></a>
+        <a class="mouseHover Spl" style="display:none!important" href="<%~ it.global.acf.playmusic %>"><%~ it.global.icons.triangulo %></a>
+        <a class="mouseHover Sst" href="<%~ it.global.acf.stitcher %>"><%~ it.global.icons.cuadraditos %></a>
+        <a class="mouseHover Ssl" href="<%~ it.global.acf.slack %>"><%~ it.global.icons.slack %></a>
+        <a class="mouseHover Sig" href="<%~ it.global.acf.instagram %>"><%~ it.global.icons.ig %></a>
+        <a class="mouseHover Sin" href="<%~ it.global.acf.linkedin %>"><%~ it.global.icons.in %></a>
+        <a class="mouseHover Sfb" href="<%~ it.global.acf.facebook %>"><%~ it.global.icons.fb %></a>
+      </div>
+    </div>
+  </div>
+</footer>

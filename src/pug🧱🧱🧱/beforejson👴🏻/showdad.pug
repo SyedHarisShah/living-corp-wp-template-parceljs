@@ -1,0 +1,61 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="podcast" data-id="2")
+      main.podcast
+        section.m-dualintro
+          .left(style="background:#E5855E")
+            .bc
+              a LC
+              span /
+              a shows
+              span /
+              span THE GROUP CHAT
+            h2.tit1 THE GROUP CHAT
+            
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+            
+        section.m-dualsep
+          .left
+            h2.tit2 About
+          .rightno
+            .txt-bureau
+              p Liberated Love Notes™ is a starting point for integrating self and community affirmations into your daily practices. Liberated Love Notes center the experiences of Black folks existing in white systems and speak to overcoming imposter syndrome, disrupting injected & internalized forms of oppression, embodying an abundance mindset and building a healthy racial identity.  Tune in for a new episode every Monday wherever you listen to podcasts!
+              .btn
+                .btn_t FOLLOW US ON CROWDCAST
+        section.m-iframe
+          .m-iframe_hold
+            iframe(loading="lazy" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" allowtransparency="true" src="https://www.crowdcast.io/e/the-group-chat-radical-8?navlinks=false&amp;embed=true" style="border: 1px solid #EEE;border-radius:3px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="microphone; camera;")
+        section.m-tabposts(style="--main:#E5855E")
+          .m-tabposts_hold.blocks
+             each val in [1, 2, 3, 4, 5]
+              .show
+                .show_hold
+                  .show_image
+                    .btnplay
+                      .btnplay_tri
+                    img(src="./images/home/1.jpg")
+                  .show_info
+                    h3.tit3 Disability & STEM While Black
+                    .txt-bureau
+                      p Black History Month 2022! This is episode one of a special series dedicated to what companies are doing AND saying in Black History Month versus the experiences of Black and brown workers.
+                    
+                    .show_info_bottom
+                      .date DEC 13, 2021
+                      .shareclick
+                        +icon({name:'share'})
+        section.m-cta(style="--main:#DF80AC")
+          .c-vw
+            .hold
+              h2.tit1 Sign up now
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t TAP IN
+        +footer
+    script(sync type="module" src="./src/app.js")

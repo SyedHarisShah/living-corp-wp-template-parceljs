@@ -1,0 +1,161 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html.logme
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="home" data-id="2")
+      main.home
+        section.home_intro
+          .iO.iO-slidetime
+          .left
+            .left_el
+              .left_el_hold
+                h3.tit4 
+                  .line
+                    .word Liberated Love Notes #14
+                h2.tit1 I Am Gifted.I Am From a Gifted People
+            .left_el
+              .left_el_hold
+                h3.tit4 
+                  .line
+                    .word Liberated Love Notes #14
+                h2.tit1 I WILL NOT LOSE MY SOUL
+            .left_el
+              .left_el_hold
+                h2.tit1 LIBERATED LOVE NOTES
+          .right
+            .right_hold
+              .border
+              .border
+              .border
+              .right_el
+                img(src="./images/home/1.jpg")
+              .right_el
+                img(src="./images/home/2.jpg")
+              .right_el
+                img(src="./images/home/3.jpg")
+            .right_timer.timer
+              .timer_s 99
+                
+              .timer_b
+                .timer_b_f
+                  .total
+              .timer_e 04
+        section.m-sectitletext
+          .c-vw
+            .left
+              h2.tit2 WHAT’S UP JOHN
+            .right
+              .txt-bureau
+                p Explore our catalog of podcast discussions with hundreds of executives, entrepreneurs, elected officials, activists, and influencers all focused on the same thing: centering and amplifying Black and brown folks at work.
+              
+              
+       
+        
+        section.m-tabposts(style="--main:#E5855E")
+          .m-tabposts_selector.c-vw
+            .m-tabposts_selector_type
+              .tabClick.simp.act.mouseHover
+                span your Pods
+              .tabClick.simp.mouseHover
+                span your Shows
+              .tabClick.simp.mouseHover
+                span your ARTICLES
+            .m-tabposts_selector_blocks
+              .blockClick.mouseHover.act(data-type="list")
+                +icon({name:'list'})
+              .blockClick.mouseHover(data-type="block")
+                +icon({name:'block'})
+          .holderall
+            .m-tabposts_hold.PodHold.act
+              each val in [1, 2, 3, 4, 5,6]
+
+                .podlist
+                  .podlist_image
+                    a.podlist_image_hold.mouseHover
+                      img(src="./images/home/1.jpg")
+                  .podlist_info
+                    h3.tit4 Disability & STEM While Black
+                    p.desc w / Rose Robinson
+                    a.btnplay.mouseHover
+                      .btnplay_tri
+                    .autor
+                      p by <a>Real Talk tuesdays</a>
+                    .podlist_info_bottom
+                      .datapod
+                        .datapod_play 1,560
+                        .datapod_date DEC 13, 2021
+                        .datapod_time 15mins
+                      .shareclick
+                        +icon({name:'share'})
+            .m-tabposts_hold.showHold.load.blocks
+              each val in [1, 2, 3, 4, 5]
+                .show
+                  .show_hold
+                    a.show_image.mouseHover
+                      .btnplay
+                        .btnplay_tri
+                      img(src="./images/home/1.jpg")
+                    .show_info
+                      h3.tit3 Disability & STEM While Black
+                      
+                      .autor
+                        p by <a>Real Talk tuesdays</a>
+                      .show_info_bottom
+                        .date DEC 13, 2021
+                        .shareclick
+                          +icon({name:'share'})
+            .m-tabposts_hold.artHold.blocks.load
+              each val in [1, 2, 3, 4, 5,6]
+                a.art.mouseHover
+                  .art_hold
+                    .art_image
+                      .btnmore.btnmore-hovered
+                        .btnmore_t read more
+                      img(src="./images/home/1.jpg")
+                    .art_info
+                      h3.tit3 Disability & STEM While Black
+                      p.desc By Madison Butler No matter how immersed you are in this work, nothing prepares you for the day that it is someone you know ...
+                      .date.tit4 dec 13, 2021
+          
+
+       
+        section.m-cta(style="--main:#DF80AC")
+          .c-vw
+            .hold
+              h2.tit1 SUPPORT OUR MISSION
+              h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices 
+              a.btn
+                .btn_t Support
+        section.m-sectitle
+          .c-vw
+            .center
+              h2.tit2 Featured Guests and Brands
+            
+              a.simp
+                span VIEW ALL
+        section.m-logos
+          .c-vw
+            a
+              img(src="./images/logos/1.png")
+            a
+              img(src="./images/logos/2.png")
+            a
+              img(src="./images/logos/3.png")
+            a
+              img(src="./images/logos/4.png")
+            a
+              img(src="./images/logos/5.png")
+            a
+              img(src="./images/logos/6.png")
+            a
+              img(src="./images/logos/7.png")
+            a
+              img(src="./images/logos/8.png")
+            a
+              img(src="./images/logos/9.png")
+            a
+              img(src="./images/logos/10.png")
+        +footer
+    script(sync type="module" src="./src/app.js")

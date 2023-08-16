@@ -1,0 +1,38 @@
+.m-arts{
+  border-top:1px solid $dark;
+  .holdarts{
+    display:flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    @include breakPortrait{
+      padding:1.2rem 1.2rem;
+    }
+    & + .pg{
+      padding:$pad $pad 4.8rem;
+      width:100%;
+      @include breakPortrait{
+
+        padding:$pad $pad;
+      }
+    }
+  }
+  &_pags{
+    &.hide{
+      display:none;
+    }
+  }
+}
+
+.tag{
+  display:inline-flex;
+  border-radius:2rem;
+  padding:.6rem 1rem;
+  border:1px solid #B2AEAA;
+  margin:1.4rem .4rem 0;
+  text-transform: uppercase;
+
+  .loading-wheel{
+    margin-bottom: 1rem;
+  }
+}

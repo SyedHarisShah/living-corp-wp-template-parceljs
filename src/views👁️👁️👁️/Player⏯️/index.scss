@@ -1,0 +1,230 @@
+.player{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  border-top: 1px solid black;
+  padding:.6rem $pad;
+  background:$light;
+  z-index:40;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  transform:translateY(100%);
+  transition:.6s all $swiftOut;
+  
+  &::after{
+    content:'';
+    @include clock;
+    background:$light;
+    z-index:10;
+    transition:.6s all $swiftOut;
+    
+  }
+  audio{
+    display:none;
+  }
+  &.act{
+    transform:translateY(0);
+    
+  }
+  &.load{
+    &::after{
+      opacity:0;
+      pointer-events: none;
+    }
+  }
+  .btn10left{
+    width:1.6rem;
+    @include breakMobile{
+      display:none;
+    }
+
+  }
+  .btnplayer{
+    margin:0 1rem;
+    @include breakMobile{
+      margin:0 0 0 1rem;
+    }
+  }
+  .btnrestart{
+    width:3rem;
+    margin-left:1rem;
+    @include breakMobile{
+      display:none;
+    }
+    svg{
+      width: 100%;
+    }
+  }
+  .btn10right{
+    width:1.6rem;
+    @include breakMobile{
+      display:none;
+    }
+    svg{
+      transform:scaleX(-1);
+    }
+  }
+  &_buttons{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    @include breakMobile{
+      order:10;
+    }
+  }
+  &_time{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:62rem;
+    font-size: 1rem;
+    @include breakMobile{
+      display:none;
+    }
+    &_bar{
+      width:100%;
+      margin:0 1rem;
+      height:1.6rem;
+      position:relative;
+      z-index:5;
+      &::before{
+        content:'';
+        @include center--y;
+        background:$dark;
+        height:2px;
+        left:0;
+        right:0;
+      }
+    }
+  }
+  &ball{
+    left:0;
+    @include center--y;
+    width:1.6rem;
+    height:1.6rem;
+    background:$orange;
+    border-radius: 100%;
+  }
+  &_volume{
+    position:relative;
+    @include breakMobile{
+      display:none;
+    }
+    &_bar{
+      position:absolute;
+      left:50%;
+      bottom:100%;
+      transform:translate(-50%,-1.8rem);
+      width:2.4rem;
+      border:1px solid $dark;
+      background:$light;
+      border-bottom: 0;
+      height:12rem;
+      padding-top:1rem;
+      padding-bottom:1rem;
+      transition:.6s all $swiftOut;
+      opacity:0;
+      pointer-events: none;
+      .hold{
+        width:100%;
+        height:100%;
+        position:relative;
+        *{
+          pointer-events: none;
+        }
+        &::before{
+          content:'';
+          @include center--x;
+          background:$dark;
+          width:2px;
+          top:0;
+          bottom:0;
+        }
+      }
+      
+      .volumepos{
+        @include center--x;
+        background:$orange;
+        width:2px;
+        height:100%;
+        bottom:0;
+      }
+      .volumeball{
+        top:0;
+        @include center--x;
+        width:1.6rem;
+        height:1.6rem;
+        background:$orange;
+        border-radius: 100%;
+      }
+    }
+    &_icon{
+      width:2rem;
+      &::before{
+        content:'';
+        position:absolute;
+        right:0;
+        width:50%;
+        top:0;
+        bottom:0;
+        background:$light;
+        transform:scaleX(0);
+        transform-origin: right center;
+        transition:.45s all $swiftOut;
+      }
+    }
+    &::before{
+      content:'';
+      position:absolute;
+      bottom:0;
+      left:0;
+      right:0;
+      height:4rem;
+    }
+    &.showVol{
+      .player_volume_bar{
+        opacity:1;
+        pointer-events: all;
+      }
+    }
+  }
+  &_info{
+    display:flex;
+    align-items: center;
+    width:30rem;
+    @include breakMobile{
+      order:0;
+    }
+    &_image{
+      width:4rem;
+      flex-shrink: 0;
+      position:relative;
+      @include ratio(1,1);
+      img{
+        position:absolute;
+        left:0;
+        top:0;
+        object-fit: cover;
+        width:100%;
+        height:100%;
+      }
+    }
+    &_title{
+      margin-left:.6rem;
+      & > *{
+        max-width: 20rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        font-size: 1rem!important;
+      }
+      .titleparent{
+        text-transform: initial;
+        font-family: 'roboto';
+      }
+    }
+  }
+}

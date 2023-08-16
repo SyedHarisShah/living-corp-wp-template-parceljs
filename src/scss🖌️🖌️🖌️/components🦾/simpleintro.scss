@@ -1,0 +1,106 @@
+.m-simpleintro{
+  
+  margin-top:$header;
+  border-top:1px solid $dark;
+  
+  .c-vw{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    
+    @include breakMobile{
+      padding-top: 2.4rem;
+      padding-bottom: 2.4rem;
+
+    }
+    
+  }
+  .tit1{
+    text-align: center;
+    @include media-min(1025){
+      max-width: 70%;
+
+    }
+  }
+  .tit2{
+    text-align: center;
+    @include media-min(1025){
+      max-width: 40%;
+
+    }
+  }
+
+  .tit3{
+    text-align: center;
+    margin-top:.8rem;
+    @include media-min(1025){
+      max-width: 30%;
+      margin-top:1.6rem;
+
+    }
+  }
+
+  p{
+    text-align: center;
+    margin-top:.8rem;
+    @include media-min(1025){
+      max-width: 70%;
+      margin-top:1.6rem;
+
+    }
+  }
+
+  .autor{
+    p{
+      max-width:100%;
+      margin-top:0;
+      a{
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &_info{
+    margin-top:2.4rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    @include breakMobile{
+      margin-top:1.6em;
+    }
+    .date{
+      margin-right:1.6rem;
+    }
+  }
+  &-r{
+    .c-vw{
+      align-items: flex-start;
+      .tit1{
+        text-align: left;
+      }
+    }
+  }
+  &-network{
+    color:$light;
+    .c-vw{
+      padding-top: $pad;
+      padding-bottom: 9.6rem;
+
+    }
+    .logo{
+      width:100%;
+      margin-bottom: 3rem;
+      img{
+        width:18rem;
+        height:5rem;
+        object-fit: contain;
+        object-position: left top;
+        
+      }
+    }
+  }
+}
+

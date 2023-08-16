@@ -1,0 +1,94 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="show" data-id="2")
+      main.showchild
+        section.m-bc
+          .c-vw
+            .bc
+              a LC
+              span /
+              a Shows
+              span /
+              span DIB & THE FUTURE...
+        section.m-simpleintro
+          .c-vw
+            h2.tit1 Black History Month 2022 – Day 5
+            .m-simpleintro_info
+              .date DEC 13, 2021
+              .autor
+                p by <a>Kham Ward</a>
+        section.showchild_main
+          .showchild_main_hold
+            img(src="./images/home/1.jpg")
+            .btnplay(data-video="https://player.vimeo.com/video/697146203?h=b07f3a44b6&color=DF80AC&autoplay=1")
+              .btnplay_tri
+            iframe(scrolling="no" style="overflow:hidden;" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen)
+        section.m-dualsep
+          .left
+            h2.tit2 ABOUT DROPBOX
+          .right
+            .txt-bureau
+              p Liberated Love Notes™ is a starting point for integrating self and community affirmations into your daily practices. Liberated Love Notes center the experiences of Black folks existing in white systems and speak to overcoming imposter syndrome, disrupting injected & internalized forms of oppression, embodying an abundance mindset and building a healthy racial identity.  Tune in for a new episode every Monday wherever you listen to podcasts!
+              p Liberated Love Notes™ is a starting point for integrating self and community affirmations into your daily practices. Liberated Love Notes center the experiences of Black folks existing in white systems and speak to overcoming imposter syndrome, disrupting injected & internalized forms of oppression, embodying an abundance mindset and building a healthy racial identity.  Tune in for a new episode every Monday wherever you listen to podcasts!
+            
+        section.m-social
+          .left
+            h2.tit4 Share
+          .right
+            .social
+              a(href="")
+                +icon({name:'ig'})
+              a(href="")
+                +icon({name:'in'})
+              a(href="")
+                +icon({name:'tw'})
+              a(href="")
+                +icon({name:'fb'})
+
+        section.m-creator
+          .m-creator_image
+            .m-creator_image_hold
+              img(src="./images/home/1.jpg")
+          .m-creator_info
+            h3.tit2 Dr. LaWanda Hill, PH.D
+            p.desc psychologist, consultant, and curator of transformative spaces
+            a.simp
+              span website
+            .m-creator_info_bottom
+              .btns
+                .btns_t Contact
+        section.m-creator
+          .m-creator_image
+            .m-creator_image_hold
+              img(src="./images/home/1.jpg")
+          .m-creator_info
+            h3.tit2 Dr. LaWanda Hill, PH.D
+            p.desc psychologist, consultant, and curator of transformative spaces
+            a.simp
+              span website
+            .m-creator_info_bottom
+              .social
+                a(href="")
+                  +icon({name:'ig'})
+                a(href="")
+                  +icon({name:'in'})
+                a(href="")
+                  +icon({name:'tw'})
+                a(href="")
+                  +icon({name:'fb'})
+        section.m-nextprev
+          .left
+            .btnarrow
+              .btnarrow_n
+              .btnarrow_t Previous
+          .right
+            .btnarrow
+              .btnarrow_t Next
+              .btnarrow_n
+        +footer
+    script(sync type="module" src="./src/app.js")

@@ -1,0 +1,52 @@
+.m-cta{
+  background:var(--main);
+  padding:13.8rem 0;
+  border-top:1px solid $dark;
+  @include media-min(2561){
+    padding:10rem 0;
+
+  }
+  @include breakPortrait{
+    padding:8rem 0;
+
+  }
+  @include breakMobile{
+
+  padding:6.8rem 0;
+  }
+  .c-vw{
+    display:flex;
+    justify-content: center;
+    .hold{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      .tit1{
+        width:100%;
+        max-width: 80rem;
+      }
+      .tit4{
+        width:100%;
+        margin-top:3.2rem;
+        max-width: 63.8rem;
+        @include breakPortrait{
+          max-width: 36rem;
+
+        }
+        @include breakMobile{
+          max-width: 100%;
+          margin-top: 1.6rem;
+        }
+      }
+      .btn{
+        margin-top:3.2rem;
+        @include breakMobile{
+          margin-top: 1.6rem;
+        }
+      }
+      
+    }
+  }
+}

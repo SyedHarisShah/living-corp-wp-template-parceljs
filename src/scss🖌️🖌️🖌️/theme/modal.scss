@@ -1,0 +1,275 @@
+.introloader{
+  position:fixed;
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  overflow: hidden;
+  color:white;
+  z-index:102;
+  padding-top:$header;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  opacity:0;
+  &_box{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    position:absolute;
+    left:0;
+    top:$pad;
+    padding-left: $gut;
+    z-index:103;
+    pointer-events: none;
+    transition:.6s all $swiftOut;
+    width:100%;
+    padding-bottom: $pad;
+
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      transform-origin: right center;
+      background:$light;
+      height: 1px;
+      transform:scaleX(0);
+      transition:.6s all 1s $swiftOut;
+    }
+    
+  }
+  &_logo{
+    width:20rem;
+    display:flex;
+    justify-content: flex-start;
+    opacity:0;
+    transition:.6s all 1s $swiftOut;
+    @include breakPortrait{
+      width:4.6rem;
+    }
+    svg{
+      width:100%;
+      &.logolg{
+        @include breakPortrait{
+          display:none;
+        }
+      }
+      &.logoxs{
+        display:none;
+        @include breakPortrait{
+          display:flex;
+        }
+
+      }
+      *:not(g){
+        fill:$light;
+        transition:.6s all $swiftOut;
+      }
+    }
+  }
+  img{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    opacity:0;
+    filter:blur(3px);
+    transition:.6s all 1s $swiftOut;
+  }
+  .c-vw{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    z-index:103;
+    text-align: center;
+    opacity:0;
+    transition:.6s all 2s $swiftOut;
+    .box{
+      .tit1{
+        margin-bottom: 2.4rem;
+      }
+      .btn{
+        margin-top:2.4rem;
+        @include hover{
+          display:none!important;
+        }
+      }
+    }
+
+  }
+  .btnCloseIntro{
+    @include clock;
+    background:red;
+    z-index:104;
+    opacity:0;
+  }
+  &.act{
+    opacity:1;
+    .introloader{
+      &_box{
+        &::before{
+          transition:.6s all 1.6s $swiftOut;
+          transform:scaleX(1);
+        }
+      }
+      &_logo{
+        opacity:1;
+        transition:.6s all 1.6s $swiftOut;
+      }
+    }
+    img{
+      filter:blur(0);
+      opacity:1;
+    }
+    .c-vw{
+      opacity:1;
+    }
+  }
+}
+
+
+
+.signupal{
+  position:fixed;
+  z-index:51;
+  
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  visibility: hidden;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s, visibility 0s .6s;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  
+  &_bg{
+    @include clock;
+    pointer-events: none;
+    background:black;
+    clip-path: circle(0% at 50% 50%);
+    transition:.6s all $swiftOut;
+    @include breakPortrait{
+
+    }
+  }
+  &_close{
+    width:4.4rem;
+    height:3rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    transform:scale(.9);
+    position:absolute;
+    right:3.2rem;
+    top:3.2rem;
+    transition:.6s all $swiftOut;
+    @include breakMobile{
+      right:0;
+      top:1rem;
+    }
+    &:hover{
+      transform:scale(1);
+      opacity:6;
+    }
+    span{
+
+      display:block;
+      width:100%;
+      height:.6rem;
+      width:100%;
+      background:$dark;
+      transition:.6s all ease;
+      @include breakPortrait{
+        height:.4rem;
+      }
+      &:first-child{
+        transform-origin: left top;
+        transform: translateY(-85%) rotate(45deg) scaleX(0);
+
+      }
+      &:last-child{
+        transform-origin: left bottom;
+        transform: rotate(-45deg) scaleX(0);
+      }
+   
+    }
+  }
+  &_content{
+    position:relative;
+    z-index:52;
+    padding:7.7rem 18rem 13rem;
+    background:$light;
+    opacity:0;
+    transition:.6s all $swiftOut;
+    max-width: 80rem;
+    @include breakMobile{
+      padding:6rem $pad;
+    }
+    &_text{
+
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .tit1{
+        text-align: center;
+        margin-top:4rem;
+      }
+      .tit4{
+
+        text-align: center;
+        margin-top:2.4rem;
+      }
+      .btn{
+        margin-top:2.4rem;
+      }
+      
+    }
+  }
+  &:not(.signupal-act){
+
+   *{
+    pointer-events:none!important;
+    }
+  }  
+
+
+  &.signupal-act{
+    opacity:1!important;
+    visibility: visible;
+    pointer-events: all;
+    transition:.6s opacity $swiftOut;
+    .signupal{
+      &_bg{
+        opacity:.6;
+        pointer-events: all;
+        clip-path: circle(100% at 50% 50%);
+
+      }
+      &_content{
+        opacity:1;
+        transition:.6s all 1s $swiftOut;
+      }
+      &_close span{
+        // transition-delay:1.2s;
+        &:first-child{
+          transform: translateY(-85%) rotate(45deg) scaleX(1);
+
+        }
+        &:last-child{
+          transform: rotate(-45deg) scaleX(1);
+        }
+      }
+    }
+  }
+}

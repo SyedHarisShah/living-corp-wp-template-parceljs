@@ -1,0 +1,12 @@
+<main class="errorpage">
+<section>
+<img src="<%~ it.global.acf.template %>/public/notlogged.png">
+<div class="c-vw">
+<div class="box">
+<h2 class="tit1">OOPS! YOU DON'T HAVE ACCESS TO THIS CONTENT</h2>
+<% /* <h3 class="tit4">GET the full living corporate experience by signing-up FOR FREE</h3> */ %>
+<% /* <a class="btn mouseHover" href="<%~ it.global.acf.login %>"><div class="btn_t">SIGN UP NOW</div></a> */ %>
+</div></div>
+</section>
+  <%~ it.footer %>
+</main>

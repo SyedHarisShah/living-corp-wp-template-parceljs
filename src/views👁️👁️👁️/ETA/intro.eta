@@ -1,0 +1,20 @@
+<div class="introloader">
+  <div class="introloader_box">
+      <div class="introloader_logo ">
+        <%~ it.global.icons.logo %>
+        <%~ it.global.icons.logoxs %>
+      </div>
+  </div>
+  <div class="btnCloseIntro"></div>
+  <img src="<%~ it.global.acf.image_intro %>" />
+  <div class="c-vw">
+    <div class="box">
+      <h1 class="tit1"><%~ it.global.acf.title_intro %></h1>
+      <h2 class="tit4"><%~ it.global.acf.text_intro %></h2>
+      <div class="btn">
+        <div class="btn_t">Explore</div>
+      </div>
+      
+    </div>
+  </div>
+</div>

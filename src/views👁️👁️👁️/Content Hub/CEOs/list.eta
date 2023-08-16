@@ -1,0 +1,13 @@
+<% it.ceos.forEach(function(ceo){ %>
+    <a class="ceo mouseHover" data-type="ceo" href="<%~ ceo.permalink %>">
+        <div class="ceo__image">
+            <%~ it.icons.elipse %>
+            <img class="ceo-image" src="<%~ ceo.image_a %>"/>
+            <img class="company-image" src="<%~ ceo.company_a[0].logo_a.replace('http://local.', 'https://') %>"/>
+        </div>
+        <div class="ceo__details">
+            <h2 class="ceo__title"><%~ ceo.post_title %></h2>
+            <span class="ceo__company"><%~ ceo.company_a[0].post_title %></span>
+        </div>
+    </a>
+<% }) %>

@@ -1,0 +1,16 @@
+
+<% it.posts.forEach(function(p,key){ %>
+
+
+  <a class="showa mouseHover" href="<%~ p.link %>" data-type="showdad">
+    <div class="showa_hold">
+      <div class="showa_image">
+        <img src="<%~ p.image %>">
+        <div class="btn">
+          <div class="btn_t">Watch Show</div>
+        </div>
+      </div>
+    </div>
+  </a>
+<% })
+%>

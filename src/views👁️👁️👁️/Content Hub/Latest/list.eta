@@ -1,0 +1,6 @@
+
+<% it.posts.forEach(function(w,key){ %>
+    <a class="el mouseFollow" data-image="<%~ w.image_a %>" data-type="article" href="<%~ w.link %>">
+        <h3 class="tit2"><span><%~ w.title %></span></h3>
+    </a>
+<% }) %>

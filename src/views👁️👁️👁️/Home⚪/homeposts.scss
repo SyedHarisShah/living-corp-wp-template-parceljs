@@ -1,0 +1,131 @@
+.followbox{
+  height:100vh;
+  top:0;
+  left:0;
+  width:100vw;
+  z-index:30;
+  position:fixed;
+  pointer-events: none;
+  *{
+    pointer-events: none;
+  }
+}
+
+.followmouse{
+  position:absolute;
+  clip-path:ellipse(0% 0% at 50% 50%);
+  width:50rem;
+  height:50rem;
+
+  transform:translate(-50%,-50%) rotate(0deg);
+  // transform:translate(-50%,-50%) rotate(-45deg);
+  img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) rotate(0);
+    transform:translate(-50%,-50%) rotate(45deg);
+  }
+}
+
+.homeposts{
+  background:$light;
+  position:relative;
+  
+  &_main{
+    //stck_base es main
+    position:relative;
+    
+    .el{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      width:100%;
+      position:relative;
+      padding:4rem 2rem;
+      border-top:1px solid black;
+      @include breakPortrait{
+        &:last-child{
+          border-bottom:1px solid black;
+        }
+
+      padding:3rem $pad;
+      }
+      @include breakMobile{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding:1.4rem $pad;
+        border-top:1px solid black;
+        &:last-child{
+          border-bottom:1px solid black;
+        }
+      }
+      .tit2{
+        position:relative;
+        span{
+          white-space: nowrap;
+          max-width: 40vw;
+          text-overflow: ellipsis;
+          position:relative;
+          display:block;
+          overflow: hidden;
+          @include breakPortrait{
+            text-overflow: initial;
+            max-width: 100%;
+            white-space: break-spaces;
+            
+          }
+          @include breakMobile{
+            max-width: 100%;
+          }
+        }
+        &::before{
+          content:'';
+          position:absolute;
+          left:0;
+          right:0;
+          bottom:0;
+          height:40%;
+          background:$orange;
+          transform:scaleY(0);
+          transform-origin: left bottom;
+          transition:.6s all $swiftOut;
+
+        }
+      }
+      .date{
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-left:.8rem;
+        @include breakMobile{
+          margin-left:0;
+          margin-top:.8rem;
+        }
+      }
+      &:hover{
+        .tit2{
+          &::before{
+            transform:scale(1);
+          }
+        }
+      }
+      &.act{
+        .tit2{
+          &::before{
+            transform:scale(1);
+          }
+        }
+      }
+    }
+   
+  }
+}
+
+
+
+
+

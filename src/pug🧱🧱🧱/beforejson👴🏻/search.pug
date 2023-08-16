@@ -1,0 +1,57 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="search" data-search="Dropbox" data-id="2")
+      main.searchp
+        section.searchp_intro
+          .searchp_intro_field
+            .field
+              label.field_lbl Search
+              input.field_npt
+              .field_btn
+                +icon({name:'search'})
+              .field_err.field_err-nores No Results
+              .field_err.field_err-empty Empty field
+        section.searchp_tabs
+          .tabs
+            .tabs_els
+              .simp.catEl.act
+                span All
+              .simp.catEl
+                span Pods
+              .simp.catEl
+                span Shows
+              .simp.catEl
+                span Articles
+          .totalSearch 35 results
+        section.searchp_results.hPosts
+          a.result(data-type="article" data-post="post")
+            .result_hold
+              .result_info
+                h3.tit3 We Are An Answered Prayer, “A WILDEST DREAM”
+                .description
+                  p Written by LiveRamp & Kham Ward Let’s talk about employee resource groups (ERGs). We all know their importance and the ...
+                .date DEC 13,2021
+                .btns
+                  .btns_t Read more
+              .result_image
+                img(src="./images/home/1.jpg")
+
+          a.result(data-type="podcastchild" data-post="podcast")
+            .result_hold
+              .result_info
+                h3.tit3 We Are An Answered Prayer, “A WILDEST DREAM”
+                .description
+                  p W/ SPECIAL guest Claudia
+                .btnplay
+                  .btnplay_tri
+                .result_info_bottom
+                  p By
+                  .date DEC 13,2021
+              .result_image
+                img(src="./images/home/1.jpg")
+        +footer
+    script(sync type="module" src="./src/app.js")

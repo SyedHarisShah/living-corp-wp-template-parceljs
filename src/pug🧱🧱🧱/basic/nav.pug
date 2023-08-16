@@ -1,0 +1,67 @@
+mixin nav(data)
+
+  if data === undefined
+    - var data = {}
+  nav.nav
+    .nav_menu
+      .nav_menu_bgs
+        .nav_menu_bg
+          img(src="./images/nav/1.jpg")
+        .nav_menu_bg
+          video(playsinline loop preload="none" muted poster="./images/nav/2.jpg" src="https://csskiller.es/livingc/2.mp4")
+        .nav_menu_bg
+          img(src="./images/nav/3.jpg")
+        .nav_menu_bg
+          img(src="./images/nav/4.jpg")
+        .nav_menu_bg
+          img(src="./images/nav/5.jpg")
+        .nav_menu_bg
+          video(playsinline loop preload="none" muted poster="./images/nav/6.jpg" src="https://csskiller.es/livingc/6.mp4")
+        .nav_menu_bg
+          img(src="./images/nav/7.jpg")
+        .nav_menu_bg
+          img(src="./images/nav/8.jpg")
+      .nav_menu_els
+        a.nav_menu_el
+          span Pods
+        a.nav_menu_el
+          span Shows
+        a.nav_menu_el
+          span Articles
+        a.nav_menu_el
+          span Network
+        a.nav_menu_el
+          span Lists
+        a.nav_menu_el
+          span Job board
+        a.nav_menu_el
+          span Contact
+        a.nav_menu_el
+          span Shop
+    .nav_searchbar
+      .nav_searchbar_icon
+        +icon({name:'search'})
+      .fieldsearch.nav_searchbar_input
+        label.fieldsearch_lbl Name
+        input.fieldsearch_npt
+      .nav_searchbar_close.closeSearch
+        span
+        span
+
+    .nav_box
+      a.nav_logo
+        +icon({name:'logo'})
+        +icon({name:'logoxs'})
+      .nav_burger
+        
+        span
+        span
+        span
+      .nav_box_right
+        .nav_search.actSearch
+          +icon({name:'search'})
+        .nav_buttons
+          .nav_log
+            .nav_log_t Sign up / log in
+          .nav_sup
+            .nav_sup_t Support

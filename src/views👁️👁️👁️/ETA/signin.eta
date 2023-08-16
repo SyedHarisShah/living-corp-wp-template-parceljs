@@ -1,0 +1,13 @@
+<div class="signupal">
+  <div class="signupal_bg"></div>
+  <div class="signupal_content">
+    
+    <div class="signupal_close"><span></span><span></span></div>
+    <div class="signupal_content_text">
+      <img src="<%~ it.global.acf.template %>/public/signupmodal.png">
+      <h2 class="tit1">SIGN UP NOW</h2>
+      <h3 class="tit4">GET UNINTERRUPTED ACCESS TO all OUR CURATED CONTENT. EXPLORE AND UPDATE YOUR INTERESTS FROM YOUR PRIVATE AREA.</h3>
+      <div class="btn" style="--base:#FEF9F3;--main:#DF80AC;"><div class="btn_t">SIGN UP</div></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="list" data-type="network" data-id="175")
+      main.artarchive
+        section.m-simpleintro
+          .c-vw
+            h2.tit1 Curated Lists
+            p Our team has pulled podcasts and blogs on important topics that center Black and brown folks at work. If you are a leader of marginalized employees, we recommend subscribing to the topics that resonate with you. These lists are updated often — please explore.
+        section.m-lists
+         .m-lists_hold.hPosts
+            each val in [1, 2, 3, 4, 5]
+              .list(style="--main:#005efe")
+                .list_hold
+                  .list_info
+                    h3.tit2 Must Reads for Aspiring Allies
+                    .description
+                      p Wellness is critical to healthy living, both in and outside of the workplace. Check this list out for Living Corporate’s content focused on physical and mental wellness.
+                    .tit4 Curated: March 28, 2021
+                    .btns
+                      .btns_t Subscribe
+                  .list_image
+                    .list_image_hold
+                      img(src="./images/home/1.jpg")
+                  
+        section.m-quote(style="--main:#895434")
+          .left
+            .left_el
+              img(src="./images/home/1.jpg")
+          .right
+            
+            h2.tit1 “<br>SUBSCRIBING TO LC CURATED LISTS IS Lorem ipsum dolor facilisis ligula facilisis sodales. Nunc vulputate.
+            h3.tit4 - Latesha Byrd, CEO of Perfeqta
+        section.m-cta(style="--main:#895434")
+          .c-vw
+            .hold
+              h2.tit1 SIGN UP NOW
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t Tap in
+        
+            
+    script(sync type="module" src="./src/app.js")

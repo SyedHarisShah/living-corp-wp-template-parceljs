@@ -1,0 +1,202 @@
+.contact{
+  &_intro{
+    margin-top:$header;
+    padding:4.8rem $pad;
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    p{
+      margin:2.4rem 0;
+      max-width: 43rem;
+      @include breakMobile{
+        max-width: 100%;
+      }
+    }
+   .mail{
+      text-decoration: underline;
+      font-family: 'bureau';
+      font-weight: 500;
+      font-size:1.4rem;
+      line-height: lH(14,16);
+      text-transform: uppercase;
+      @include breakPortrait{
+        font-size: 1.2rem;
+      }
+      @include breakMobile{
+        font-size:1.4rem;
+
+      }
+   }
+  }
+  &_form{
+    border-top:1px solid $dark;
+    padding:4rem 0;
+    display:flex;
+    justify-content: center;
+    align-items: flex-start;
+    .txt-bureau{
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .form{
+      display:flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+      & > *:not(.btn){
+        width:100%;
+      }
+      &_el{
+        position:relative;
+        @include breakMobile{
+          .selc{
+            margin-right: 4.4rem;
+          
+          }
+        }
+        
+        .tooltip{
+          position:absolute;
+          top:0%;
+          transform:translate(1.6rem,1.6rem);
+          left:100%;
+          @include breakMobile{
+            left:auto;
+            right:0;
+            transform:translate(0,1.2rem);
+          }
+        }
+        .tooltipmsg{
+          margin-top:1rem;
+          position:relative;
+          overflow: hidden;
+          height:0;
+          transition:.6s all $swiftOut;
+          .cover{
+
+            position:absolute;
+            left:0;
+            top:0;
+            width:calc(100% - .8rem);
+            border-radius: 4rem;
+            padding:2.4rem;
+            opacity:0;
+            transition:.6s all $swiftOut;
+            &::before{
+              content:'';
+              position:absolute;
+              left:.4rem;
+              top:.4rem;
+              width:100%;
+              bottom:.4rem;
+              border-radius: 4rem;
+              background:black;
+              transform:translate(-.4rem,.4rem);
+            }
+            &::after{
+              content:'';
+              position:absolute;
+              left:.4rem;
+              top:.4rem;
+              width:100%;
+              bottom:.4rem;
+              border-radius: 4rem;
+              background:$pink;
+              border:1px solid $dark;
+              transform:translate(.4rem,-.4rem);
+            }
+          }
+          p{
+            width:100%;
+            position:relative;
+            z-index:4;
+            
+          }
+          &.act{
+            .cover{
+              opacity:1;
+              transition-delay:.6s;
+            }
+          }
+        }
+        & + .field{
+
+          margin-top:1rem;
+        }
+      }
+
+    }
+  }
+}
+
+.tooltip{
+  width:3.2rem;
+  height:3.2rem;
+  &_icon{
+    width:3.2rem;
+    height:3.2rem;
+    position:absolute;
+    left:0;
+    top:0;
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      background:$dark;
+      width:100%;
+      height:100%;
+      border-radius:100%;
+      opacity:0;
+      transition:.6s all $swiftOut;
+    }
+    &::after{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      background:$dark;
+      width:100%;
+      height:100%;
+      border: 1px solid $dark;
+      border-radius: 100%;
+      transition:.6s all $swiftOut;
+  
+    }
+    &_i{
+
+      font-family: 'bureau';
+      font-weight: 500;
+      font-size:1.4rem;
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      text-align: center;
+      line-height: 3.2rem;
+      z-index:6;
+      color:$light;
+      transition:.6s all $swiftOut;
+    }
+    &:hover{
+      &::before{
+        opacity:1;
+        transform:translate(-.2rem,.2rem);
+  
+      }
+      &::after{
+        background:$pink;
+        transform:translate(.2rem,-.2rem);
+      }
+      .tooltip_icon_i{
+        color:$dark;
+        transform:translate(.2rem,-.2rem);
+  
+      }
+    }
+  }
+  
+}

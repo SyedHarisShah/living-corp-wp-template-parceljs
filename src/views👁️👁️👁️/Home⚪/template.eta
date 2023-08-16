@@ -1,0 +1,253 @@
+<main class="home">
+    <% if(it.data.acf?.use_grid_intro){ %>
+      <section class="home_intro">
+        <div class="home_intro_overlay">
+          <h1><%~ it.data.acf?.home_grid_heading || '' %></h1>
+          <span><%~ it.data.acf?.home_grid_subheading || '' %></span>
+        </div> 
+
+        <div class="home_intro_grid" data-progress="100">
+          <%
+            let images = it.data.acf?.home_grid_images || [];
+            let video = it.data.acf?.home_grid_video || '';
+            let video_link = it.data.acf?.home_grid_video_link || '';
+
+            for(let i = 0; i < images.length; i++) { 
+              if(i == Math.round(images.length/2)){ %>
+                <a class="home_intro_grid-image mouseHover" href="<%~ video_link %>">
+                  <video src="<%~ video %>" autoplay loop muted playsinline></video> 
+                </a>
+              <% } %>
+              <a class="home_intro_grid-image mouseHover" href="<%~ images[i]?.link || '' %>">
+                <img src="<%~ images[i].image %>">
+              </a>
+          <% } %>
+        </div>
+      </section>
+    <% } else { %>
+      <section class="home_intro">
+        <div class="iO iO-slidetime"></div>
+        <div class="left">
+
+          <% it.data.acf.slider.forEach(function(p,key){ 
+          if(p.link.post_type=='network' || p.link.post_type=="podcast"){
+                text ='Listen'
+              }
+              else if(p.link.post_type=='post'){
+                text ='Read'
+              }
+              else{
+                text ='Watch'
+              }
+          %>
+          <div class="left_el">
+            <div class="left_el_hold">
+              <% if(p.subtitle){ %>
+              <h3 class="tit4">
+                <div class="line">
+                  <div class="word"><%~ p.subtitle %></div>
+                </div>
+              </h3>
+              <% } %>
+              <h2 class="tit1"><%~ p.title %></h2>
+              <div class="btnmore">
+                <div class="btnmore_t"><%~ text %></div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+          
+        </div>
+        <div class="right">
+          <div class="right_hold">
+          <% it.data.acf.slider.forEach(function(p,key){
+              if(p.link.post_type=='network' || p.link.post_type=="podcast"){
+                mousehov ='mouseListen'
+              }
+              else if(p.link.post_type=='post'){
+                mousehov ='mouseRead'
+              }
+              else{
+                mousehov ='mouseWatch'
+              } %>
+              <div class="border"></div>
+              <a class="right_el <%~ mousehov %>" href="<%~ p.link.permalink %>" data-type="article"><img
+                src="<%~ p.image %>"></a>
+
+          <% }) %>
+          </div>
+          <div class="right_timer timer">
+            <div class="timer_s">99</div>
+            <div class="timer_b">
+              <div class="timer_b_f">
+                <div class="total"></div>
+              </div>
+            </div>
+            <div class="timer_e">0<%~ it.data.acf.slider.length %></div>
+          </div>
+        </div>
+      </section>
+    <% } %>
+
+      <section class="m-sectitle">
+        <div class="c-vw">
+          <div class="left">
+            <h2 class="tit2"><%~ it.data.acf.title_1 %></h2>
+          </div>
+          <div class="right">
+            <div class="txt-bureau">
+              <p><%~ it.data.acf.text_1 %></p>
+            </div><a href="<%~ it.global.acf.pods %>" class="simp mouseHover" style="--main:#E5855E"><span>Tune in</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="m-slidrag">
+        <div class="swiper">
+          <div class="swiper-wrapper mouseDrag">
+          <% 
+            if(it.data.acf.podcasts){
+            it.data.acf.podcasts.forEach(function(p,key){ %>
+            <div class="swiper-slide">
+            <a class="pod" href="<%~ p.permalink %>" data-type="podcastdad">
+                <div class="pod_image"><svg viewbox="0 0 810 810" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M342.941 690.825C269.987 707.143 202.158 695.855 157.898 651.595C113.639 607.336 102.35 539.507 118.668 466.553C135.002 393.528 179.093 314.604 246.849 246.849C314.604 179.093 393.528 135.002 466.553 118.668C539.507 102.35 607.336 113.639 651.595 157.898C695.855 202.158 707.144 269.987 690.826 342.941C674.492 415.966 630.401 494.889 562.645 562.645C494.89 630.401 415.966 674.491 342.941 690.825ZM161.434 648.06C246.686 733.312 424.732 693.488 559.11 559.109C693.488 424.731 733.312 246.686 648.06 161.434C562.808 76.1816 384.762 116.006 250.384 250.384C116.006 384.762 76.1818 562.808 161.434 648.06Z"
+                      fill="#FEF9F3"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M342.068 686.922C269.905 703.063 203.68 691.72 160.727 648.767C117.774 605.815 106.431 539.589 122.572 467.426C138.716 395.249 182.375 316.98 249.677 249.677C316.979 182.375 395.249 138.716 467.426 122.572C539.589 106.431 605.814 117.774 648.767 160.727C691.72 203.68 703.063 269.905 686.922 342.068C670.778 414.245 627.119 492.515 559.817 559.817C492.514 627.119 414.245 670.778 342.068 686.922ZM161.434 648.06C246.686 733.312 424.732 693.488 559.11 559.11C693.488 424.732 733.312 246.686 648.06 161.434C562.808 76.182 384.762 116.006 250.384 250.384C116.006 384.763 76.1818 562.808 161.434 648.06Z"
+                      fill="black"></path>
+                  </svg>
+                  <div class="pod_image_hold"><img src="<%~ p.image_a %>"></div>
+                </div>
+                <div class="pod_info">
+                  <h3 class="tit4"><%~ p.post_title %></h3>
+                  <p></p>
+                </div>
+              </a></div>
+          <% })
+          
+          } %>
+            
+          </div>
+        </div>
+      </section>
+      <section class="m-cta signupmod" style="--main:#E5855E">
+        <div class="c-vw">
+          <div class="hold">
+            <%
+              var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+              var title = it.global.acf.signup_text[randomNum-1].title;
+              var text = it.global.acf.signup_text[randomNum-1].text;
+              
+           %>
+            <h2 class="tit1"><%~ title %></h2>
+            <h3 class="tit4"><%~ text %> </h3>
+            </h3>
+            <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+              <div class="btn_t">TAP IN</div>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="m-sectitle">
+        <div class="c-vw">
+          <div class="left">
+            <h2 class="tit2"><%~ it.data.acf.title_2 %></h2>
+          </div>
+          <div class="right">
+            <div class="txt-bureau">
+              <p><%~ it.data.acf.text_2 %></p>
+            </div><a href="<%~ it.global.acf.shows %>" data-type="showarchive" class="simp mouseHover"><span>VIEW ALL</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="m-slidnum">
+        <div class="left" style="--main:#895434">
+          <div class="left_hold">
+
+          <% it.data.acf.shows.forEach(function(p,key){ %>
+            <div class="left_el">
+              <h3 class="tit1"><%~ p.post_title %></h3>
+              <div class="btnmore">
+                <div class="btnmore_t">Watch</div>
+              </div>
+            </div>
+          <% }) %>
+            
+          </div>
+          <div class="pg">
+
+          <% it.data.acf.shows.forEach(function(p,key){ %>
+            <div class="pgel mouseHover" style="--base:#895434;--main:#FEF9F3">
+              <div class="pgel_t"><%~ key+1 %></div>
+            </div>
+          <% }) %>
+            
+          </div>
+        </div>
+        <div class="right">
+          <% it.data.acf.shows.forEach(function(p,key){ %>
+          <a href="<%~ p.permalink %>" data-type="showdad" class="right_el mouseWatch"><img src="<%~ p.image_a %>"></a>
+          <% }) %>
+        </div>
+      </section>
+      <section class="m-sectitle">
+        <div class="c-vw">
+          <div class="left">
+            <h2 class="tit2"><%~ it.data.acf.title_3 %></h2>
+          </div>
+          <div class="right">
+            <div class="txt-bureau">
+              <p><%~ it.data.acf.text_3 %></p>
+            </div><a class="simp mouseHover" href="<%~ it.global.acf.articles %>"><span>VIEW ALL</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="homeposts">
+        <div class="homeposts_main">
+
+            <% it.data.acf.articles.forEach(function(w,key){ %>
+            <a class="el mouseFollow" data-image="<%~ w.image_a %>" data-type="article" href="<%~ w.permalink %>">
+                <h3 class="tit2"><span><%~ w.post_title %></span></h3>
+                <div class="date"><%~ w.date %></div>
+            </a>
+            <% }) %>
+            
+        </div>
+      </section>
+      <section class="m-cta" style="--main:#DF80AC">
+        <div class="c-vw">
+          <div class="hold">
+          <%
+              var randomNum = Math.floor((Math.random() * it.global.acf.support_text.length) + 1);
+              var title = it.global.acf.support_text[randomNum-1].title;
+              var text = it.global.acf.support_text[randomNum-1].text;
+              
+           %>
+            <h2 class="tit1"><%~ title %></h2>
+            <h3 class="tit4"><%~ text %> </h3>
+            <a  class="btn mouseHover" href="<%~ it.global.acf.support %>">
+              <div class="btn_t">Support</div>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="m-sectitle">
+        <div class="c-vw">
+          <div class="center">
+            <h2 class="tit2">Featured Guests and Brands</h2><a href="<%~ it.global.acf.network %>" data-type="networkarchive" class="simp mouseHover" style="--main:#E5855E"><span>VIEW
+                ALL</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="m-logos">
+        <div class="c-vw">
+        <%  it.global.acf.featured.forEach(function(p,key){ %>
+        <div><img src="<%~ p %>" /></div>
+        <%
+        })
+        %>
+        </div>
+      </section>
+  <%~ it.footer %>
+</main>

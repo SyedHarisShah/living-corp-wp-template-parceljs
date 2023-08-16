@@ -1,0 +1,631 @@
+.searchbg{
+  position:fixed;
+  z-index:49;
+  background:black;
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  opacity:0;
+  pointer-events: none;
+  clip-path: circle(0% at 74% 0%);
+  transition:.6s all $swiftOut;
+  @include breakPortrait{
+    clip-path: circle(0% at 90% 0%);
+
+  }
+}
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  --bg:#ECE8E7;
+  --color:#000;
+  transform:translateY(-100%);
+  &_box{
+    height: var(--header);
+    background:$light;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    position:relative;
+    border-bottom:1px solid var(--color);
+    padding-left: $gut;
+    z-index:51;
+    transition:.6s all $swiftOut;
+    @include breakPortrait{
+      height:7rem;
+      padding-right: $gut;
+    }
+    @include breakMobile{
+      height:4.8rem;
+
+    }
+    &_right{
+      display:flex;
+      justify-content: flex-start;
+      align-items:center;
+      transition:.6s all $swiftOut;
+      overflow: hidden;
+      height: var(--header);
+    }
+  }
+  
+  &_links{
+    display: flex;
+    overflow: hidden;
+    height: 0;
+    transition:.6s all $swiftOut;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+
+    .nav_link{
+      border-left: 1px solid #000;
+      height: 100%;
+      padding-inline: 4rem;
+      display: flex;
+      align-items: center;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+  }
+
+  &_burger{
+    max-height: 100%;
+    transition:.6s all $swiftOut;
+    width:5.5rem;
+    height:3.8rem;
+    @include center;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    @include breakPortrait{
+      width:4.4rem;
+      height:3rem;
+      transition:.6s transform $swiftOut;
+
+    }
+    span{
+      display:block;
+      width:100%;
+      height:.6rem;
+      width:100%;
+      background:var(--color);
+      transition:.6s all $swiftOut;
+      @include breakPortrait{
+        height:.5rem;
+      }
+      &:first-child{
+        transform-origin: left top;
+
+      }
+      &:nth-child(2){
+        
+        transform-origin: left top;
+      }
+      &:nth-child(3){
+        transform-origin: left bottom;
+      }
+
+    }
+    
+  }
+  &_search{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2.4rem;
+    width:3.4rem;
+    max-height: 100%;
+    overflow: hidden;
+    transition:.6s all $swiftOut;
+    &:hover{
+      opacity:.4;
+    }
+    @include breakPortrait{
+      margin-right: 0;
+      width:2.8rem;
+    }
+    svg{
+      width:100%;
+      *:not(g){
+        fill:var(--color);
+        transition:.6s all $swiftOut;
+      }
+    }
+  }
+  &_buttons{
+    display:flex;
+    height:7rem;
+    align-items:stretch;
+    @include breakPortrait{
+      position:absolute;
+      width:100vw;
+      right:0;
+      top:var(--app-height);
+      transform:translateY(0%);
+      border-top:1px solid $light;
+      transition: .6s all $swiftOut;
+      opacity:0;
+      pointer-events: none;
+      & > *{
+        width:100%;
+      }
+    }
+    @include breakMobile{
+
+      height:7rem;
+    }
+  }
+  &_log{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition:.6s all $swiftOut;
+    border-left:1px solid var(--color);
+    border-bottom: 1px solid var(--color);
+    padding:0 2.4rem;
+    position:relative;
+    @include breakPortrait{
+      border-left:0;
+      background:$dark;
+      padding:0 0;
+    }
+    
+    &_t{
+      font-family: 'bureau';
+      font-weight: 500;
+      font-size:1.4rem;
+      text-transform: uppercase;
+      color:var(--color);
+      transition:.6s color $swiftOut;
+      @include breakPortrait{
+        color:$light;
+      }
+    }
+    &_l{
+      font-family: 'bureau';
+      font-weight: 500;
+      font-size:1.4rem;
+      text-transform: uppercase;
+      color:var(--color);
+      white-space: nowrap;
+      transition:.6s color $swiftOut,.6s transform $swiftOut;
+      @include center;
+      color:transparent;
+      
+    }
+    &:hover{
+      background:$pink;
+      .nav_log_t{
+        // color:$light;
+      }
+    }
+  }
+  &_sup{
+    border-bottom: 1px solid var(--color);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition:.6s background $swiftOut;
+    border-left:1px solid $dark;
+    
+    padding:0 4rem;
+    background:var(--color);
+    @include breakPortrait{
+      background:$light;
+      padding:0 0;
+    }
+    &_t{
+      font-family: 'bureau';
+      font-weight: 500;
+      font-size:1.4rem;
+      text-transform: uppercase;
+      transition:.6s color $swiftOut;
+      color:var(--bg);
+      
+      @include breakPortrait{
+        color:$dark;
+      }
+    }
+    &:hover{
+      background:$light;
+      .nav_sup_t{
+        color:$dark;
+      }
+    }
+  }
+  &_logo{
+    width:20rem;
+    display:flex;
+    justify-content: flex-start;
+    @include breakPortrait{
+      width:4.6rem;
+    }
+    svg{
+      width:100%;
+      &.logolg{
+        @include breakPortrait{
+          display:none;
+        }
+      }
+      &.logoxs{
+        display:none;
+        @include breakPortrait{
+          display:flex;
+        }
+
+      }
+      *:not(g){
+        fill:var(--color);
+        transition:.6s all $swiftOut;
+      }
+    }
+  }
+  &_menu{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100vw;
+    background:$dark;
+    height:var(--app-height);
+    clip-path: circle(0% at 50% 0%);
+    // transition:.6s all $bounce;
+    transition:1.2s all $bounce;
+    pointer-events: none;
+    &_els{
+      position:absolute;
+      top:$header;
+      bottom:0;
+      width:100%;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index:1;
+      @include breakPortrait{
+        padding-bottom: 4.8rem;
+      }
+
+      &--ch {
+        display: none;
+      }
+    }
+    &_el{
+      color:$light;
+      font-weight: 700;
+      text-transform: uppercase;
+      --main:#DF80AC;
+      position:relative;
+      font-size:var(--fontSize); //use variable set in template.eta
+      pointer-events: all;
+      line-height: .8;
+      margin:var(--margin) 0; //use variable set in template.eta;
+      @include breakPortrait{
+        font-size:8vh;
+
+      }
+      @include breakMobile{
+        font-size:4.8rem;
+      }
+      @include media-max(376){
+        font-size:3.6rem;
+      }
+      &::before{
+        content:'';
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        height:30%;
+        background:var(--main);
+        transform:scaleY(0);
+        transform-origin: left bottom;
+        transition:.6s all $swiftOut;
+      }
+      span{
+        position:relative;
+        z-index:1;
+        display:block;
+      }
+      &:hover{
+        &::before{
+          transform:scaleY(1);
+
+        }
+      }
+    }
+
+    &_bgs{
+      @include clock;
+      
+    }
+    
+    &_bg{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      // transition:.9s clip-path $bounce;
+      clip-path: circle(0% at 30% 50%);
+
+      transform:translateZ(0px);
+      backface-visibility: hidden;
+      will-change: clip-path;
+      img{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        object-fit: cover;
+        filter:blur(6px);
+        transition:.6s all $swiftOut;
+      }
+      video{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        object-fit: cover;
+
+      }
+      // &:first-child{
+      //   clip-path: circle(0% at 30% 50%);
+        
+      // }
+      // &:nth-child(2){
+      //   clip-path: circle(0% at 70% 70%);
+        
+      // }
+      // &:nth-child(3){
+      //   clip-path: circle(0% at 70% 30%);
+        
+      // }
+      // &:nth-child(4){
+      //   clip-path: circle(0% at 30% 70%);
+        
+      // }
+      // &:nth-child(5){
+      //   clip-path: circle(0% at 30% 30%);
+        
+      // }
+      // &:nth-child(6){
+      //   clip-path: circle(0% at 70% 70%);
+        
+      // }
+      // &:nth-child(7){
+      //   clip-path: circle(0% at 70% 30%);
+        
+      // }
+      // &:nth-child(8){
+      //   clip-path: circle(0% at 70% 30%);
+        
+      // }
+      // &:nth-child(9){
+      //   clip-path: circle(0% at 30% 30%);
+        
+      // }
+      &.show{
+        // clip-path: circle(100% at 50% 50%);
+        // transition:1.4s clip-path $swiftOut;
+        z-index:1;
+        img{
+          filter:blur(0);
+          transition:1s all $swiftOut;
+
+        }
+      }
+    }
+  }
+  &_searchbar{
+    background:$light;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7rem;
+    z-index:52;
+    transition:.6s all $swiftOut;
+    opacity:0;
+    pointer-events: none;
+    @include breakPortrait{
+      padding-left:2.4rem;
+      justify-content: space-between;
+    }
+    @include breakMobile{
+      height:$header;
+      padding-left:1.6rem;
+    }
+    &_icon{
+      width:3.4rem;
+      margin-right: 2.8rem;
+      opacity:.4;
+    }
+    .fieldsearch{
+      font-family: 'bureau';
+      font-weight: 500;
+      text-transform: uppercase;
+      position:relative;
+      width:66rem;
+      @include breakPortrait{
+        width:100%;
+      }
+      &_lbl{
+        position:absolute;
+        left:0;
+        top:0;
+        font-size: 1.4rem;
+        transition:.45s all $swiftOut;
+        opacity:0.4;
+        pointer-events: none;
+        line-height: 3;
+      }
+      &_npt{
+        width:100%;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        pointer-events: none;
+        line-height: 3;
+      }
+      &.foc{
+        &::before{
+          border-width: 2px;
+        }
+        .fieldsearch{
+          &_lbl{
+            opacity:0;
+          }
+        }
+      }
+      &.fill{
+        .fieldsearch{
+          &_lbl{
+            opacity:0;
+            transform:translateX(100%);
+          }
+        }
+      }
+    }
+    &_close{
+      width:4.4rem;
+      height:3rem;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      transform:scale(.9);
+      span{
+
+        display:block;
+        width:100%;
+        height:.6rem;
+        background:$dark;
+        transition:.6s all $swiftOut;
+        @include breakPortrait{
+          height:.5rem;
+        }
+        &:first-child{
+          transform-origin: left top;
+          transform: translateY(-85%) rotate(45deg) scaleX(0);
+
+        }
+        &:last-child{
+          transform-origin: left bottom;
+          transform: rotate(-45deg) scaleX(0);
+        }
+     
+      }
+    }
+  }
+}
+html.logged{
+  .nav{
+    &_log{
+      background:$pink;
+      &_t{
+        color:transparent;
+      }
+      &_l{
+        color:$dark;
+        @include breakPortrait{
+          color:$dark;
+        }
+
+      }
+      &:hover{
+        background:$light;
+        .nav_log_l{
+          color:$dark;
+        }
+      }
+    }
+  }
+}
+html.menu-active{
+  .nav{
+    --color:#FEF9F3;
+    --bg:#000;
+    &_box{
+      background:transparent;
+    }
+    &_menu{
+      clip-path: circle(100% at 50% 50%);
+      &_els{
+        pointer-events: all;
+      }
+    }
+    &_burger{
+      @include breakPortrait{
+        transform:translate(-30%,-50%);
+      }
+      span{
+        &:first-child{
+          transform: translateY(-85%) rotate(45deg);
+  
+        }
+        &:nth-child(2){
+          
+          transform:scaleX(0);
+        }
+        &:nth-child(3){
+          transform: rotate(-45deg);
+        }
+      }
+    }
+    @include breakPortrait{
+      &_buttons{
+        opacity:1;
+        transform:translateY(-100%);
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+
+html.search-active{
+  .searchbg{
+    opacity:.6;
+    pointer-events: all;
+    clip-path: circle(100% at 50% 50%);
+  }
+  .nav{
+    &_searchbar{
+      opacity:1;
+      pointer-events: all;
+      .fieldsearch{
+        &_npt{
+          pointer-events:all;
+        }
+      }
+      &_close{
+        span{
+  
+          &:first-child{
+            transform: translateY(-85%) rotate(45deg) scaleX(1);
+            transition-delay:.4s;
+          }
+          &:last-child{
+            transform: rotate(-45deg) scaleX(1);
+            transition-delay:.6s;
+          }
+        }
+       
+      }
+    }
+  }
+}

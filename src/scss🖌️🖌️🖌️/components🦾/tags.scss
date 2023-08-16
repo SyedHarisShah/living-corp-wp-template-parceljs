@@ -1,0 +1,51 @@
+.m-tags{
+  display:flex;
+  padding-bottom: 1.4rem;
+  border-top: 1px solid $dark;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  
+  flex-wrap: wrap;
+  padding-left: $pad;
+  padding-right: $pad;
+
+  .tag{
+    align-items: center;
+    display:inline-flex;
+    border-radius:2rem;
+    padding:.6rem 1rem;
+    border:1px solid #B2AEAA;
+    margin:1.4rem .4rem 0;
+    text-transform: uppercase;
+
+    &:hover{
+      .tag-add-btn {
+        margin-block: 0;
+        margin-inline: -0.25rem 0.5rem;
+        max-width: 100%;
+        padding: 0.5rem;
+      }
+    }
+
+    &-add-btn {
+      align-items: center;
+      aspect-ratio: 1;
+      background-color: #df80ac;
+      border-radius: 50%;
+      display: inline-flex;
+      font-family: roboto;
+      font-size: 1.5rem;
+      height: 100%;
+      justify-content: center;
+      margin-block: 0.25rem;
+      margin-inline: 0;
+      max-width: 0;
+      padding: 0;
+      overflow: hidden;
+      text-transform: lowercase;
+      transition: 0.2s;
+    }
+  }
+}

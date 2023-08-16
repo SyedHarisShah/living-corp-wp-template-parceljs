@@ -1,0 +1,44 @@
+@charset "utf-8";
+//Fonts
+$desktop:1681;
+$tablet:821;
+$mobile:421;
+//sizes
+// $header:7rem;
+//Colors
+$text:#000;
+$dark:#000;
+$bg:#FEF9F3;
+$light:#FEF9F3;
+
+$pink:#DF80AC;
+$orange:#E5855E;
+$brown:#895434;
+$error:#FF244C;
+
+$vd:var(--appd);
+$vl:var(--appl);
+
+$main:var(--main);
+
+$header:var(--header);
+//Ease
+$easeOut: cubic-bezier(.43,.39,.23,1.01);
+$swiftOut: cubic-bezier(.55,0,.1,1);
+
+
+$easeOutn: cubic-bezier(0.19, 1, 0.22, 1);
+// $bounce: cubic-bezier(.63,.35,.4,1.10);
+
+$bounce:cubic-bezier(0.34, 1.56, 0.64, 1);
+
+
+// CustomEase.create("custom", "M0,0 C0,0 0.102,0.164 0.13,0.64 0.142,0.845 0.138,1.042 0.232,1.042 0.322,1.042 0.354,0.99 0.46,0.99 0.558,0.99 0.613,1.004 0.676,1.004 0.733,1.004 0.832,1 0.893,0.999 0.935,0.998 1,1 1,1 ")
+
+
+html{
+  --header:7rem;
+  @include breakMobile{
+    --header:4.8rem;
+  }
+}

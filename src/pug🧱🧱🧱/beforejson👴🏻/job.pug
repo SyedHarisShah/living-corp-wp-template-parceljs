@@ -1,0 +1,83 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="job" data-id="2")
+      main.jobsingle
+        section.m-bc
+          .c-vw
+            .bc
+              a LC
+              span /
+              a JOB BOARD
+              span /
+              span SENIOR TECHNICAL PROGRAM MANAGER - CLOUD INFRASTRUCTURE
+        section.m-logointro
+          .c-vw
+            img(src="./images/network/dropbox.svg")
+        section.jobsingle_main.stck_base(id="stck0")
+          .iO.iO-stck.stck_control(data-stck="0")
+          .stck_main
+            .stck_main_hold
+              a.btnfull
+                span.btnfull_t SIGN IN OR CREATE ACCOUNT TO APPLY
+          .stck_hold
+            .grid
+              .jobsingle_main_title
+                h2.tit4 ACCENTURE
+                h3.tit2 SENIOR TECHNICAL PROGRAM MANAGER - CLOUD INFRASTRUCTURE
+                .locate
+                  +icon({name:'marker'})
+                  .locate_t SAN FRANCISCO, CA
+              .jobsingle_main_hold
+                .tags
+                  span Mid career
+                  span Business Operations
+                  span Program Management
+                .hidetext
+                  .hidetext_click
+                    .simp
+                      span Show more
+                  .hidetext_hold.wp
+                    p Lorem, ipsum <a>dolor</a> sit amet consectetur adipisicing elit. Repudiandae et laborum aliquid exercitationem dolores officiis eaque nesciunt blanditiis, dignissimos sit a perferendis, consequuntur deleniti maiores assumenda esse deserunt ab harum necessitatibus non nulla at cum. Dolor nostrum beatae, distinctio, consequatur itaque ducimus consequuntur obcaecati ex repellat quasi animi deserunt tempora accusamus. Necessitatibus explicabo, ipsa nulla soluta porro aliquam, ipsum possimus, deserunt dolore velit rerum magnam quam quibusdam. Explicabo nulla molestias eveniet provident fuga aperiam voluptatum vero labore corporis iure corrupti nam, maiores officiis deleniti. Fugiat odit sed rem fugit reiciendis quidem unde architecto ex accusantium! Vero odit hic in at.
+                    ul 
+                      li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                      li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                      li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                      li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                      li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                      li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                    h4 title
+                    h2 title
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam expedita quod est sapiente dolore ullam voluptatum error velit veniam non.
+                    img(src="./images/home/1.jpg")
+                    p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia tempora blanditiis sed nisi libero ab voluptatem aperiam, ea est. Sequi dignissimos earum enim dolor vero, eveniet impedit ab, deleniti doloribus minus harum!
+                    blockquote Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel officiis iste beatae.
+        
+        section.m-share
+          .m-share_hold.grid
+            p share
+            .social
+              a(href="")
+                +icon({name:'tw'})
+              a(href="")
+                +icon({name:'fb'})
+              a(href="")
+                +icon({name:'in'})
+              a(href="")
+                +icon({name:'reddit'})
+              a(href="")
+                +icon({name:'tumbler'})
+
+        section.m-cta(style="--main:#DF80AC")
+          .c-vw
+            .hold
+              h2.tit1 SUPPORT OUR MISSION
+              h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices 
+              a.btn
+                .btn_t Support
+        +footer
+    script(sync type="module" src="./src/app.js")

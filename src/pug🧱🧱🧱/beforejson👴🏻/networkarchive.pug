@@ -1,0 +1,47 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="archive" data-type="network" data-id="175")
+      main.artarchive
+        section.m-simpleintro
+          .c-vw
+            h2.tit1 Network
+            h3.tit3 EXCLUSIVE CONTENT FROM FEATURED GUESTS AND BRANDS
+        section.m-networks
+         .m-networks_hold.hPosts
+            each val in [1, 2, 3, 4, 5]
+              a.network(style="--main:#005efe")
+                .network_hold
+                  .network_logo
+                    img(src="./images/network/dropbox.svg")
+            .fake
+         .m-networks_pags.c-vw.pg.pPosts
+            .pgel.act
+              .pgel_t 1
+            .pgel
+              .pgel_t 2
+            .pgel
+              .pgel_t 30
+            .pgel.dis
+              .pgel_t 4
+        section.m-cta(style="--main:#895434")
+          .c-vw
+            .hold
+              h2.tit1 SIGN UP NOW
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t Tap in
+        section.m-dual
+          .left
+            
+            h2.tit1 THE GROUP CHAT
+            h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices. 
+            .btn
+              .btn_t SUPPORT
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+    script(sync type="module" src="./src/app.js")

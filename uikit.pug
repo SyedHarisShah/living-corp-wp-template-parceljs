@@ -1,0 +1,123 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="simple" data-id="2")
+      main.page-uikit
+        .titleblock
+          h1.tit3.f h1
+          h2.tit1 Real Talk
+          .txt-bureau
+            p BUREAU GROT - CONDENSED BLACK 88PX / LINE: 80  700
+        .titleblock
+          h1.tit3.f h2
+          h2.tit2 Listen
+          .txt-bureau
+            p BUREAU GROT - CONDENSED BLACK 48PX / LINE: 44 700
+        .titleblock
+          h1.tit3.f h3
+          h2.tit3 LIBERATED LOVE NOTES
+          .txt-bureau
+            p BUREAU GROT - BLACK 18PX / LINE: 20 500
+        .titleblock
+          h1.tit3.f h4
+          h2.tit4 Liberated Love Notes #14
+          .txt-bureau
+            p BUREAU GROT - BLACK 14PX / LINE: 16 500
+        .titleblock
+          h1.tit3.f body
+          .txt-bureau.a
+            p Explore our catalog of podcast discussions with hundreds of executives, entrepreneurs, elected officials, activists, and influencers all focused on the same thing: centering and amplifying Black and brown folks at work.
+          .txt-bureau
+            p BUREAU GROT - WIDE BOOK 12PX / LINE: 16 400
+        .titleblock.a
+          h1.tit3.f body<br>blog
+          .txt-roboto
+            p We’re looking for an experienced Senior level Technical Program Manager to join our Cloud Infrastructure group and focus on our platform, frameworks and other foundational tools used to build software at Grubhub. Our clients are all internal but distributed, busy and opinionated so the right candidate will have a strong engineering background, be highly organized, analytical and multi disciplined. This will involve architecture, technology & vendor selection, project and product management.
+          .txt-bureau
+            p ROBOTO - REGULAR 16PX / LINE: 24
+        .colors
+          .color
+            .c(style="background-color:#DF80AC")
+            span #DF80AC
+          .color
+            .c(style="background-color:#E5855E")
+            span #E5855E
+          .color
+            .c(style="background-color:#895434")
+            span #895434
+          .color
+            .c.c-border(style="background-color:#FEF9F3")
+            span #FEF9F3
+          .color
+            .c(style="background-color:#000000")
+            span #000000
+          .color
+            .c(style="background-color:#FF244C")
+            span #FF244C
+        .buttons
+          .btn
+            .btn_t sign up
+          .btns
+            .btns_t sign up
+          .btnplay
+            .btnplay_tri
+          a.simp.simp-b
+                span Tune in
+          a.simp.act(style="--main:#E5855E")
+                span Tune in
+          a.simp.inac
+                span Tune in
+        
+        .pg
+          .pgel.act
+            .pgel_t 1
+          .pgel
+            .pgel_t 2
+          .pgel
+            .pgel_t 30
+          .pgel.dis
+            .pgel_t 4
+        .checks
+          .chk
+            input.chk_npt(type="checkbox")
+            .chk_s
+              .chk_i
+            label.chk_lbl I accept <a>Bacalao</a>
+        .fields
+          .field.field-email
+            label.field_lbl Name
+            input.field_npt
+            .field_err Empty field
+          .field.field-email.foc
+            label.field_lbl Name
+            input.field_npt
+            .field_err Empty field
+          .field.fill
+            label.field_lbl Email
+            input.field_npt
+            .field_err WRONG FORMAT. EJ: NAME@DOMAIN.COM
+          .field.err
+            label.field_lbl Email
+            input.field_npt
+            .field_err WRONG FORMAT. EJ: NAME@DOMAIN.COM
+          .selc
+            select
+              option(value="a" hidden selected) SELECT YOUR TOPIC
+              option(value="a") topic 1
+              option(value="a") topic 2
+          .field.field-txt
+            label.field_lbl Message
+            textarea.field_npt
+            .field_err Empty field
+          .chk
+            input.chk_npt(type="checkbox")
+            .chk_s
+              .chk_i
+            label.chk_lbl I accept <a>Bacalao</a>
+          .btn.btn-c(style="--base:#895434")
+            .btn_t Submit
+    script(sync type="module" src="./src/app.js")

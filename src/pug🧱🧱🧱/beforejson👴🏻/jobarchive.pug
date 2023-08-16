@@ -1,0 +1,153 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="jobs" data-id="2")
+      main.jobs
+        section.jobs_intro
+          .iO.iO-slidetime
+          .left
+            .left_el
+              .left_el_hold
+                h2.tit1 JOB BOARD
+                p.tit4 BROWSE AND APPLY for opportunities with our partner companies. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            
+          .right
+            .right_hold
+              .border
+              .right_el
+                img(src="./images/home/1.jpg")
+            
+        section.jobs_main
+          .jobs_main_top
+              .activeFilters
+                +icon({name:'filter'})
+                .activeFilters_t Filter by
+              .totalSearch 20 Results
+          .jobs_main_bottom
+            .bottom_types
+              .catEl
+                span Location
+              .catEl
+                span Industry
+            .bottom_checks
+              each val in [1, 2]
+                .bottom_checks_el
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl San Diego, Ca
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl LOS ANGELES, CA
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl SAN BERNARDINO, CA
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl DETROIT, MI
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl Remote
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl San Diego, Ca
+                  .chk
+                    input.chk_npt(type="checkbox")
+                    .chk_s
+                      .chk_i
+                    label.chk_lbl San Diego, Ca
+            .bottom_clear
+              .btn.btnClear
+                .btn_x
+                .btn_t Delete Filters
+          .jobs_main_results
+            .joblist
+              .joblist_hold
+                .joblist_info
+                  .joblist_info_top
+                    h2.tit2 SENIOR TECHNICAL PROGRAM MANAGEr
+                    h3.tit3 Accenture
+                    .locate
+                      +icon({name:'marker'})
+                      .locate_t New York,NY
+                    .description
+                      p We’re looking for an experienced Senior level Technical Program Manager to join our Cloud Infrastructure group and focus on our
+                    .date
+                      .date_t 22 MAY,2022
+                .joblist_button
+                  img(src="./images/network/dropbox.svg")
+                  .btns
+                    .btns_t Read more
+            each val in [1, 2]
+              .joblist
+                .joblist_hold
+                  .joblist_info
+                    .joblist_info_top
+                      h2.tit2 SENIOR TECHNICAL PROGRAM MANAGER - CLOUD INFRASTRUCTURE
+                      h3.tit3 Accenture
+                      .locate
+                        +icon({name:'marker'})
+                        .locate_t New York,NY
+                      .description
+                        p We’re looking for an experienced Senior level Technical Program Manager to join our Cloud Infrastructure group and focus on our
+                      .date
+                        .date_t 22 MAY,2022
+                  .joblist_button
+                    img(src="./images/network/dropbox.svg")
+                    .btns
+                      .btns_t Read more
+          
+
+        section.m-cta(style="--main:#E5855E")
+          .c-vw
+            .hold
+              h2.tit1 Sign up now
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t TAP IN
+        section.m-sectitle
+          .c-vw
+            .center
+              h2.tit2 Featured Guests and Brands
+            
+              a.simp(style="--main:#E5855E")
+                span VIEW ALL
+        section.m-logos
+          .c-vw
+            a
+              img(src="./images/logos/1.png")
+            a
+              img(src="./images/logos/2.png")
+            a
+              img(src="./images/logos/3.png")
+            a
+              img(src="./images/logos/4.png")
+            a
+              img(src="./images/logos/5.png")
+            a
+              img(src="./images/logos/6.png")
+            a
+              img(src="./images/logos/7.png")
+            a
+              img(src="./images/logos/8.png")
+            a
+              img(src="./images/logos/9.png")
+            a
+              img(src="./images/logos/10.png")
+        +footer
+    script(sync type="module" src="./src/app.js")

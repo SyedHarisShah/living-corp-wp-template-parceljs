@@ -1,0 +1,7 @@
+<div class="player-page__content-banner"><img src="<%~ it?.global?.sponsor?.banner%>"></div>
+
+<ul class="player-browse__tabs">
+    <li id="tab-latest" class="player-browse-tab--active">Latest</li>
+    <li id="tab-popular">Popular</li>
+</ul>
+<div class="player-page__content-modules"></div>

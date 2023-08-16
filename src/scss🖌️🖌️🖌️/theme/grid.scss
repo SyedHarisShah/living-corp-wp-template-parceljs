@@ -1,0 +1,72 @@
+
+	body{
+
+    --pad: 2rem;
+    --gut: 2.4rem;
+    --gutneg: -2.8rem;
+		
+		// @include media-min(2351){
+
+    //   --pad: 12.8rem;
+    //   --gut: 3.2rem;
+    //   --gutneg: -3.2rem;
+    // }
+		
+    @include media-max(1180){
+      --pad: 2rem;
+      --gut: 2rem;
+      --gutneg: -2.8rem;
+
+    }
+		@include media-max(767){
+
+      --pad: 1.6rem;
+      --gut: 1.6rem;
+      --gutneg: -1.2rem;
+    }
+	}
+
+
+
+	$gut :var(--gut);
+	$gutneg :var(--gutneg);
+	$pad :var(--pad);
+
+
+
+
+
+.c-vw {
+  margin: 0 auto;
+  width:100%;
+  padding-left:$pad;
+  padding-right:$pad;
+  // @include media-min(2350){
+    // max-width:2350px;
+    // @include media-min(1920){
+    //   max-width: 210vh;
+    // }
+  
+}
+
+.r{
+  margin-left:$gutneg;
+  margin-right:$gutneg;
+
+}
+
+.b{
+  padding-left:$gut;
+  padding-right:$gut;
+}
+
+
+.grid{
+  max-width: 58.7rem;
+  width:100%;
+  @include media-max(768){
+    max-width: 100%;
+    padding-left:$pad;
+    padding-right:$pad;
+  }
+}

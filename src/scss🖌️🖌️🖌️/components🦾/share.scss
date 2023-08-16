@@ -1,0 +1,74 @@
+.m-share{
+  display:flex;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  border-top: 1px solid $dark;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  &_hold{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    p{
+      font-family: 'bureau';
+      font-size:1.2rem;
+      font-weight: 500;
+      line-height: lH(12,16);
+      text-transform: uppercase;
+    }
+    .social{
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+      
+      a{
+        display:inline-flex;
+        position:relative;
+        @include media-max(680){
+          margin-left:2rem;
+          width:1.8rem;
+        }
+        svg{
+          width:100%;
+          position:relative;
+          *:not(g){
+            fill:$dark;
+            transition:.6s all $swiftOut;
+          }
+        }
+        &::before{
+          content:'';
+          position:absolute;
+          left:50%;
+          top:50%;
+          width:3.2rem;
+          height:3.2rem;
+          border-radius: 100%;
+          transform:translate(-50%,-50%) scale(0);
+          transition:.6s all $swiftOut;
+          
+        }
+        & + a{
+          
+          @include media-min(681){
+            margin-left:4rem;
+          }
+        }
+        &:hover{
+          &:before{
+            transform:translate(-50%,-50%) scale(1);
+
+          }
+          svg{
+            *:not(g){
+              fill:$light;
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}

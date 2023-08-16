@@ -1,0 +1,288 @@
+<main class="home">
+  <% if(it.data.acf?.use_grid_intro){ %>
+    <section class="home_intro">
+      <div class="home_intro_overlay">
+        <h1><%~ it.data.acf?.home_grid_heading || '' %></h1>
+        <span><%~ it.data.acf?.home_grid_subheading || '' %></span>
+      </div> 
+
+      <div class="home_intro_grid" data-progress="100">
+        <%
+          let images = it.data.acf?.home_grid_images || [];
+          let video = it.data.acf?.home_grid_video || '';
+          let video_link = it.data.acf?.home_grid_video_link || '';
+
+          for(let i = 0; i < images.length; i++) { 
+            if(i == Math.round(images.length/2)){ %>
+              <a class="home_intro_grid-image mouseHover" href="<%~ video_link %>">
+                <video src="<%~ video %>" autoplay loop muted playsinline></video> 
+              </a>
+            <% } %>
+            <a class="home_intro_grid-image mouseHover" href="<%~ images[i]?.link || '' %>">
+              <img src="<%~ images[i].image %>">
+            </a>
+        <% } %>
+      </div>
+    </section>
+  <% } else { %>
+    <section class="home_intro">
+      <div class="iO iO-slidetime"></div>
+      <div class="left">
+
+        <% it.data.acf.slider.forEach(function(p,key){ 
+        if(p.link.post_type=='network' || p.link.post_type=="podcast"){
+              text ='Listen'
+            }
+            else if(p.link.post_type=='post'){
+              text ='Read'
+            }
+            else{
+              text ='Watch'
+            }
+        %>
+        <div class="left_el">
+          <div class="left_el_hold">
+            <% if(p.subtitle){ %>
+            <h3 class="tit4">
+              <div class="line">
+                <div class="word"><%~ p.subtitle %></div>
+              </div>
+            </h3>
+            <% } %>
+            <h2 class="tit1"><%~ p.title %></h2>
+            <div class="btnmore">
+              <div class="btnmore_t"><%~ text %></div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+        
+      </div>
+      <div class="right">
+        <div class="right_hold">
+        <% it.data.acf.slider.forEach(function(p,key){
+            if(p.link.post_type=='network' || p.link.post_type=="podcast"){
+              mousehov ='mouseListen'
+            }
+            else if(p.link.post_type=='post'){
+              mousehov ='mouseRead'
+            }
+            else{
+              mousehov ='mouseWatch'
+            } %>
+            <div class="border"></div>
+            <a class="right_el <%~ mousehov %>" href="<%~ p.link.permalink %>" data-type="article"><img
+              src="<%~ p.image %>"></a>
+
+        <% }) %>
+        </div>
+        <div class="right_timer timer">
+          <div class="timer_s">99</div>
+          <div class="timer_b">
+            <div class="timer_b_f">
+              <div class="total"></div>
+            </div>
+          </div>
+          <div class="timer_e">0<%~ it.data.acf.slider.length %></div>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
+  <section class="m-sectitletext">
+    <div class="c-vw">
+      <div class="left">
+        <h2 class="tit2">Hi <%~ it.global.user.acf.firstname %></h2>
+      </div>
+      <div class="right">
+        <div class="txt-bureau">
+          <p>Explore our catalog of podcast discussions with hundreds of executives, entrepreneurs, elected officials, activists, and influencers all focused on the same thing: centering and amplifying Black and brown folks at work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="m-tabposts" style="--main:#E5855E">
+    <div class="m-tabposts_selector c-vw">
+      <div class="m-tabposts_selector_type">
+        <div class="tabClick simp act mouseHover"><span>your Pods</span></div>
+        <div class="tabClick simp mouseHover"><span>your Shows</span></div>
+        <div class="tabClick simp mouseHover"><span>your ARTICLES</span></div>
+      </div>
+      <div class="m-tabposts_selector_blocks">
+        <div class="blockClick mouseHover act" data-type="list"><svg viewbox="0 0 16 16" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="4" height="4" fill="black"></rect>
+            <rect x="6" width="10" height="4" fill="black"></rect>
+            <rect x="6" y="6" width="10" height="4" fill="black"></rect>
+            <rect x="6" y="12" width="10" height="4" fill="black"></rect>
+            <rect y="6" width="4" height="4" fill="black"></rect>
+            <rect y="12" width="4" height="4" fill="black"></rect>
+          </svg>
+        </div>
+        <div class="blockClick mouseHover" data-type="block"><svg viewbox="0 0 16 16" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect width="7" height="7" fill="black"></rect>
+            <rect y="9" width="7" height="7" fill="black"></rect>
+            <rect x="9" width="7" height="7" fill="black"></rect>
+            <rect x="9" y="9" width="7" height="7" fill="black"></rect>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="holderall">
+      <div class="m-tabposts_hold PodHold act">
+        <% it.datap.pods.forEach(function(p,key){ %>
+            <div class="podlist">
+              <div class="podlist_image">
+                <a class="podlist_image_hold mouseHover"  href="<%~ p.link %>" data-type="podcastchild"><img src="<%~ p.image %>"></a>
+              </div>
+              <div class="podlist_info">
+                <h3 class="tit4"><%~ p.title %></h3>
+                <% if(p.featuring){ %>
+                <p class="desc"><%~ p.featuring %></p>
+                <% }
+                else{
+                %>
+                <p class="desc"><%~ p.description %></p>
+                <%
+                  }
+                 %>
+                <a class="btnplay mouseHover" data-type="podcastchild"  href="<%~ p.link %>">
+                  <div class="btnplay_tri"></div>
+                </a>
+                <div class="autor">
+                  <% if(p.parentid>0){ %>
+                  <p><a class="mouseHover" href="<%~ p.parent.permalink %>" data-type="podcastdad"><%~ p.parent.name %></a></p>
+                  <% }
+                  %>
+                </div>
+                <div class="podlist_info_bottom">
+                  <div class="datapod">
+                    <div class="datapod_date"><%~ p.date %></div>
+                  <% if(p.duration){ %>
+                    <div class="datapod_time"><%~ p.duration %></div>
+                  <%  } %>
+                  </div>
+                  <div class="shareclick mouseHover">
+                    <%~ it.global.icons.share %>
+                    <div class="shareclick_close"></div>
+                    <div class="shareclick_icons">
+                      <a class="mouseHover Stw" href="https://twitter.com/intent/tweet?url=<%~ p.link %>"><%~ it.global.icons.tw %></a>
+                      <a class="mouseHover Sfb" href="https://www.facebook.com/sharer/sharer.php?u=<%~ p.link %>"><%~ it.global.icons.fb %></a>
+                      <a class="mouseHover Sin" href="https://www.linkedin.com/shareArticle?url=<%~ p.link %>"><%~ it.global.icons.in %></a>
+                      <a class="mouseHover Srd" href="https://www.reddit.com/submit?url=<%~ p.link %>"><%~ it.global.icons.reddit %></a>
+                      <a class="mouseHover Stb" href="https://www.tumblr.com/share/link?url=<%~ p.link %>"><%~ it.global.icons.tumbler %></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) 
+          if(it.datap.pods.length %2 != 0){
+          %>
+            <div class="podlist podlist-fake"></div>
+
+          <%
+          }
+          %>
+      </div>
+      <div class="m-tabposts_hold showHold load blocks">
+
+        <% it.datap.shows.forEach(function(p,key){ %>
+
+
+          <div class="show">
+            <div class="show_hold">
+              <div class="show_image">
+                <a class="btnplay mouseHover" data-type="showchild" href="<%~ p.link %>">
+                  <div class="btnplay_tri"></div>
+                </a>
+                <img src="<%~ p.image %>">
+              </div>
+              <div class="show_info">
+                <h3 class="tit3"><%~ p.title %></h3>
+                <div class="txt-bureau">
+                  <p><%~ p.description %></p>
+                </div>
+                <div class="show_info_bottom">
+                  <div class="date"><%~ p.date %></div>
+                  <div class="shareclick mouseHover">
+                    <%~ it.global.icons.share %>
+                    <div class="shareclick_close"></div>
+                    <div class="shareclick_icons">
+                      <a class="mouseHover Stw" href="https://twitter.com/intent/tweet?url=<%~ p.link %>"><%~ it.global.icons.tw %></a>
+                      <a class="mouseHover Sfb" href="https://www.facebook.com/sharer/sharer.php?u=<%~ p.link %>"><%~ it.global.icons.fb %></a>
+                      <a class="mouseHover Sin" href="https://www.linkedin.com/shareArticle?url=<%~ p.link %>"><%~ it.global.icons.in %></a>
+                      <a class="mouseHover Srd" href="https://www.reddit.com/submit?url=<%~ p.link %>"><%~ it.global.icons.reddit %></a>
+                      <a class="mouseHover Stb" href="https://www.tumblr.com/share/link?url=<%~ p.link %>"><%~ it.global.icons.tumbler %></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% })
+        %>
+      </div>
+
+      <div class="m-tabposts_hold artHold blocks load">
+
+        <% it.datap.posts.forEach(function(p,key){ %>
+          <a class="art mouseHover" href="<%~ p.link %>" data-type="article">
+            <div class="art_hold">
+              <div class="art_image">
+                <div class="btnmore btnmore-hovered">
+                  <div class="btnmore_t">read more</div>
+                </div><img src="<%~ p.image %>">
+              </div>
+              <div class="art_info">
+                <h3 class="tit3"><%~ p.title %></h3>
+                <% if(p.description!=null){ %>
+                <p class="desc"><%~ p.description %></p>
+                <% } %>
+                <div class="date tit4"><%~ p.date %></div>
+              </div>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="m-cta" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+      <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.support_text.length) + 1);
+          var title = it.global.acf.support_text[randomNum-1].title;
+          var text = it.global.acf.support_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        <a  class="btn mouseHover" href="<%~ it.global.acf.support %>">
+          <div class="btn_t">Support</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="m-sectitle">
+    <div class="c-vw">
+      <div class="center">
+        <h2 class="tit2">Featured Guests and Brands</h2><a href="<%~ it.global.acf.network %>" data-type="networkarchive" class="simp mouseHover" style="--main:#E5855E"><span>VIEW
+            ALL</span></a>
+      </div>
+    </div>
+  </section>
+  <section class="m-logos">
+    <div class="c-vw">
+    <%  it.global.acf.featured.forEach(function(p,key){ %>
+    <div><img src="<%~ p %>" /></div>
+    <%
+    })
+    %>
+    </div>
+  </section>
+<%~ it.footer %>
+</main>

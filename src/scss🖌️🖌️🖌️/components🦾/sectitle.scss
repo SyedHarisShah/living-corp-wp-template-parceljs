@@ -1,0 +1,105 @@
+.m-sectitle{
+  padding-top:2.8rem;
+  padding-bottom:2.8rem;
+  border-top:1px solid $dark;
+  @include breakPortrait{
+    padding-top:2.4rem;
+    padding-bottom:2.4rem;
+  }
+  @include breakMobile{
+    padding-top:0;
+    padding-bottom:0;
+
+
+  }
+  .c-vw{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    @include breakPortrait{
+
+    align-items: flex-start;
+    }
+    @include breakMobile{
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .left{
+      width:50%;
+      
+      @include breakPortrait{
+        width:30%;
+
+      }
+      @include breakMobile{
+        width:100%;
+        padding:2.8rem 1.6rem 0;
+      }
+      
+    }
+    .right{
+      width:50%;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      @include breakPortrait{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width:70%;
+        padding-left:2.4rem;
+      }
+      @include breakMobile{
+        margin-top:1.6rem;
+        width:100%;
+        padding:0 1.6rem;
+        padding-bottom:2.8rem;
+      }
+      .txt-bureau{
+        max-width: 52rem;
+        width:100%;
+        @include breakPortrait{
+          max-width: 100%;  
+        }
+      }
+      @include breakPortrait{
+        .simp{
+          margin-top:2.4rem;
+        }
+      }
+    }
+    .center{
+      width:100%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      position:relative;
+      text-align: center;
+      @include breakMobile{
+        flex-direction: column;
+        .tit2{
+          padding:1.6rem;
+        }
+      }
+      .simp{
+        @include center--y;
+        right:0;
+        @include breakMobile{
+          position:relative;
+          right:auto;
+          top:auto;
+          transform:translateY(0);
+          width:100%;
+          border-top:1px solid $dark;
+          padding:1.6rem;
+          display:flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

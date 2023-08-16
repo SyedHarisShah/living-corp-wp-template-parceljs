@@ -1,0 +1,64 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="simple" data-id="2")
+      main.contact
+        section.contact_intro(style="background:#E5855E")
+          h2.tit1 Contact us
+          p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque maximus est commodo orci suscipit posuere.
+          a.mail(href="mailto:INFO@LIVING-CORPORATE.COM") INFO@LIVING-CORPORATE.COM
+        section.contact_form
+          .grid
+            form.form
+              .form_el
+                .selc
+                  select
+                    option(value="a" hidden selected) SELECT YOUR TOPIC
+                    option(value="a") topic 1
+                    option(value="a") topic 2
+                .tooltip
+                  .tooltip_icon
+                    .tooltip_icon_i ?
+
+              .field.field-email
+                label.field_lbl Email
+                input.field_npt
+                .field_err Empty field
+              .field.field-email
+                label.field_lbl Name
+                input.field_npt
+                .field_err Empty field
+              .field.field-txt
+                label.field_lbl Message
+                textarea.field_npt
+                .field_err Empty field
+              
+              .chk
+                input.chk_npt(type="checkbox")
+                .chk_s
+                  .chk_i
+                label.chk_lbl I accept <a>terms & conditions</a>
+              .btn.btn-c(style="--base:#895434")
+                .btn_t Submit
+        section.m-cta(style="--main:#895434")
+          .c-vw
+            .hold
+              h2.tit1 SIGN UP NOW
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t Tap in
+        section.m-dual
+          .left
+            
+            h2.tit1 THE GROUP CHAT
+            h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices. 
+            .btn
+              .btn_t SUPPORT
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+        +footer
+    script(sync type="module" src="./src/app.js")

@@ -1,0 +1,215 @@
+<main class="player-archive" style="--brand-color: <%~ it?.global?.sponsor?.color %>">
+  <section class="player-header">
+    <div class="player-header__logo">
+      <img src="<%~ it?.global?.sponsor?.logo %>">
+    </div>
+
+    <div class="player-header__search">
+      <input id="player-search-bar" type="text" placeholder="Search..">
+    </div>
+
+    <div class="player-header__profile">
+      <div class="player-header__profile-img"><img src="<%~ it?.global?.sponsor?.icon %>"/></div>
+      <span class="player-header__profile-name"><%~ it.global.user?.acf?.firstname%></span>
+      <span class="player-header__profile-email"><%~ it.global.user?.user?.data?.user_email%></span>
+    </div>
+  </section>
+
+  <section class="player-page">
+    <div class="player-page__nav">
+      <div class="player-page__nav-tabs">
+        <span id="discover-link" class="player-page__nav-link mouseHover" data-href="discover">
+          <span class="player-page-btn--icon"><%~it.global.icons.grid%></span>
+          <span class="player-page-btn--text">Discover</span>
+        </span>
+
+        <span id="browse-link" class="player-page__nav-link mouseHover" data-href="browse">
+          <span class="player-page-btn--icon"><%~it.global.icons.book%></span>
+          <span class="player-page-btn--text">Browse</span>
+        </span>
+
+        <span id="playlists-link" class="player-page__nav-link mouseHover" data-href="playlists">
+          <span class="player-page-btn--icon"><%~it.global.icons.history%></span>
+          <span class="player-page-btn--text">Playlists</span>
+        </span>
+      </div>
+
+      <div class="player-page__nav-buttons">
+        <span class="player-page__nav-link mouseHover" data-href="create-playlist">
+          <span class="player-page-btn--icon"><%~it.global.icons.plus%></span>
+          <span class="player-page-btn--text">Create Playlist</span>
+        </span>
+
+        <span class="player-page__nav-link mouseHover" data-href="liked-podcasts">
+          <span class="player-page-btn--icon"><%~it.global.icons.heart%></span>
+          <span class="player-page-btn--text">Liked Modules</span>
+        </span>
+      </div>
+
+      <div class="player-page__nav-playlists">
+        <% Object.entries(it.user_playlists).forEach(([key, playlist]) => { %>
+          <span id="<%~ key%>" class="mouseHover" data-href="<%~ playlist.link%>">
+            <span class="player-page-btn--input" id="input-playlist-name"><input type="text" placeholder="Custom Playlist"></span>
+            <span class="player-page-btn--text"><%~ playlist.name%></span>
+            <span class="player-page-btn--icon share-user-pl-btn" id="share-icon"><%~it.global.icons.menu%></span>
+            <span class="player-page-btn--icon save-pl-btn" id="close-icon"><%~it.global.icons.check%></span>
+            <ul class="mp-dropmenu" aria-label="Modify Playlist">
+                <li id="edit-playlist-name">Edit Playlist Name</li>
+                <li id="delete-this-playlist">Delete This Playlist</li>
+              <li id="share-this-playlist">Share This Playlist</li>
+            </ul>
+          </span>
+        <% }) %>
+      </div>
+    </div>
+
+    <div class="player-header__search-mobile">
+      <input id="player-search-bar" type="text" placeholder="Search..">
+    </div>
+
+    <div class="player-page__nav-mobile player-page__nav-tabs">
+      <span id="discover-link" class="player-page__nav-link mouseHover" data-href="discover">
+        <span class="player-page-btn--icon"><%~it.global.icons.grid%></span>
+        <span class="player-page-btn--text">Discover</span>
+      </span>
+
+      <span id="browse-link" class="player-page__nav-link mouseHover" data-href="browse">
+        <span class="player-page-btn--icon"><%~it.global.icons.book%></span>
+        <span class="player-page-btn--text">Browse</span>
+      </span>
+
+      <span id="playlists-link" class="player-page__nav-link mouseHover" data-href="playlists">
+        <span class="player-page-btn--icon"><%~it.global.icons.history%></span>
+        <span class="player-page-btn--text">Playlists</span>
+      </span>
+
+      <span id="liked-podcasts-link"  class="player-page__nav-link mouseHover" data-href="liked-podcasts">
+        <span class="player-page-btn--icon"><%~it.global.icons.heart%></span>
+        <span class="player-page-btn--text">Liked</span>
+      </span>
+    </div>
+
+    <div class="player-page__content"></div>
+
+    <div class="player-page__filters">
+      <% const filter_label = it.global.acf?.filter_label ?? "Popular"; %>
+      <div class="player-page__category-filter">
+        <h2><%~ filter_label %> Categories</h2>
+
+        <div class="player-page__filter-items">
+          <% it.filters.cats.forEach(({id, name},i) => { %>
+            <span id="cat-<%~i%>" data-id="<%~id%>" class="player-page__filter-item mouseHover"><%~name%></span>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="player-page__tag-filter">
+        <h2><%~ filter_label %> Tags</h2>
+
+        <div class="player-page__filter-items">
+          <% it.filters.tags.forEach(({id, name},i) => { %>
+            <span id="tag-<%~i%>" data-id="<%~id%>" class="player-page__filter-item mouseHover"><%~name%></span>
+          <% }) %>
+        </div>
+      </div>
+      
+      <div class="player-page__topic-filter">
+        <h2><%~ filter_label %> Topics</h2>
+
+        <div class="player-page__filter-items">
+          <% it.filters.topics.forEach(({id, name},i) => { %>
+            <span id="topic-<%~i%>" data-id="<%~id%>" class="player-page__filter-item mouseHover"><%~name%></span>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-page__filters player-page__filters--modules">
+      <div class="player-page__category-filter">
+        <h2>Module Categories</h2>
+
+        <div class="player-page__filter-items player-page__filter-items--cats"></div>
+      </div>
+
+      <div class="player-page__tag-filter">
+        <h2>Module Tags</h2>
+
+        <div class="player-page__filter-items player-page__filter-items--tags"></div>
+      </div>
+      
+      <div class="player-page__topic-filter">
+        <h2>Module Topics</h2>
+
+        <div class="player-page__filter-items player-page__filter-items--topics"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="player-archive-fixed">
+    <section class="media-player" style="height: 0;">
+      <audio id="audio-player"></audio>
+      <div class="media-player__banner">
+        <img src="<%~ it?.global?.sponsor?.icon %>"/>
+        <h3>DROPBOX AND #BLACKLIVESMATT...</h3>
+        <span>by Living Corporate</span>
+        <span id="close-mp-btn"><%~ it.global.icons.close %></span>
+      </div>
+
+      <div class="media-player__image">
+        <img src="<%~ it?.global?.sponsor?.icon %>"/>
+      </div>
+
+      <div class="media-player__buttons media-player__buttons-1">
+        <span class="mp-btn mouseHover" id="prev-btn"><%~ it.global.icons.rewind %></span>
+        <span class="mp-btn mouseHover" id="play-btn"><%~ it.global.icons.play %></span>
+        <span class="mp-btn mouseHover" id="next-btn"><%~ it.global.icons.rewind %></span>
+        <span class="mp-btn mouseHover" id="loop-btn"><%~ it.global.icons.loop %></span>
+        <span class="mp-btn mouseHover" id="shuffle-btn"><%~ it.global.icons.shuffle %></span>
+      </div>
+
+      <div class="media-player__info">
+        <div class="media-player__title">
+          <h3>DROPBOX AND #BLACKLIVESMATT...</h3>
+          <span>by Living Corporate</span>
+        </div>
+
+        <div class="media-player__time">
+          <span id="curr-time">0:00</span>
+          <span id="slash">/</span>
+          <span id="end-time">0:00</span>
+        </div>
+
+        <div class="media-player__seek-bar">
+          <div id="progress">
+            <span class="mouseHover" id="handle"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="media-player__buttons media-player__buttons-2">
+        <span class="mp-btn mouseHover" id="volume-btn">
+          <%~ it.global.icons.volume %>
+          <div id="volume-control" class="volume-btn-control">
+            <div id="volume-slider">
+              <div id="volume-progress">
+                <span class="mouseHover" id="volume-handle"></span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span class="mp-btn mouseHover" id="like-btn"><%~ it.global.icons.heart %></span>
+        <span class="mp-btn mouseHover" id="share-btn"><%~ it.global.icons.share %></span>
+        <span class="mp-btn mouseHover" id="menu-btn">
+          <%~ it.global.icons.menu %>
+          <ul class="mp-menu" id="menu-list" aria-label="Add to playlist">
+            <% Object.entries(it.user_playlists).forEach(([key, playlist]) => { %>
+              <li id="<%~ key%>-add"><%~ playlist.name%></li>
+            <% }) %>
+          </ul>
+        </span>
+      </div>
+    </section>  
+    <%~ it.footer %>
+    <div class="snackbar" id="snackbar">Copied to clipboard</div>
+  </div>
+</main>

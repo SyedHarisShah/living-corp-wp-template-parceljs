@@ -1,0 +1,104 @@
+
+
+html {
+  &.smooth{
+
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  
+
+    body {
+      left: 0;
+      opacity: 1;
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    #content {
+      // height: 100%;
+      // left: 0;
+      // overflow: auto;
+      // position: absolute;
+      // top: 0;
+      // width: 100%;
+      position:relative;
+      z-index:4;
+      // pointer-events: none;
+    }
+    .holdanim{
+      position:fixed;
+      width:100vw;
+      height:var(--app-height);
+      left:0;
+      top:0;
+    }
+    main{
+      position: fixed;
+      width:100%;
+      top:0;
+      left:0;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      will-change: transform;
+      // pointer-events: none;
+      & > *{ 
+        pointer-events:auto;
+      }
+    }
+
+  }
+}
+
+html.touch{
+
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  body{
+
+    left: 0;
+    opacity: 1;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    // bottom:0;
+    width: 100%;
+    #content{
+      
+    }
+    main{
+      width:100%;
+      position:relative;
+    }
+    
+  }
+  &.no-scroll{
+    pointer-events:none!important;
+    body{
+      pointer-events:none!important;
+
+    }
+  }
+  // .stck_main{
+  //   position:sticky;
+  //   @include nohover{
+  //     height: var(--app-height);
+  //   }
+  // }
+
+}

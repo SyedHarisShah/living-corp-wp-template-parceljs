@@ -1,0 +1,175 @@
+.m-social{
+  border-top:1px solid $dark;
+  display:flex;
+  justify-content: space-between;
+  align-items: stretch;
+  @include breakMobile{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left{
+    padding-top:2.4rem;
+    padding-bottom:2.4rem;
+    padding-left:$pad;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 2.8rem;
+    width:50%;
+    
+    @include breakPortrait{
+      width:30%;
+      padding-top:2.4rem;
+      padding-bottom:2.4rem;
+
+    }
+    @include breakMobile{
+      width:100%;
+      padding:1.6rem 1.6rem 0;
+    }
+    
+  }
+  .right{
+    width:50%;
+    border-left:1px solid $dark;
+    padding-top:2.4rem;
+    padding-bottom:2.4rem;
+    padding-left:2.8rem;
+    padding-right: $pad;
+    @include breakPortrait{
+      width:70%;
+      padding-left:2.4rem;
+    }
+    @include breakMobile{
+      margin-top:1.6rem;
+      width:100%;
+      padding:$pad $pad 1.6rem;
+      border-top:1px solid $dark;
+      border-left: 0;
+    }
+    .social{
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+      @include breakMobile{
+        justify-content: space-between;
+      }
+
+      a{
+        display:inline-flex;
+        align-items: center;
+        justify-content: center;
+        position:relative;
+        margin-right:4rem;
+        @include media-max(680){
+          margin-right:2rem;
+          width:1.8rem;
+        }
+        svg{
+          width:100%;
+          position:relative;
+          *:not(g){
+            fill:$dark;
+            transition:.6s all $swiftOut;
+          }
+        }
+        &::before{
+          content:'';
+          position:absolute;
+          left:50%;
+          top:50%;
+          width:3.2rem;
+          height:3.2rem;
+          border-radius: 100%;
+          transform:translate(-50%,-50%) scale(0);
+          transition:.6s all $swiftOut;
+          
+        }
+        & + a{
+          @include media-min(681){
+            margin-left:2rem;
+          }
+        }
+        &:hover{
+          &:before{
+            transform:translate(-50%,-50%) scale(1);
+
+          }
+          svg{
+            *:not(g){
+              fill:$light;
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
+
+
+.S{
+  &tw{
+    &::before{
+      background:#1D9BF0;
+    }
+    &:hover{
+    }
+  }
+  &fb{
+    &::before{
+      background:#3B5998;
+    }
+  }
+  &in{
+    &::before{
+      background:#0E76A8;
+    }
+  }
+  &rd{
+    &::before{
+      background:#FF5700;
+    }
+  }
+  &tb{
+    &::before{
+      background:#001935;
+    }
+  }
+  &ig{
+    &::before{
+      background: linear-gradient(221.99deg, #BF00A2 15%, #F30005 45.51%, #FEC71E 86.45%);
+    }
+  }
+  &ap{
+    &::before{
+      background:#7F46C9;
+    }
+  }
+
+  &sp{
+    &::before{
+      background:#1DB954;
+    }
+  }
+
+
+  &st{
+    svg{
+      width:24px;
+    }
+    &::before{
+      background:#3892C4;
+    }
+  }
+
+
+  &sl{
+    &::before{
+      background:#4A154B;
+    }
+  }
+}

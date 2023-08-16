@@ -1,0 +1,20 @@
+
+<% 
+  it.posts.forEach(function(p,key){
+ %>
+  <a class="list mouseHover" data-title="<%~ p.title %>" href="<%~ p.link %>">
+    <div class="list_hold">
+      <div class="list_info">
+        <h3 class="tit2"><%~ p.title %></h3>
+        <div class="description">
+          <p><%~ p.description %></p>
+        </div>
+        <div class="tit4"><%~ p.subtitle %> </div>
+        
+      </div>
+      <div class="list_image"><div class="list_image_hold"><img src="<%~ p.image %>"></div></div>
+    </div>
+  </a>
+  <%
+  }) 
+%>

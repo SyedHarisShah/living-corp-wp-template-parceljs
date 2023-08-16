@@ -1,0 +1,357 @@
+
+.chk{
+  position:relative;
+  display:flex;
+  &_s{
+    position:absolute;
+    left:0;
+    top:0;
+    width:2.4rem;
+    height:2.4rem;
+    pointer-events: none;
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      background:$dark;
+      width:100%;
+      height:100%;
+      border-radius: .4rem;
+      opacity:0;
+      transition:.6s all $swiftOut;
+    }
+    &::after{
+      content:'';
+      position:absolute;
+      left:0;
+      top:0;
+      background:$light;
+      width:100%;
+      height:100%;
+      border: 1px solid $dark;
+      border-radius: .4rem;
+      transition:.6s all $swiftOut;
+  
+    }
+  }
+  &_i{
+    position:absolute;
+    left:0;
+    top:0;
+    width:2.4rem;
+    height:2.4rem;
+    z-index:4;
+    opacity:0;
+    transition:.6s all $swiftOut;
+    &::before{
+      content:'';
+      width:.5rem;
+      height:.3rem;
+      display:block;
+      position:absolute;
+      left:.5rem;
+      top:1.1rem;
+      background:$dark;
+      transform:rotate(45deg);
+    }
+    &::after{
+      content:'';
+      width:1.3rem;
+      height:.3rem;
+      display:block;
+      position:absolute;
+      left:.7rem;
+      top:1rem;
+      background:$dark;
+      transform:rotate(-45deg);
+    }
+  }
+  
+  &_lbl{
+    text-transform: uppercase;
+    margin-left:1.4rem;
+    line-height: 2.4rem;
+    a{
+      text-decoration: underline;
+    }
+  }
+  &_npt{
+    width:2.4rem;
+    height:2.4rem;
+    &:checked + .chk_s{
+      &::before{
+        opacity:1;
+        transform:translate(-.2rem,.2rem);
+  
+      }
+      &::after{
+        transform:translate(.2rem,-.2rem);
+      }
+      .chk_i{
+        transform:translate(.2rem,-.2rem);
+        opacity:1;
+      }
+    }
+  }
+  &.err{
+    .chk_s{
+      &::after{
+        border-color:$error;
+      }
+    }
+  }
+  & + .btn{
+    margin-top:2.4rem;
+  }
+}
+
+.field{
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:flex-start;
+  font-family: 'bureau';
+  font-weight: 500;
+  text-transform: uppercase;
+  pointer-events: none;
+  &::before{
+    content:'';
+    position:absolute;
+    left:0;
+    width:100%;
+    height:7.2rem;
+    border-radius: 6.5rem;
+    border:1px solid $dark;
+    @include breakMobile{
+      height: 6.8rem;
+    }
+  }
+  &_err{
+    color:$error;
+    padding-left:2.8rem;
+    margin-top:.8rem;
+    font-size: 1rem;
+    opacity:0;
+    transition:.45s all $swiftOut;
+    @include breakMobile{
+      padding-left:2.4rem;
+    }
+  }
+  &_lbl{
+    position:absolute;
+    left:2.8rem;
+    top:0;
+    font-size: 1.4rem;
+    line-height: lH(14,72);
+    transition:.45s all $swiftOut;
+    opacity:0.4;
+    white-space: nowrap;
+    @include breakMobile{
+      left:2.4rem;
+      line-height: lH(14,68);
+    }
+  }
+  &_npt{
+    width:100%;
+    border:1px solid transparent;
+    border-radius: 6.5rem;
+    font-size: 1.4rem;
+    padding:0 2.8rem;
+    text-transform: uppercase;
+    pointer-events: all;
+    line-height: lH(14,72);
+    @include breakMobile{
+      line-height: lH(14,68);
+
+    }
+  }
+  
+  &-txt{
+    &::before{
+      height:calc(100% - 1.8rem);
+      border-radius: 4.8rem;
+    }
+    .field{
+      &_npt{
+        border-radius: 4.8rem;
+        padding-top:2.4rem;
+        line-height: lH(16,24);
+        height:20vh;
+        resize: none;
+        @include breakPortrait{
+          height:35vh;
+        }
+      }
+    }
+  }
+  &.foc{
+    &::before{
+      border-width: 2px;
+    }
+    .field{
+      &_lbl{
+        opacity:0;
+      }
+    }
+  }
+  &.fill{
+    .field{
+      &_lbl{
+        left:calc(100% - 2.8rem);
+        transform:translateX(-100%);
+      }
+    }
+  }
+  &.err{
+    &::before{
+      border-color: $error;
+      border-width: 2px;
+    }
+    .field{
+      &_err{
+        opacity:1;
+      }
+    }
+  }
+  & + .field{
+    margin-top:.8rem;
+  }
+  & + .selc{
+    margin-top:.8rem;
+  }
+  & + .chk{
+    margin-top:.8rem;
+  }
+}
+
+.selc{
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:flex-start;
+  font-family: 'bureau';
+  font-weight: 500;
+  text-transform: uppercase;
+  &::before{
+    content:'';
+    width:1.2rem;
+    height:1.2rem;
+    display:block;
+    position:absolute;
+    right:2.8rem;
+    top:45%;
+    border-left:.5rem solid $dark;
+    border-bottom:.5rem solid $dark;
+    transform:translateY(-50%) rotate(-45deg);
+    @include breakMobile{
+      right:2.4rem;
+
+    }
+  }
+  select{
+    width:100%;
+    border:1px solid $dark;
+    border-radius: 6.5rem;
+    font-size: 1.4rem;
+    padding:0 2.8rem;
+    text-transform: uppercase;
+    pointer-events: all;
+    height:7.2rem;
+    background:transparent;
+    appearance: none;
+    transition:.6s all $swiftOut;
+    @include breakMobile{
+      height:6.4rem;
+      padding:0 2.4rem;
+
+    }
+
+  }
+  & + .field{
+    margin-top:2.6rem;
+  }
+  &.err{
+    select{
+      color:$error;
+      border-width: 2px;
+      border-color: $error;
+    }
+  }
+}
+
+.supercheck{
+  position:relative;
+  width:8.8rem;
+  height:8.8rem;
+  border:1px solid $dark;
+  background:var(--main);
+  border-radius: 100%;
+  &_i{
+    @include center;
+    width:8.8rem;
+    height:8.8rem;
+    z-index:4;
+    opacity:1;
+    transition:.6s all $swiftOut;
+    margin-right: 1rem;
+    &::before{
+      content:'';
+      width:1.5rem;
+      height:.9rem;
+      display:block;
+      position:absolute;
+      left:2.2rem;
+      top:4.3rem;
+      background:$dark;
+      transform:rotate(45deg);
+    }
+    &::after{
+      content:'';
+      width:3.9rem;
+      height:.9rem;
+      display:block;
+      position:absolute;
+      left:2.8rem;
+      top:4rem;
+      background:$dark;
+      transform:rotate(-45deg);
+    }
+  }
+}
+
+
+
+.iconcheck{
+  position:relative;
+  width:2.4rem;
+  height:2.4rem;
+  z-index:4;
+  opacity:1;
+  transition:.6s all $swiftOut;
+  margin-right: 1rem;
+  &::before{
+    content:'';
+    width:.5rem;
+    height:.3rem;
+    display:block;
+    position:absolute;
+    left:.5rem;
+    top:1.1rem;
+    background:$light;
+    transform:rotate(45deg);
+  }
+  &::after{
+    content:'';
+    width:1.3rem;
+    height:.3rem;
+    display:block;
+    position:absolute;
+    left:.7rem;
+    top:1rem;
+    background:$light;
+    transform:rotate(-45deg);
+  }
+}

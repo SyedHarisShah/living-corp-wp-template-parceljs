@@ -1,0 +1,132 @@
+html{
+
+  // @include media-min(2561){
+  @include media-min(2291){
+    font-size: calc(100vw / 1440 * 8.1);
+  }
+    
+  font-size: calc(100vw / 1440 * 10);
+  
+  @include media-min(2291){
+    @media (min-aspect-ratio: 17/9) {
+
+    }
+
+  }
+
+
+  @include media-max(1180){
+    font-size: calc(100vw / 1180 * 9);
+
+  }
+
+
+
+  @include breakLandscape{
+    font-size: calc(100vw / 1180 * 9);
+
+  }
+  @include breakPortrait{
+    font-size: calc(100vw / 375 * 4.7);
+
+  }
+  @include media-max(768){
+    font-size: calc(100vw / 375 * 6);
+
+  }
+
+
+  
+  @include media-max(414){
+    font-size: calc(100vw / 375 * 10);
+
+  }
+}
+
+body{
+  font-family: 'bureau';
+  color:black;
+  font-weight: 400;
+  font-size:1.2rem;
+  background:$bg;
+  // @include breakLandscape{
+  //   font-size:2.4rem;
+  // }
+  // @include media-max(414){
+  //   font-size:1.8rem;
+    
+  // }
+}
+
+main{
+  min-height: 100vh;
+  position:relative;
+  z-index:3;
+  backface-visibility: hidden;
+  section{
+    background:$light;
+
+  }
+  
+}
+.loadbubble{
+  display:flex;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100vw;
+  height:100vh;
+  z-index:100;
+  opacity:1;
+  pointer-events: none;
+  transform:translateZ(0px);
+  backface-visibility: hidden;
+  background:$pink;
+  // backdrop-filter:blur(3px);
+  // background:$light;
+  clip-path:circle(0% at 0% 0%);
+  img{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    backface-visibility: hidden;
+    transition:1s filter $swiftOut;
+    &:not(.act){
+      filter:blur(3px);
+    }
+    &.act{
+    }
+  }
+}
+#content{
+  
+
+
+  // &::after{
+  //   display:flex;
+  //   content:'';
+  //   position:absolute;
+  //   left:0;
+  //   top:0;
+  //   width:100vw;
+  //   height:100vh;
+  //   z-index:30;
+  //   opacity:1;
+  //   transition:1s all ease;
+  //   pointer-events: none;
+  //   transform:translateZ(0px);
+  //   backface-visibility: hidden;
+  //   will-change: backdrop-filter;
+  //   // backdrop-filter:blur(3px);
+  //   // background:$light;
+  // }
+}
+
+.is-scrolling{
+  iframe{
+    pointer-events:none!important;
+  }
+}

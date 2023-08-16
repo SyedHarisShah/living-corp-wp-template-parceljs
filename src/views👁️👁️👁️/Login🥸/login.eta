@@ -1,0 +1,159 @@
+<main class="loginp">
+    <section class="m-login">
+      <div class="left">
+          <div class="bgop" style="background-color:#DF80AC"></div>
+          <div class="bgop" style="background-color:#E5855E"></div>
+          <div class="bgop" style="background-color:#895434"></div>
+          <div class="bgop" style="background-color:#DF80AC"></div>
+        <div class="left_hold">
+          <div class="border"></div>
+          <div class="border"></div>
+          <div class="border"></div>
+          <div class="border"></div>
+          <div class="left_el"><img src="<%~ it.global.acf.template %>/public/images/login/1.jpg"></div>
+          <div class="left_el"><img src="<%~ it.global.acf.template %>/public/images/login/2.jpg"></div>
+          <div class="left_el"><img src="<%~ it.global.acf.template %>/public/images/login/3.jpg"></div>
+          <div class="left_el"><img src="<%~ it.global.acf.template %>/public/images/login/3.jpg"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right_top">
+          <div class="tabselector simp mouseHover" style="--main:#DF80AC<% if(it.recover==true){%>;display:none;<%}%>"><span>Sign up</span></div>
+          <div class="tabselector simp mouseHover" style="--main:#E5855E<% if(it.recover==true){%>;display:none;<%}%>"><span>Log in</span></div>
+          <div class="tabselector simp mouseHover" style="--main:#DF80AC;display:none;"><span>Reset pass</span></div>
+        </div>
+        <div class="right_tabs">
+          <div class="right_tabs_el signuptab">
+            <div class="error">
+              <p>Email already exists</p>
+            </div>
+            <div class="error error-3">
+              <p>Custom message</p>
+            </div>
+            <h2 class="tit1">Sign up</h2>
+            <div class="signuptab_inputs">
+              <div class="field"><label class="field_lbl">First Name</label><input class="field_npt firstReg">
+                <div class="field_err">Empty field</div>
+              </div>
+              <div class="field6">
+                <div class="field"><label class="field_lbl">Last Name</label><input
+                    class="field_npt lastReg">
+                  <div class="field_err">Empty field</div>
+                </div>
+                <div class="selc"><select class="pronounReg">
+                    <option hidden="" selected="" value="">Pronouns</option>
+                    <% it.global.acf.pronouns.forEach(function(t,k){ %>
+                      
+                    <option  value="<%~ t.title %>"><%~ t.title %></option>
+                    <% }) %>
+                  </select></div>
+              </div>
+              <div class="field field-email"><label class="field_lbl">Your Email*</label><input
+                  class="field_npt emailReg">
+                <div class="field_err">Wrong Format : name@example.com</div>
+              </div>
+              <div class="signuptab_text">
+                <h3 class="tit4">A password will be sent to your email</h3>
+                <div class="txt-bureau">
+                  <p>Your personal data will be used to support your experience throughout this website, to manage
+                    access to your account, and for other purposes described in our <a>PRIVACY POLICY</a></p>
+                </div>
+              </div>
+              <div class="login_btn_cont">
+                <div class="btn btnReg mouseHover" style="--main:#DF80AC;--base:#FEF9F3">
+                  <div class="btn_t">Register</div>
+                </div>
+                <%if(it.global.acf.linkedin_api.client_id || it.global.acf.linkedin_api.client_secret){%>
+                  <div class="btn btnLIReg mouseHover" style="--main:#0E76A8;--base:#FEF9F3">
+                    <div class="btn_t">Sign up with <span class="btnLIReg--icons"><%~ it.global.icons.in %> <%~ it.global.icons.in %></span></div>
+                  </div>
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="right_tabs_el logintab">
+            <div class="error error-1">
+              <p>Email is wrong</p>
+            </div>
+            <div class="error error-2">
+              <p>Password is wrong</p>
+            </div>
+            <div class="error error-3">
+              <p>Custom message</p>
+            </div>
+            <div class="logintab_hold">
+              <h2 class="tit1">Log in</h2>
+              <div class="logintab_inputs">
+                <div class="field field-email"><label class="field_lbl">Email</label><input
+                    class="field_npt logEm mouseHover">
+                  <div class="field_err">Wrong Format : name@example.com</div>
+                </div>
+                <div class="field field-pass"><label class="field_lbl">password*</label><input
+                    class="field_npt logPass mouseHover" type="password">
+                  <div class="field_err">Empty field</div>
+                </div>
+                <div class="chk"><input class="mouseHover chk_npt logRem" type="checkbox">
+                  <div class="chk_s">
+                    <div class="chk_i"></div>
+                  </div><label class="chk_lbl">Remember me</label>
+                </div>
+                <div class="login_btn_cont">
+                  <div class="btn btnLogin mouseHover" style="--main:#E5855E;--base:#FEF9F3">
+                    <div class="btn_t">Log in</div>
+                  </div>
+                  <%if(it.global.acf.linkedin_api.client_id || it.global.acf.linkedin_api.client_secret){%>
+                    <div class="btn btnLILogin mouseHover" style="--main:#0E76A8;--base:#FEF9F3">
+                      <div class="btn_t">Log in with <span class="btnLILogin--icons"><%~ it.global.icons.in %> <%~ it.global.icons.in %></span></div>
+                    </div>
+                  <%}%>
+                </div>
+                <div class="tabselector forget mouseHover">Forgot your password?</div>
+              </div>
+            </div>
+          </div>
+          <div class="right_tabs_el resettab">
+            <div class="error">
+              <p>Passwords dont match</p>
+            </div>
+            <div class="error error-1 succ">
+              <div class="iconcheck"></div>
+              <p>Success! Your password has been changed</p>
+            </div>
+            <h2 class="tit1">Reset<br>password</h2>
+            <div class="resettab_inputs">
+              <div class="field"><label class="field_lbl">Password</label><input
+                  class="field_npt mouseHover recPass1" type="password">
+                <div class="field_err">Empty field</div>
+              </div>
+              <div class="field"><label class="field_lbl">Confirm password</label>
+              <input type="password" class="field_npt mouseHover recPass2">
+                <div class="field_err">Empty field</div>
+              </div>
+              <div class="btn btnRecpass mouseHover">
+                <div class="btn_t">Change Password</div>
+              </div>
+            </div>
+          </div>
+          <div class="right_tabs_el forgettab">
+            <div class="error">
+              <p>Email doesnt exists</p>
+            </div>
+            <div class="error error-1 succ">
+              <div class="iconcheck"></div>
+              <p>Success! You will recieve an email confirmation</p>
+            </div>
+            <h2 class="tit1">Reset<br>password</h2>
+            <div class="forgettab_inputs">
+              <div class="field field-email"><label class="field_lbl">Email</label><input
+                  class="field_npt mouseHover emFor">
+                <div class="field_err">Wrong Format : name@example.com</div>
+              </div>
+              <div class="btn btnForget mouseHover" style="--main:#DF80AC;--base:#FEF9F3">
+                <div class="btn_t">Reset Password</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

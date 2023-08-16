@@ -1,0 +1,30 @@
+
+<% 
+  cont = 0
+  it.posts.forEach(function(p,key){ %>
+  <a class="pod mouseHover" href="<%~ p.link %>" data-type="learndad">
+    <div class="pod_image">
+      <%~ it.global.icons.elipse %>
+      <div class="pod_image_hold"><img src="<%~ p.image %>"></div>
+    </div>
+    <div class="pod_info">
+      <h3 class="tit4"><%~ p.title %></h3>
+      <p><%~ p.sons %></p>
+    </div>
+  </a>
+<% 
+  cont++
+  if(cont==3){
+  cont=0
+  }
+  })
+if(cont != 0 ){
+  for(i=0;i<3-cont;i++){
+  %>
+    <div class="fake"></div>
+
+  <%
+  }
+
+}
+%>

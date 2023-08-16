@@ -1,0 +1,103 @@
+.m-dualsep{
+  border-top:1px solid $dark;
+  display:flex;
+  justify-content: space-between;
+  align-items: stretch;
+  @include breakMobile{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .left{
+    padding-top:4rem;
+    padding-bottom:4rem;
+    padding-left:$pad;
+    padding-right: 2.8rem;
+    width:50%;
+    
+    @include breakPortrait{
+      width:30%;
+      padding-top:2.4rem;
+      padding-bottom:2.4rem;
+      padding-right: 2.4rem;
+
+    }
+    @include breakMobile{
+      width:100%;
+      padding:1.6rem 1.6rem 0;
+    }
+    
+  }
+  .right{
+    width:50%;
+    border-left:1px solid $dark;
+    padding-top:4rem;
+    padding-bottom:4rem;
+    padding-left:2.8rem;
+    padding-right: $pad;
+    @include breakPortrait{
+      width:70%;
+      padding-left:2.4rem;
+    }
+    @include breakMobile{
+      margin-top:1.6rem;
+      width:100%;
+      padding:$pad $pad 2.4rem;
+      border-top:1px solid $dark;
+      border-left: 0;
+    }
+    .txt-bureau{
+      width:100%;
+      @include breakPortrait{
+        max-width: 100%;  
+      }
+      p{
+        & + p{
+          margin-top:1rem;
+        }
+      }
+    }
+    .simp{
+      margin-top:2.4rem;
+    }
+    .btn{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+  }
+  .rightno{
+    width:50%;
+    padding-top:4rem;
+    padding-bottom:4rem;
+    padding-right: $pad;
+    @include breakPortrait{
+      width:70%;
+    }
+    @include breakMobile{
+      margin-top:1.6rem;
+      width:100%;
+      padding:$pad $pad 2.4rem;
+      border-top:1px solid $dark;
+      border-left: 0;
+    }
+    .txt-bureau{
+      width:100%;
+      @include breakPortrait{
+        max-width: 100%;  
+      }
+    }
+    .simp{
+      margin-top:2.4rem;
+    }
+    .btn{
+      margin-top:4rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+  }
+}

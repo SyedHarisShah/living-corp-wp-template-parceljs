@@ -1,0 +1,12 @@
+<main class="errorpage error404">
+<section>
+<img src="<%~ it.global.acf.template %>/public/404.png">
+<div class="c-vw">
+<div class="box">
+<h3 class="tit4">404 ERROR</h3>
+<h2 class="tit1">OOPS!WE CAN’T FIND THIS PAGE</h2>
+<a class="btn mouseHover" href="<%~ it.global.acf.home %>"><div class="btn_t">Back to LC</div></a>
+</div></div>
+</section>
+  <%~ it.footer %>
+</main>

@@ -1,0 +1,29 @@
+
+<% it.posts.forEach(function(p,key){ %>
+
+  <a class="joblist mouseHover" href="<%~ p.link %>" data-type="job">
+    <div class="joblist_hold">
+      <div class="joblist_info">
+        <div class="joblist_info_top">
+          <h2 class="tit2"><%~ p.title %></h2>
+          <h3 class="tit3"><%~ p.client %></h3>
+          <div class="locate">
+            <%~ it.global.icons.marker %>
+            <div class="locate_t"><%~ p.location %></div>
+          </div>
+          <div class="description">
+            <p><%~ p.description %></p>
+          </div>
+          <div class="date">
+            <div class="date_t"><%~ p.date %></div>
+          </div>
+        </div>
+      </div>
+      <div class="joblist_button"><img src="<%~ p.logo %>">
+        <div class="btns">
+          <div class="btns_t">Read more</div>
+        </div>
+      </div>
+    </div>
+  </a>
+<% }) %>

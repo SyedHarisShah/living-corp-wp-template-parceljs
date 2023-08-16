@@ -1,0 +1,54 @@
+<main class="artarchive">
+  <section class="m-simpleintro">
+    <div class="c-vw">
+      <h2 class="tit1">Articles</h2>
+    </div>
+  </section>
+  <section class="m-arts">
+    <div class="m-arts_hold holdarts hPosts c-vw">
+    </div>
+    <div class="m-arts_pags c-vw pg pPosts">
+    </div>
+  </section>
+  
+  <section class="m-cta signupmod" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+         <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+          var title = it.global.acf.signup_text[randomNum-1].title;
+          var text = it.global.acf.signup_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        </h3>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="m-dual">
+    <div class="left">
+      
+      <%
+        var randomNum = Math.floor((Math.random() * it.global.acf.support_text.length) + 1);
+        var title = it.global.acf.support_text[randomNum-1].title;
+        var text = it.global.acf.support_text[randomNum-1].text;
+        
+      %>
+      <h2 class="tit1"><%~ title %></h2>
+      <h3 class="tit4"><%~ text %> </h3>
+      <a class="btn mouseHover" href="<%~ it.global.acf.support %>" style="--main:#DF80AC">
+        <div class="btn_t">SUPPORT</div>
+      </a>
+    </div>
+    <div class="right">
+      <div class="right_el"><img src="<%~ it.global.acf.image_archive_article %>"></div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

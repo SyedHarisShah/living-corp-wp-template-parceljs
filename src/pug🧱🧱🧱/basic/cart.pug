@@ -1,0 +1,48 @@
+mixin cart(data)
+  .killercartbg
+  .killercart
+    .killercart__title
+      h3.titletext BAG
+      .killercart__close
+    .killercart__prods
+      .ajaxProduct.killercart__prods__el.el(data-id="1" data-var="6" data-max="24" data-total="210.6" data-cant="12" data-price="120.32" data-sale="110.32" data-hash="1212121212")
+        a.ajaxLoad.el__image
+          img(src="./images/gear/1.png")
+        .el__ops
+          .el__ops__left
+            p.name LET’S BLOW SHIT UP HOODIE
+            p COLOR: White
+            p SIZE : M
+            .cant
+              .minus -
+              span
+                .cant__total 1
+              .plus +
+          .el__ops__right
+
+            .infoprice.price
+              span.normal $56,50
+            .deleteEl DELETE
+          
+          
+
+      
+            
+      
+      
+      
+    .killercart__bottom
+      .killercart__bottom__text
+        span SUBTOTAL:
+        span $59,90
+      .killercart__bottom__text
+        span SHIPPING:
+        span <span class="ship">$8,90</span>
+      .killercart__bottom__text.killercart__bottom__text--total
+        span TOTAL:
+        span.totalhold $<span class="total">275,50</span>
+      .killercart__bottom__button
+        a.btn.ajaxLoad
+          .btn__text Complete order
+          .btn__svg
+            +icon({name:'explosion'})

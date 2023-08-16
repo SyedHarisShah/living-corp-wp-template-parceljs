@@ -1,0 +1,57 @@
+.m-sectitletext{
+  border-top:1px solid $dark;
+  .c-vw{
+    display:flex;
+    justify-content: space-between;
+    align-items: stretch;
+    @include breakMobile{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .left{
+      width:50%;
+      padding-top:4rem;
+      padding-bottom:4rem;
+      
+        @include breakMobile{
+        width:100%;
+        padding:$pad 0;    
+        }
+      .line{
+        position:relative;
+        overflow: hidden;
+      }
+    }
+    .right{
+      border-left:1px solid $dark;
+      width:50%;
+      display:flex;
+      justify-content:flex-start;
+      align-items: center;
+      padding-top:4rem;
+      padding-bottom:4rem;
+      padding-left:2.4rem;
+      @include breakMobile{
+        width:100%;
+        padding:0 0 $pad;
+        border:0;
+
+
+      }
+      .txt-bureau{
+        max-width: 52rem;
+      }
+    }
+    .center{
+      width:100%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      position:relative;
+      .simp{
+        @include center--y;
+        right:0;
+      }
+    }
+  }
+}

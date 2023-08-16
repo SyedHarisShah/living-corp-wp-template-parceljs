@@ -1,0 +1,42 @@
+.m-bc{
+    margin-top:$header;
+    display:flex;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+    
+  & + .m-simpleintro{
+    margin-top:0;
+  }
+}
+
+
+.bc{
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  display:flex;
+  & > *{
+    max-width: 16rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    &:first-child{
+      margin-left:0;
+    }
+
+    &:last-child{
+      opacity:1;
+    }
+    margin-left:.4rem;
+  }
+  a{
+    opacity:.3;
+    transition:.6s all $swiftOut;
+    &:hover{
+      opacity:1;
+    }
+  }
+  span{
+    opacity:.3;
+  }
+}

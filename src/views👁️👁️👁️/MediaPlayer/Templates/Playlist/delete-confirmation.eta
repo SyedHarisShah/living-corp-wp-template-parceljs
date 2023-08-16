@@ -1,0 +1,10 @@
+<div id="delete-conf-dialog-background"></div>
+<div id="delete-conf-dialog">
+    <h3>Delete from library</h3>
+    <span>This will delete from "<%~ it.name %>" from your library.</span>
+
+    <div class="delete-dialog-btns">
+        <button id="cancel-conf-btn">Cancel</button>
+        <button id="delete-conf-btn">Delete</button>
+    </div>
+</div>

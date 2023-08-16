@@ -1,0 +1,53 @@
+.m-quote{
+  border-top:1px solid $dark;
+ &_hold{
+    padding:12rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    @include breakPortrait{
+      padding:8rem;
+      flex-direction: column;
+    }
+    @include breakMobile{
+      padding:4rem $pad;
+    }
+  }
+  .left{
+    position:relative;
+    overflow:hidden;
+    border:1px solid $dark;
+    @include ratio(1,1);
+    width:51rem;
+    flex-shrink: 0;
+    @include breakPortrait{
+      width:100%;
+    }
+    @include breakMobile{
+      max-width: 375px;
+
+    }
+    img{
+      width:100%;
+      height:100%;
+      position:absolute;
+      left:0;
+      top:0;
+      object-fit: cover;
+    }
+  }
+  .right{
+    width:60rem;
+    @include breakPortrait{
+      width:100%;
+      margin-top:4rem;
+    }
+    @include breakMobile{
+      max-width: 414px;
+
+    }
+    .tit4{
+      margin-top:2.4rem;
+    }
+  }
+}

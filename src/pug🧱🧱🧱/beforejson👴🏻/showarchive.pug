@@ -1,0 +1,43 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="simple" data-type="network" data-id="175")
+      main.artarchive
+        section.m-simpleintro
+          .c-vw
+            h2.tit1 SHOWS
+        section.m-textbutton
+          .c-vw
+            h3.tit3 recurring web shows that reinforce our mission: centering and amplifying marginalized voices at work. Follow us on Crowdcast to never miss an episode.
+            a.btn(href="https://www.crowdcast.io/livingcorporate")
+              .btn_t FOLLOW US
+        section.m-shows
+         .m-shows_hold.hPosts
+            each val in [1, 2, 3, 4, 5]
+              a.showa
+                .showa_hold
+                  .showa_image
+                    img(src="./images/home/1.jpg")
+                    .btn
+                      .btn_t Watch Show
+        section.m-cta(style="--main:#895434")
+          .c-vw
+            .hold
+              h2.tit1 SIGN UP NOW
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t Tap in
+        section.m-dual
+          .left
+            
+            h2.tit1 THE GROUP CHAT
+            h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices. 
+            .btn
+              .btn_t SUPPORT
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+    script(sync type="module" src="./src/app.js")

@@ -1,0 +1,205 @@
+.jobs_main{
+  .holdFilters{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid $dark;
+    &_box{
+
+    }
+  }
+  &_top{
+    border-top: 1px solid $dark;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:$pad;
+    .activeFilters{
+      display:inline-flex;
+      align-items: center;
+      &_t{
+        font-family: 'bureau';
+        font-weight: 500;
+        font-size:1.4rem;
+        line-height: lH(14,16);
+        text-transform: uppercase;
+        margin-left:1.2rem;
+      }
+      &:after{
+        content:'';
+        display:block;
+        height:.8rem;
+        width:.8rem;
+        border-left:.3rem solid $dark;
+        border-bottom:.3rem solid $dark;
+        transform:translateY(-40%) rotate(-45deg);
+        margin-left:1.2rem;
+        transition:.6s all $swiftOut;
+      }
+    }
+    .totalSearch{
+      text-transform: uppercase;
+    }
+  }
+  &_bottom{
+    border-top: 1px solid $dark;
+    .bottom{
+      &_types{
+        display:flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding:$pad;
+        .catEl{
+          font-family: 'bureau';
+          font-weight: 500;
+          font-size:1.4rem;
+          line-height: lH(14,16);
+          text-transform: uppercase;
+          display:inline-flex;
+          @include breakPortrait{
+            font-size: 1.2rem;
+          }
+          @include breakMobile{
+            font-size:1.4rem;
+        
+          }
+          &:after{
+            content:'';
+            display:block;
+            height:.8rem;
+            width:.8rem;
+            border-left:.3rem solid $dark;
+            border-bottom:.3rem solid $dark;
+            transform:rotate(-45deg);
+            margin-left:.8rem;
+            transition:.6s all $swiftOut;
+          }
+          &.act{
+            &::after{
+              transform:translateY(70%) rotate(-45deg) scale(-1);
+            }
+          }
+          & + .catEl{
+            margin-left:4rem;
+          }
+        }
+
+      }
+      &_checks{
+        position:relative;
+        overflow: hidden;
+        border-top: 1px solid $dark;
+        
+        &_el{
+          position:absolute;
+          left:0;
+          top:0;
+          width:100%;
+          padding:$pad;
+
+          display: grid;
+          grid-template-columns: repeat(6, auto);
+          grid-row-gap: 2.4rem;
+          justify-content: space-between;
+          transition:.6s all .6s $swiftOut;
+          @include media-max(1360){
+            grid-template-columns: repeat(4, auto);
+
+          }
+          @include media-max(860){
+            grid-template-columns: repeat(3, auto);
+
+          }
+          @include media-max(767){
+            grid-template-columns: repeat(1, auto);
+            justify-content: flex-start;
+
+          }
+          &:not(.act){
+            opacity:0;
+            pointer-events: none;
+            transition:.6s all $swiftOut;
+            *{
+
+            pointer-events: none!important;
+            }
+          }
+
+        }
+      }
+      &_clear{
+        overflow: hidden;
+        position:relative;
+        &_box{
+          display:flex;
+          justify-content: center;
+
+        }
+        &::before{
+          content:'';
+          position:absolute;
+          left:0;
+          top:0;
+          right:0;
+          background:$dark;
+          height:1px;
+        }
+        .btn{
+          margin:$pad;
+
+          min-width: 1px;
+          padding-left:$pad;
+
+          padding-right:$pad;
+          &_x{
+            width:1.2rem;
+            height:1.2rem;
+            margin-right: 1rem;
+            z-index:4;
+            position:relative;
+            transition:.6s all $swiftOut;
+            &:before{
+              content:'';
+              position:absolute;
+              left:50%;
+              top:50%;
+              background:$dark;
+              display:block;
+              height:.3rem;
+              width:100%;
+              transform: translate(-50%,-50%) rotate(45deg) scaleX(1);
+    
+            }
+            &:after{
+              content:'';
+              position:absolute;
+              left:50%;
+              top:50%;
+              background:$dark;
+              display:block;
+              height:.3rem;
+              width:100%;
+              transform:translate(-50%,-50%) rotate(-45deg) scaleX(1);
+            }
+          }
+        }
+      }
+    }
+  }
+  &_results{
+    display:flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 600px;
+    transition:.6s all $swiftOut;
+    padding:2.4rem $pad;
+    @include breakMobile{
+      padding:0 0 $pad;
+      min-height: 100px;
+    }
+    &.load{
+      pointer-events: none;
+      opacity:0;
+    }
+  }
+}

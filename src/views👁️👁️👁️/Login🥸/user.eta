@@ -1,0 +1,289 @@
+
+<main class="usermain">
+  <section class="userp">
+    <div class="userp_form">
+      <article class="userp_form_0">
+        <div class="userp_form_title">
+          
+          <div class="userp_pos">1 of 4</div>
+          <h2 class="tit2">WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU</h2>
+        </div>
+        <div class="userp_form_ops activeOp">
+          <% 
+            firstis = null
+            it.global.acf.options_0.forEach(function(p,key){ %>
+          <div class="rad <% if(it.global.user.acf.option_0 == p.title){ firstis = key %> act <% } %> mouseHover" data-value="<%~ p.title %>" data-key="<%~ key %>">
+            <div class="rad_cont">
+              <div class="rad_s">
+                <div class="rad_i"></div>
+              </div>
+              <div class="rad_t"><%~ p.title %></div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </article>
+
+      <article class="userp_form_1">
+        <div class="userp_form_title">
+          <div class="userp_back">
+            <div class="btnarrow btnBack mouseHover">
+              <div class="btnarrow_n"></div>
+              <div class="btnarrow_t">Back</div>
+            </div>
+          </div>
+          <div class="userp_pos">2 of 4</div>
+          <h2 class="tit2">WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU</h2>
+        </div>
+          <% 
+            cont1=0
+            secondis = null
+            it.global.acf.options_0.forEach(function(p,key){ %>
+            <div class="userp_form_ops <% if(firstis==key){ %>activeOp<% } %>" data-op="<%~ cont1 %>">
+          <% p.options_1.forEach(function(w,keya){ %>
+            <div class="rad mouseHover <% if(it.global.user.acf.option_1 == w.title){ secondis = cont1 %> act <% } %>" data-value="<%~ w.title %>" data-key0="<%~ key %>" data-key1="<%~ keya %>">
+              <div class="rad_cont">
+                <div class="rad_s">
+                  <div class="rad_i"></div>
+                </div>
+                <div class="rad_t"><%~ w.title %></div>
+              </div>
+            </div>
+            <% 
+              
+            cont1++
+              }) %>
+          </div>
+          <% 
+            }) %>
+      </article>
+
+      <article class="userp_form_2">
+        <div class="userp_form_title">
+          <div class="userp_back">
+            <div class="btnarrow btnBack mouseHover">
+              <div class="btnarrow_n"></div>
+              <div class="btnarrow_t">Back</div>
+            </div>
+          </div>
+          <div class="userp_pos">3 of 4</div>
+          <h2 class="tit2">WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU</h2>
+        </div>
+          <% 
+            cont2 = 0
+            thirdis = null
+            it.global.acf.options_0.forEach(function(p,key){ %>
+          <% p.options_1.forEach(function(w,keya){ %>
+            <div class="userp_form_ops <% if(secondis==cont2){ %>activeOp<% } %>" data-se="<%~ secondis %>" data-op="<%~ cont2 %>" data-text="<%~ p.title %> <%~ w.title %>">
+              <% w.options_2.forEach(function(z,keyb){ %>
+              <div class="rad mouseHover <% if(it.global.user.acf.option_2 == z.text){ thirdis = 1 %> act <% } %>" data-value="<%~ z.text %>" data-key0="<%~ key %>" data-key1="<%~ keya %>" data-key2="<%~ keyb %>">
+                <div class="rad_cont">
+                  <div class="rad_s">
+                    <div class="rad_i"></div>
+                  </div>
+                  <div class="rad_t"><%~ z.text %></div>
+                </div>
+              </div>
+              <% 
+                }) %>
+            </div>
+            <% 
+              cont2++
+              }) %>
+          <% }) %>
+      </article>
+
+      <article class="userp_form_3">
+        <div class="userp_form_titlelast">
+          <div class="userp_back">
+            <div class="btnarrow btnBack mouseHover">
+              <div class="btnarrow_n"></div>
+              <div class="btnarrow_t">Back</div>
+            </div>
+          </div>
+          <div class="userp_pos">4 of 4</div>
+          <h2 class="tit2">CHOOSE THE TOPICS AND CONTENT<br>THAT RESONATE WITH YOU.</h2>
+          <p>DON’T WORRY, YOU CAN ALWAYS CHANGE IT LATER :)</p>
+        </div>
+            <div class="userp_form_ops activeOp">
+              <% 
+                
+                fourdis = null
+                it.data.forEach(function(t,keyb){ %>
+              <div class="check mouseHover <% if(t.selected==true){ fourdis=1 %> act <% } %>" data-value="<%~ t.title %>" data-id="<%~ t.id %>">
+                <div class="check_cont">
+                  <div class="check_s">
+                    <div class="check_i"></div>
+                  </div>
+                  <div class="check_t"><%~ t.title %></div>
+                </div>
+              </div>
+              <% 
+                }) %>
+            </div>
+      </article>
+      <article class="userp_form_4">
+        <div class="userp_form_titlelast">
+
+        <h2 class="tit1">Welcome <%~ it.global.user.acf.firstname %>!</h2>
+        <p><%~ it.global.acf.userwelcome %></p>
+        <div class="btn btnToStart mouseHover"><div class="btn_t">Edit my preferences</div></div>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="datap">
+    <div class="datap_title">
+      <h2 class="tit2">UPDATE AND MANAGE YOUR<br>ACCOUNT SETTINGS</h2>
+    </div>
+    <article>
+      <div class="edits">
+        <div class="field">
+          <label class="field_lbl">First Name</label>
+          <input class="field_npt firstEdit" <% if(it.global.user.acf.firstname ){ %>value="<%~ it.global.user.acf.firstname  %>"<%} %>>
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="field">
+          <label class="field_lbl">Last Name</label>
+          <input class="field_npt lastEdit" <% if(it.global.user.acf.lastname ){ %>value="<%~ it.global.user.acf.lastname  %>"<%} %>>
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="selc">
+          <select class="pronounEdit">
+            <option hidden=""  value="">Pronouns</option>
+            <% it.global.acf.pronouns.forEach(function(t,keyb){ %>
+                      
+            <option <% if(t.title==it.global.user.acf.pronoun){ %>selected<% } %> value="<%~ t.title %>"><%~ t.title %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="field field-email">
+          <label class="field_lbl">Email</label>
+          <input class="field_npt emailEdit" <% if(it.global.user.user.data.user_email ){ %>value="<%~ it.global.user.user.data.user_email  %>"<%} %>>
+          <div class="field_err">Wrong Format : name@example.com</div>
+        </div>
+        <div class="btnEdit btn mouseHover" style="--main:#E5855E;--base:#FEF9F3">
+          <div class="btn_t">SAVE INFO</div>
+        </div>
+      </div>
+      <div class="passwords">
+        <h3 class="passwords_title"><span>Edit passwords</span></h3>
+        <div class="field">
+          <label class="field_lbl">Password</label>
+          <input class="field_npt p1Pass" type="password">
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="field">
+          <label class="field_lbl">Confirm password</label>
+          <input class="field_npt p2Pass" type="password">
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="btnPass btn mouseHover" style="--main:#E5855E;--base:#FEF9F3">
+          <div class="btn_t">CHANGE</div>
+        </div>
+      </div>
+      <div class="connect">
+        <h3 class="connect_title"></h3>
+        <div class="btn btnLIConnect mouseHover" style="--main:#0E76A8;--base:#FEF9F3">
+          <div class="btn_t">CONNECT <span class="btnLIConnect--icons"><%~ it.global.icons.in %> <%~ it.global.icons.in %></span></div>
+        </div>
+      </div>
+      <div class="delete">
+        <div class="btnDelete btn mouseHover" style="--main:#FF244C;--base:#FEF9F3;margin-top:1.8rem">
+          <div class="btn_t">DELETE ACCOUNT</div>
+        </div>
+      </div>
+    </article>
+  </section>
+  <section class="jobsp">
+    <div class="jobsp_title">
+      <h2 class="tit2">CHECK OUT THE JOBS<br>YOU’VE APPLIED FOR</h2>
+    </div>
+    <article>
+    <%~ it.jobs %>
+    </article>
+  </section>
+</main>
+
+<%~ include("li_dialog")%>
+
+<div class="delAcctModal">
+  <div class="delAcctModal__bg"></div>
+  <div class="delAcctModal__body">
+    <div class="delAcctModal__title">DELETE ACCOUNT</div>
+    <div class="delAcctModal__content">
+      <p>Confirm that you wish to delete this account.</p>
+
+      <div class="field">
+        <label class="field_lbl">Password</label>
+        <input class="field_npt pass_conf" type="password">
+        <div class="field_err">Empty field</div>
+      </div>
+
+      <div class="btnDeleteConf btn mouseHover" style="--main:#FF244C;--base:#FEF9F3;">
+        <div class="btn_t">CONFIRM AND DELETE</div>
+      </div>
+    </div>
+    <p class="delAcctModal__message">Test message</p>
+  </div>
+</div>
+
+<div class="disLIModal">
+  <div class="disLIModal__bg"></div>
+  <div class="disLIModal__body">
+    <div class="disLIModal__title">DISCONNECT LINKEDIN</div>
+    <div class="disLIModal__content">
+      <p>Confirm that you wish to disconnect your LinkedIn.</p>
+
+      <div class="field">
+        <label class="field_lbl">Password</label>
+        <input class="field_npt pass_conf" type="password">
+        <div class="field_err">Empty field</div>
+      </div>
+
+      <div class="btnDisConf btn mouseHover" style="--main:#FF244C;--base:#FEF9F3;">
+        <div class="btn_t">CONFIRM DISCONNECT</div>
+      </div>
+    </div>
+    <p class="disLIModal__message">Test message</p>
+  </div>
+</div>
+
+<div class="usercontrols">
+  <div class="usercontrols_top">
+    <div class="simp mouseHover" style="--main:#DF80AC"><span class="xs">Content</span><span>Prefered content</span></div>
+    <div class="simp mouseHover" style="--main:#E5855E"><span class="xs">settings</span><span>Profile settings</span></div>
+    <div class="simp mouseHover" style="--main:#DF80AC"><span>Jobs</span></div>
+    <div class="simp mouseHover"><span>Log out</span></div>
+  </div>
+  <div class="usercontrols_errors">
+    <div class="error">Email already in use</div>
+    <div class="error succ"><div class="iconcheck"></div>Info updated</div>
+    <div class="error">Passwords dont match</div>
+    <div class="error succ"><div class="iconcheck"></div>Password updated</div>
+  </div>
+  
+  <div class="usercontrols_bottom">
+    <div class="pg">
+      <div class="mouseHover pgel act">
+        <div class="pgel_t">1</div>
+      </div>
+      <div class="mouseHover pgel <% if(firstis==null){%> dis  <%}%>" data-color="pink">
+        <div class="pgel_t">2</div>
+      </div>
+      <div class="mouseHover pgel <% if(secondis==null){%> dis  <%}%>" data-color="pink">
+        <div class="pgel_t">3</div>
+      </div>
+      <div class="mouseHover pgel <% if(thirdis==null){%> dis  <%}%>" data-color="pink">
+        <div class="pgel_t">4</div>
+      </div>
+      <div class="mouseHover pgel" style="display:none!important">
+        <div class="pgel_t">5</div>
+      </div>
+    </div>
+    <div class="btnNext mouseHover btn  <% if(secondis==null){%> inact  <%}%>" style="--main:#DF80AC;--base:#FEF9F3">
+      <div class="btn_t">Continue</div>
+      <div class="btn_l">Save changes</div>
+    </div>
+  </div>
+</div>

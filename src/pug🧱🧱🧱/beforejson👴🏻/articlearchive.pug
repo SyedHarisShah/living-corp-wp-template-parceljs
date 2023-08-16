@@ -1,0 +1,53 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="archive" data-type="article" data-id="2")
+      main.artarchive
+        section.m-simpleintro
+          .c-vw
+            h2.tit1 Articles
+        section.m-arts
+         .m-arts_hold.holdarts.c-vw
+            each val in [1, 2, 3, 4, 5]
+              a.art
+                .art_hold
+                  .art_image
+                    .btnmore.btnmore-hovered
+                      .btnmore_t read more
+                    img(src="./images/home/1.jpg")
+                  .art_info
+                    h3.tit3 Disability & STEM While Black
+                    p.desc By Madison Butler No matter how immersed you are in this work, nothing prepares you for the day that it is someone you know ...
+                    .date.tit4 dec 13, 2021
+         .m-arts_pags.c-vw.pg
+            .pgel.act
+              .pgel_t 1
+            .pgel
+              .pgel_t 2
+            .pgel
+              .pgel_t 30
+            .pgel.dis
+              .pgel_t 4
+        section.m-cta(style="--main:#895434")
+          .c-vw
+            .hold
+              h2.tit1 SIGN UP NOW
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t Tap in
+        section.m-dual
+          .left
+            
+            h2.tit1 THE GROUP CHAT
+            h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices. 
+            .btn
+              .btn_t SUPPORT
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+        +footer
+    script(sync type="module" src="./src/app.js")

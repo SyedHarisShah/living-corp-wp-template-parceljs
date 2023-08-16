@@ -1,0 +1,259 @@
+
+<main class="home">
+  <section class="home_intro stck_base" id="stck0">
+    <div class="iO iO-stck stck_control" data-stck="0"></div>
+    <div class="iO iO-logohide"></div>
+    <div class="iO iO-quickshow"></div>
+    <div class="home_intro_hold stck_main">
+      <div class="timehold">
+        <div class="iO iO-time"></div>
+        <div class="timeoflow">
+          <div class="time" data-offset="1">
+            <div class="change">01 <div class="sep">:</div> 00 <div class="sep">:</div> 12</div>
+            <div class="end">ESPAÑA</div>
+          </div>
+        </div>
+      </div>
+      <div class="introOut"><span>Saltar intro</span></div>
+      <div class="box">
+            <div class="logo">
+              <div class="logo_left">
+                <div class="logo_el logo_left_1"><span>S</span></div>
+                <div class="logo_el logo_left_2 logo_el-hide"><span>E</span></div>
+                <div class="logo_el logo_left_3"><span>R</span></div>
+                <div class="logo_el logo_left_4 logo_el-hide"><span>É</span></div>
+              </div>
+              <div class="logo_video">
+                <div class="logo_video_mask mdlClick" data-video="<%~ it.data.video_reel %>">
+                  <video class="inline"  src="<%~ it.data.video_anim %>"  playsinline autoplay muted loop  poster="<%~ it.data.poster_animation %>"></video>
+                  <video class="reel" src="<%~ it.data.video_reel %>" preload="none"  playsinline muted  poster="<%~ it.data.poster_animation %>"></video>
+                </div>
+              </div>
+              <div class="logo_right">
+                <div class="logo_el logo_right_1"><span>B</span></div>
+                <div class="logo_el logo_right_2"><span>R</span></div>
+                <div class="logo_el logo_right_3 logo_el-hide"><span>E</span></div>
+                <div class="logo_el logo_right_4"><span>V</span></div>
+                <div class="logo_el logo_right_5 logo_el-hide"><span>E</span></div>
+              </div>
+            </div>
+            <div class="claim">
+              <p><span class="space"></span><%~ it.data.frase_inicial %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home_claim">
+    <div class="c-vw">
+      <div class="col">
+        <div class="title1 title1-cols">
+
+          <% it.data.claims[0].title.forEach(function(w,key){ %>
+              <div class="line"><span class="line_fake"><%~  w.line %></span><span class="spell iO iO-spell"><%~  w.line %></span></div>
+
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="col col-right">
+        <div class="title1">
+          <% it.data.claims[1].title.forEach(function(w,key){ %>
+              <div class="line"><span class="line_fake"><%~  w.line %></span><span class="spell iO iO-spell"><%~  w.line %></span></div>
+
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="title1">
+          <% it.data.claims[2].title.forEach(function(w,key){ %>
+              <div class="line"><span class="line_fake"><%~  w.line %></span><span class="spell iO iO-spell"><%~  w.line %></span></div>
+
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="home_text stck_base" id="stck1">
+    <div class="iO iO-stck iO-stck-text stck_control" data-stck="1"></div>
+    <div class="home_text_hold stck_main">
+      
+      <%~ it.data.texto %>
+      <div class="positions">
+        <%~ it.data.frasefinal %>
+      </div>
+    </div>
+  </section>
+  <section class="home_projects darksect">
+    <div class="iO iO-hide"></div>
+    <div class="iO iO-dark"></div>
+    <div class="iO iO-foot"></div>
+    <div class="home_projects_first gridmaster">
+      <div class="G-intro">
+        <div class="G-intro_year">
+          <div class="nums nums-2 nums-anim iO iO-counter" data-from="<%~  it.data.year %>">
+            <div class="nums_arrow"><%~ it.global.icons.arrowlink %></div>
+              <div class="nums_main"><%~ it.global.acf.actualyear %></div>
+            </div>
+          </div>
+          <div class="G-intro_title">
+            <h2 class="title2 title2-cols">
+              <% it.data.titulo_1_title.forEach(function(w,key){ %>
+              <div class="line"><span class="line_fake"><%~  w.line %></span><span class="spell iO iO-spell"><%~  w.line %></span>
+                <% if(key == it.data.titulo_1_title.length-1){ %>
+                  <div class="nums nums-sup nums-anim iO iO-counter">
+                  <div class="nums_main"><%~ it.data.numtitle %></div>
+                </div>
+                <% } %>
+                
+              </div>
+
+            <% }) %>
+            </h2>
+          </div>
+    
+          <div class="G-intro_dual">
+
+            <a class="Eproject Eproject-<%~ it.data.destacado.ratio_a %>" href="<%~ it.data.destacado.permalink %>" data-type="proyecto">
+              <div class="iO iO-par"></div>
+              <div class="Eproject_box">
+                <div class="iO_son Eproject_par">
+                  <img src="<%~ it.data.destacado.imagen_a %>">
+                  <% it.data.destacado.imagen_a %>
+                  <% if(it.data.destacado.video_a!=''){ %>
+                    <video src="<%~ it.data.destacado.video_a %>" preload="none" playsinline="" muted="" loop="" poster="<%~ it.data.destacado.imagen_a %>"></video>
+                  <% } %>
+                </div>
+              </div>
+              <div class="Eproject_info">
+                <h3 class="titlesmall name"><% it.data.destacado.post_title %></h3>
+                <div class="tags">
+                  <div class="tags_el"><% it.data.destacado.tags_a %></div>
+                </div>
+              </div>
+            </a>
+
+            <div class="G-intro_dual_text">
+              <h2 class="title2 title2-cols">
+              <% it.data.titulo_2_title.forEach(function(w,key){ %>
+              <div class="line"><span class="line_fake"><%~  w.line %></span><span class="spell iO iO-spell"><%~  w.line %></span></div>
+                
+
+            <% }) %>
+              </h2>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+        <% cont = 0 %>
+      <div class="home_projects_last gridmaster">
+        <% it.data.proyectos.forEach(function(post,key){ %>
+        <% if(cont == 0){ %>
+          
+          <% type = 'G-tri' %>
+          <div class="<%~ type %>">
+        <% }
+        if(cont == 3 || cont == 6 || cont == 9 || cont == 12){
+        %>
+          </div>
+          <% type = 'G-tri' %>
+          <div class="<%~ type %>">
+        <%
+        }
+        %>
+        
+            <div class="<%~ type %>_col">
+              <a class="Eproject Eproject-<%~ post.ratio_a %>" href="<%~ post.permalink %>" data-type="proyecto">
+
+                <div class="iO iO-par"></div>
+                <div class="Eproject_box">
+                  <div class="iO_son Eproject_par">
+                    <img src="<%~ post.imagen_a %>">
+                    <% if(post.video_a!=''){ %>
+                      <video src="<%~ post.video_a %>" preload="none" playsinline="" muted="" loop="" poster="<%~ post.imagen_a %>"></video>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="Eproject_info">
+                  <h3 class="titlesmall name"><%~ post.post_title %></h3>
+                  <div class="tags">
+                    <div class="tags_el"><%~ post.tags_a %></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+        <%  
+        cont++
+        }) %>
+        </div><!-- cierre last G -->
+        <div class="G-textright">
+          <div class="holder in">
+            <p><%~ it.data.texto_premios %></p>
+              <a class="linkarrow" href="<%~ it.data.url_boton %>" data-type="premios">
+                <div class="linkarrow_t"><%~ it.data.texto_boton %></div>
+                <div class="linkarrow_h"><%~ it.data.texto_boton %></div>
+                <div class="linkarrow_i"><%~ it.global.icons.arrowlink %></div>
+              </a>
+          </div>
+        </div>
+        <div class="G-title">
+          <div class="nums nums-small nums-anim iO iO-counter">
+            <div class="nums_main"><%~ it.data.year_2 %></div>
+          </div>
+          <h3 class="titlesmall"><%~ it.data.titulo_3 %></h3>
+        </div>
+        <div class="Stexthold">
+          <div class="iO iO-stext"></div>
+          <div class="Stext Stext-big">
+            <div class="Stext_real">
+              <div class="el">
+                
+              <% it.data.texto_carousel.forEach(function(text,key){ %>
+                <%~ it.global.icons.asterisk %>
+                <span><%~ text.texto %></span>
+              <% }) %>
+              </div>
+            </div>
+            <div class="Stext_fake"></div>
+          </div>
+        </div>
+        <div class="G-dual2">
+          <div class="G-dual2_col">
+            <a class="Eproject Eproject-<%~ it.data.destacado_2.ratio_a %>" href="<%~ it.data.destacado_2.permalink %>" data-type="proyecto">
+              <div class="iO iO-par"></div>
+              <div class="Eproject_box">
+                <div class="iO_son Eproject_par">
+                  <img src="<%~ it.data.destacado_2.imagen_a %>">
+                  <% if(it.data.destacado_2.video_a!=''){ %>
+                    <video src="<%~ it.data.destacado_2.video_a %>" preload="none" playsinline="" muted="" loop="" poster="<%~ it.data.destacado_2.imagen_a %>"></video>
+                  <% } %>
+                </div>
+              </div>
+              <div class="Eproject_info">
+                <h3 class="titlesmall name"><%~ it.data.destacado_2.post_title %></h3>
+                <div class="tags">
+                  <div class="tags_el"><%~ it.data.destacado_2.tags_a %></div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="G-dual2_col">
+            <div class="Eproject Eproject-st Eproject-no">
+              <div class="iO iO-par"></div>
+              <div class="Eproject_box">
+                <div class="iO_son Eproject_par"><img src="<%~ it.data.imagen_alternativa %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- cierre master -->
+  </section>
+  <%~ it.footer %>
+</main>

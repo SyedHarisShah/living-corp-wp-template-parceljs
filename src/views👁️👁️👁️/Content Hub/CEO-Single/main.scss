@@ -1,0 +1,56 @@
+.showchild{
+  &_main{
+    border-top:1px solid $dark;
+    padding:4rem $pad;
+    @include breakPortrait{
+      padding:$pad;
+    }
+    &_hold{
+      width:103rem;
+      position:relative;
+      margin:0 auto;
+      @include ratio(16,9);
+      @include breakPortrait{
+        width:100%;
+      }
+      .btnplay{
+        @include center;
+        z-index:2;
+      }
+      iframe{
+        transition:.6s all $swiftOut;
+        position:absolute;
+        left:0;
+        top:0;
+        z-index:3;
+        pointer-events: none;
+      }
+
+      img{
+        transition:.6s all $swiftOut;
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        object-fit: cover;
+        z-index:1;
+      }
+      
+    }
+    &.act{
+      .showchild_main_hold{
+        iframe{
+          opacity:1;
+          pointer-events: all;
+        }
+      }
+    }
+  }
+}
+
+.ceo {
+  .m-tabposts_pags{
+    display: none;
+  }
+}

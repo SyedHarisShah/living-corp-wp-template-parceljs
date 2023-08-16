@@ -1,0 +1,114 @@
+<div class="contactal">
+  <div class="contactal_bg"></div>
+  <div class="contactal_content">
+    <div class="contactal_success">
+      <div class="supercheck" style="--main:#E5855E">
+        <div class="supercheck_i"></div>
+      </div>
+      <h2 class="tit1">Thank you!We will contact you soon</h2>
+      <a href="<%~ it.global.acf.home %>" data-type="index" class="mouseHover btn btn_close" style="--main:#E5855E">
+        <div class="btn_t">BACK TO Home</div>
+      </a>
+    </div>
+    <div class="contactal_close"><span></span><span></span></div>
+    <div class="contactal_content_text">
+      <h3 class="tit4">Must Reads for Aspiring Allies</h3>
+      <h2 class="tit1">Subscribe to stay updated on this list</h2>
+      <div class="field field-email"><label class="field_lbl">Name</label><input class="field_npt">
+        <div class="field_err">Wrong format</div>
+        <div class="field_button">
+          <div class="btninput">
+            <div class="btninput_t">Suscribe</div>
+          </div>
+        </div>
+      </div>
+      <div class="chk "><input class="chk_npt" type="checkbox">
+        <div class="chk_s">
+          <div class="chk_i"></div>
+        </div><label class="chk_lbl">I accept <a>Terms and conditions</a></label>
+      </div>
+    </div><img src="<%~ it.global.acf.template %>/public/modal.png">
+  </div>
+</div>
+
+<main class="contact">
+  <section class="contact_intro" style="background:#E5855E">
+    <h2 class="tit1">Contact us</h2>
+    <p><%~ it.data.text %></p><a class="mail mouseHover" href="mailto:<%~ it.global.acf.emailcontact %>"><%~ it.global.acf.emailcontact %></a>
+  </section>
+  <section class="contact_form">
+    <div class="grid">
+      <form class="form">
+        <div class="form_el">
+          <div class="selc topicCon"><select>
+              <option value="" hidden="" selected="">SELECT YOUR TOPIC</option>
+              <% it.data.topics.forEach(function(p,key){ %>
+              <option value="<%~ p.text %>"><%~ p.text %></option>
+              <% }) %>
+            </select></div>
+          <div class="tooltip mouseHover">
+            <div class="tooltip_icon">
+              <div class="tooltip_icon_i">?</div>
+            </div>
+          </div>
+          <div class="tooltipmsg"><div class="cover"><p><%~ it.global.acf.pronouns_tooltip %></p></div></div>
+        </div>
+        <div class="field field-email emailCon"><label class="field_lbl">Email</label><input class="field_npt">
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="field field nameCon"><label class="field_lbl">Name</label><input class="field_npt">
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="field field-txt messageCon"><label class="field_lbl">Message</label><textarea class="field_npt"></textarea>
+          <div class="field_err">Empty field</div>
+        </div>
+        <div class="chk chkCon"><input class="chk_npt mouseHover" type="checkbox">
+          <div class="chk_s">
+            <div class="chk_i"></div>
+          </div><label class="chk_lbl">I accept <a>terms & conditions</a></label>
+        </div>
+        <div class="btn btn-c btnCon mouseHover" style="--main:#E5855E;--base:#FEF9F3">
+          <div class="btn_t">Submit</div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <section class="m-cta signupmod" style="--main:#895434">
+    <div class="c-vw">
+      <div class="hold">
+         <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+          var title = it.global.acf.signup_text[randomNum-1].title;
+          var text = it.global.acf.signup_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        </h3>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="m-dual">
+    <div class="left">
+      
+      <%
+        var randomNum = Math.floor((Math.random() * it.global.acf.support_text.length) + 1);
+        var title = it.global.acf.support_text[randomNum-1].title;
+        var text = it.global.acf.support_text[randomNum-1].text;
+        
+      %>
+      <h2 class="tit1"><%~ title %></h2>
+      <h3 class="tit4"><%~ text %> </h3>
+      <a class="btn mouseHover" href="<%~ it.global.acf.support %>" style="--main:#E5855E" style="--main:#E5855E;--base:#FEF9F3">
+        <div class="btn_t">SUPPORT</div>
+      </a>
+    </div>
+    <div class="right">
+      <div class="right_el"><img src="<%~ it.data.image_support %>"></div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

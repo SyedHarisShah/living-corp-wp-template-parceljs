@@ -1,0 +1,54 @@
+.m-logos{
+  padding-bottom:10rem;
+  padding-top:10rem;
+  border-top:1px solid $dark;
+  @include breakPortrait{
+    padding-bottom:8rem;
+    padding-top:8rem;
+
+  }
+  @include breakMobile{
+    padding-bottom:4.8rem;
+    padding-top:4.8rem;
+
+  }
+  .c-vw{
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    text-align: center;
+    grid-row-gap: 10rem;
+    grid-column-gap: 2rem;
+    justify-content: space-between;
+    @include breakPortrait{
+
+      grid-template-columns: repeat(4, auto);
+      grid-row-gap: 8rem;
+    }
+    @include breakMobile{
+      grid-template-columns: repeat(3, auto);
+      grid-row-gap: 4.8rem;
+    }
+    div{
+      pointer-events: none;
+      display:inline;
+      transition:.6s all $swiftOut;
+      &:hover{
+        opacity:0.5;
+      }
+      img{
+        pointer-events: all;
+        object-fit: contain;
+        width:auto;
+        height:3rem;
+        filter:brightness(0);
+        @include breakPortrait{
+          height:2rem;
+        }
+
+      }
+    }
+    
+  }
+}

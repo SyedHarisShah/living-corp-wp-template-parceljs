@@ -1,0 +1,7 @@
+
+<% if(it.destacado.video_a!=''){ %>
+<%~ it.data.video_reel %>
+
+<%~
+<% it.data.forEach(function(post,key){ %>
+<% }) %>

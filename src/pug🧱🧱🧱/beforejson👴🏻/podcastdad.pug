@@ -1,0 +1,76 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="podcast" data-id="40")
+      main.podcast
+        section.m-dualintro
+          .left
+            .bc
+              a LC
+              span /
+              a ARTICLES
+              span /
+              span DIB & THE FUTURE...
+            h2.tit1 I Am Gifted.I Am From a Gifted People
+            h3.tit4 Thriving while Black in systems designed for whiteness is hard. We must have a strong foundation supporting our sense of self, and we must engage in ongoing calibration, healing, and community care.
+            
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+            
+        section.m-dualsep
+          .left
+            h2.tit2 About
+          .right
+            .txt-bureau
+              p Liberated Love Notes™ is a starting point for integrating self and community affirmations into your daily practices. Liberated Love Notes center the experiences of Black folks existing in white systems and speak to overcoming imposter syndrome, disrupting injected & internalized forms of oppression, embodying an abundance mindset and building a healthy racial identity.  Tune in for a new episode every Monday wherever you listen to podcasts!
+        section.m-tabposts(style="--main:#E5855E")
+          .m-tabposts_selector.c-vw
+            .m-tabposts_selector_blocks
+              .blockClick.act(data-type="list")
+                +icon({name:'list'})
+              .blockClick(data-type="block")
+                +icon({name:'block'})
+          .m-tabposts_hold.holdposts
+             each val in [1, 2, 3, 4, 5]
+
+              .podlist
+                .podlist_image
+                  .podlist_image_hold
+                    img(src="./images/home/1.jpg")
+                .podlist_info
+                  h3.tit4 Disability & STEM While Black
+                  p.desc w / Rose Robinson
+                  .btnplay
+                    .btnplay_tri
+                  .autor
+                    p by <a>Real Talk tuesdays</a>
+                  .podlist_info_bottom
+                    .datapod
+                      .datapod_play 1,560
+                      .datapod_date DEC 13, 2021
+                      .datapod_time 15mins
+                    .shareclick
+                      +icon({name:'share'})
+          .m-tabposts_pags.pg
+            .pgel.act
+              .pgel_t 1
+            .pgel
+              .pgel_t 2
+            .pgel
+              .pgel_t 30
+            .pgel.dis
+              .pgel_t 4
+        section.m-cta(style="--main:#DF80AC")
+          .c-vw
+            .hold
+              h2.tit1 Sign up now
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t TAP IN
+        +footer
+    script(sync type="module" src="./src/app.js")

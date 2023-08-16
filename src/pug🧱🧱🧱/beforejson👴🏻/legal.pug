@@ -1,0 +1,38 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="simple" data-id="2")
+        section.m-simpleintro
+          .c-vw
+            h2.tit1 Legal text
+        section.articlesingle_main
+          .grid.wp
+            h3 Title
+            p Lorem, ipsum <a>dolor</a> sit amet consectetur adipisicing elit. Repudiandae et laborum aliquid exercitationem dolores officiis eaque nesciunt blanditiis, dignissimos sit a perferendis, consequuntur deleniti maiores assumenda esse deserunt ab harum necessitatibus non nulla at cum. Dolor nostrum beatae, distinctio, consequatur itaque ducimus consequuntur obcaecati ex repellat quasi animi deserunt tempora accusamus. Necessitatibus explicabo, ipsa nulla soluta porro aliquam, ipsum possimus, deserunt dolore velit rerum magnam quam quibusdam. Explicabo nulla molestias eveniet provident fuga aperiam voluptatum vero labore corporis iure corrupti nam, maiores officiis deleniti. Fugiat odit sed rem fugit reiciendis quidem unde architecto ex accusantium! Vero odit hic in at.
+            ul 
+              li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+              li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+              li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+              li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+              li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+              li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+            h4 title
+            h2 title
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam expedita quod est sapiente dolore ullam voluptatum error velit veniam non.
+            img(src="./images/home/1.jpg")
+            p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia tempora blanditiis sed nisi libero ab voluptatem aperiam, ea est. Sequi dignissimos earum enim dolor vero, eveniet impedit ab, deleniti doloribus minus harum!
+            blockquote Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel officiis iste beatae.
+        
+        section.m-cta(style="--main:#FEF9F3")
+          .c-vw
+            .hold
+              h2.tit1 Sign up now
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t TAP IN
+        +footer
+    script(sync type="module" src="./src/app.js")

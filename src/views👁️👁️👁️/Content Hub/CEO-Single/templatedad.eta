@@ -1,0 +1,63 @@
+<main class="podcast ceo">
+  <section class="m-dualintro " >
+    <div class="left" style="background-color:<%~ it.data.acf.company_a[0].color_a %>">
+      <div class="left_hover mouseScroll"></div>
+      <div class="bc">
+        <a class="mouseHover" href="<%~ it.global.acf?.ch_home ?? '/content-hub' %>">LC Hub</a>
+        <span>/</span><a class="mouseHover" href="<%~ it.ceo_link %>">CEOs</a>
+        <span>/</span><span><%~ it.data.title.rendered %></span>
+      </div>
+      <h2 class="tit1"><%~ it.data.title.rendered %></h2>
+    </div>
+    <div class="right mouseScroll">
+      <div class="right_el"><img src="<%~ it.data.acf.image_a %>"></div>
+    </div>
+  </section>
+  <section class="m-dualsep">
+    <div class="left">
+      <h2 class="tit2">About <%~ it.data.title.rendered %></h2>
+    </div>
+    <div class="right">
+      <div class="txt-bureau">
+        <%~ it.data.acf.description_a %>
+      </div>
+    </div>
+  </section>
+  <section class="m-dualsep">
+    <div class="left">
+      <h2 class="tit2">About <%~ it.data.acf.company_a[0].post_title %></h2>
+    </div>
+    <div class="right">
+      <div class="txt-bureau">
+        <%~ it.data.acf.company_a[0].descriptionl %>
+        <% if(it.data.acf.company_a[0].link){ %>
+        <a class="simp mouseHover" href="<%~ it.data.acf.company_a[0].link %>"><span>Visit site</span></a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <section class="m-social">
+    <div class="left">
+      <h2 class="tit4"><%~ it.data.acf.company_a[0].title_social %></h2>
+    </div>
+    <div class="right">
+      <div class="social">
+          <% if(it.data.acf.company_a[0].instagram){ %>
+            <a class="mouseHover Sig" href="<%~it.data.acf.company_a[0].instagram %>"><%~ it.global.icons.ig %></a>
+          <% }
+          if(it.data.acf.company_a[0].linkedin){ %>
+            <a class="mouseHover Sin" href="<%~it.data.acf.company_a[0].linkedin %>"><%~ it.global.icons.in %></a>
+          <%
+          }
+          if(it.data.acf.company_a[0].facebook){ %>
+            <a class="mouseHover Sfb" href="<%~it.data.acf.company_a[0].facebook %>"><%~ it.global.icons.fb %></a>
+          <%
+          }
+          if(it.data.acf.company_a[0].twitter){ %>
+            <a class="mouseHover Stw" href="<%~it.data.acf.company_a[0].twitter %>"><%~ it.global.icons.tw %></a>
+          <% }%>
+        </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

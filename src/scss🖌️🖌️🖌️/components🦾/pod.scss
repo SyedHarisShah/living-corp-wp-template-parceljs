@@ -1,0 +1,410 @@
+.pod{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  &_image{
+    position:relative;
+    overflow: hidden;
+    width:100%;
+    &::after{
+      content:'';
+      display:block;
+      width:100%;
+      padding-bottom: 100%;
+    }
+    &_hold{
+      @include center;
+      
+      width:100%;
+      height:100%;
+      background:$light;
+      clip-path: ellipse(35% 55% at 50% 50%);
+      backface-visibility: hidden;
+      transform:translate3d(-50%,-50%,0px) rotate(calc(45deg + (var(--app-speed))));
+      transition:.4s clip-path $swiftOut;
+      &::after{
+        padding-bottom: 100%;
+      }
+    }
+    svg{
+      position:absolute;
+      width:128%;
+      left:50%;
+      top:50%;
+      display:flex;
+      z-index:3;
+      backface-visibility: hidden;
+      transform:translate3d(-50%,-50%,0px) rotate(var(--app-speed));
+      transition:.01s opacity .4s $swiftOut;
+    }
+    img{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      backface-visibility: hidden;
+      transform:translateZ(0px) rotate(calc(-45deg + (-1 * var(--app-speed))));
+      
+      // transition:.6s all $swiftOut;
+    }
+  }
+  &_info{
+    width:100%;
+    padding:2.4rem;
+    border-top:1px solid $dark;
+    display:flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
+    .tit4{
+
+    }
+    p{
+      margin-top:.8rem;
+    }
+  }
+  &:hover{
+    svg{
+      // transform:translate(-50%,-50%) scale(5);
+      opacity:0;
+      transition:0.001s opacity $swiftOut;
+      
+    }
+    .pod_image_hold{
+      transition:.6s clip-path $swiftOut;
+      clip-path: ellipse(100% 100% at 50% 50%);
+    }
+
+  }
+}
+
+
+
+.podlist{
+  display:flex;
+  justify-content: center;
+  border-top:1px solid $dark;
+  @include breakMobile{
+    padding-bottom: 4.2rem;
+    position:relative;
+  }
+  &-fake{
+    display:none;
+  }
+  &_image{
+    padding:2.4rem;
+    width:50%;
+    @include breakMobile{
+      width:12rem;
+      padding:$pad 0 $pad $pad;
+      flex-shrink: 0;
+    }
+    &_hold{
+      display:block;
+      position:relative;
+      overflow: hidden;
+      @include ratio(673,360);
+      border:1px solid $dark;
+      @include breakPortrait{
+        height:100%;
+      }
+    }
+    img{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transition:.6s all $swiftOut;
+    }
+    &:hover{
+      img{
+        transform:scale(1.1);
+      }
+    }
+  }
+  &_info{
+    width:50%;
+    padding:2.4rem 4.8rem;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-left:1px solid $dark;
+    @include breakPortrait{
+      padding:2.4rem 2.4rem;
+
+    }
+    @include breakMobile{
+      width:100%;
+      border-left: 0;
+      padding:$pad;
+    }
+    .desc{
+      margin-top:1.6rem;
+      @include breakMobile{
+        margin-top:.8rem;
+      }
+      
+
+    }
+    .btnplay{
+      margin-top:4.8rem;
+      @include breakPortrait{
+        margin-top:2.4rem;
+        margin-bottom:2.4rem; 
+      }
+      @include breakMobile{
+        margin:$pad 0;
+      }
+    }
+    .autor{
+      margin-top:auto;
+      a{
+        text-decoration: underline;
+      }
+    }
+    &_bottom{
+      padding-top:2rem;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      width:100%;
+      border-top:1px solid $dark;
+      margin-top:1.6rem;
+      @include breakMobile{
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        padding:.8rem $pad;
+      }
+      .datapod{
+        display:flex;
+        text-transform: uppercase;
+        div + div{
+          margin-left:5rem;
+        }
+      }
+      .shareclick{
+        position:relative;
+          
+        &_close{
+          position:absolute;
+          right:0;
+          top:50%;
+          transform:translateY(-50%);
+          width:2rem;
+          height:2rem;
+          display:flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          flex-shrink: 0;
+          z-index:3;
+          &::before{
+            content:'';
+            position:absolute;
+            top:50%;
+            left:0;
+            display:block;
+            width:100%;
+            height:.4rem;
+            background:$dark;
+            transition:.6s all $swiftOut;
+            transform: translateY(-50%) rotate(45deg) scaleX(0);
+           
+         
+          }
+          &::after{
+            content:'';
+            position:absolute;
+            top:50%;
+            left:0;
+            display:block;
+            width:100%;
+            height:.4rem;
+            background:$dark;
+            transition:.6s all $swiftOut;
+            
+            transform:translateY(-50%) rotate(-45deg) scaleX(0);
+         
+          }
+        }
+        & > svg{
+          pointer-events: all;
+          transition:.4s all $swiftOut;
+        }
+        
+        &_icons{
+          right:100%;
+          position:absolute;
+          top:50%;
+          transform:translateY(-50%);
+          width:auto;
+          display:flex;
+          justify-content: flex-end;
+          padding-right: 2rem;
+          align-items: center;
+          pointer-events: none;
+          background:transparent;
+          transition:.4s all $swiftOut;
+          @include breakMobile{
+            width:60vw;
+          }
+          a{
+            display:inline-flex;
+            position:relative;
+            opacity:0;
+            flex-shrink: 0;
+            transform:translateY(50%);
+            transition:.4s all $swiftOut;
+            @for $i from 1 to 5 {
+              &:nth-child(#{$i}) { transition-delay:(5-$i) * 0.1s; }
+            }
+            @include media-max(680){
+              // width:1.4rem;
+            }
+            svg{
+              width:100%;
+              position:relative;
+              *:not(g){
+                transition:.6s all $swiftOut;
+                fill:$dark;
+              }
+            }
+            &::before{
+              content:'';
+              position:absolute;
+              left:50%;
+              top:50%;
+              width:3.2rem;
+              height:3.2rem;
+              border-radius: 100%;
+              transform:translate(-50%,-50%) scale(0);
+              transition:.6s all $swiftOut;
+              
+            }
+            & + a{
+              margin-left:2rem;
+              
+             
+            }
+            &:hover{
+              &:before{
+                transform:translate(-50%,-50%) scale(1);
+    
+              }
+              svg{
+                *:not(g){
+                  fill:$light;
+                }
+              }
+            }
+          }
+
+          
+        }
+        &.act{
+          .shareclick_icons{
+            background:$light;
+          }
+          .shareclick_close{
+            &::before{
+              transform: translateY(-50%) rotate(45deg) scaleX(1);
+              transition-delay:.4s;
+            }
+            &::after{
+              transform: translateY(-45%) rotate(-45deg) scaleX(1);
+              transition-delay:.6s;
+            }
+            
+           
+          }
+          & > svg{
+            opacity:0;
+          }
+          .shareclick_icons{
+            pointer-events: all;
+
+          }
+          a{
+            pointer-events: all;
+            opacity:1;
+            transform:translateY(0%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakDesktop{
+  .blocks{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .podlist{
+      width:50%;
+      &-fake{
+        display:flex;
+      }
+      &_image{
+        width:31.6rem;
+        flex-shrink: 0;
+        &_hold{
+          max-height: 30vh;
+          padding-bottom: 111%;
+        }
+      }
+      &_info{
+        width:100%;
+        padding:2.4rem 2.4rem 2.4rem 0;
+        border-left:0;
+        &_bottom{
+          padding-top: 1.6rem;
+        }
+        .datapod{
+          &_play{
+            display:none;
+
+          }
+          &_date{
+            margin-left:0;
+          }
+          &_time{
+            display:none;
+          }
+        }
+      }
+      &:nth-child(odd){
+        border-right:1px solid $dark;
+      }
+    }
+    
+  }
+}
+
+.datapod{
+  &_play{
+    padding-left:1.2rem;
+    position:relative;
+    &::after{
+      content:'';
+      left:0;
+      @include center--y;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: .5rem 0 .5rem .87rem;
+      border-color: transparent transparent transparent $dark;
+    }
+
+  }
+}

@@ -1,0 +1,53 @@
+.m-pods{
+
+  &_hold{
+    display:flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin-left:-1px;
+    @include breakMobile{
+
+    }
+    .fake{
+      width: colSize(4);
+      border-top:1px inset $dark;
+      border-left:1px inset $dark;
+      @include breakMobile{
+        display:none;
+      }
+
+    }
+    
+    .pod{
+      width: colSize(4);
+      border-top:1px inset $dark;
+      border-left:1px inset $dark;
+      @include breakMobile{
+        width:100%;
+      }
+      &_image{
+        display:block;
+        svg{
+          transform:translate(-50%, -50%) rotate(0);
+        }
+        &_hold{
+        transform:translate(-50%, -50%) rotate(45deg);
+        img{
+          transition:.6s all $swiftOut;
+          transform:rotate(-45deg);
+        }
+        }
+      }
+      &:hover{
+        .pod_image_hold{
+          img{
+            transform:rotate(-45deg) scale(1.01);
+
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,25 @@
+.m-logointro{
+  border-top:1px solid $dark;
+  background:$dark;
+  .c-vw{
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    
+    @include breakMobile{
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+
+    }
+    img{
+      max-width: 26.1rem;
+      height:9rem;
+      object-fit: contain;
+    }
+  }
+  
+}
+

@@ -1,0 +1,18 @@
+<% if(it.posts && it.posts.length > 0){ %>
+    <% it.posts.forEach((x, i) => { %>
+        <div class="player-module mouseHover p-m" id="module-<%~i%>" data-id="<%~x.ID%>" data-href="<%~ x.link%>" data-liked="<%~ x.liked%>">
+            <div class="player-module__image"><img src="<%~x.img%>"></div>
+            <div class="player-module__details">
+                <span class="player-module__title"><%~x.post_title%></span>
+                <span class="player-module__subtitle"><%~x.byline%></span>
+            </div>
+            <span class="player-module__playBtn module-play-btn" data-fetch="true"><%~it.icons.playbtn%></span>
+            <span class="player-module__plays"><%~it.icons.play%><%~x.plays%></span>
+            <span class="player-module__date"><%~ it.formatDate(x.post_date)%></span>
+            <span class="player-module__length"><%~ it.formatDuration(x.duration)%></span>
+            <span class="player-module__length-num"><%~ it.formatDuration(x.duration, true)%></span>
+            <span class="player-module__likeBtn mouseHover module-like-btn"><%~ x.liked ? it.icons.heart_filled : it.icons.heart%></span>
+            <span class="player-module__menuBtn mouseHover module-menu-btn"><%~it.icons.menu%></span>
+        </div>
+    <% }) %>
+<% } %>

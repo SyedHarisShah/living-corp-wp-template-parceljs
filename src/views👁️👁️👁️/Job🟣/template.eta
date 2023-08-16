@@ -1,0 +1,75 @@
+<main class="jobsingle">
+  <section class="m-bc">
+    <div class="c-vw">
+      <div class="bc">
+        <a class="mouseHover" href="<%~ it.global.acf.home %>" data-type="index">LC</a>
+        <span>/</span><a class="mouseHover" href="<%~ it.global.acf.jobs %>" data-type="jobarchive">Job board</a>
+        <span>/</span><span><%~ it.data.title.rendered %></span>
+      </div>
+    </div>
+  </section>
+  <section class="m-logointro">
+    <div class="c-vw"><img src="<%~ it.data.acf.client_logo_a %>"></div>
+  </section>
+  <section class="jobsingle_main stck_base" id="stck0">
+    <div class="iO iO-stck stck_control" data-stck="0"></div>
+    <div class="stck_main">
+      <div class="stck_main_hold">
+        <% if(!it.global.user){ %>
+        <div class="btnfull">
+          <span class="btnfull_t">SIGN IN OR CREATE ACCOUNT TO APPLY</span>
+        </div>
+        <%}
+        else{
+        %>
+        <div class="btnfull btnfull-act mouseHover">
+          <span class="btnfull_t">APPLY</span>
+        </div>
+
+        <%
+        }%>
+      </div>
+    </div>
+    <div class="stck_hold">
+      <div class="grid">
+        <div class="jobsingle_main_title">
+          <h2 class="tit4"><%~ it.data.acf.client_a %></h2>
+          <h3 class="tit2"><%~ it.data.title.rendered %></h3>
+          <div class="locate">
+            <%~ it.global.icons.marker %>
+            <div class="locate_t"><%~ it.data.ownpost_data.location %></div>
+          </div>
+        </div>
+        <div class="jobsingle_main_hold">
+        <div class="tags">
+          <% it.data.acf.tags.forEach(function(p,key){ %>
+          <span><%~ p.tag %></span>
+          <% }) %>
+        </div>
+        <div class="hidetext">
+          <div class="hidetext_click">
+            <div class="simp mouseHover"><span>Show more</span></div>
+          </div>
+          <div class="hidetext_hold wp">
+            <%~ it.data.acf.content %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="m-share">
+    <div class="m-share_hold grid">
+      <p>Share</p>
+      <div class="social">
+        <a class="mouseHover Stw" href="https://twitter.com/intent/tweet?url=<%~ it.data.link %>"><%~ it.global.icons.tw %></a>
+        <a class="mouseHover Sfb" href="https://www.facebook.com/sharer/sharer.php?u=<%~ it.data.link %>"><%~ it.global.icons.fb %></a>
+        <a class="mouseHover Sin" href="https://www.linkedin.com/shareArticle?url=<%~ it.data.link %>"><%~ it.global.icons.in %></a>
+        <a class="mouseHover Srd" href="https://www.reddit.com/submit?url=<%~ it.data.link %>"><%~ it.global.icons.reddit %></a>
+        <a class="mouseHover Stb" href="https://www.tumblr.com/share/link?url=<%~ it.data.link %>"><%~ it.global.icons.tumbler %></a>
+      </div>
+    </div>
+  </section>
+  
+  <%~ it.footer %>
+</main>

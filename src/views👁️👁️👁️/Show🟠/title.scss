@@ -1,0 +1,37 @@
+.m-sectitle{
+  padding-top:2.8rem;
+  padding-bottom:2.8rem;
+  border-top:1px solid $dark;
+  .c-vw{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .left{
+      width:50%;
+      .line{
+        position:relative;
+        overflow: hidden;
+      }
+    }
+    .right{
+      width:50%;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      .txt-bureau{
+        max-width: 52rem;
+      }
+    }
+    .center{
+      width:100%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      position:relative;
+      .simp{
+        @include center--y;
+        right:0;
+      }
+    }
+  }
+}

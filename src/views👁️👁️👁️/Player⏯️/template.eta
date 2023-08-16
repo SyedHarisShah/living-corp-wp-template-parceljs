@@ -1,0 +1,35 @@
+<div class="player">
+  <audio></audio>
+  <div class="player_buttons">
+    <div class="btn10left"><%~ it.global.icons.rewind %></div>
+    <div class="btnplayer">
+      <div class="btnplayer_play"></div>
+      <div class="btnplayer_pause"></div>
+    </div>
+    <div class="btn10right"><%~ it.global.icons.rewind %></div>
+    <div class="btnrestart"><%~ it.global.icons.repeat %></div>
+  </div>
+  <div class="player_time">
+    <div class="player_time_start">01:20</div>
+    <div class="player_time_bar">
+      <div class="playerball"></div>
+    </div>
+    <div class="player_time_end">14:40</div>
+  </div>
+  <div class="player_volume">
+    <div class="player_volume_icon"><%~ it.global.icons.volume %></div>
+    <div class="player_volume_bar">
+      <div class="hold">
+        <div class="volumeball"></div>
+        <div class="volumepos"></div>
+      </div>
+    </div>
+  </div>
+  <div class="player_info">
+    <div class="player_info_image"><img src=""></div>
+    <div class="player_info_title">
+      <h3 class="tit4"></h3>
+      <p class="titleparent"></p>
+    </div>
+  </div>
+</div>

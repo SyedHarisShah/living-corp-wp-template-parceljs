@@ -1,0 +1,205 @@
+<main class="podcastsimple">
+  <section class="m-bc">
+    <div class="c-vw">
+      <div class="bc">
+        <% if(it.data.acf?.add_to_collective || it.data?.parent_data?.add_to_collective){ %>
+          <a class="mouseHover" href="<%~ it.global.acf?.ch_home ?? '/content-hub' %>">LC Hub</a>
+        <%  } else {%>
+          <a class="mouseHover" href="<%~ it.global.acf.home %>">LC</a>
+        <%  }%>
+        <span>/</span><a class="mouseHover" href="<%~ it.global.acf.pods %>">Pods</a>
+        <span>/</span><a class="mouseHover" href="<%~ it.data.parent_data.permalink %>"><%~ it.data.parent_data.name %></a>
+        <span>/</span><span><%~ it.data.title.rendered %></span>
+      </div>
+    </div>
+  </section>
+  <section class="m-simpleintro">
+    <div class="c-vw">
+      <h2 class="tit1"><%~ it.data.title.rendered %></h2>
+      <div class="m-simpleintro_info">
+        <div class="autor">
+          <p><%~ it.data.acf.featuring_a %></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="m-podcast">
+    <div class="image"><img src="<%~ it.data.acf.image_podcast %>"></div>
+    <div class="info">
+      <div class="info_top">
+        <div class="btnpod mouseHover" data-player="<%~ it.data.acf.url_podcast %>"
+          data-title="<%~ it.data.title.rendered %>"
+          data-subtitle="<%~ it.data.parent_data.name %>"
+          data-image="<%~ it.data.acf.image_podcast %>">
+          <div class="btnpod_play"></div>
+          <div class="btnpod_pause"></div>
+          </div>
+          <div class="info_top_title">
+            <p class="titleparent"><%~ it.data.parent_data.name %></p>
+            <h3 class="tit4"><%~ it.data.title.rendered %></h3>
+          </div>
+          <div class="info_top_time podTime"><%~ it.data.acf.duration_a %></div>
+        </div>
+        <div class="info_lines"><img src="<%~ it.global.acf.template %>/public/podcastline.svg"></div>
+        <div class="info_bottom">
+        <div class="info_bottom_date"><%~ it.data.ownpost_data.date %></div>
+      </div>
+    </div>
+  </section>
+  <section class="m-dualsep">
+    <div class="left">
+      <h2 class="tit2"><%~ it.data.acf.title_description %></h2>
+    </div>
+    <div class="right">
+      <div class="txt-bureau">
+        <p><%~ it.data.acf.descriptionl %></p>
+      </div>
+    </div>
+  </section>
+  <section class="podcastsingle_main">
+    <div class="grid">
+      <div class="hidetext">
+        <div class="hidetext_click">
+          <div class="simp mouseHover"><span>Read more</span></div>
+        </div>
+        <div class="hidetext_hold wp">
+        <%~ it.data.acf.transcription %>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="m-social">
+    <div class="left">
+      <h2 class="tit4">Share</h2>
+    </div>
+    <div class="right">
+      <div class="social">
+        <a class="mouseHover Stw" href="https://twitter.com/intent/tweet?url=<%~ it.data.link %>"><%~ it.global.icons.tw %></a>
+        <a class="mouseHover Sfb" href="https://www.facebook.com/sharer/sharer.php?u=<%~ it.data.link %>"><%~ it.global.icons.fb %></a>
+        <a class="mouseHover Sin" href="https://www.linkedin.com/shareArticle?url=<%~ it.data.link %>"><%~ it.global.icons.in %></a>
+        <a class="mouseHover Srd" href="https://www.reddit.com/submit?url=<%~ it.data.link %>"><%~ it.global.icons.reddit %></a>
+        <a class="mouseHover Stb" href="https://www.tumblr.com/share/link?url=<%~ it.data.link %>"><%~ it.global.icons.tumbler %></a>
+      </div>
+    </div>
+  </section>
+  <%
+    if(it.data.parent_data.creators){ 
+    it.data.parent_data.creators.forEach(function(p,key){ %>
+  <section class="m-creator">
+    <div class="m-creator_image">
+      <div class="m-creator_image_hold"><img src="<%~ p.image %>"></div>
+    </div>
+    <div class="m-creator_info">
+      <h3 class="tit2"><%~ p.title %></h3>
+      <% if(p.description){ %>
+      <div class="desc"><%~ p.description %></div>
+      <% }
+      if(p.website){ %>
+      <a href="<%~ p.website %>" class="simp mouseHover"><span>website</span></a>
+      <% } %>
+      <div class="m-creator_info_bottom">
+        <% if(p.contactsocial_links==true){ %>
+        <div class="social">
+          <% if(p.social.instagram){ %>
+            <a class="mouseHover Sig" href="<%~ p.social.instagram %>"><%~ it.global.icons.ig %></a>
+          <% }
+          if(p.social.linkedin){ %>
+            <a class="mouseHover Sin" href="<%~ p.social.linkedin %>"><%~ it.global.icons.in %></a>
+          <%
+          }
+          if(p.social.facebook){ %>
+            <a class="mouseHover Sfb" href="<%~ p.social.facebook %>"><%~ it.global.icons.fb %></a>
+          <%
+          }
+          if(p.social.twitter){ %>
+            <a class="mouseHover Stw" href="<%~ p.social.twitter %>"><%~ it.global.icons.tw %></a>
+          <% }%>
+        </div>
+        <% } 
+        else{
+        %>
+        <a class="btns mouseHover" href="<%~ p.email_contact %>"><div class="btns_t">contact</div></a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <% })
+  }
+  %>
+  <% 
+    
+  if(it.data.acf.creators){ 
+  it.data.acf.creators.forEach(function(p,key){
+  if(p.title!=''){
+   %>
+  <section class="m-creator">
+    <div class="m-creator_image">
+      <div class="m-creator_image_hold"><img src="<%~ p.image %>"></div>
+    </div>
+    <div class="m-creator_info">
+      <h3 class="tit2"><%~ p.title %></h3>
+      <% if(p.description){ %>
+      <div class="desc"><%~ p.description %></div>
+      <% }
+      if(p.website){ %>
+      <a href="<%~ p.website %>" class="simp mouseHover"><span>website</span></a>
+      <% } %>
+      <div class="m-creator_info_bottom">
+        <% if(p.contactsocial_links==true){ %>
+        <div class="social">
+          <% if(p.social.instagram){ %>
+            <a class="mouseHover Sig" href="<%~ p.social.instagram %>"><%~ it.global.icons.ig %></a>
+          <% }
+          if(p.social.linkedin){ %>
+            <a class="mouseHover Sin" href="<%~ p.social.linkedin %>"><%~ it.global.icons.in %></a>
+          <%
+          }
+          if(p.social.facebook){ %>
+            <a class="mouseHover Sfb" href="<%~ p.social.facebook %>"><%~ it.global.icons.fb %></a>
+          <%
+          }
+          if(p.social.twitter){ %>
+            <a class="mouseHover Stw" href="<%~ p.social.twitter %>"><%~ it.global.icons.tw %></a>
+          <% }%>
+        </div>
+        <% } 
+        else{
+        %>
+        <a class="btns mouseHover" href="<%~ p.email_contact %>"><div class="btns_t">contact</div></a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <%
+  } 
+    })
+  }
+  %>
+    
+  <section class="m-nextprev">
+    <% if(it.data.parent_data.prev!=null){ %>
+    <a class="left mouseHover" href="<%~ it.data.parent_data.prev.permalink %>" data-type="podcastchild">
+      <div class="btnarrow ">
+        <div class="btnarrow_n"></div>
+        <div class="btnarrow_t">Previous</div>
+      </div>
+    </a>
+    <% }
+    else{
+
+    }
+    if(it.data.parent_data.next!=null){
+    %>
+    <a class="right mouseHover" href="<%~ it.data.parent_data.next.permalink %>" data-type="podcastchild">
+      <div class="btnarrow ">
+        <div class="btnarrow_t">Next</div>
+        <div class="btnarrow_n"></div>
+      </div>
+    </a>
+    <%
+      }
+    %>
+  </section>
+  <%~ it.footer %>
+</main>

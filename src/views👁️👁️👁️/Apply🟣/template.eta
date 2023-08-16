@@ -1,0 +1,78 @@
+<div class="applyal">
+  <div class="applyal_bg"></div>
+  <div class="applyal_content">
+    <div class="applyal_success">
+      <div class="supercheck" style="--main:#E5855E">
+        <div class="supercheck_i"></div>
+      </div>
+      <h2 class="tit1">Thank you!you’VE applied successfully</h2>
+      <a href="<%~ it.global.acf.jobs %>" class="btn btn_close" style="--main:#E5855E">
+        <div class="btn_t">BACK TO LISTS</div>
+      </a>
+    </div>
+    <div class="applyal_close"><span></span><span></span></div>
+    <div class="applyal_content_text">
+      <h3 class="tit4">Must Reads for Aspiring Allies</h3>
+      <h2 class="tit1">Subscribe to stay updated on this list</h2>
+      <div class="field field-email"><label class="field_lbl">Name</label><input class="field_npt">
+        <div class="field_err">Wrong format</div>
+        <div class="field_button">
+          <div class="btninput">
+            <div class="btninput_t">Suscribe</div>
+          </div>
+        </div>
+      </div>
+      <div class="chk "><input class="chk_npt" type="checkbox">
+        <div class="chk_s">
+          <div class="chk_i"></div>
+        </div><label class="chk_lbl">I accept <a>Terms and conditions</a></label>
+      </div>
+    </div><img src="<%~ it.global.acf.template %>/public/modal.png">
+  </div>
+</div>
+<main class="apply">
+  <section class="apply_intro" style="background:#E5855E">
+    <div class="btnarrow btnBack">
+      <div class="btnarrow_n"></div>
+      <div class="btnarrow_t">Back</div>
+    </div>
+    <h2 class="tit1 iO">APPLY NOW</h2>
+  </section>
+  <section class="apply_form">
+    <div class="grid">
+      <div class="txt-bureau">
+        <p> LIVING CORPORATE team reviews resume to look for qualified applications to highlight to partner
+          companies. </p>
+      </div>
+      <form class="form"></form>
+      <div class="field nameAp"><label class="field_lbl">Name</label><input class="field_npt " value="<%~ it.global.user.acf.firstname %>">
+        <div class="field_err">Empty field</div>
+      </div>
+      <div class="field field-email emailAp"><label class="field_lbl">Email</label><input class="field_npt" value="<%~ it.global.user.user.data.user_email %>">
+        <div class="field_err">Wrong format ex: email@example.com</div>
+      </div>
+      <div class="field field-txt messageAp"><label class="field_lbl">Message</label><textarea class="field_npt "></textarea>
+        <div class="field_err">Empty field</div>
+      </div>
+      <div class="file fileAp">
+        <div class="file_dropzone mouseHover"></div>
+        <div class="file_info">
+          <div class="file_info_icon"><%~ it.global.icons.folder %>
+          </div>
+          <h3 class="tit3">UPLOAD YOUR RESUME</h3>
+          <p>CLICK OR DRAG YOUR FILE AND START UPLOADING<br>(SUPPORTED FORMATS: PDF, JPG, DOC)</p>
+        </div><input class="field_file" type="file">
+        <div class="file_err">Empty field</div>
+      </div>
+      <div class="chk chkAp"><input class="chk_npt mouseHover" type="checkbox">
+        <div class="chk_s">
+          <div class="chk_i"></div>
+        </div><label class="chk_lbl">I accept <a>terms and conditions</a></label>
+      </div>
+      <div class="btn btn-c btnReg mouseHover" style="--main:#E5855E;--base:#FEF9F3">
+        <div class="btn_t">Submit</div>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

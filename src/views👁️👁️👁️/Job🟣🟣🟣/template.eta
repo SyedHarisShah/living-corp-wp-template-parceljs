@@ -1,0 +1,118 @@
+
+<main class="jobs">
+  <section class="jobs_intro mouseScroll">
+    <div class="left" style="background:<%~ it.data.color_joba %>">
+      <div class="left_el">
+        <div class="left_el_hold">
+          <h2 class="tit1"><%~ it.data.title_joba %></h2>
+          <p class="tit4"><%~ it.data.text_joba %></p>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="right_hold">
+        <div class="border"></div>
+        <div class="right_el"><img src="<%~ it.data.image_joba %>"></div>
+      </div>
+    </div>
+  </section>
+  <section class="jobs_main">
+    <div class="jobs_main_top">
+      <div class="activeFilters mouseHover">
+        <%~ it.global.icons.filter %>
+        <div class="activeFilters_t">Filter by</div>
+      </div>
+      <div class="totalSearch">20 Results</div>
+    </div>
+    <div class="holdFilters">
+      <div class="holdFilters_box">
+        <div class="jobs_main_bottom">
+          <div class="bottom_types">
+          <div class="catEl mouseHover"><span>Location</span></div>
+          <div class="catEl mouseHover"><span>Industry</span></div>
+        </div>
+        <div class="bottom_checks">
+          <div class="bottom_checks_el">
+          <% 
+              it.data.location.forEach(function(p,key){ %>
+              <div class="chk mouseHover">
+                <input class="chk_npt" type="checkbox" value="<%~ p.term_id %>">
+                <div class="chk_s">
+                  <div class="chk_i"></div>
+                </div>
+                <label class="chk_lbl"><%~ p.name %></label>
+              </div>
+              
+              <%
+              })
+             %>
+          </div>
+          <div class="bottom_checks_el">
+          <% 
+           
+              it.data.industry.forEach(function(p,key){ %>
+              <div class="chk mouseHover">
+                <input class="chk_npt" type="checkbox" value="<%~ p.term_id %>">
+                <div class="chk_s">
+                  <div class="chk_i"></div>
+                </div>
+                <label class="chk_lbl"><%~ p.name %></label>
+              </div>
+              <%
+              })
+           %>
+          </div>
+        </div>
+        <div class="bottom_clear">
+          <div class="bottom_clear_box">
+            <div class="btn btnClear mouseHover">
+              <div class="btn_x"></div>
+              <div class="btn_t">Delete Filters</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="jobs_main_results">
+  </div>
+</section>
+<section class="m-cta signupmod" style="--main:#E5855E">
+  <div class="c-vw">
+    <div class="hold">
+        <%
+        var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+        var title = it.global.acf.signup_text[randomNum-1].title;
+        var text = it.global.acf.signup_text[randomNum-1].text;
+        
+      %>
+      <h2 class="tit1"><%~ title %></h2>
+      <h3 class="tit4"><%~ text %> </h3>
+      </h3>
+      <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+        <div class="btn_t">TAP IN</div>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="m-sectitle">
+  <div class="c-vw">
+    <div class="center">
+      <h2 class="tit2">Featured Guests and Brands</h2><a href="<%~ it.global.acf.network %>" data-type="networkarchive" class="simp mouseHover" style="--main:#E5855E"><span>VIEW
+          ALL</span></a>
+    </div>
+  </div>
+</section>
+<section class="m-logos">
+  <div class="c-vw">
+  <%  it.global.acf.featured.forEach(function(p,key){ %>
+   <div><img src="<%~ p %>" /></div>
+   <%
+  })
+  %>
+  </div>
+</section>
+
+ 
+  <%~ it.footer %>
+</main>

@@ -1,0 +1,19 @@
+
+<% it.posts.forEach(function(p,key){ %>
+  <a class="art mouseHover" href="<%~ p.link %>" data-type="article">
+    <div class="art_hold">
+      <div class="art_image">
+        <div class="btnmore btnmore-hovered">
+          <div class="btnmore_t">read more</div>
+        </div><img src="<%~ p.image %>">
+      </div>
+      <div class="art_info">
+        <h3 class="tit3"><%~ p.title %></h3>
+        <% if(p.description!=null){ %>
+        <p class="desc"><%~ p.description %></p>
+        <% } %>
+        <div class="date tit4"><%~ p.date %></div>
+      </div>
+    </div>
+  </a>
+<% }) %>

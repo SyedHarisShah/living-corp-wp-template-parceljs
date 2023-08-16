@@ -1,0 +1,14 @@
+<div class="li_dialog">
+  <div class="li_dialog__bg"></div>
+  <div class="li_dialog__body">
+    <div class="li_dialog__title">DELETE ACCOUNT</div>
+    <div class="li_dialog__content">
+      <p>Confirm that you wish to delete this account.</p>
+
+      <div class="li_dialog__btn btn mouseHover" style="--main:#E5855E;--base:#FEF9F3">
+        <div class="btn_t">CLOSE</div>
+      </div>
+    </div>
+    <p class="li_dialog__message">Test message</p>
+  </div>
+</div>

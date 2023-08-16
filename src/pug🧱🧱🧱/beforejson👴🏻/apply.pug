@@ -1,0 +1,48 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="apply" data-id="2")
+      main.apply
+        section.apply_intro(style="background:#E5855E")
+          a.btnarrow
+            .btnarrow_n
+            .btnarrow_t Back
+          h2.tit1 APPLY NOW
+        section.apply_form
+          .grid
+            .txt-bureau
+              p  LIVING CORPORATEteam reviews resume to look for qualified applications to highlight to partner companies. 
+            form.form
+            .field.field-email
+              label.field_lbl Name
+              input.field_npt
+              .field_err Empty field
+            .field.field-email
+              label.field_lbl Name
+              input.field_npt
+              .field_err Empty field
+            .field.field-txt
+              label.field_lbl Message
+              textarea.field_npt
+              .field_err Empty field
+            .file
+              .file_dropzone
+              .file_info
+                .file_info_icon
+                  +icon({name:'folder'})
+                h3.tit3 UPLOAD YOUR RESUME
+                p CLICK OR DRAG YOUR FILE AND START UPLOADING<br>(SUPPORTED FORMATS: PDF, JPG, DOC)
+              input.field_file(type="file")
+              .file_err Empty field
+            .chk
+              input.chk_npt(type="checkbox")
+              .chk_s
+                .chk_i
+              label.chk_lbl I accept <a>terms and conditions</a>
+            .btn.btn-c(style="--base:#895434")
+              .btn_t Submit
+        +footer
+    script(sync type="module" src="./src/app.js")

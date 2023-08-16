@@ -1,0 +1,43 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="archive" data-type="podcast")
+      main.artarchive
+        section.m-simpleintro.m-simpleintro-r
+          .c-vw
+            h2.tit1 Podcasts
+        section.m-pods
+         .m-pods_hold.hPosts
+            each val in [1, 2, 3, 4, 5]
+              a.pod
+                  .pod_image
+                    +icon({name:'elipse'})
+                    .pod_image_hold
+                      img(src="./images/home/4.jpg")
+                  .pod_info 
+                    h3.tit4 LIBERATED LOVE NOTES
+                    p 20 episodes
+            .fake
+        section.m-cta(style="--main:#FEF9F3")
+          .c-vw
+            .hold
+              h2.tit1 SIGN UP NOW
+              h3.tit4 Subscribe to curated lists our editorial team has created on the topics that matter to you.
+              a.btn
+                .btn_t Tap in
+        section.m-dual
+          .left(style="background:#DF80AC")
+            
+            h2.tit1 THE GROUP CHAT
+            h3.tit4 Living Corporate’s mission is singular in purpose, but diversified in approach. From our podcasting, to live events around the US, to our giveaways.WE AMPLIFY Underrepresented Voices. 
+            .btn
+              .btn_t SUPPORT
+          .right
+            .right_el
+              img(src="./images/home/1.jpg")
+        +footer
+    script(sync type="module" src="./src/app.js")

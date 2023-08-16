@@ -1,0 +1,54 @@
+<main class="ch-ceos">
+  <% let item = it.data.acf.ch_intro; %>
+  <section class="ch-ceos_intro">
+    <div class="iO iO-slidetime"></div>
+    <div class="left">
+      <div class="left_el">
+        <div class="left_el_hold">
+          <% if(item){ %>
+            <img src="<%~ item.image %>"/>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="right_hold">
+        <% if(item){ %>
+          <h2 class="tit1"><%~ item.heading %></h2>
+          <h3 class="tit4">
+            <div class="line">
+              <div class="word"><%~ item.subheading %></div>
+            </div>
+          </h3>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <section class="ch-ceos_content">
+    <div class="left">
+      <div class="ch_search-cont">
+        <input class="ch_search" type="text" id="ceo-search" name="ceo-search" placeholder="Search Organizations">
+        <%~ it.global.icons.search %>
+      </div>
+
+      <div class="ch_filters">
+        <div class="ch_sort">
+          <div id="alpha-filter" data-sort="alpha" class="ch_filter ch_filter--active"><span>Alphabetical</span></div>
+          <div id="date-filter" data-sort="date" class="ch_filter"><span>Newest</span></div>
+        </div>
+        
+        <% /* <div class="ch_filter"><span>Company</span></div>
+        <div class="ch_filter ch_filter--active"><span>Industry</span></div>
+        <div class="ch_filter"><span>Category</span></div> */ %>
+      </div>
+    </div>
+
+    <div class="right">
+    </div>
+
+  </section>
+
+  <%~ it.footer %>
+</main>

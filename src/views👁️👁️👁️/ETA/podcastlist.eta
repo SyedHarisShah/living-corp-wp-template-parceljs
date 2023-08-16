@@ -1,0 +1,44 @@
+
+<% it.posts.forEach(function(p,key){ %>
+  <div class="podlist">
+    <div class="podlist_image">
+      <a class="podlist_image_hold mouseHover"  href="<%~ p.link %>" data-type="podcastchild"><img src="<%~ p.image %>"></a>
+    </div>
+    <div class="podlist_info">
+      <h3 class="tit4"><%~ p.title %></h3>
+      <% if(p.featuring){ %>
+      <p class="desc"><%~ p.featuring %></p>
+      <% } %>
+      <a class="btnplay mouseHover" data-type="podcastchild"  href="<%~ p.link %>">
+        <div class="btnplay_tri"></div>
+      </a>
+      <div class="autor">
+        <p><a class="mouseHover" href="<%~ p.parent.permalink %>" data-type="podcastdad"><%~ p.parent.name %></a></p>
+      </div>
+      <div class="podlist_info_bottom">
+        <div class="datapod">
+          <div class="datapod_date"><%~ p.date %></div>
+          <div class="datapod_time"><%~ p.duration %></div>
+        </div>
+        <div class="shareclick mouseHover">
+          <%~ it.global.icons.share %>
+          <div class="shareclick_close"></div>
+          <div class="shareclick_icons">
+            <a class="mouseHover Stw" href="https://twitter.com/intent/tweet?url=<%~ p.permalink %>"><%~ it.global.icons.tw %></a>
+            <a class="mouseHover Sfb" href="https://www.facebook.com/sharer/sharer.php?u=<%~ p.permalink %>"><%~ it.global.icons.fb %></a>
+            <a class="mouseHover Sin" href="https://www.linkedin.com/shareArticle?url=<%~ p.permalink %>"><%~ it.global.icons.in %></a>
+            <a class="mouseHover Srd" href="https://www.reddit.com/submit?url=<%~ p.permalink %>"><%~ it.global.icons.reddit %></a>
+            <a class="mouseHover Stb" href="https://www.tumblr.com/share/link?url=<%~ p.permalink %>"><%~ it.global.icons.tumbler %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% }) 
+if(it.posts.length %2 != 0){
+%>
+  <div class="podlist podlist-fake"></div>
+
+<%
+}
+%>

@@ -1,0 +1,567 @@
+.ch-ceos {
+  transform-style: unset !important;
+
+  &_intro {
+    height: calc(var(--app-height) - $header);
+    margin-top: $header;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    position: relative;
+
+    @include breakPortrait {
+      flex-direction: column;
+    }
+
+    @include breakMobile {}
+
+    .iO-slidetime {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+    }
+
+    .left {
+      position: relative;
+      width: 43%;
+
+      @include breakPortrait {
+        width: 100%;
+        // flex-grow: 1;
+        height: 38vw;
+        flex-shrink: 0;
+      }
+
+      @include breakMobile {
+        height: 80vw;
+
+      }
+
+      &_el {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: $gut;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        overflow: hidden;
+        height: 100%;
+
+        &_hold {
+          position: relative;
+          height: 100%;
+          width: 100%;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+
+          .tit4 {
+            margin-bottom: 2.4rem;
+
+            @include breakPortrait {
+              margin-bottom: 1rem;
+            }
+
+            .line {
+              display: block;
+              width: 100%;
+              overflow: hidden;
+            }
+
+            .word {
+              display: inline-block;
+              position: relative;
+              transform: translate(0%, 120%);
+              transition: .6s all $swiftOut;
+            }
+          }
+
+          .tit1 {
+
+            .line {
+              position: relative;
+              overflow: hidden;
+            }
+          }
+
+          .btnmore {
+            margin-top: 2.4rem;
+            transform: translateY(120%);
+            transition: .6s all $swiftOut;
+
+            @include breakPortrait {
+              margin-top: 1.2rem;
+            }
+
+            @include hover {
+              display: none;
+            }
+          }
+        }
+
+        &:before {
+          content: '';
+        }
+
+        &.active {
+          .tit4 .word {
+            transform: translateY(0);
+            transition: .6s all 1s $swiftOut;
+          }
+
+          .btnmore {
+            transform: translateY(-2%);
+            transition: .6s all 1s $swiftOut;
+
+          }
+        }
+      }
+    }
+
+    .right {
+      background-color: #8FD7C6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      justify-content: center;
+
+      // padding-left:9.5rem;
+      @include breakDesktop {
+        width: 57%;
+        padding-bottom: 4rem;
+        padding-right: 2.5rem;
+        border-left: 11px solid $dark;
+        padding: 6rem;
+      }
+
+      @include breakPortrait {
+        width: 100%;
+        padding: 2.4rem;
+        height: 100%;
+      }
+
+      @include breakMobile {
+        padding: 1.4rem 0;
+      }
+
+      &_timer {
+        padding-left: 10%;
+        padding-right: 10%;
+
+        @include breakPortrait {
+          padding-left: 2.4rem;
+          padding-right: 2.4rem;
+          margin-top: auto;
+
+        }
+
+        @include breakMobile {
+          padding-left: 1.6rem;
+          padding-right: 1.6rem;
+
+        }
+      }
+
+      &_hold {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        display: flex;
+        margin: auto 0;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4rem;
+        padding: 7rem;
+
+        .btnmore {
+          padding: 1.5rem 4rem;
+          width: fit-content;
+        }
+
+        @include breakPortrait {
+          max-width: 70vw;
+          padding: 5rem;
+        }
+
+        @include breakMobile {
+          max-width: 100%;
+          transform: scale(1.15);
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+
+          @include breakPortrait {
+
+            padding-bottom: 80%;
+          }
+
+          @include breakMobile {
+            padding-bottom: 60%;
+          }
+        }
+
+
+      }
+
+      .border {
+        @include center;
+        width: 0%;
+        height: 0%;
+        border: 1px solid $dark;
+        pointer-events: none;
+
+        &.active {
+
+          z-index: 5;
+        }
+      }
+
+      &_el {
+        clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+        // transition:.6s all $swiftOut;
+        @include clock;
+        z-index: 3;
+        pointer-events: none;
+
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          filter: blur(6px);
+          object-fit: cover;
+          object-position: center;
+          transform: scale(1);
+          transition: .6s all $swiftOut;
+        }
+
+        &.active {
+          pointer-events: all;
+
+          // clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          // transition:1.4s clip-path .3s $swiftOut;
+          z-index: 4;
+
+          img {
+            filter: blur(0);
+            transform: scale(.8);
+            transition: 1.8s all $swiftOut;
+          }
+        }
+      }
+
+    }
+
+    &:not(.delayed) {
+      .active {
+        transition-delay: 0s !important;
+
+        &>div {
+          transition-delay: 0s !important;
+
+        }
+      }
+    }
+  }
+
+  &_content {
+    height: calc(var(--app-height) - $header);
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    position: relative;
+
+    @include breakPortrait {
+      flex-direction: column;
+    }
+
+    @include breakMobile {}
+
+    .left {
+      position: relative;
+      width: 43%;
+      padding: 5rem 4rem;
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      @include breakPortrait {
+        width: 100%;
+        // flex-grow: 1;
+        height: 38vw;
+        flex-shrink: 0;
+      }
+
+      @include breakMobile {
+        height: 25%;
+      }
+
+      .ch_search-cont {
+        position: relative;
+
+        svg {
+          position: absolute;
+          top: 50%;
+          right: 4rem;
+          height: 4rem;
+          transform: translateY(-50%);
+        }
+      }
+
+      .ch_search {
+        width: 100%;
+        text-transform: uppercase;
+        pointer-events: all;
+        border: 1px solid #000;
+        border-radius: 6.5rem;
+        padding: 0 2.8rem;
+        font-size: 1.4rem;
+        line-height: 5.14;
+        font-weight: 500;
+      }
+
+      .ch_filters {
+        display: flex;
+        flex-direction: column;
+
+        > {
+
+          .ch_filter {
+            border-top: 1px solid #000;
+          }
+        }
+      }
+
+      .ch_filter {
+        text-transform: uppercase;
+        --main: #E5855E;
+        font-family: bureau;
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 1.14;
+        transition: all .6s cubic-bezier(.55, 0, .1, 1);
+        display: inline-flex;
+        position: relative;
+        padding: 1.5rem;
+        padding-bottom: 0;
+
+        &:not(:nth-child(2)) {
+          margin-top: 1.5rem;
+        }
+
+        &:before {
+          content: "";
+          height: 0.8rem;
+          background: var(--main);
+          transform-origin: 0 100%;
+          transition: all .6s cubic-bezier(.55, 0, .1, 1);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          transform: scaleY(0);
+          max-width: 15rem;
+        }
+
+        &--active {
+          span {
+            z-index: 1;
+            position: relative;
+          }
+
+          &:before {
+            transform: scaleY(1);
+          }
+        }
+      }
+
+      .ch_sort {
+        display: flex;
+        padding: 3rem 1.5rem;
+        gap: 2rem;
+
+        .ch_filter {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      overflow: auto;
+      flex-wrap: wrap;
+      align-content: flex-start;
+
+
+      &:has(> .loading-wheel) {
+        align-content: center;
+      }
+
+      .loading-wheel {
+        margin: auto;
+      }
+
+      // padding-left:9.5rem;
+      @include breakDesktop {
+        width: 57%;
+        border-left: 11px solid $dark;
+      }
+
+      @include breakPortrait {
+        width: 100%;
+        padding: 2.4rem;
+        height: 100%;
+      }
+
+      @include breakMobile {
+        padding: 1.4rem 0;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .ceo {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+        margin-bottom: -1px;
+        background-color: $bg;
+        flex-basis: calc(100% / 3);
+        margin-inline: -1px;
+        display: flex;
+        box-sizing: content-box;
+        overflow: hidden;
+        height: fit-content;
+        max-height: 32.3rem;
+
+        &__image {
+          clip-path: ellipse(35% 55%);
+          transform: rotate(45deg);
+          transition: .4s $swiftOut;
+
+          img {
+            width: 100%;
+            aspect-ratio: 1;
+            transform: rotate(-45deg);
+          }
+
+          svg {
+            position: absolute;
+            transform: rotate(-45deg) translateY(-15.5%);
+            width: 128%;
+            z-index: 1000;
+            transition: opacity 10ms cubic-bezier(.55, 0, .1, 1) .4s;
+          }
+
+          .ceo-image {
+            opacity: 1;
+            transition: inherit;
+            object-fit: cover;
+          }
+
+          .company-image {
+            opacity: 0;
+            filter: brightness(0);
+            position: absolute;
+            transform: rotate(-45deg) scale(1);
+            object-fit: contain;
+            top: 0;
+            left: 0;
+            transition: inherit;
+            z-index: -1;
+          }
+        }
+
+        &:hover {
+          .ceo__image {
+            clip-path: ellipse(100% 100%);
+            transition: .4s $swiftOut;
+
+            img {
+              transform: rotate(-45deg)scale(1.01);
+            }
+
+            svg {
+              opacity: 0;
+              transition: opacity 1ms $swiftOut;
+            }
+
+            .ceo-image {
+              opacity: 0;
+            }
+
+            .company-image {
+              opacity: 1;
+              transform: rotate(-45deg) scale(0.8);
+            }
+          }
+        }
+
+        &__details {
+          border-top: 1px solid black;
+          display: flex;
+          flex-direction: column;
+          font-family: 'Oswald', sans-serif;
+          gap: 0.5rem;
+          padding: 1rem 1.25rem;
+        }
+
+        &__title {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+
+        &__title,
+        &__company {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+    }
+
+    &:not(.delayed) {
+      .active {
+        transition-delay: 0s !important;
+
+        &>div {
+          transition-delay: 0s !important;
+
+        }
+      }
+    }
+  }
+}
+
+.touch {
+  .ch-ceos_content {
+    .right {
+      border-top: 1px solid #000;
+
+      .ceo {
+        flex-basis: 100%;
+        max-height: unset;
+        border: none;
+        border-bottom: 1px solid #000;
+      }
+    }
+  }
+}

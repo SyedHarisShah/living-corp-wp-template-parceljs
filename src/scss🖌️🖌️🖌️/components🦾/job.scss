@@ -1,0 +1,147 @@
+
+.joblist{
+  padding:2.4rem;
+  // padding:4.8rem;
+  width:colSize(6);
+  display:flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  @include breakPortrait{
+    padding:$pad;
+  }
+  @include breakMobile{
+    width:100%;
+    padding:$pad $pad 0;
+  }
+  &_hold{
+    width:100%;
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    border:1px solid $dark;
+    transition:1s all $swiftOut;
+
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:0;
+      right:0;
+      top:0;
+      background:$dark;
+      transition:1s all $swiftOut;
+    }
+    
+  }
+  &_info{
+    background:$light;
+    position:relative;
+    z-index:2;
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+
+    &_top{
+      padding:$pad;
+      display:flex;
+      align-items: stretch;
+      flex-direction: column;
+      flex-grow: 1;
+      
+    }
+    .tit3{
+      margin-top:2.4rem;
+    }
+    .locate{
+      margin-top:3.8rem;
+      display:flex;
+      align-items: center;
+      margin-bottom:2.4rem;
+      &_t{
+        margin-left:1rem;
+        text-transform: uppercase;
+      }
+
+    }
+    .description{
+      margin-top:auto;
+      padding-top:2.4rem;
+      border-top:1px solid $dark;
+    }
+    .date{
+
+      margin-top:2.4rem;
+    }
+  }
+  &_button{
+    position:relative;
+    z-index:2;
+    padding:2rem $pad;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background:$dark;
+    border-top:1px solid $dark;
+    transition:.6s all $swiftOut;
+    img{
+      transition:.6s all $swiftOut;
+      width:14rem;
+      @include breakPortrait{
+        width:12rem;
+      }
+
+      @include breakMobile{
+        width:12rem;
+        
+      }
+      // filter:brightness(0);
+    }
+    .btns{
+      opacity:0;
+      transition:.6s all $swiftOut;
+      @include breakMobile{
+        display:none;
+      }
+    }
+  }
+  &:hover{
+    @include media-min(767){
+      .joblist{
+        &_hold{
+
+          transition:.6s all $swiftOut;
+          transform:translate(2.4rem,-2.4rem);
+          &::before{
+
+            transition:.6s all $swiftOut;
+            transform:translate(-2.4rem,2.4rem);
+          }
+        }
+        &_info{
+
+        }
+        &_button{
+          background:$pink;
+          img{
+            filter:brightness(0);
+          }
+          .btns{
+            opacity:1;
+            &::before{
+              opacity:1;
+              transform:translate(-.2rem,.2rem);
+        
+            }
+            &::after{
+              transform:translate(.2rem,-.2rem);
+            }
+            .btns_t{
+              transform:translate(.2rem,-.2rem);
+        
+            }
+          }
+        }
+      }
+    }
+  }
+}

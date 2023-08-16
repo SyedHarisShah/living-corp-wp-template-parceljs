@@ -1,0 +1,157 @@
+.m-lists{
+  border-top: 1px solid $dark;
+  padding:4.8rem 0 4.8rem;
+  @include breakMobile{
+    padding:2rem 0;
+  }
+  .hPosts{
+    min-height: 400px;
+  }
+  .list{
+    padding:0 4.8rem;
+    display:flex;
+    @include breakPortrait{
+      padding:0 $pad;
+
+    }
+    &_hold{
+      width:100%;
+      display:flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      border:1px solid $dark;
+      position:relative;
+      transition:1s all $swiftOut;
+      @include breakMobile{
+        flex-direction: column;
+      }
+      &::before{
+        content:'';
+        position:absolute;
+        left:0;
+        bottom:0;
+        right:0;
+        top:0;
+        background:$dark;
+        transition:1s all $swiftOut;
+      }
+    }
+    &_info{
+      width:100%;
+      padding:4.8rem $pad;
+      position:relative;
+      display:flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      background:$light;
+      transition:.6s all $swiftOut;
+      @include breakPortrait{
+        padding:$pad;
+      }
+      @include breakMobile{
+        padding:$pad $pad 4.8rem;
+      }
+      .tit2{
+
+      }
+      .description{
+        margin-top:2.4rem;
+        @include breakPortrait{
+          margin-top:1.6rem;
+
+        }
+      }
+      .tit4{
+        margin-top:2.4rem;
+        @include breakPortrait{
+          margin-top:1.6rem;
+
+        }
+          
+      }
+      .btns{
+        
+        margin-top:8rem;
+        @include breakPortrait{
+          margin-top:4rem;
+        }
+        &::before{
+          opacity:1;
+          transform:translate(-.2rem,.2rem);
+    
+        }
+        &::after{
+          transform:translate(.2rem,-.2rem);
+        }
+        .btns_t{
+          transform:translate(.2rem,-.2rem);
+    
+        }
+      }
+    }
+    &_image{
+      padding:$pad $pad $pad;
+      display:flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      border-left:1px solid $dark;
+      width:64.8rem;
+      flex-shrink: 0;
+      position:relative;
+
+      background:$light;
+      transition:.6s all $swiftOut;
+      @include breakPortrait{
+        width:32rem;
+      }
+      @include breakMobile{
+        width:100%;
+        border-left: 0;
+        border-top: 1px solid $dark;
+      }
+
+      &_hold{
+        width:100%;
+        flex-grow: 1;
+        position:relative;
+        @include ratio(6,3.2);
+        img{
+          width:100%;
+          height:100%;
+          position:absolute;
+          top:0;
+          left:0;
+          object-fit: cover;
+        }
+      }
+    }
+    & + .list{
+      margin-top: 4.8rem;
+      @include breakMobile{
+        margin-top:2.4rem;
+      }
+    }
+    &:hover{
+      .list{
+        &_hold{
+          transform:translate(1.2rem,-1.2rem);
+          transition:.6s all $swiftOut;
+          &::before{
+            transform:translate(-1.2rem,1.2rem);
+            transition:.6s all $swiftOut;
+
+          }
+        }
+        &_info{
+          background:var(--main);
+        }
+        &_image{
+          background:var(--main);
+
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    +nav
+    #content(data-template="network" data-id="178")
+      main.podcastsimple
+        section.m-bc
+          .c-vw
+            .bc
+              a LC
+              span /
+              a ARTICLES
+              span /
+              span DIB & THE FUTURE...
+        section.m-simpleintro.m-simpleintro-network(style="background-color:#005EFE")
+          .c-vw
+            .logo
+              img(src="./images/network/dropbox.svg")
+            h2.tit2 Dropbox and #BlackLivesMatter #StopAsianHate
+            .m-simpleintro_info
+              .autor
+                p by <a>Kham Ward</a>
+        section.m-podcast
+          .info
+            .info_top
+              .btnpod(data-player="https://traffic.megaphone.fm/LCL9984807504.mp3?updated=1650881476" data-title="We Are An Answered Prayer, “A WILDEST DREAM” W / BRITTANY JANAY" data-subtitle="Liberated love notes" data-image="ftp://csskiller.es:21//csskiller.es/public_html/livingc/1.3a16df5c.jpg")
+                .btnpod_play
+                .btnpod_pause
+              .info_top_title
+                p.titleparent Liberated love notes
+                h3.tit4 We Are An Answered Prayer, “A WILDEST DREAM” W / BRITTANY JANAY
+              .info_top_time.podTime 01:24
+            .info_lines
+              img(src="./images/podcastline.svg")
+            .info_bottom
+              .info_bottom_date DEC 13, 2021
+        section.podcastsingle_main
+
+          .grid
+            .hidetext
+              .hidetext_click
+                .simp
+                  span Read more
+              .hidetext_hold.wp
+                h3 Transcription
+                p Lorem, ipsum <a>dolor</a> sit amet consectetur adipisicing elit. Repudiandae et laborum aliquid exercitationem dolores officiis eaque nesciunt blanditiis, dignissimos sit a perferendis, consequuntur deleniti maiores assumenda esse deserunt ab harum necessitatibus non nulla at cum. Dolor nostrum beatae, distinctio, consequatur itaque ducimus consequuntur obcaecati ex repellat quasi animi deserunt tempora accusamus. Necessitatibus explicabo, ipsa nulla soluta porro aliquam, ipsum possimus, deserunt dolore velit rerum magnam quam quibusdam. Explicabo nulla molestias eveniet provident fuga aperiam voluptatum vero labore corporis iure corrupti nam, maiores officiis deleniti. Fugiat odit sed rem fugit reiciendis quidem unde architecto ex accusantium! Vero odit hic in at.
+                ul 
+                  li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                  li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                  li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                  li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                  li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                  li Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, facilis.
+                h4 title
+                h2 title
+                p Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam expedita quod est sapiente dolore ullam voluptatum error velit veniam non.
+                
+                p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia tempora blanditiis sed nisi libero ab voluptatem aperiam, ea est. Sequi dignissimos earum enim dolor vero, eveniet impedit ab, deleniti doloribus minus harum!
+                blockquote Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel officiis iste beatae.
+        section.m-share
+          .m-share_hold.grid
+            p share
+            .social
+              a(href="")
+                +icon({name:'tw'})
+              a(href="")
+                +icon({name:'fb'})
+              a(href="")
+                +icon({name:'in'})
+              a(href="")
+                +icon({name:'reddit'})
+              a(href="")
+                +icon({name:'tumbler'})
+        
+        section.m-creator
+          .m-creator_image
+            .m-creator_image_hold
+              img(src="./images/home/1.jpg")
+          .m-creator_info
+            h3.tit2 Dr. LaWanda Hill, PH.D
+            p.desc psychologist, consultant, and curator of transformative spaces
+            a.simp
+              span website
+            .m-creator_info_bottom
+              .social
+                a(href="")
+                  +icon({name:'ig'})
+                a(href="")
+                  +icon({name:'in'})
+                a(href="")
+                  +icon({name:'tw'})
+                a(href="")
+                  +icon({name:'fb'})
+        section.m-nextprev
+          .left
+            .btnarrow
+              .btnarrow_n
+              .btnarrow_t Previous
+          .right
+            .btnarrow
+              .btnarrow_t Next
+              .btnarrow_n
+        +footer
+    script(sync type="module" src="./src/app.js")

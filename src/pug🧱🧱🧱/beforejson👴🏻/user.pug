@@ -1,0 +1,122 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html.logme
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="login" data-id="2")
+      .usercontrols
+        .usercontrols_top
+          .simp
+            span Prefered content
+          .simp
+            span Profile settings
+          .simp
+            span Jobs
+          .simp
+            span Log out
+        .usercontrols_bottom
+          
+          .pg
+            .pgel.act
+              .pgel_t 1
+            .pgel
+              .pgel_t 2
+            .pgel
+              .pgel_t 3
+            .pgel
+              .pgel_t 4
+          .btnNext.btn
+            .btn_t Continue
+            .btn_l Save changes
+      main.userp
+        .userp_form
+          .userp_form_0
+            .userp_form_title
+
+              .userp_back
+                .btnarrow
+                  .btnarrow_n
+                  .btnarrow_t Back
+              .userp_pos 1 of 4
+              h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+            .userp_form_ops
+              .rad
+                .rad_cont
+                  .rad_s
+                    .rad_i
+                  .rad_t I'm a professional
+              .rad
+                .rad_cont
+                  .rad_s
+                    .rad_i
+                  .rad_t I'm a Student
+          .userp_form_1
+            .userp_form_title
+
+              .userp_back
+                .btnarrow
+                  .btnarrow_n
+                  .btnarrow_t Back
+              .userp_pos 1 of 4
+              h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+            .userp_form_ops
+              .rad
+                .rad_s
+                  .rad_i
+                .rad_t ENTREPENEUR
+              .rad
+                .rad_s
+                  .rad_i
+                .rad_t FULL TIME EMPLOYEE
+              .rad
+                .rad_s
+                  .rad_i
+                .rad_t Full Time w/ Side Hustle
+          .userp_form_2
+            .userp_form_title
+
+              .userp_back
+                .btnarrow
+                  .btnarrow_n
+                  .btnarrow_t Back
+              .userp_pos 1 of 4
+              h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+            .userp_form_ops
+              .rad
+                .rad_s
+                  .rad_i
+                .rad_t ENTREPENEUR
+              .rad
+                .rad_s
+                  .rad_i
+                .rad_t FULL TIME EMPLOYEE
+              .rad
+                .rad_s
+                  .rad_i
+                .rad_t Full Time w/ Side Hustle
+          .userp_form_topics
+            .userp_form_title
+
+              .userp_back
+                .btnarrow
+                  .btnarrow_n
+                  .btnarrow_t Back
+              .userp_pos 1 of 4
+              h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+            .userp_form_ops
+              .check
+                .check_s
+                  .check_i
+                .check_t ENTREPENEUR
+              .check
+                
+                .check_s
+                  .check_i
+                .check_t FULL TIME EMPLOYEE
+              .check
+                
+                .check_s
+                  .check_i
+                .check_t Full Time w/ Side Hustle
+    script(sync type="module" src="./src/app.js")

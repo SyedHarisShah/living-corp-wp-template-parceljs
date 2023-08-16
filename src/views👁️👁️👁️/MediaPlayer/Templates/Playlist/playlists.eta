@@ -1,0 +1,16 @@
+<% if(it.playlists && Object.entries(it.playlists).length > 0){ %>
+    <% Object.values(it.playlists).forEach((playlist,i) => { %>
+        <div class="player-playlist mouseHover" id="playlist-<%~ i%>" data-id="<%~playlist.ID%>" data-href="<%~playlist.link%>">
+            <div class="player-playlist__image<%~playlist.user ? '--user-playlist' : ''%>">
+                <img src="<%~playlist.user ? it?.global?.sponsor?.icon : playlist.img%>">
+                <% if (playlist.user) { %>
+                    <h2><%~playlist.post_title%></h2>
+                <% } %>
+            </div>
+            <div class="player-playlist__details">
+                <span class="player-playlist__title"><%~playlist.post_title%></span>
+                <span class="player-playlist__epcnt"><%~playlist.modules%> <%~playlist.modules == 1 ? "module" : "modules"%></span>
+            </div>
+        </div>
+    <% }) %>
+<% } %>

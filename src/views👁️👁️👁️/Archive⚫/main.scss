@@ -1,0 +1,59 @@
+.podcastsingle{
+  &_main{
+    border-top:1px solid $dark;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+
+    
+      .hidetext{
+        overflow:hidden;
+        position:relative;
+        height: 80vh;
+        &::after{
+          content:'';
+          position:absolute;
+          bottom:0;
+          left:0;
+          right:0;
+          height:30%;
+          z-index:3;
+          pointer-events: none;
+          transition:.6s all $swiftOut;
+          background: linear-gradient(180deg, rgba(254,249,243,0) 0%,rgba(254,249,243,.7) 40%, rgba(254,249,243,1) 100%);
+        }
+        &_click{
+          position:absolute;
+          bottom:10rem;
+          left:0;
+          width:100%;
+          display:flex;
+          justify-content: center;
+          z-index:4;
+          transition:.6s all $swiftOut;
+          &.act{
+            opacity:0;
+            pointer-events: none;
+          }
+          @include breakPortrait{
+            bottom:3rem;
+
+          }
+        }
+        &_hold{
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+          
+
+        }
+        &.act{
+          overflow: visible;
+          height:auto!important;
+          &::after{
+            opacity:0;
+          }
+        }
+      }
+    }
+  }

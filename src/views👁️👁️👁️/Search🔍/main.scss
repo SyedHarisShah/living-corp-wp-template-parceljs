@@ -1,0 +1,266 @@
+.searchp{
+  margin-top:$header;
+  &_intro{
+    padding:8rem 12rem;
+    @include breakPortrait{
+
+      padding:4.22rem $pad;
+    }
+    @include breakMobile{
+      padding-bottom: 2.4rem;
+      padding-top: 2.4rem;
+    }
+    &_field{
+
+    }
+  }
+  &_tabs{
+    padding:0 12rem $pad;
+    border-bottom: 1px solid $dark;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    @include breakPortrait{
+      padding:0 $pad $pad;
+
+    }
+    @include breakMobile{
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+    .tabs{
+      display:flex;
+      @include breakMobile{
+        order:2;
+        width:100%;
+        margin-top:1.2rem;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .simp{
+        transition:.6s all $swiftOut;
+        opacity:.4;
+        & + .simp{
+          margin-left:4rem;
+          @include breakMobile{
+            margin-left:3rem;
+            font-size: 1.6rem;
+            // margin-right: 2.4rem;
+          }
+        }
+        
+        &:hover{
+          opacity:1;
+        }
+        &.act{
+          opacity:1;
+          &::before{
+            transform:scaleY(1);
+          }
+          pointer-events: none;
+        }
+      }
+    }
+    .totalSearch{
+      text-transform: uppercase;
+      @include breakMobile{
+        position:relative;
+        margin-bottom: 1.6rem;
+        color:rgba(0,0,0,.5);
+        &::before{
+          content:'';
+          position:absolute;
+          right:-1.6rem;
+          height:1px;
+          width:100vw;
+          bottom:-1.2rem;
+          background:$dark;
+        }
+      }
+
+    }
+  }
+  &_results{
+    @include hover{
+      min-height: 100vh;
+
+    }
+    
+    .result{
+      padding:$pad 12rem;
+      display:flex;
+      transition:.6s all $swiftOut;
+      --main:$pink;
+      position:relative;
+      overflow:hidden;
+      max-height: 800px;
+      border-bottom:1px solid $dark;
+      @include breakPortrait{
+        padding:$pad $pad;
+
+      }
+      &_hold{
+        width:100%;
+        display:flex;
+        justify-content: flex-start;
+        align-items: center;
+        position:relative;
+        transition:.6s all $swiftOut;
+        @include breakMobile{
+          flex-direction: column;
+        }
+        
+      }
+      &_info{
+        width:100%;
+        padding-right: 12%;
+        position:relative;
+        display:flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+  
+        transition:.6s all $swiftOut;
+        @include breakPortrait{
+          padding:$pad 0;
+        }
+        @include breakMobile{
+          padding:$pad 0 2.4rem;
+        }
+        
+        .description{
+          margin-top:2.4rem;
+          @include breakPortrait{
+            margin-top:1.6rem;
+  
+          }
+          @include breakMobile{
+            margin-top:.8rem;
+
+          }
+        }
+        .btnplay{
+          
+         pointer-events: none;
+          margin-top:4rem;
+          @include breakPortrait{
+            margin-top:2.4rem;
+          }
+         
+        }
+        & > .date{
+          margin-top:4rem;
+          @include breakPortrait{
+            margin-top:2.4rem;
+          }
+
+        }
+        .btns{
+          
+         
+          margin-top:4rem;
+          @include breakPortrait{
+            margin-top:2.4rem;
+          }
+          
+        }
+        &_bottom{
+          border-top: 1px solid $dark;
+          margin-top:4rem;
+          padding-top: 2.4rem;
+          width:100%;
+          display:flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+      &_image{
+        display:flex;
+        justify-content: flex-start;
+        align-items: stretch;
+        width:58.8rem;
+        flex-shrink: 0;
+        position:relative;
+        overflow: hidden;
+        border:1px solid $dark;
+        @include ratio(58.8,32);
+  
+        transition:.6s all $swiftOut;
+        @include breakPortrait{
+          width:32rem;
+        }
+        @include breakMobile{
+          width:100%;
+        }
+        img{
+          width:100%;
+          height:100%;
+          position:absolute;
+          top:0;
+          left:0;
+          object-fit: cover;
+        }
+      }
+      & + .result{
+        // border-top:1px solid $dark;
+      }
+      &:hover{
+        background:var(--main);
+        .btns{
+          &::before{
+            opacity:1;
+            transform:translate(-.2rem,.2rem);
+      
+          }
+          &::after{
+            transform:translate(.2rem,-.2rem);
+          }
+          .btns_t{
+            transform:translate(.2rem,-.2rem);
+      
+          }
+        }
+        .btnplay{
+          &::before{
+            opacity:1;
+            transform:translate(-.4rem,.4rem);
+            @include breakMobile{
+              transform:translate(-.2rem,.2rem);
+      
+            }
+      
+          }
+          &::after{
+            transform:translate(.4rem,-.4rem);
+            @include breakMobile{
+              transform:translate(.2rem,-.2rem);
+      
+            }
+          }
+          
+          .btnplay_tri{
+            transform:translate(.4rem,-.4rem);
+            @include breakMobile{
+              transform:translate(.2rem,-.2rem);
+      
+            }
+      
+          }
+        }
+      }
+      &.hide{
+        max-height: 0px;
+        padding:0 12rem;
+        border-bottom:0;
+        pointer-events: none;
+        @include breakPortrait{
+          padding:0 $pad;
+        }
+        .result_hold{
+          opacity:0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+.date{
+  font-family: 'bureau';
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+ 
+}
+
+
+
+.pg{
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pgel{
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+  width:5.8rem;
+  height:5.8rem;
+  position:relative;
+  --main:#FEF9F3;
+  --base:#FEF9F3;
+  transition:.45 opacity $swiftOut;
+  @include breakMobile{
+    width:4rem;
+    height:4rem;
+  }
+  & + .pgel{
+    margin-left:2.4rem;
+    @include breakMobile{
+      margin-left:1.2rem;
+    }
+  }
+  &_t{
+
+    font-family: 'bureau';
+    font-weight: 500;
+    font-size:1.4rem;
+    line-height: 1;
+    text-transform: uppercase;
+    position:relative;
+    z-index:3;
+    transition:.6s all $swiftOut;
+  }
+  &::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:0;
+    background:$dark;
+    width:100%;
+    height:100%;
+    border-radius: 100%;
+    opacity:0;
+    transition:.6s all $swiftOut;
+  }
+  &::after{
+    content:'';
+    position:absolute;
+    left:0;
+    top:0;
+    background:var(--base);
+    width:100%;
+    height:100%;
+    border: 1px solid $dark;
+    border-radius: 100%;
+    transition:.6s all $swiftOut;
+
+  }
+  &:hover{
+    &::before{
+      opacity:1;
+      transform:translate(-.2rem,.2rem);
+
+    }
+    &::after{
+      background:$main;
+      transform:translate(.2rem,-.2rem);
+    }
+    .pgel_t{
+      transform:translate(.2rem,-.2rem);
+
+    }
+  }
+  &.act{
+    pointer-events: none;
+    &::before{
+      opacity:1;
+      transform:translate(-.2rem,.2rem);
+
+    }
+    &::after{
+      background:var(--main);
+      transform:translate(.2rem,-.2rem);
+    }
+    .pgel_t{
+      transform:translate(.2rem,-.2rem);
+
+    }
+  }
+  &.dis{
+    pointer-events: none;
+    opacity:.4;
+  }
+}
+
+
+
+.holdposts{
+  & + .pg{
+    border-top:1px solid $dark;
+    padding:$pad;
+    width:100%;
+    // margin-top:2.4rem;
+  }
+}
+

@@ -1,0 +1,36 @@
+.articlesingle{
+  &_main{
+    border-top:1px solid $dark;
+    padding-top:4rem;
+    padding-bottom:4rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    @include breakMobile{
+      padding-top:2.4rem;
+      padding-bottom:2.4rem;
+    }
+  }
+  &_more{
+    border-top:1px solid $dark;
+    padding-top:4.8rem;
+    padding-bottom:4.8rem;
+    display:flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    @include breakMobile{
+      padding-top:2.4rem;
+      padding-bottom:2.4rem;
+      align-items: flex-start;
+    }
+
+    .art{
+      width:50%;
+      @include breakMobile{
+        width:100%;
+      }
+    }
+  }
+}
+

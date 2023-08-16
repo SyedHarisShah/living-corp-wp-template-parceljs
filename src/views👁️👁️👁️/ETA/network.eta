@@ -1,0 +1,26 @@
+
+<%
+  cont = 0
+   it.posts.forEach(function(p,key){
+  %>
+  <a class="network mouseHover" href="<%~ p.link %>" style="--main:<%~ p.color %>">
+    <div class="network_hold">
+      <div class="network_logo"><img src="<%~ p.logo %>"></div>
+    </div>
+    
+  </a>
+<% 
+  if(cont==3){
+  cont=0
+  }
+  })
+if(cont != 0 ){
+  for(i=0;i<3-cont;i++){
+  %>
+    <div class="fake"></div>
+
+  <%
+  }
+
+}
+%>

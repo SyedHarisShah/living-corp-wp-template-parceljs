@@ -1,0 +1,22 @@
+.m-simpletitle{
+  
+  border-top:1px solid $dark;
+  
+  .c-vw{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display:flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    
+    @include breakMobile{
+      padding-top: 2.4rem;
+      padding-bottom: 2.4rem;
+
+    }
+    
+  }
+  
+}
+

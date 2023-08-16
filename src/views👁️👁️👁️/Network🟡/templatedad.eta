@@ -1,0 +1,86 @@
+<main class="podcast">
+  <section class="m-dualintro m-dualintro-network">
+    <div class="left" style="background-color:<%~ it.data.acf.color_a %>">
+      <div class="left_hover mouseScroll"></div>
+      <div class="bc">
+        <% if(it.data.acf?.add_to_collective || it.data?.parent_data?.add_to_collective){ %>
+          <a class="mouseHover" href="<%~ it.global.acf?.ch_home ?? '/content-hub' %>">LC Hub</a>
+        <%  } else {%>
+          <a class="mouseHover" href="<%~ it.global.acf.home %>">LC</a>
+        <%  }%>
+        <span>/</span><a class="mouseHover" href="<%~ it.global.acf.network %>">Network</a>
+        <span>/</span><span><%~ it.data.title.rendered %></span>
+      </div>
+      <div class="left_logo"><img src="<%~ it.data.acf.logo_a %>"/></div>
+    </div>
+    <div class="right mouseScroll">
+      <div class="right_el"><img src="<%~ it.data.acf.imageintro %>"></div>
+    </div>
+  </section>
+  <section class="m-dualsep">
+    <div class="left">
+      <h2 class="tit2"><%~ it.data.acf.title_description %></h2>
+    </div>
+    <div class="right">
+      <div class="txt-bureau">
+        <%~ it.data.acf.descriptionl %>
+        <% if(it.data.acf.link){ %>
+        <a class="simp mouseHover" href="<%~ it.data.acf.link %>"><span>Visit site</span></a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <section class="m-social">
+    <div class="left">
+      <h2 class="tit4"><%~ it.data.acf.title_social %></h2>
+    </div>
+    <div class="right">
+      <div class="social">
+          <% if(it.data.acf.instagram){ %>
+            <a class="mouseHover Sig" href="<%~it.data.acf.instagram %>"><%~ it.global.icons.ig %></a>
+          <% }
+          if(it.data.acf.linkedin){ %>
+            <a class="mouseHover Sin" href="<%~it.data.acf.linkedin %>"><%~ it.global.icons.in %></a>
+          <%
+          }
+          if(it.data.acf.facebook){ %>
+            <a class="mouseHover Sfb" href="<%~it.data.acf.facebook %>"><%~ it.global.icons.fb %></a>
+          <%
+          }
+          if(it.data.acf.twitter){ %>
+            <a class="mouseHover Stw" href="<%~it.data.acf.twitter %>"><%~ it.global.icons.tw %></a>
+          <% }%>
+        </div>
+    </div>
+  </section>
+  <section class="m-simpletitle">
+    <div class="c-vw">
+      <h2 class="tit2">LISTEN TO THEIR EPISODE</h2>
+    </div>
+  </section>
+  <section class="m-tabposts" style="--main:#E5855E">
+    <div class="m-tabposts_hold hPosts">
+    
+    </div>
+    
+  </section>
+  <section class="m-cta signupmod" style="--main:#DF80AC">
+    <div class="c-vw">
+      <div class="hold">
+         <%
+          var randomNum = Math.floor((Math.random() * it.global.acf.signup_text.length) + 1);
+          var title = it.global.acf.signup_text[randomNum-1].title;
+          var text = it.global.acf.signup_text[randomNum-1].text;
+          
+        %>
+        <h2 class="tit1"><%~ title %></h2>
+        <h3 class="tit4"><%~ text %> </h3>
+        </h3>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>">
+          <div class="btn_t">TAP IN</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

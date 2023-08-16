@@ -1,0 +1,464 @@
+.m-login{
+  min-height:calc(var(--app-height) - $header);
+  margin-top:$header;
+  display:flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  @include breakPortrait{
+    flex-direction: column;
+  }
+  @include breakMobile{
+    
+  }
+  .right{
+    width:50%;
+    flex-shrink: 0;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-top:1px solid $dark;
+    @include breakPortrait{
+      width:100%;
+      order:0;
+    }
+    &_top{
+      padding:$pad;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      width:100%;
+      .simp{
+        margin:0 5rem;
+      }
+    }
+    &_tabs{
+      border-top:1px solid $dark;
+      flex-grow: 1;
+      position:relative;
+      width:100%;
+      min-height: 60rem;
+      position:relative;
+      overflow: hidden;
+      @include media-min(2291){
+        // min-height: 45rem;
+
+      }
+      @include breakPortrait{
+        min-height: 64rem;
+      }
+      @include breakMobile{
+        min-height: 80rem;
+      }
+      .error{
+        top:0;
+        left:0;
+        position:absolute;
+        background:rgba(#FF244C,0.1);
+        color:$error;
+        padding:1.2rem;
+        width:100%;
+        text-align: center;
+        transition:.6s all $swiftOut;
+        transform:translateY(-110%);
+        font-family: 'bureau';
+        font-weight: 500;
+        font-size:1.4rem;
+        line-height: lH(14,16);
+        text-transform: uppercase;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        @include breakPortrait{
+          font-size: 1.2rem;
+        }
+        @include breakMobile{
+          font-size:1.4rem;
+
+        }
+        &.act{
+          transform:translateY(0%);
+
+        }
+
+        &.succ{
+          background:$dark;
+          color:$light;
+        }
+      }
+      &_el{
+        opacity:0;
+        position:absolute;
+        left:0;
+        top:0;
+        height:100%;
+        width:100%;
+        pointer-events: none;
+        transition:.6s all $swiftOut;
+        &:not(.active){
+          *{
+            pointer-events: none!important;
+          }
+        }
+        &.active{
+          transition:.6s all .6s $swiftOut;
+          opacity:1;
+          pointer-events: all;
+        }
+        .field{
+          width:100%;
+          &_npt{
+            border:0;
+            background:$light;
+          }
+          &.err{
+            .field_err{
+              // color:$dark;
+            }
+            &::before{
+              // border-color:$dark;
+            }
+          }
+        }
+        .field6{
+          display:flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width:100%;
+          margin-top:.8rem;
+          @include breakMobile{
+            flex-direction: column;
+          }
+          .selc{
+            margin-left:2.4rem;
+            margin-top:0;
+            flex-shrink: 0;
+            width:20rem;
+            @include breakMobile{
+              width:100%;
+              margin-left:0;
+              margin-top:.8rem;
+            }
+          }
+          & + .field{
+
+              margin-top:.8rem;
+              @include breakMobile{
+                margin-top:2.8rem;
+              }
+          }
+        }
+        .selc{
+          select{
+            background:$light;
+          }
+        }
+        .chk{
+          align-self: flex-start;
+        }
+        .tit1{
+          margin-bottom: 4rem;
+          text-align: center;
+          display:flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          @include breakPortrait{
+            margin-bottom:2.4rem;
+          }
+          .line{
+            position:relative;
+            display:inline;
+            overflow: hidden;
+          }
+        }
+      }
+      .logintab{
+        padding:0 10rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @include breakMobile{
+          padding:$pad $pad;
+
+          justify-content: flex-start;
+        }
+        .forget{
+          align-self: center;
+          text-decoration: underline;
+          text-transform: uppercase;
+          margin-top:2rem;
+        }
+        .btn{
+          margin-top:3rem;
+        }
+        &_hold{
+          width:100%;
+          display:flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        &_inputs{
+          width:100%;
+          display:flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+      }
+      .signuptab{
+        padding:0 10rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @include breakMobile{
+          padding:$pad $pad;
+
+          justify-content: flex-start;
+        }
+        &_text{
+          width:100%;
+          margin-top:1.2rem;
+          .txt-bureau{
+            margin-top:1.2rem;
+          }
+        }
+        &_inputs{
+          width:100%;
+          display:flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          .btn{
+            margin-top:3rem;
+          }
+        }
+      }
+      .resettab{
+        padding:0 10rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        @include breakMobile{
+          padding:$pad $pad;
+
+          justify-content: flex-start;
+        }
+        justify-content: center;
+        &_inputs{
+          width:100%;
+          display:flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          .btn{
+            margin-top:4rem;
+          }
+        }
+
+      }
+      .forgettab{
+        padding:0 10rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @include breakMobile{
+          padding:$pad $pad;
+
+          justify-content: flex-start;
+        }
+        &_inputs{
+          width:100%;
+          display:flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          .btn{
+            margin-top:4rem;
+          }
+        }
+
+      }
+      .login_btn_cont{
+        text-align: center;
+      }
+    }
+  }
+  .left{
+    
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: flex-end;
+    justify-content: center;
+    position:relative;
+    // padding-left:9.5rem;
+    @include breakDesktop{
+      width:50%;
+      padding-bottom: 4rem;
+      padding-right:2.5rem;
+      border-right:1px solid $dark;
+
+    }
+    @include breakPortrait{
+      width:100%;
+      padding:2.4rem;
+      height: 100%;
+      flex-grow: 1;
+      order:1;
+    }
+    @include breakMobile{
+      padding:1.4rem 0;
+      overflow:hidden;
+    }
+    &_hold{
+      overflow:hidden;
+      position:relative;
+      width:100%;
+      display:flex;
+      margin:auto 0;
+      max-width: 60vh;
+      @include breakPortrait{
+        max-width: 70vw;
+      }
+      @include breakMobile{
+        max-width: 100%;
+        transform:scale(1.15);
+      }
+      &::after{
+        content:'';
+        display:block;
+        padding-bottom: 100%;
+        @include breakPortrait{
+
+          padding-bottom: 80%;
+        }
+        @include breakMobile{
+          // padding-bottom: 60%;
+        }
+      }
+      
+
+    }
+    .bgop{
+      @include clock;
+      transition:.6s all $swiftOut;
+      opacity:0;
+      &.active{
+        opacity:1;
+      }
+    }
+    .border{
+      @include center;
+      width:0%;
+      height:0%;
+      border:1px solid $dark;
+      pointer-events: none;
+      &.active{
+
+      z-index:5;
+      }
+    }
+    &_el{
+      clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+      // transition:.6s all $swiftOut;
+      @include clock;
+      z-index:3;
+      pointer-events: none;
+      img{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        filter:blur(6px);
+        object-fit: cover;
+        object-position: center;
+        transform:scale(1);
+        transition:.6s all $swiftOut;
+      }
+
+      &.active{
+        pointer-events: all;
+
+        // clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        // transition:1.4s clip-path .3s $swiftOut;
+        z-index:4;
+        img{
+          filter:blur(0);
+          transform:scale(.8);
+          transition:1.8s all $swiftOut;
+        }
+        
+      }
+    }
+
+  }
+  &:not(.delayed){
+    .active{
+      transition-delay:0s!important;
+      & > div{
+        transition-delay:0s!important;
+
+      }
+    }
+  }
+}
+
+.btnLILogin, .btnLIReg{
+  &--icons{
+    margin-inline-start: 0.5rem;
+    position: relative;
+    transition: inherit;
+
+    svg{
+      inset-inline-start: 0.5rem;
+      bottom: 0.05rem;
+      opacity: 0;
+      position: absolute;
+      transition: inherit;
+    }
+
+    svg:first-child{
+      filter: brightness(0) saturate(100%) invert(29%) sepia(100%) saturate(1146%) hue-rotate(173deg) brightness(93%) contrast(89%);
+    }
+
+    svg:last-child{
+      // filter: brightness(0) saturate(100%) invert(29%) sepia(100%) saturate(1146%) hue-rotate(173deg) brightness(93%) contrast(89%);
+    }  
+  }
+
+  //blue
+  &:not(:hover){
+    svg:first-child{
+      opacity: 1;
+    }
+  }
+
+  //white
+  &:hover{
+    svg:last-child{
+      opacity: 1;
+    }
+  }
+}
+
+
+.logged{
+  .signupmod{
+    display:none;
+  }
+  .footer{
+    &_first .btn{
+      opacity:0;
+      display:none;
+      pointer-events: none;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.cookies{
+  position:fixed;
+  left:$gut;
+  bottom:$gut;
+  background:$dark;
+  z-index:300;
+  color:$light;
+  border-radius: 2rem;
+  padding:2rem 2rem;
+  width: 47.6rem;
+  display:none;
+  p{
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .btnaccept{
+    margin-top:24px;
+    &_t{
+
+    }
+    &_i{
+      margin-left:1rem;
+      display:flex;
+      width:2rem;
+    }
+  }
+}

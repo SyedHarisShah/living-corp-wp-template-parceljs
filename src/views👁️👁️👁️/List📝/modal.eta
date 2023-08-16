@@ -1,0 +1,25 @@
+<div class="modal">
+    <div class="modal_bg"></div>
+    <div class="modal_content">
+      <div class="modal_close"><span></span><span></span></div>
+      <div class="modal_content_text">
+        <h3 class="tit4"></h3>
+        <h2 class="tit1">Subscribe to stay updated on this list</h2>
+        <div class="field field-email">
+          <label class="field_lbl">Name</label>
+          <input class="field_npt" data-list="" />
+          <div class="field_err">Wrong format</div>
+          <div class="field_button">
+            <div class="btninput">
+              <div class="btninput_t">Suscribe</div>
+            </div>
+          </div>
+        </div>
+        <div class="chk"><input class="chk_npt" type="checkbox">
+          <div class="chk_s">
+            <div class="chk_i"></div>
+          </div><label class="chk_lbl">I accept <a href="<%~ it.global.acf.legal %>">Terms and conditions</a></label>
+        </div>
+      </div><img src="<%~ it.global.acf.template %>/public/modal.png">
+    </div>
+  </div>

@@ -1,0 +1,16 @@
+doctype html
+include src/pug🧱🧱🧱/basic/basic
+html
+  +head
+  body(data-js="http://165.227.64.123:8126/")
+    +fixeds
+    #content(data-template="error404" data-id="2")
+      main.errorpage
+        img(src="./images/error/notlogged.png")
+        .c-vw
+          .box
+            h2.tit1 OOPS! SIGN UP TO ACCESS THIS CONTENT
+            h3.tit4 GET the full living corporate experience by signing-up FOR FREE
+            a.btn
+              .btn_t SIGN UP NOW
+    script(sync type="module" src="./src/app.js")

@@ -1,0 +1,247 @@
+.footer{
+  background:$dark;
+  color:$light;
+  padding:3.2rem 0 1.6rem;
+  &_logo{
+    width:20rem;
+    display:flex;
+    @include media-min(1181){
+      @include center--y;
+      left:0;
+    }
+    @include media-max(1180){
+      width:100%;
+    }
+    
+    svg{
+      width:100%;
+      @include media-max(1180){
+        width:20rem;
+      }
+
+      *:not(g){
+        fill:$light;
+        transition:.6s all $swiftOut;
+      }
+    }
+  }
+  &_first{
+    padding-left:42.3rem;
+    position:relative;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    @include media-max(1230){
+      padding-left:30rem;
+        
+    }
+    @include media-max(1180){
+      padding-left:0;
+      flex-wrap: wrap;
+    }
+    p{
+      width:45.7rem;
+      @include media-max(1180){
+        width:100%;
+        max-width: 50rem;
+        margin-top:2.4rem;
+      }
+      
+    }
+    .btn{
+      @include media-max(1180){
+        margin-top:2.4rem;
+      }
+
+    }
+  }
+  &_menu{
+    margin-top:10.4rem;
+    @include media-max(1180){
+      margin-top:6rem;
+    }
+    @include media-max(680){
+      margin-top:4.8rem;
+      border-top:1px solid $light;
+
+    }
+    .tab{
+      .tabClick{
+        @include media-min(681){
+          display:none;
+        }
+        position:relative;
+        padding:1.6rem 0;
+        &::before{
+          content:'';
+          position:absolute;
+          top:42%;
+          transform:translateY(-50%) rotate(-45deg);
+          right:.4rem;
+          width:1rem;
+          height:1rem;
+          border-left:.4rem solid $light;
+          border-bottom:.4rem solid $light;
+        }
+      }
+      .tabHold{
+        @include media-max(680){
+          position:relative;
+          overflow:hidden;
+          height:0;
+          border-bottom:1px solid $light;
+          height:0;
+        }
+
+      }
+      .tabBox{
+        @include media-min(681){
+          display:grid;
+          grid-template-columns: repeat(3, 33.3333%);
+          grid-row-gap: 3rem;
+          justify-content: flex-start;
+          width:64rem;
+        }
+        @include media-max(680){
+          display:flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          position:absolute;
+          left:0;
+          top:0;
+          width:100%;
+          padding-bottom: 1.6rem;
+        }
+      }
+    }
+    .menu_el{
+      @include media-max(680){
+        & + .menu_el{
+          margin-top:1.6rem;
+        }
+      }
+    }
+      a{
+        font-weight: 500;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        display:inline-flex;
+        
+      }
+  }
+  &_bottom{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-left:42.3rem;
+    position:relative;
+    margin-top:10rem;
+    @include media-max(1230){
+      padding-left:32rem;
+
+    }
+    @include media-max(1180){
+      flex-wrap: wrap;
+      padding-left:0;
+      margin-top:6rem;
+
+    }
+    @include media-max(680){
+      margin-top:0;
+    }
+    .copy{
+      flex-shrink: 0;
+      @include media-min(1181){
+        bottom:0;
+        left:0;
+        position:absolute;
+      }
+      @include media-max(1180){
+        width:100%;
+      }
+      @include media-max(680){
+        // display:none;
+        text-align: center;
+        order:1;
+        margin-top:1.6rem;
+      }
+    }
+    .right{
+      width:45.7rem;
+      opacity:.4;
+      @include media-max(1230){
+        width:45.7rem;
+        
+      }
+      @include media-max(1180){
+        width:100%;
+        max-width: 53rem;
+        margin-top:.8rem;
+      }
+      @include media-max(680){
+        // display:none;
+        text-align: center;
+        order:1;
+        margin-top:1.6rem;
+      }
+    }
+    .social{
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+      @include media-max(1180){
+        margin-top:1.6rem;
+      }
+      @include media-max(680){
+        display:flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top:0;
+        margin:0 -1.6rem;
+        order:0;
+        
+      }
+      a{
+        position:relative;
+        display:inline-flex;
+        @include media-max(680){
+          margin:2rem 1.6rem 0;
+        }
+        svg{
+          position:relative;
+          *:not(g){
+            fill:$light;
+          }
+          
+        }
+        &::before{
+          content:'';
+          position:absolute;
+          left:50%;
+          top:50%;
+          width:3.2rem;
+          height:3.2rem;
+          border-radius: 100%;
+          transform:translate(-50%,-50%) scale(0);
+          transition:.6s all $swiftOut;
+          
+        }
+        & + a{
+          
+          @include media-min(681){
+            margin-left:4rem;
+          }
+        }
+        &:hover{
+          &:before{
+            transform:translate(-50%,-50%) scale(1);
+
+          }
+        }
+      }
+    }
+  }
+}
