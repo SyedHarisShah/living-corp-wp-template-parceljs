@@ -77,8 +77,12 @@ const setupSwiper = () => {
     const spaceBetween = isMobile ? 24 : 0;
 
     parent.swiper = new Swiper ('.swiper', {
-        slidesPerView: 3,
+        slidesPerView: 4,
         spaceBetween,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        }
     })
 }
 
