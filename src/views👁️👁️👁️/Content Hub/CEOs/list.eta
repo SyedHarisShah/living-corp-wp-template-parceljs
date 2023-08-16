@@ -3,7 +3,7 @@
         <div class="ceo__image">
             <%~ it.icons.elipse %>
             <img class="ceo-image" src="<%~ ceo.image_a %>"/>
-            <img class="company-image" src="<%~ ceo.company_a[0].logo_a.replace('http://local.', 'https://') %>"/>
+            <img class="company-image" src="<%~ ceo.image_a %>"/>
         </div>
         <div class="ceo__details">
             <h2 class="ceo__title"><%~ ceo.post_title %></h2>
