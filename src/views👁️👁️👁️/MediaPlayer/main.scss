@@ -528,11 +528,6 @@ html.smooth {
     grid-template-columns: repeat(2, 1fr);
     margin-top: 4rem;
 
-    h3, h4, h5, h6 {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-
     h2 {
       margin-top: 0;
       font-size: 3.5rem;
@@ -570,6 +565,7 @@ html.smooth {
 
     ol, ul {
       list-style: auto;
+      white-space: initial;
     }
 
     span {
@@ -577,6 +573,7 @@ html.smooth {
       letter-spacing: 1px;
       font-size: 1.25rem;
       line-height: 1.6;
+      white-space: pre-line
     }
   }
 
