@@ -17,9 +17,9 @@ export default class extends Page {
   async generate(content) {
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log(data)
+    // //  console.log(data)
     var html = Eta.render(template,{global:this.main,data:data.acf,footer:this.footer})
-    // console.log(html)
+    // //  console.log(html)
     document.querySelector('#content').innerHTML += html
     this.DOM = {
       el:document.querySelector('main:not(.old)')
@@ -29,8 +29,8 @@ export default class extends Page {
     this.DOM.watchers = this.DOM.el.querySelectorAll('.iO')
     
     this.DOM.modal = document.documentElement.querySelector('.contactal')
-    console.log(this.DOM.modal)
-    console.log(this.DOM.modal.parentNode)
+    // //  console.log(this.DOM.modal)
+    // //  console.log(this.DOM.modal.parentNode)
     this.font = parseFloat(getComputedStyle(document.documentElement).fontSize)
     this.form = new Form(this.DOM.el.querySelector('.form'),this.main)
     this.DOM.tooltipclick = this.DOM.el.querySelector('.tooltip')

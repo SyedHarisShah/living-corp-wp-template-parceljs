@@ -67,10 +67,10 @@ export default class extends EventEmitter {
   
    makeAnim(anim,y,ratio){
     if(y < 0){
-      console.log(1-(ratio/2))
+      // //  console.log(1-(ratio/2))
     }
     else{
-      console.log(ratio/2)
+      // //  console.log(ratio/2)
     }
     
   }

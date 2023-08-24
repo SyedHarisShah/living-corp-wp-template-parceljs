@@ -24,7 +24,7 @@ export default class extends EventEmitter {
     this.btn =  this.DOM.el.querySelector(".btnReg")
     this.btnLi =  this.DOM.el.querySelector(".btnLIReg")
     this.DOM.errors = this.DOM.el.querySelectorAll('.error')
-    console.log(this.DOM.errors)
+    // //  console.log(this.DOM.errors)
     this.initEvents()
   }
   
@@ -56,7 +56,7 @@ export default class extends EventEmitter {
         body: formdata
       })
       const datalog = await logtest.json()
-      console.log(datalog)
+      // //  console.log(datalog)
       if(datalog==300){
           this.DOM.errors[0].classList.add('act')
         setTimeout(()=>{
@@ -64,19 +64,19 @@ export default class extends EventEmitter {
         },3300)
       }
       else{
-        console.log('register and emit login')
+        // //  console.log('register and emit login')
         this.main.user = datalog
         this.emit('login')
       }
       //   // this.DOM.el
-      //   console.log('badname')
+      // //  console.log('badname')
       //   this.DOM.errors[0].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[0].classList.remove('act')
       //   },3300)
       // }
       // else if(datalog.code=='incorrect_password'){
-      //   console.log('badpass')
+      // //  console.log('badpass')
       //   this.DOM.errors[1].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[1].classList.remove('act')
@@ -85,7 +85,7 @@ export default class extends EventEmitter {
       // else{
 
       // }
-      // console.log('sis')
+      // //  console.log('sis')
       
   }
 
@@ -94,7 +94,7 @@ export default class extends EventEmitter {
 
     const finishLogin = setInterval(() => {
       if(window.registerFinished){
-        console.log('linkedin register and emit login')
+        // //  console.log('linkedin register and emit login')
         
         this.main.user = window.registerFinished
         

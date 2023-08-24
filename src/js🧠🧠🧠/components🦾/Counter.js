@@ -34,8 +34,8 @@ export default class extends Component {
         this.isFroms = 1
         this.froms =  this.el.dataset.from.split('')
         this.to =  msg
-        // console.log(this.froms)
-        // console.log(this.to)
+        // //  console.log(this.froms)
+        // //  console.log(this.to)
       }
       else{
 
@@ -79,11 +79,11 @@ export default class extends Component {
           else{
             vfrom = parseInt(this.froms[index]) - parseInt(this.to[index])
             vfrom = parseInt(this.froms[index])*-100
-            console.log(vfrom)
+            // //  console.log(vfrom)
           }
-          // console.log(parseInt(this.froms[index]))
-          // console.log(parseInt(this.to[index]))
-          // console.log(vfrom*100)
+          // //  console.log(parseInt(this.froms[index]))
+          // //  console.log(parseInt(this.to[index]))
+          // //  console.log(vfrom*100)
           gsap.set(s,{yPercent:vfrom})
         
         }
@@ -122,7 +122,7 @@ export default class extends Component {
     for(let [index,s] of this.el.querySelectorAll('.nums_main_el').entries()){
       
       total = parseInt(this.to[index])
-      // console.log(total)
+      // //  console.log(total)
       gsap.to(s,{yPercent:-100*(total),duration:.6+(total*.12),delay:this.delay,ease:Power3.easeInOut})
       
     }
@@ -163,15 +163,15 @@ export default class extends Component {
         else if(parseInt(this.froms[index]) > parseInt(this.to[index])){
           vfrom = parseInt(this.to[index]) - parseInt(this.froms[index])
           vfrom = parseInt(this.froms[index]) * -100
-          console.log(vfrom)
+          // //  console.log(vfrom)
         }
         else{
           vfrom = parseInt(this.froms[index]) - parseInt(this.to[index])
           vfrom = vfrom * 100
         }
-        // console.log(parseInt(this.froms[index]))
-        // console.log(parseInt(this.to[index]))
-        // console.log(vfrom*100)
+        // //  console.log(parseInt(this.froms[index]))
+        // //  console.log(parseInt(this.to[index]))
+        // //  console.log(vfrom*100)
         gsap.set(s,{yPercent:vfrom,y:0})
       
       }
@@ -180,7 +180,7 @@ export default class extends Component {
       for(let s of this.el.querySelectorAll('.nums_main_el')){
         
         gsap.to(s,{yPercent:100,duration:.45})
-        console.log(s)
+        // //  console.log(s)
       
       }
     }

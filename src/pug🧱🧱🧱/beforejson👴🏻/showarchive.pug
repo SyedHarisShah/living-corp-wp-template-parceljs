@@ -2,7 +2,7 @@ doctype html
 include src/pug🧱🧱🧱/basic/basic
 html
   +head
-  body(data-js="http://165.227.64.123:8126/")
+  body(data-js=process.env.PUBLIC_URL)
     +fixeds
     #content(data-template="simple" data-type="network" data-id="175")
       main.artarchive

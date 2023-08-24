@@ -19,7 +19,6 @@ it.posts.forEach(function(p,key){
   //check if post has been shown to prevent duplicates across categories
   for(const el of shownPosts) {
     if(title == el.title || description == el.description){
-      console.log('match');
       match = true;
       break;
     }

@@ -25,11 +25,11 @@ export default class extends Page {
   async generate(content) {
     //${"http://165.227.64.123:8126/"}/wp-json/wp/v2/podcast/40?acf_format=standard
     // const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
-    console.log(this.main.acf.base+'/wp-json/wp/v2/network/'+content.dataset.id+'?acf_format=standard')
+    // console.log(this.main.acf.base+'/wp-json/wp/v2/network/'+content.dataset.id+'?acf_format=standard')
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/network/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log(data)
-    console.log(this.main)
+    // console.log(data)
+    // console.log(this.main)
     let html = ''
 
     let load = true;
@@ -112,14 +112,14 @@ export default class extends Page {
           else{
             this.textExpand = () =>{
               this.isVisible = 0
-              console.log(this.sticks)
+              // console.log(this.sticks)
               this.DOM.clicktext.classList.add('act')
               this.timeline = gsap.timeline(({paused:true}))
               // .to(this.sticks[0].stick.son,{duration:.6,y:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)+'px'},'a')
               // .to(this.sticks[0].stick,{duration:.6,current:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight),target:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)},'a')
               .to(this.DOM.hidetext,{height:this.DOM.holdtext.clientHeight+'px',duration:.6,
                 onUpdate:()=>{
-                  console.log(this.sticks)
+                  // console.log(this.sticks)
                 },
                 onComplete:()=>{
                   this.isVisible = 1
@@ -197,7 +197,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       if(isNew == true){
-        console.log(this.max)
+        // console.log(this.max)
         // for(let i = 1;i<=this.max;i++){
         //   if(i == page){
         //     this.DOM.pages.innerHTML += '<div class="pgel act"><div class="pgel_t">'+i+'</div></div>'

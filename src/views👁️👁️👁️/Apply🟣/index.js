@@ -21,11 +21,11 @@ export default class extends Page {
   async generate(content) {
     // const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     // const data = await response.json()
-    // console.log(data)
+    // //  console.log(data)
     this.job = content
-    console.log(this.job)
+    // //  console.log(this.job)
     var html = Eta.render(template,{global:this.main,data:this.id,footer:this.footer})
-    // console.log(html)
+    // //  console.log(html)
     document.querySelector('#content').innerHTML += html
     this.DOM = {
       el:document.querySelector('main:not(.old)')
@@ -42,7 +42,7 @@ export default class extends Page {
     this.DOM.back = this.DOM.el.querySelector('.btnBack')
     this.backToJob =()=>{
       this.emit('toJob',content)
-      console.log('asasas')
+      // //  console.log('asasas')
     }
     this.DOM.back.addEventListener('click',this.backToJob)
 

@@ -18,6 +18,7 @@ const load = async () => {
     document.querySelectorAll(".player-page-tab--active").forEach((x) => x.classList.remove("player-page-tab--active"));
     const params = new URLSearchParams(window.location.search);
     parent.search_term = parent.search_term || params.get('term');
+    parent.search_term_tax = parent.search_term_tax || params.get("tax");
     
    getModules();
 }
@@ -28,6 +29,9 @@ const getModules = async () => {
 
     params.set("userid", parent.main.user.user.ID);
     params.set("term", parent.search_term);
+
+    let tax = parent.search_term_tax;
+    if (tax) params.set("tax", tax);
 
     parent.addFiltersToParams(params);
 
@@ -41,7 +45,9 @@ const getModules = async () => {
 
     const html = Eta.render(modules_eta, {posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
     modulesCont.innerHTML = html;
-    document.getElementById("search-term").innerHTML = `Results for "${parent.search_term}"`;
+    let text = `Results for "${parent.search_term}"`;
+    if (tax) text = `${tax}: "${parent.search_term}"`;
+    document.getElementById("search-term").innerHTML = text;
     parent.regModuleClick();
     parent.regModuleButtons();
 }

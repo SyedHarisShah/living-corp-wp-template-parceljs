@@ -2,7 +2,7 @@ doctype html
 include src/pug🧱🧱🧱/basic/basic
 html
   +head
-  body(data-js="https://living-corporate.com")
+  body(data-js=process.env.PUBLIC_URL)
     +fixeds
     #content(data-template="podcast" data-id="7326")
     

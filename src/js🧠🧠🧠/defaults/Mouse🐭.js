@@ -94,7 +94,7 @@ export default class {
 
   createFollow(pos,dad,follow,el,type){
     const dadpos = dad.getBoundingClientRect()
-    // console.log(dadpos)
+    // //  console.log(dadpos)
     // const x = this.current.x-dadpos.x
     // const y = this.current.y-dadpos.y
 
@@ -115,7 +115,7 @@ export default class {
     this.follows.push(followOb)
     follow.appendChild(el)
     gsap.set(follow,{left:this.current.x+'px',top:this.current.y+'px'})
-    console.log(follow)
+    // //  console.log(follow)
     document.querySelector('.followbox').appendChild(follow)
     gsap.to(follow,{'clip-path':'ellipse(35% 55% at 50% 50%)',rotate:-45+'deg',delay:.3,duration:.45})
     gsap.to(follow.querySelector('img'),{rotate:45+'deg',delay:.3,duration:.45})
@@ -252,7 +252,7 @@ export default class {
     }
   
     this.mouseFollowOut = async (el) =>{
-      console.log('followout')
+      // //  console.log('followout')
       document.documentElement.classList.remove('mouse-hide')
       if(!el.dataset.posho){
     
@@ -350,7 +350,7 @@ export default class {
 
               img.onload = ()=>resolve(el.dataset.image)
               img.onerror = ()=>reject(path)
-              console.log(img)
+              // //  console.log(img)
           }))
         }
       }

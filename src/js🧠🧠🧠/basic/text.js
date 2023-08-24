@@ -2,12 +2,12 @@
 import each from 'lodash'
 
 export function split ({ element, expression = ' ', append = true }) {
-  console.log(element)
+  // //  console.log(element)
   const words = splitText(element.innerHTML.toString().trim(), expression)
 
   let innerHTML = ''
   each(words, line => {
-    console.log(line)
+    // //  console.log(line)
     if (line.indexOf('<br>') > -1) {
       const lines = line.split('<br>')
 

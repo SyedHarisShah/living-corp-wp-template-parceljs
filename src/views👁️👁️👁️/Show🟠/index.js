@@ -90,7 +90,7 @@ export default class extends Page {
     if(data.parent==0 && load){
       this.DOM.holder = this.DOM.el.querySelector('.hPosts')
       this.DOM.pages = this.DOM.el.querySelector('.pPosts')
-      console.log(this.DOM.holder)
+      // console.log(this.DOM.holder)
       await this.getPosts(true,'show',data.id,8,1)
     }
     else{
@@ -114,14 +114,14 @@ export default class extends Page {
         else{
           this.textExpand = () =>{
             this.isVisible = 0
-            console.log(this.sticks)
+            // console.log(this.sticks)
             this.DOM.clicktext.classList.add('act')
             this.timeline = gsap.timeline(({paused:true}))
             // .to(this.sticks[0].stick.son,{duration:.6,y:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)+'px'},'a')
             // .to(this.sticks[0].stick,{duration:.6,current:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight),target:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)},'a')
             .to(this.DOM.hidetext,{height:this.DOM.holdtext.clientHeight+'px',duration:.6,
               onUpdate:()=>{
-                console.log(this.sticks)
+                // console.log(this.sticks)
               },
               onComplete:()=>{
                 this.isVisible = 1
@@ -142,7 +142,7 @@ export default class extends Page {
     const posts = await fetch(url)
     const datap = await posts.json()
 
-    console.log(datap)
+    // console.log(datap)
 
     this.html = Eta.render(show,{global:this.main,posts:datap.posts})
     // this.ajaxImages()
@@ -200,7 +200,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       if(isNew == true){
-        console.log(this.max)
+        // console.log(this.max)
         for(let i = 1;i<=this.max;i++){
           if(i == page){
             this.DOM.pages.innerHTML += '<div class="pgel mouseHover act"><div class="pgel_t">'+i+'</div></div>'

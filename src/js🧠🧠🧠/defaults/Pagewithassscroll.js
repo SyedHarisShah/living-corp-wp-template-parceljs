@@ -65,7 +65,7 @@ export default class extends EventEmitter {
         }
         
         var pos = entry.target.dataset.pos
-        console.log(entry)
+        // //  console.log(entry)
         if(!entry.isIntersecting){
           this.anims[pos].active = false
         }
@@ -76,7 +76,7 @@ export default class extends EventEmitter {
             this.makeAnim(this.anims[pos].el,(entry.boundingClientRect.y).toFixed(0),entry.intersectionRatio)
           }
           else{
-            console.log(entry.intersectionRatio)
+            // //  console.log(entry.intersectionRatio)
             if(entry.intersectionRatio > 0.4){
               entry.target.classList.add('inview')
               this.observer.unobserve(entry.target)
@@ -100,10 +100,10 @@ export default class extends EventEmitter {
   
    makeAnim(anim,y,ratio){
     if(y < 0){
-      console.log(1-(ratio/2))
+      // //  console.log(1-(ratio/2))
     }
     else{
-      console.log(ratio/2)
+      // //  console.log(ratio/2)
     }
     
   }

@@ -4,8 +4,8 @@
 <div class="player-page__content-playlists player-page__content-playlists--swiper swiper">
     <div class="swiper-wrapper">
     </div>
-    <div class="swiper-wrapper"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-prev mouseHover"></div>
+    <div class="swiper-button-next mouseHover"></div>
 </div>
 
 <h2>Top Modules</h2>

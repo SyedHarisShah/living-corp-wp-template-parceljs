@@ -22,7 +22,7 @@ export default class extends Page {
     let html = ''
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log(data)
+    // //  console.log(data)
     
     if(this?.main?.user){
       if (!this?.main?.user?.acf?.is_content_hub_user) {
@@ -243,7 +243,7 @@ export default class extends Page {
         if(!entry.isIntersecting){
           if(this.anims[pos].active==true && this.anims[pos].animated==1){
             if(id=='s'){
-              // console.log(this.anims[pos])
+              // //  console.log(this.anims[pos])
               this.anims[pos].stick.active = 0
               this.movestick = null
             }

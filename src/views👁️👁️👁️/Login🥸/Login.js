@@ -21,7 +21,7 @@ export default class extends EventEmitter {
     this.btn =  this.DOM.el.querySelector(".btnLogin")
     this.btnLi =  this.DOM.el.querySelector(".btnLILogin")
     this.DOM.errors = this.DOM.el.querySelectorAll('.error')
-    console.log(this.DOM.errors)
+    // //  console.log(this.DOM.errors)
     this.initEvents()
   }
   
@@ -42,8 +42,8 @@ export default class extends EventEmitter {
       let formdata = new FormData()
       // formdata.set('username','angelperezpedrosa@gmail.com')
       // formdata.set('password',encodeURIComponent('jy1&K7w)i14O$BDCtC'))
-      console.log(this.email.DOM.npt.value)
-      console.log(this.password.DOM.npt.value)
+      // //  console.log(this.email.DOM.npt.value)
+      // //  console.log(this.password.DOM.npt.value)
       formdata.set('username',this.email.DOM.npt.value)
       formdata.set('password',encodeURIComponent(this.password.DOM.npt.value))
       const logtest = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/login',{
@@ -52,17 +52,17 @@ export default class extends EventEmitter {
         body: formdata
       })
       const datalog = await logtest.json()
-      console.log(datalog)
+      // //  console.log(datalog)
       if(datalog.code=='empty_username'){
         // this.DOM.el
-        console.log('badname')
+        // //  console.log('badname')
         this.DOM.errors[0].classList.add('act')
         setTimeout(()=>{
           this.DOM.errors[0].classList.remove('act')
         },3300)
       }
       else if(datalog.code=='incorrect_password'){
-        console.log('badpass')
+        // //  console.log('badpass')
         this.DOM.errors[1].classList.add('act')
         setTimeout(()=>{
           this.DOM.errors[1].classList.remove('act')
@@ -70,8 +70,8 @@ export default class extends EventEmitter {
       }
       else{
         this.main.user = datalog
-        console.log('login is made')
-        console.log(this.main)
+        // //  console.log('login is made')
+        // //  console.log(this.main)
         this.emit('login')
       }
       
@@ -83,8 +83,8 @@ export default class extends EventEmitter {
     const finishLogin = setInterval(() => {
       if(window.loginFinished){
         this.main.user = window.loginFinished
-        console.log('linkedin login is made')
-        console.log(this.main)
+        // //  console.log('linkedin login is made')
+        // //  console.log(this.main)
         this.emit('login')
 
         clearInterval(finishLogin)

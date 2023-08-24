@@ -129,7 +129,7 @@ const trackPlay = async () => {
     const player = elemObj.player;
 
     if(player.currentTime >= 60.0 || player.ended){
-        // console.log("play tracked", podcast_id);
+        // //  console.log("play tracked", podcast_id);
         play_tracked = true;
 
         const params = new URLSearchParams();

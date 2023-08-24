@@ -15,7 +15,7 @@ export default class extends EventEmitter {
       el: el,
     }
 
-    console.log(this.DOM.el)
+    // //  console.log(this.DOM.el)
     this.main = main
     this.delConfModal =  document.querySelector(".delAcctModal")
     this.pass =  new Field(this.delConfModal.querySelector('.pass_conf').parentNode)
@@ -49,8 +49,8 @@ export default class extends EventEmitter {
     const delConfText = this.delConfBtn.querySelector(".btn_t");
     delConfText.innerHTML = getLoadingWheel();
 
-    console.log(this.main.acf.base)
-    console.log(this.main.user.nonce)
+    // //  console.log(this.main.acf.base)
+    // //  console.log(this.main.user.nonce)
     let formdata = new FormData()
     formdata.set('userid',this.main.user.user.ID)
     formdata.set('pass',encodeURIComponent(this.pass.DOM.npt.value))

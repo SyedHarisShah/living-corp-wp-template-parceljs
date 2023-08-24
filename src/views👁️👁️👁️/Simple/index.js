@@ -17,10 +17,10 @@ export default class extends Page {
    * Animations.
    */
   async generate(content) {
-    console.log(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
+    // console.log(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     var html = Eta.render(template,{global:this.main,data:data,footer:this.footer})
     // console.log(html)
     document.querySelector('#content').innerHTML += html

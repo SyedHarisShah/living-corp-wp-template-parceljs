@@ -101,7 +101,7 @@ export default class {
       this.DOM.volres.style.height = (1-(ev.offsetY / ev.target.clientHeight))*100+'%'
       this.DOM.volball.style.top = ((ev.offsetY / ev.target.clientHeight))*100+'%'
       this.DOM.volicon.style.opacity = 1-(((ev.offsetY / ev.target.clientHeight))+.1)
-      console.log(ev.offsetY / ev.target.clientHeight)
+      // //  console.log(ev.offsetY / ev.target.clientHeight)
     }
 
     this.isactive = 0
@@ -117,14 +117,14 @@ export default class {
         return false
       }
       let tot = Math.max(0,(Math.min((ev.offsetY / ev.target.clientHeight),1)))
-      // console.log(tot)
+      // //  console.log(tot)
       this.DOM.media.volume = 1-tot
       this.DOM.volres.style.height = (1-tot)*100+'%'
       this.DOM.volball.style.top = ((ev.offsetY / ev.target.clientHeight))*100+'%'
-      console.log(1-(Math.min(tot,.7)))
+      // //  console.log(1-(Math.min(tot,.7)))
       this.DOM.volicon.style.opacity = 1-(Math.min(tot,.7))
-      // console.log(ev.offsetY / ev.target.clientHeight)
-      // console.log(1-(ev.offsetY / ev.target.clientHeight))
+      // //  console.log(ev.offsetY / ev.target.clientHeight)
+      // //  console.log(1-(ev.offsetY / ev.target.clientHeight))
     }
 
 

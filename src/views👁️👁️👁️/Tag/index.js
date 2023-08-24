@@ -125,7 +125,7 @@ export default class extends Page {
 
 
   async getJson(url,isNew){
-    console.log(url)
+    // console.log(url)
     const posts = await fetch(url)
     const datap = await posts.json()
 
@@ -149,7 +149,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       if(isNew == true && this.DOM.pages){
-        console.log(this.max)
+        // console.log(this.max)
         for(let i = 1;i<=this.max;i++){
           if(i == page){
             this.DOM.pages.innerHTML += '<div class="pgel mouseHover act"><div class="pgel_t">'+i+'</div></div>'

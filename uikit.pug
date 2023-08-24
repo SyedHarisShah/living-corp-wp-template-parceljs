@@ -2,7 +2,7 @@ doctype html
 include src/pug🧱🧱🧱/basic/basic
 html
   +head
-  body(data-js="http://165.227.64.123:8126/")
+  body(data-js=process.env.PUBLIC_URL)
     +fixeds
     +nav
     #content(data-template="simple" data-id="2")

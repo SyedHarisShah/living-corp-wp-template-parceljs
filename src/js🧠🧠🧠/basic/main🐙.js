@@ -109,7 +109,7 @@ class App {
     // this.pages.set('home', new Home(this.main,this.footer.string))
     this.pages.get('login').on('reset',()=>{
       let url = window.location
-      console.log('letsmakethelog')
+      // //  console.log('letsmakethelog')
       if(process.env.APP_ENV=='local'){
         url='http://localhost:1234/login.html'
       }
@@ -157,8 +157,8 @@ class App {
       pa[1].on('globalchange',()=>{
         this.main = this.page.main
        
-        console.log('reset global')
-        console.log(this.main)
+        // //  console.log('reset global')
+        // //  console.log(this.main)
       })
       pa[1].on('mousereset',()=>{
         if(this.mouse){
@@ -313,7 +313,7 @@ class App {
     if (this.isLoading) return
     this.page.isVisible = false
     this.isLoading = true
-    console.log(content.content)
+    // //  console.log(content.content)
     document.body.style.pointerEvents = 'none'
     let mainold = document.querySelector('#content main')
     mainold.classList.add('old')
@@ -471,8 +471,8 @@ class App {
     })
     this.page.hide()
     await this.newpage.create(this.content,this.main)
-    console.log(this.page.isVisible)
-    console.log(mainold)
+    // //  console.log(this.page.isVisible)
+    // //  console.log(mainold)
     // gsap.to('main.old',{y:'-='+window.innerHeight*.8+'px',duration:.9,ease:Power3.easeInOut})
     gsap.to('main.old',{opacity:0,duration:1.2,ease:Power3.easeInOut})
     await this.newpage.show()
@@ -484,7 +484,7 @@ class App {
         behavior: 'instant'
       })
     }
-    console.log(mainold)
+    // //  console.log(mainold)
     if(this.mouse){
       this.mouse.reset()
     }
@@ -550,7 +550,7 @@ class App {
     }
     else{
       var isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1 || window.innerWidth < 1181;
-      console.log(isMobile)
+      // //  console.log(isMobile)
       if(isMobile){
         location.reload()
         

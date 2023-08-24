@@ -131,10 +131,10 @@ export default class extends Page {
 
 
   async getJson(url){
-    console.log(url)
+    // console.log(url)
     const posts = await fetch(url)
     const datap = await posts.json()
-    console.log(datap)
+    // console.log(datap)
     this.html = Eta.render(searchlist,{global:this.main,type:this.cat,posts:datap.post})
     
     this.DOM.holder.innerHTML = this.html

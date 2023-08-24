@@ -22,7 +22,7 @@ export default class extends Page {
    * Animations.
    */
   async generate(content) {
-    //${"http://165.227.64.123:8126/"}/wp-json/wp/v2/podcast/40?acf_format=standard
+    //${process.env.PUBLIC_URL}/wp-json/wp/v2/podcast/40?acf_format=standard
     // const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/ceos/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
@@ -55,8 +55,8 @@ export default class extends Page {
     html = Eta.render(dad,{global:this.main,data:data,footer:this.footer, ceo_link})
     
       
-    // console.log(data)
-    // console.log(html)
+    // //  console.log(data)
+    // //  console.log(html)
     document.querySelector('#content').innerHTML += html
     this.DOM = {
       el:document.querySelector('main:not(.old)')
@@ -87,7 +87,7 @@ export default class extends Page {
     if(data.parent==0){
       this.DOM.holder = this.DOM.el.querySelector('.hPosts')
       this.DOM.pages = this.DOM.el.querySelector('.pPosts')
-      console.log(this.DOM.holder)
+      // //  console.log(this.DOM.holder)
       await this.getPosts(true,'show',data.id,8,1)
     }
     else{
@@ -111,14 +111,14 @@ export default class extends Page {
         else{
           this.textExpand = () =>{
             this.isVisible = 0
-            console.log(this.sticks)
+            // //  console.log(this.sticks)
             this.DOM.clicktext.classList.add('act')
             this.timeline = gsap.timeline(({paused:true}))
             // .to(this.sticks[0].stick.son,{duration:.6,y:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)+'px'},'a')
             // .to(this.sticks[0].stick,{duration:.6,current:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight),target:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)},'a')
             .to(this.DOM.hidetext,{height:this.DOM.holdtext.clientHeight+'px',duration:.6,
               onUpdate:()=>{
-                console.log(this.sticks)
+                // //  console.log(this.sticks)
               },
               onComplete:()=>{
                 this.isVisible = 1
@@ -156,7 +156,7 @@ export default class extends Page {
     const posts = await fetch(url)
     const datap = await posts.json()
 
-    console.log(datap)
+    // //  console.log(datap)
 
     this.html = Eta.render(show,{global:this.main,posts:datap.posts})
     // this.ajaxImages()
@@ -214,7 +214,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       if(isNew == true){
-        console.log(this.max)
+        // //  console.log(this.max)
         for(let i = 1;i<=this.max;i++){
           if(i == page){
             this.DOM.pages.innerHTML += '<div class="pgel mouseHover act"><div class="pgel_t">'+i+'</div></div>'
@@ -296,7 +296,7 @@ export default class extends Page {
         if(!entry.isIntersecting){
           if(this.anims[pos].active==true && this.anims[pos].animated==1){
             if(id=='s'){
-              // console.log(this.anims[pos])
+              // //  console.log(this.anims[pos])
               this.anims[pos].stick.active = 0
               this.movestick = null
             }
