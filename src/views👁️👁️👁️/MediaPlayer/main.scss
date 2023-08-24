@@ -971,6 +971,9 @@ html.smooth {
     border-radius: 8px;
     margin: 1.25rem;
     overflow: hidden;
+    width: 55%;
+    margin: 0 auto !important;
+    margin-bottom: 15px !important;
 
     &--user-playlist {
       align-items: center;

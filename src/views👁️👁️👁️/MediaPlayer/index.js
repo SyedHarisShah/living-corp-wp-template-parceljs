@@ -31,10 +31,17 @@ export default class extends Page {
 
     window.history.replaceState({...window.history.state, postid: this.postid}, document.title, window.location.href);
 
+    this.lsAvail = true;
+    try {
+      localStorage.getItem("sign_LC");
+    } catch (_) {
+      this.lsAvail = false;
+    }
+
     this.state = {
-      loop: localStorage.getItem('loop') === "true",
-      shuffle: localStorage.getItem('shuffle') === "true",
-      index: parseInt(localStorage.getItem('index')),
+      loop: this.lsAvail ? localStorage?.getItem("loop") === "true" : false,
+      shuffle: this.lsAvail ? localStorage?.getItem("shuffle") === "true" : false,
+      index: parseInt(this.lsAvail ? localStorage?.getItem("index") : 0),
       itemScrolling: "",
       playing: false, // only used for pausing while seeking
       filters: {cats: [], tags: [], topics: []}
