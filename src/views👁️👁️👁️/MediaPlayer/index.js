@@ -1194,6 +1194,7 @@ export default class extends Page {
 
       params.set('isEmbed', true);
       params.set('spId', this.main?.sponsor?.id ?? 0);
+      params.set("cache", Math.random());
 
       link += link.at(-1) == '/' ? '?' : '&';
       link += `${params}`;
