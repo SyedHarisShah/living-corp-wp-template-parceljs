@@ -533,6 +533,26 @@ html.smooth {
       font-size: 3.5rem;
     }
 
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 500;
+    }
+
+    h4 {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    h5 {
+      font-size: 1.6rem;
+      font-weight: 500;
+    }
+
+    h6 {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
     span {
       text-transform: uppercase;
     }
@@ -543,11 +563,17 @@ html.smooth {
     line-height: 1.5;
     font-size: 1.15rem;
 
+    ol, ul {
+      list-style: auto;
+      white-space: initial;
+    }
+
     span {
       text-transform: none;
       letter-spacing: 1px;
       font-size: 1.25rem;
       line-height: 1.6;
+      white-space: pre-line
     }
   }
 
