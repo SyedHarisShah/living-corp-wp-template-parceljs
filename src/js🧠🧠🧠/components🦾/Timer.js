@@ -37,7 +37,7 @@ export default class {
   }
 
   start(num){
-    console.log('start'+num)
+    // //  console.log('start'+num)
     if(num==1){
       this.isworking=1
     }

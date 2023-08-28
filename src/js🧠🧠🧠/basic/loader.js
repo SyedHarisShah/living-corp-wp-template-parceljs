@@ -27,7 +27,7 @@ export default class extends Component {
     // })
 
     // this.timeline.call(_ => {
-    //   console.log('compit')
+    // //  console.log('compit')
     //   this.emit('complete')
     // })
   }

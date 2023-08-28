@@ -251,7 +251,7 @@ export default class extends EventEmitter {
     for(let b of a.querySelectorAll('svg')){
       if(b.getAttribute('width') && !b.getAttribute('viewBox')){
         let txt = '0 0 '+b.getAttribute('width')+' '+b.getAttribute('height')
-        console.log(txt)
+        // //  console.log(txt)
         b.setAttribute('viewBox',txt)
       }
     }
@@ -370,7 +370,7 @@ export default class extends EventEmitter {
           else{
             // anim.stick.limit=anim.stick.parent.clientHeight
             anim.stick.limit = anim.stick.parent.querySelector('.stck_control').clientHeight
-            console.log(anim.stick.limit)
+            // //  console.log(anim.stick.limit)
           }
           
         }
@@ -458,7 +458,7 @@ export default class extends EventEmitter {
     this.scroll.last = this.scroll.current
     for(let st of this.sticks){
       st.stick.target = this.h - st.el.getBoundingClientRect().y
-      // console.log(st.stick.pos+'pos')
+      // //  console.log(st.stick.pos+'pos')
       st.stick.current = clamp(0, st.stick.limit, st.stick.target)
       // st.stick.current = lerp(st.stick.current, st.stick.target,this.scroll.ease)
       // st.stick.current = Math.floor(st.stick.target)
@@ -468,8 +468,8 @@ export default class extends EventEmitter {
       if (st.stick.current < 0.1) {
         st.stick.current = 0
       }
-      // console.log(st.stick.prog)
-      // console.log(st.stick.current+'currentaf')
+      // //  console.log(st.stick.prog)
+      // //  console.log(st.stick.current+'currentaf')
       st.stick.son.style[this.transform] = `translate3d(0,${st.stick.current}px, 0)`
     }
   }

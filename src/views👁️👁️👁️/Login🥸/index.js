@@ -33,7 +33,7 @@ export default class extends Page {
     Eta.templates.define("li_dialog", Eta.compile(li_dialog))
 
     if(document.documentElement.classList.contains('logged')){
-      console.log(this.main)
+      // //  console.log(this.main)
       const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/topic/')
       const data = await response.json()
       if(this.main.user.acf.topics){
@@ -46,11 +46,11 @@ export default class extends Page {
           }
         }
       }
-      console.log(this.main.user.acf.jobs)
+      // //  console.log(this.main.user.acf.jobs)
       if(this.main.user.acf.jobs!=''){
       const responsejobs = await fetch(this.main.acf.base+'/wp-json/wp/v2/getjobs?jobsids='+this.main.user.acf.jobs)
       const datajobs = await responsejobs.json()
-      console.log(datajobs)
+      // //  console.log(datajobs)
       this.jobshtml = Eta.render(job,{global:this.main,posts:datajobs.posts})
       }
       else{
@@ -105,7 +105,7 @@ export default class extends Page {
       this.sectionselector = this.DOM.el.parentNode.querySelectorAll('.usercontrols_top .simp')
 
       this.sectionFn = async (index,el) =>{
-        console.log(index)
+        // //  console.log(index)
         if(index==0){
           if(this.pos==4){
             this.opholderFn(0)
@@ -171,7 +171,7 @@ export default class extends Page {
 
      //LOS RADS
       this.clickRadFn = (el,key,dad) =>{
-        console.log(el)
+        // //  console.log(el)
         if(el.classList.contains('act')){
           // for(let other of this.ops[key]){
           //   other.classList.remove('act')
@@ -288,7 +288,7 @@ export default class extends Page {
         this.resizeLimit()
         this.pags[this.pos].classList.remove('dis')
         this.pags[this.pos].classList.add('act')
-        console.log(this.opholder[this.pos])
+        // //  console.log(this.opholder[this.pos])
         if(!this.opholder[this.pos].querySelector('.rad.act') && !this.opholder[this.pos].querySelector('.check.act')){
           
           this.DOM.btnnext.classList.add('inact')
@@ -356,7 +356,7 @@ export default class extends Page {
             formdata.set('topics',checksid)
           }
           formdata.set('userid',this.main.user.user.ID)
-          console.log(formdata.get('userid'))
+          // //  console.log(formdata.get('userid'))
           const logtest = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/preferences',{
             method: 'post',
             body: formdata,
@@ -365,7 +365,7 @@ export default class extends Page {
             
           })
           const datalog = await logtest.json()
-          console.log(datalog)
+          // //  console.log(datalog)
           await this.timeout(610)
           this.opholder[this.pos].style.display='none'
           this.pos=4
@@ -435,30 +435,30 @@ export default class extends Page {
 
       this.reset.on('login',()=>{
         document.documentElement.classList.add('logged')
-        console.log('reset and emit login main reset')
+        // //  console.log('reset and emit login main reset')
         this.main.user = this.register.main.user
         this.emit('globalchange')
         this.emit('reset')
       })
       this.login.on('login',()=>{
         document.documentElement.classList.add('logged')
-        console.log(' emit login -> globalchange -> main reset')
+        // //  console.log(' emit login -> globalchange -> main reset')
         this.main.user = this.login.main.user
-        console.log(this.main)
+        // //  console.log(this.main)
         this.emit('globalchange')
         this.emit('reset')
       })
   
       this.register.on('login',()=>{
         document.documentElement.classList.add('logged')
-        console.log('register and emit login main reset')
+        // //  console.log('register and emit login main reset')
         this.main.user = this.register.main.user
         this.emit('globalchange')
         this.emit('reset')
       })
 
-      console.log(urlParams)
-      console.log(loginpar)
+      // //  console.log(urlParams)
+      // //  console.log(loginpar)
       if(loginpar!='expired' && loginpar!=null){
         this.intro = new Intro(this.DOM.el.querySelector('.m-login'),2)
       }
@@ -499,7 +499,7 @@ export default class extends Page {
     //   // credentials: 'same-origin',
       
     // }).then((data)=>{
-    //   console.log(data)
+    // //  console.log(data)
     // })
     
 
@@ -510,11 +510,11 @@ export default class extends Page {
     // formdata.set('EMAIL','angelperezpedrosa@gmail.com')
     
     // setTimeout(() => {
-    //   console.log('fona?')
+    // //  console.log('fona?')
     //   fetch(urlap,{
        
     //   }).then((o)=>{
-    //     // console.log(o)
+    //     // //  console.log(o)
     //   })
       // fetch(urlne,{
       //   method: 'post',
@@ -524,7 +524,7 @@ export default class extends Page {
       //     'jsonp': 'c'
       //   },
       // }).then((o)=>{
-      //   console.log(o)
+      // //  console.log(o)
       // })
     // }, 600);
 
@@ -557,13 +557,13 @@ export default class extends Page {
   }
   
   async getJson(url){
-    console.log(url)
+    // //  console.log(url)
     const posts = await fetch(url)
     const datap = await posts.json()
-    console.log(datap)
+    // //  console.log(datap)
     this.html = Eta.render(list,{global:this.main,posts:datap.posts})
-    console.log(this.html)
-    console.log(this.DOM.holder)
+    // //  console.log(this.html)
+    // //  console.log(this.DOM.holder)
     this.DOM.holder.innerHTML = this.html
     
 

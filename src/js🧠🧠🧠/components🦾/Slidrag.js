@@ -40,9 +40,9 @@ export default class {
 
     }
     initEvents() {
-      // console.log('asasa')
+      // //  console.log('asasa')
       // this.swiper.on('drag',()=>{
-      //   console.log('a')
+      // //  console.log('a')
       //   document.documentElement.classList.add('mouse-down')
       // })
       // this.swiper.on('dragEnd',()=>{
@@ -58,7 +58,7 @@ export default class {
 					this.update()
         })
 				// this.swiper.on('progress',(sw)=>{
-				// 	console.log(sw.progress)
+				// 	// //  console.log(sw.progress)
         // })
         this.swiper.on('touchEnd',(sw,ev)=>{
           document.documentElement.classList.remove('mouse-down')

@@ -26,14 +26,14 @@ export default class extends Page {
     var html = ''
     this.childscrolling = false;
 
-    console.log(this.main)
+    // //  console.log(this.main)
     if(!this.main.user){
       
       const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
       const data = await response.json()
-      console.log(data)
+      // //  console.log(data)
       html = Eta.render(template,{global:this.main,data:data,footer:this.footer})
-      // console.log(html)
+      // //  console.log(html)
       document.querySelector('#content').innerHTML += html
       this.DOM = {
         el:document.querySelector('main:not(.old)')
@@ -58,7 +58,7 @@ export default class extends Page {
       const datap = await responsep.json()
       const response = await fetch(this.main.acf.base + '/wp-json/wp/v2/pages/' + content.dataset.id + '?acf_format=standard')
       const data = await response.json()
-      console.log(data);
+      // //  console.log(data);
       html = Eta.render(templatelog,{global:this.main,data:data,datap:datap,footer:this.footer})
       document.querySelector('#content').innerHTML += html
       this.DOM = {
@@ -123,7 +123,7 @@ export default class extends Page {
       this.indexlist = index
       if(index!=-1){
 
-        // console.log(this.indexlist)
+        // //  console.log(this.indexlist)
         this.DOM.listimg[this.indexlist].classList.add('act')
         this.DOM.listel[this.indexlist].classList.add('act')
       }
@@ -268,7 +268,7 @@ export default class extends Page {
 
             }
             else if(id=='v'){
-              console.log('stahp')
+              // //  console.log('stahp')
               this.intro?.stop()
             }
             else if(id=="t"){
@@ -301,7 +301,7 @@ export default class extends Page {
               this.slidetext = this.anims[pos]
             }
             else if(id=='v'){
-              console.log('start')
+              // //  console.log('start')
               this.intro?.start()
             }
             else if(id=='s'){
@@ -372,7 +372,7 @@ export default class extends Page {
         if(this.isVisible == 0){
           return false
         }
-        // console.log(entry.isIntersecting+' '+entry.target.dataset.el)
+        // //  console.log(entry.isIntersecting+' '+entry.target.dataset.el)
         if(entry.boundingClientRect.y > 100){
           this.slideList(entry.target.dataset.el)
         }

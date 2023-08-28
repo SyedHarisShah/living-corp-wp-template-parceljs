@@ -7,6 +7,7 @@
           
           <div class="userp_pos">1 of 4</div>
           <h2 class="tit2">WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU</h2>
+          <p>(This info will help us curate content just for you)</p>
         </div>
         <div class="userp_form_ops activeOp">
           <% 
@@ -34,6 +35,7 @@
           </div>
           <div class="userp_pos">2 of 4</div>
           <h2 class="tit2">WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU</h2>
+          <p>(This info will help us curate content just for you)</p>
         </div>
           <% 
             cont1=0
@@ -68,6 +70,7 @@
           </div>
           <div class="userp_pos">3 of 4</div>
           <h2 class="tit2">WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU</h2>
+          <p>(This info will help us curate content just for you)</p>
         </div>
           <% 
             cont2 = 0
@@ -251,7 +254,7 @@
 
 <div class="usercontrols">
   <div class="usercontrols_top">
-    <div class="simp mouseHover" style="--main:#DF80AC"><span class="xs">Content</span><span>Prefered content</span></div>
+    <div class="simp mouseHover" style="--main:#DF80AC"><span class="xs">Content</span><span>Preferred content</span></div>
     <div class="simp mouseHover" style="--main:#E5855E"><span class="xs">settings</span><span>Profile settings</span></div>
     <div class="simp mouseHover" style="--main:#DF80AC"><span>Jobs</span></div>
     <div class="simp mouseHover"><span>Log out</span></div>

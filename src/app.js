@@ -1,5 +1,5 @@
 import './app🖌️.scss';
-// console.log('%c 💀 CssKiller ','background-color:#111; font-weight:800; color:white; text-transform:uppercase;font-size:30px;');
+// //  console.log('%c 💀 CssKiller ','background-color:#111; font-weight:800; color:white; text-transform:uppercase;font-size:30px;');
 (function(url) {
     // Create a new `Image` instance
     var image = new Image();
@@ -23,7 +23,7 @@ import './app🖌️.scss';
        ].join(' ');
   
        // notice the space after %c
-       console.log('%c ', style);
+      // //  console.log('%c ', style);
     };
   
     // Actually loads the image

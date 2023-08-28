@@ -26,7 +26,7 @@ export default class extends Page {
     // const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/podcast/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log('data', data)
+    // console.log('data', data)
     let html = ''
 
     let load = true;
@@ -116,14 +116,14 @@ export default class extends Page {
         else{
           this.textExpand = () =>{
             this.isVisible = 0
-            console.log(this.sticks)
+            // console.log(this.sticks)
             this.DOM.clicktext.classList.add('act')
             this.timeline = gsap.timeline(({paused:true}))
             // .to(this.sticks[0].stick.son,{duration:.6,y:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)+'px'},'a')
             // .to(this.sticks[0].stick,{duration:.6,current:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight),target:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)},'a')
             .to(this.DOM.hidetext,{height:this.DOM.holdtext.clientHeight+'px',duration:.6,
               onUpdate:()=>{
-                console.log(this.sticks)
+                // console.log(this.sticks)
               },
               onComplete:()=>{
                 this.isVisible = 1
@@ -201,7 +201,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       if(isNew == true){
-        console.log(this.max)
+        // console.log(this.max)
         this.DOM.pages.innerHTML = '<div class="simp inact prev"><span>Prev</span></div>'
         for(let i = 1;i<=this.max;i++){
           if(i == page){
@@ -262,7 +262,7 @@ export default class extends Page {
         }
 
         if(this.DOM.el.querySelector('.m-tabposts_pags .next')){
-          console.log(this.DOM.el.querySelector('.m-tabposts_pags .next'))
+          // console.log(this.DOM.el.querySelector('.m-tabposts_pags .next'))
           this.DOM.el.querySelector('.m-tabposts_pags .next').onclick = async () => {
             if(!this.main.isTouch){
               this.scroll.target += this.DOM.el.querySelector('.m-tabposts').getBoundingClientRect().y
@@ -288,7 +288,7 @@ export default class extends Page {
         if(this.DOM.el.querySelector('.sPosts')){
           for(let el of this.DOM.el.querySelectorAll('.sPosts .blockClick')){
             el.onclick = ev =>{
-              console.log(el)
+              // console.log(el)
               this.DOM.el.querySelector('.blockClick.act').classList.remove('act')
               el.classList.add('act')
               this.blocksClick(el.dataset.type)
@@ -309,7 +309,7 @@ export default class extends Page {
           this.DOM.el.querySelector('.m-tabposts_pags .prev').classList.remove('inact')
 
         }
-        console.log(this.actualpage+' '+this.max)
+        // console.log(this.actualpage+' '+this.max)
         if(this.actualpage<this.max){
           this.DOM.el.querySelector('.m-tabposts_pags .next').classList.remove('inact')
 
@@ -331,7 +331,7 @@ export default class extends Page {
   checkPages(page){
     if(this.DOM.el.querySelector('.deleter')){
       for(let el of this.DOM.el.querySelectorAll('.deleter')){
-        console.log(el)
+        // console.log(el)
         el.remove()
       }
     }

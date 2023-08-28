@@ -38,8 +38,8 @@ export default class extends EventEmitter {
       const loginpar = urlParams.get('login')
       const keypar = urlParams.get('key')
       let formdata = new FormData()
-      console.log(this.pass1.DOM.npt.value)
-      console.log(this.pass2.DOM.npt.value)
+      // //  console.log(this.pass1.DOM.npt.value)
+      // //  console.log(this.pass2.DOM.npt.value)
       formdata.set('pass1',encodeURIComponent(this.pass1.DOM.npt.value))
       const pass1 = encodeURIComponent(this.pass1.DOM.npt.value)
       const pass2 = encodeURIComponent(this.pass2.DOM.npt.value)
@@ -52,7 +52,7 @@ export default class extends EventEmitter {
         method: 'GET'
       })
       const datalog = await logtest.json()
-      console.log(datalog)
+      // //  console.log(datalog)
       if(datalog==300){
         this.DOM.errors[0].classList.add('act')
         setTimeout(()=>{
@@ -68,14 +68,14 @@ export default class extends EventEmitter {
         this.emit('login')
       }
       //   // this.DOM.el
-      //   console.log('badname')
+      // //  console.log('badname')
       //   this.DOM.errors[0].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[0].classList.remove('act')
       //   },3300)
       // }
       // else if(datalog.code=='incorrect_password'){
-      //   console.log('badpass')
+      // //  console.log('badpass')
       //   this.DOM.errors[1].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[1].classList.remove('act')
@@ -84,7 +84,7 @@ export default class extends EventEmitter {
       // else{
 
       // }
-      // console.log('sis')
+      // //  console.log('sis')
       
   }
   removeEvents() {

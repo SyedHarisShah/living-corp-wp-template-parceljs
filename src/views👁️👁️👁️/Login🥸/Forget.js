@@ -16,7 +16,7 @@ export default class extends EventEmitter {
     this.email =  new Field(this.DOM.el.querySelector('.emFor').parentNode)
     this.btn =  this.DOM.el.querySelector(".btnForget")
     this.DOM.errors = this.DOM.el.querySelectorAll('.error')
-    console.log(this.DOM.errors)
+    // //  console.log(this.DOM.errors)
     this.initEvents()
   }
   
@@ -34,16 +34,16 @@ export default class extends EventEmitter {
       let formdata = new FormData()
       // formdata.set('username','angelperezpedrosa@gmail.com')
       // formdata.set('password',encodeURIComponent('jy1&K7w)i14O$BDCtC'))
-      console.log(this.email.DOM.npt.value)
+      // //  console.log(this.email.DOM.npt.value)
       formdata.set('email',this.email.DOM.npt.value)
       const logtest = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/forgetpassword?email='+this.email.DOM.npt.value,{
         
       })
       const datalog = await logtest.json()
-      console.log(datalog)
+      // //  console.log(datalog)
       if(datalog=='300'){
         // this.DOM.el
-        console.log('badmail')
+        // //  console.log('badmail')
         this.DOM.errors[0].classList.add('act')
         setTimeout(()=>{
           this.DOM.errors[0].classList.remove('act')

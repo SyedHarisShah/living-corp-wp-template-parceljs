@@ -28,7 +28,7 @@ export default class extends EventEmitter {
       this.DOM.clickshold?.classList.remove('hid')
 
     }
-    console.log(num)
+    // //  console.log(num)
     this.DOM.btns[this.pos]?.classList.remove('act')
     this.DOM.btns[num]?.classList.add('act')
     this.DOM.selectors[this.pos]?.classList.add('load')

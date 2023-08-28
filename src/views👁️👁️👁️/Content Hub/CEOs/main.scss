@@ -478,7 +478,7 @@
 
           .company-image {
             opacity: 0;
-            filter: brightness(0);
+            filter: brightness(1);
             position: absolute;
             transform: rotate(-45deg) scale(1);
             object-fit: contain;

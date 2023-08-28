@@ -44,7 +44,7 @@ export default class extends Component {
         this.closeSBg = this.signup.querySelector('.signupal_bg')
         this.closeS = this.signup.querySelector('.signupal_close')
         this.closeSBtn = this.signup.querySelector('.btn')
-        console.log(this.closeSBtn)
+        // //  console.log(this.closeSBtn)
 
         this.clickModal = (type) =>{
           localStorage.setItem('sign_LC',true)
@@ -94,7 +94,7 @@ export default class extends Component {
     // })
 
     // this.timeline.call(_ => {
-    //   console.log('compit')
+    // //  console.log('compit')
     //   this.emit('complete')
     // })
 

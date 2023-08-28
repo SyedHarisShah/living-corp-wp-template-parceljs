@@ -19,7 +19,7 @@ export default class extends Page {
   async generate(content) {
     
     var html = Eta.render(template,{global:this.main,footer:this.footer})
-    // console.log(html)
+    // //  console.log(html)
     document.querySelector('#content').innerHTML += html
 
     this.DOM = {
@@ -77,7 +77,7 @@ export default class extends Page {
         if(!entry.isIntersecting){
           if(this.anims[pos].active==true && this.anims[pos].animated==1){
             if(id=='s'){
-              // console.log(this.anims[pos])
+              // //  console.log(this.anims[pos])
               this.anims[pos].stick.active = 0
               this.movestick = null
             }

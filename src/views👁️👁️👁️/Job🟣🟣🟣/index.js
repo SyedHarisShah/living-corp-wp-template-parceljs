@@ -21,7 +21,7 @@ export default class extends Page {
   async generate(content) {
     const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/job/')
     const data = await response.json()
-    console.log(data)
+    // //  console.log(data)
     var html = Eta.render(template,{global:this.main,data:data,footer:this.footer})
     
     document.querySelector('#content').innerHTML += html
@@ -51,7 +51,7 @@ export default class extends Page {
     await this.createAnimations()
     this.clearChecks = () =>{
       this.isloading = 1
-      console.log(this.isloading+'fi')
+      // //  console.log(this.isloading+'fi')
       for(let [index,o] of this.DOM.checks.entries()){
         o.checked = false
       }
@@ -157,7 +157,7 @@ export default class extends Page {
     const posts = await fetch(url)
     const datap = await posts.json()
 
-    console.log(datap)
+    // //  console.log(datap)
     if(datap.total==1){
       this.DOM.total.innerHTML = datap.total+' result'
 
@@ -174,11 +174,11 @@ export default class extends Page {
 
 
   async getPosts(){
-    console.log('tri')
+    // //  console.log('tri')
     if(this.isloading == 1){
       return false
     }
-    console.log(this.isloading+'islad')
+    // //  console.log(this.isloading+'islad')
     this.isloading = 1
     this.DOM.holder.classList.add('load')
     let a = ''

@@ -14,7 +14,7 @@ export default class extends EventEmitter {
       el: el,
     }
 
-    console.log(this.DOM.el)
+    // //  console.log(this.DOM.el)
     this.main = main
     this.btn =  this.DOM.el.querySelector(".btnLIConnect")
     this.DOM.errors = document.body.querySelectorAll('.usercontrols_errors .error')
@@ -44,7 +44,7 @@ export default class extends EventEmitter {
     const finishConnect = setInterval(() => {
       if(window.liConnected){
         window.liConnected = false;
-        console.log('linkedin connected')
+        // //  console.log('linkedin connected')
 
         this.main.linkedin_id = window.liConnected;
         const btn_t = this.btn.querySelector(".btn_t");
@@ -65,7 +65,7 @@ export default class extends EventEmitter {
     const finishDisconnect = setInterval(() => {
       if(window.liDisconnected){
         window.liDisconnected = false;
-        console.log('linkedin disconnected')
+        // //  console.log('linkedin disconnected')
 
         this.main.linkedin_id = '';
         const btn_t = this.btn.querySelector(".btn_t");

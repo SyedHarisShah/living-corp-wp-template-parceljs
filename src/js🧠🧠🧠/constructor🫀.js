@@ -11,9 +11,9 @@ import FontFaceObserver from 'fontfaceobserver'
 const global = browser.browserCheck()
 global.icons = icons
 
-// console.log(navigator.userAgentData.mobile)
+// //  console.log(navigator.userAgentData.mobile)
 
-// console.log(process.env.APP_ENV)
+// //  console.log(process.env.APP_ENV)
 if (window.history.scrollRestoration) {
     window.history.scrollRestoration = 'manual'
 }
@@ -34,13 +34,13 @@ async function getuser(){
       
     })
     const userdata = await usertest.json()
-    console.log(userdata)
+    // //  console.log(userdata)
     document.body.dataset.user=userdata.user.id
     document.documentElement.classList.add('logged')
     return userdata
   }
   else{
-    console.log('asa')
+    // //  console.log('No dataset nonce');
   }
 }
 
@@ -54,7 +54,7 @@ async function login(){
       body: formdata
     })
     const datalog = await logtest.json()
-    console.log(datalog)
+    // //  console.log(datalog)
     document.body.dataset.nonce=datalog.nonce
     document.body.dataset.user=datalog.user.ID
     document.documentElement.classList.add('logged')
@@ -63,7 +63,7 @@ async function login(){
 }
 
 async function start(main) {
-  console.log(document.body.dataset.js+'/wp-json/csskiller/v1/options')
+  // //  console.log(document.body.dataset.js+'/wp-json/csskiller/v1/options')
   
   
 	const response = await fetch(document.body.dataset.js+'/wp-json/csskiller/v1/options')
@@ -77,7 +77,7 @@ async function start(main) {
   }
   // await 
   global.acf = data
-  console.log(main)
+  // //  console.log(main)
 	return global
 }
 

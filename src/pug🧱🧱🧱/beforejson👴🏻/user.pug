@@ -2,13 +2,13 @@ doctype html
 include src/pug🧱🧱🧱/basic/basic
 html.logme
   +head
-  body(data-js="http://165.227.64.123:8126/")
+  body(data-js=process.env.PUBLIC_URL)
     +fixeds
     #content(data-template="login" data-id="2")
       .usercontrols
         .usercontrols_top
           .simp
-            span Prefered content
+            span Preferred content
           .simp
             span Profile settings
           .simp
@@ -40,6 +40,7 @@ html.logme
                   .btnarrow_t Back
               .userp_pos 1 of 4
               h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+              p (This info will help us curate content just for you)
             .userp_form_ops
               .rad
                 .rad_cont
@@ -60,6 +61,7 @@ html.logme
                   .btnarrow_t Back
               .userp_pos 1 of 4
               h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+              p (This info will help us curate content just for you)
             .userp_form_ops
               .rad
                 .rad_s
@@ -82,6 +84,7 @@ html.logme
                   .btnarrow_t Back
               .userp_pos 1 of 4
               h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+              p (This info will help us curate content just for you)
             .userp_form_ops
               .rad
                 .rad_s
@@ -104,6 +107,7 @@ html.logme
                   .btnarrow_t Back
               .userp_pos 1 of 4
               h2.tit2 WELCOME! TELL US A<br>LITTLE BIT ABOUT YOU
+              p (This info will help us curate content just for you)
             .userp_form_ops
               .check
                 .check_s

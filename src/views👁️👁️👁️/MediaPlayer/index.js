@@ -31,10 +31,17 @@ export default class extends Page {
 
     window.history.replaceState({...window.history.state, postid: this.postid}, document.title, window.location.href);
 
+    this.lsAvail = true;
+    try {
+      localStorage.getItem("sign_LC");
+    } catch (_) {
+      this.lsAvail = false;
+    }
+
     this.state = {
-      loop: localStorage.getItem('loop') === "true",
-      shuffle: localStorage.getItem('shuffle') === "true",
-      index: parseInt(localStorage.getItem('index')),
+      loop: this.lsAvail ? localStorage?.getItem("loop") === "true" : false,
+      shuffle: this.lsAvail ? localStorage?.getItem("shuffle") === "true" : false,
+      index: parseInt(this.lsAvail ? localStorage?.getItem("index") : 0),
       itemScrolling: "",
       playing: false, // only used for pausing while seeking
       filters: {cats: [], tags: [], topics: []}
@@ -250,10 +257,13 @@ export default class extends Page {
     const searchTerm = e.target.value;
 
     if(!searchTerm) return;
-    this.search_term = searchTerm;
+    this.search_term = searchTerm.trim();
+    this.search_term_tax = false;
 
     const params = new URLSearchParams(window.location.search);
     params.set('term', this.search_term);
+
+    params.delete("tax");
     this.DOM.searchBars?.forEach(x => x.blur());
 
     window.history.pushState({'player_href': 'search'}, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
@@ -687,13 +697,13 @@ export default class extends Page {
     if(menu.style.display === 'unset'){ // hide
       menu.style.display = 'none';
       menu.classList.remove('stickout');
-      console.log('hide');
+      //  console.log('hide');
       document.removeEventListener('click', hideMenu);
     } else { // show
       document.querySelectorAll('.mp-menu, .mp-dropmenu, .mp-removemenu')?.forEach(el => el.style.display = 'none');
       menu.style.display = 'unset';
       menu.classList.add('stickout');
-      console.log('show');
+      //  console.log('show');
 
       document.addEventListener('click', hideMenu);
       e?.stopPropagation();
@@ -730,7 +740,7 @@ export default class extends Page {
   async getUserPlaylists(){
     const params = new URLSearchParams();
     params.set("userid", this.main.user?.user?.ID);
-    console.log(this.main.user?.user);
+    //  console.log(this.main.user?.user);
 
     const url = `/wp-json/sdv/player/v1/get-user-playlists?${params}`;
 
@@ -741,8 +751,8 @@ export default class extends Page {
   async playPlaylist(id, ismodule = false) {
     if(!id && !ismodule) return;
 
-    console.log('id, ismodule');
-    console.log(id, ismodule);
+    //  console.log('id, ismodule');
+    //  console.log(id, ismodule);
 
     const params = new URLSearchParams();
     params.set("userid", this.main.user?.user?.ID);
@@ -782,14 +792,13 @@ export default class extends Page {
 
     if(this.state.shuffle) this.shuffledPlaylist = this.shufflePlaylist();
     
-    console.log('this.playlist', this.playlist);
     this.load(this.playlist[0]);
   }
 
   regModuleClick(){
     document.querySelectorAll('.p-m').forEach((module) => {
       module.addEventListener('click', (e) => {
-        console.log('opening module page');
+        //  console.log('opening module page');
         this.postid = module.dataset.id;
 
         window.history.pushState({'player_href': 'module', postid: this.postid}, document.title, module.dataset.href);
@@ -810,7 +819,7 @@ export default class extends Page {
     let clickCount = 0;
 
     const showPlaylist = (playlist) => {
-      console.log('opening playlist page');
+      //  console.log('opening playlist page');
 
       window.history.pushState({'player_href': 'playlist'}, document.title, playlist.dataset.href);
       this.lastload = playlist_single.load;
@@ -819,7 +828,7 @@ export default class extends Page {
 
     playlist.addEventListener('mousedown', (e) => {
       if(['svg', 'path', 'ul', 'li'].includes(e.target.tagName.toLowerCase()) || e.target.id === 'share-icon'){
-        // console.log(e.target);
+        //  console.log(e.target);
         return;
       }
 
@@ -827,7 +836,7 @@ export default class extends Page {
       // clickCount++;
 
       // if (("which" in e && e.which == 3) || ("button" in e && e.button == 2)) {
-      //   console.log('right click');
+      //  console.log('right click');
       //   editPlaylist(playlist); // right-click
       //   clickCount = 0;
       // }
@@ -845,7 +854,7 @@ export default class extends Page {
   regPlaylistClick(){
     document.querySelectorAll('.player-playlist').forEach((playlist) => {
       playlist.addEventListener('click', (e) => {
-        console.log('opening playlist page');
+        //  console.log('opening playlist page');
         this.postid = playlist.dataset.id;
 
         window.history.pushState({'player_href': 'playlist', postid: this.postid}, document.title, playlist.dataset.href);
@@ -860,6 +869,7 @@ export default class extends Page {
       const filterElem = document.createElement('span');
       filterElem.id = `${type}-${i}`;
       filterElem.dataset.id = filter.id;
+      filterElem.dataset.type = type;
       filterElem.classList.add("player-page__filter-item");
       filterElem.classList.add("mouseHover");
       filterElem.innerHTML = filter.name;
@@ -902,16 +912,22 @@ export default class extends Page {
 
     moduleFilterBtns.forEach(btn => {
       btn.addEventListener('click', e => {
-        const browseBtn = document.getElementById('browse-link');
-        const filterBtn = document.querySelector(`.player-page__filters:not(.player-page__filters--modules) [data-id='${btn.dataset.id}']`);
-
+        this.search_term = btn.innerText;
+        this.search_term_tax = btn.dataset.type;
+        const params = new URLSearchParams(window.location.search);
+        params.set("term", this.search_term);
+        params.set("tax", this.search_term_tax);
+        this.DOM.searchBars?.forEach((x)=>x.blur());
         // clear selected cats
-        const actClass = 'player-page__filter-item--active';
-        document.querySelectorAll(`.${actClass}`).forEach(filter => filter.classList.remove(actClass));
+        const actClass = "player-page__filter-item--active";
+        document.querySelectorAll(`.${actClass}`).forEach((filter)=>filter.classList.remove(actClass));
         this.state.filters = {cats: [], tags: [], topics: []};
 
-        browseBtn.click();
-        filterBtn.click();
+        window.history.pushState({
+          "player_href": "search"
+        }, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
+        this.lastload = search_podcasts.load;
+        this.lastload();
       });
     })
   }
@@ -943,7 +959,7 @@ export default class extends Page {
       
           const postsResp = await fetch(url);
           const module = (await postsResp.json());
-          this.nextPlaylist = [module] || this.nextPlaylist;
+          this.nextPlaylist = [module];
         }
 
         this.playPlaylist(parent.dataset.id, true);
@@ -1178,6 +1194,7 @@ export default class extends Page {
 
       params.set('isEmbed', true);
       params.set('spId', this.main?.sponsor?.id ?? 0);
+      params.set("cache", Math.random());
 
       link += link.at(-1) == '/' ? '?' : '&';
       link += `${params}`;
@@ -1187,7 +1204,7 @@ export default class extends Page {
     
     // copy to clipboard
     if(navigator?.clipboard) navigator?.clipboard?.writeText(copy);
-    else console.log('copied: ' + link);
+    // else console.log('copied: ' + link);
 
     const type = embed ? 'Iframe' : 'link';
     const shareMsg = this.main.acf?.share_message ?? `${type} copied to clipboard`;

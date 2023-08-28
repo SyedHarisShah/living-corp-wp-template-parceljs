@@ -23,7 +23,7 @@ export default class extends Page {
   async generate(content) {
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/posts/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log('data', data)
+    // //  console.log('data', data)
 
     let Difference_In_Time = new Date(data.date).getTime() - new Date().getTime()
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24)
@@ -46,9 +46,9 @@ export default class extends Page {
 
       const responsetags = await fetch(this.main.acf.base+'/wp-json/wp/v2/gettags/?post='+content.dataset.id)
       const datatags = await responsetags.json()
-      console.log(datatags)
+      // //  console.log(datatags)
       html = Eta.render(template,{global:this.main,tags:datatags,data:data,footer:this.footer})
-      // console.log(html)
+      // //  console.log(html)
     }
     document.querySelector('#content').innerHTML += html
     this.DOM = {
@@ -136,7 +136,7 @@ export default class extends Page {
     return new Promise((resolve, reject) => {
       let url = elem.dataset.src
         elem.src = url
-        console.log('eeee')
+        // //  console.log('eeee')
         elem.onload = () => {
           if(elem.naturalWidth < elem.naturalHeight){
             elem.parentNode.classList.add('portrait')
@@ -217,7 +217,7 @@ export default class extends Page {
         if(!entry.isIntersecting){
           if(this.anims[pos].active==true && this.anims[pos].animated==1){
             if(id=='s'){
-              // console.log(this.anims[pos])
+              // //  console.log(this.anims[pos])
               this.anims[pos].stick.active = 0
               this.movestick = null
             }

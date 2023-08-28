@@ -29,7 +29,7 @@
   <section class="ch-ceos_content">
     <div class="left">
       <div class="ch_search-cont">
-        <input class="ch_search" type="text" id="ceo-search" name="ceo-search" placeholder="Search Organizations">
+        <input class="ch_search" type="text" id="ceo-search" name="ceo-search" placeholder="Search Member Organizations">
         <%~ it.global.icons.search %>
       </div>
 

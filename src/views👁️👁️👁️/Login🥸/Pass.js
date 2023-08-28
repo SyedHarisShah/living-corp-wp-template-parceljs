@@ -14,7 +14,7 @@ export default class extends EventEmitter {
     this.DOM = {
       el: el,
     }
-    console.log(this.DOM.el)
+    // //  console.log(this.DOM.el)
     this.main = main
     this.pass1 =  new Field(this.DOM.el.querySelector('.p1Pass').parentNode)
     this.pass2 =  new Field(this.DOM.el.querySelector('.p2Pass').parentNode)
@@ -40,8 +40,8 @@ export default class extends EventEmitter {
       formdata.set('pass1',encodeURIComponent(this.pass1.DOM.npt.value))
       formdata.set('pass2',encodeURIComponent(this.pass2.DOM.npt.value))
       formdata.set('userid',this.main.user.user.ID)
-      console.log(this.main.acf.base)
-      console.log(this.main.user.nonce)
+      // //  console.log(this.main.acf.base)
+      // //  console.log(this.main.user.nonce)
       const logtest = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/setpass',{
         
         method: 'post',
@@ -50,7 +50,7 @@ export default class extends EventEmitter {
         'X-WP-Nonce': this.main.user.nonce
       })
       const datalog = await logtest.json()
-      console.log(datalog)
+      // //  console.log(datalog)
       if(datalog==300){
         this.DOM.errors[2].classList.add('act')
         setTimeout(()=>{
@@ -66,14 +66,14 @@ export default class extends EventEmitter {
         this.emit('resetuser')
       }
       //   // this.DOM.el
-      //   console.log('badname')
+      // //  console.log('badname')
       //   this.DOM.errors[0].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[0].classList.remove('act')
       //   },3300)
       // }
       // else if(datalog.code=='incorrect_password'){
-      //   console.log('badpass')
+      // //  console.log('badpass')
       //   this.DOM.errors[1].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[1].classList.remove('act')
@@ -82,7 +82,7 @@ export default class extends EventEmitter {
       // else{
 
       // }
-      // console.log('sis')
+      // //  console.log('sis')
       
   }
   removeEvents() {

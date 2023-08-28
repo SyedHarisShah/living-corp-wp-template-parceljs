@@ -280,6 +280,7 @@ html.smooth {
       overflow: hidden;
       width: 100%;
       transition: .6s all $swiftOut;
+      display: none;
 
       img {
         aspect-ratio: 3.2;
@@ -299,8 +300,6 @@ html.smooth {
       display: flex;
       padding-right: 3px;
 
-      &--swiper {}
-
       &--grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -308,6 +307,16 @@ html.smooth {
         .player-playlist {
           width: unset;
         }
+      }
+
+      .swiper-button-prev {
+        color: #000000;
+        top: 100px;
+      }
+
+      .swiper-button-next {
+        color: #000000;
+        top: 100px;
       }
     }
 
@@ -383,8 +392,6 @@ html.smooth {
       }
     }
   }
-
-  .swiper {}
 }
 
 .player-module-page {
@@ -958,6 +965,7 @@ html.smooth {
   // border: 1px solid black;
   border: none;
   display: flex;
+  align-items: center;
   flex-direction: column;
   text-transform: uppercase;
   width: 20rem;
@@ -991,6 +999,9 @@ html.smooth {
     border-radius: 8px;
     margin: 1.25rem;
     overflow: hidden;
+    width: 55%;
+    margin: 0 auto !important;
+    margin-bottom: 15px !important;
 
     &--user-playlist {
       align-items: center;
@@ -1031,6 +1042,7 @@ html.smooth {
     gap: 5rem;
     margin-block: 2.85rem;
     padding-bottom: 2rem;
+    list-style: none;
 
     li {
       color: #9A9AB0;
@@ -1660,6 +1672,7 @@ html.smooth {
 .mp-menu {
   left: unset;
   right: 0%;
+  list-style: none;
 }
 
 .mp-dropmenu {

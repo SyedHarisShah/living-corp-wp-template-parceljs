@@ -54,21 +54,21 @@ export default class extends EventEmitter {
         // processData: false, // NEEDED, DON'T OMIT THIS
       })
       const datalog = await logtest
-      console.log(datalog)
+      // //  console.log(datalog)
       document.body.querySelector('.contactal').classList.add('contactal-act')  
       // document.body.querySelector('.applyal').classList.add('applyal-act')  
       // this.emit('success')
 
 
       //   // this.DOM.el
-      //   console.log('badname')
+      // //  console.log('badname')
       //   this.DOM.errors[0].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[0].classList.remove('act')
       //   },3300)
       // }
       // else if(datalog.code=='incorrect_password'){
-      //   console.log('badpass')
+      // //  console.log('badpass')
       //   this.DOM.errors[1].classList.add('act')
       //   setTimeout(()=>{
       //     this.DOM.errors[1].classList.remove('act')
@@ -77,7 +77,7 @@ export default class extends EventEmitter {
       // else{
 
       // }
-      // console.log('sis')
+      // //  console.log('sis')
       
   }
   removeEvents() {

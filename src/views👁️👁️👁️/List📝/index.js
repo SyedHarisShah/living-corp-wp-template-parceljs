@@ -23,7 +23,7 @@ export default class extends Page {
     let html = ''
     const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/list/')
     const data = await response.json()
-    console.log(data)
+    // //  console.log(data)
     html = Eta.render(template,{data:data,global:this.main,footer:this.footer})
     this.modalhtml = Eta.render(modal,{global:this.main})
     document.querySelector('#content').innerHTML += html
@@ -62,7 +62,7 @@ export default class extends Page {
     //   // credentials: 'same-origin',
       
     // }).then((data)=>{
-    //   console.log(data)
+    // //  console.log(data)
     // })
     
 
@@ -73,11 +73,11 @@ export default class extends Page {
     // formdata.set('EMAIL','angelperezpedrosa@gmail.com')
     
     // setTimeout(() => {
-    //   console.log('fona?')
+    // //  console.log('fona?')
     //   fetch(urlap,{
        
     //   }).then((o)=>{
-    //     // console.log(o)
+    //     // //  console.log(o)
     //   })
       // fetch(urlne,{
       //   method: 'post',
@@ -87,7 +87,7 @@ export default class extends Page {
       //     'jsonp': 'c'
       //   },
       // }).then((o)=>{
-      //   console.log(o)
+      // //  console.log(o)
       // })
     // }, 600);
 
@@ -120,13 +120,13 @@ export default class extends Page {
   }
   
   async getJson(url){
-    console.log(url)
+    // //  console.log(url)
     const posts = await fetch(url)
     const datap = await posts.json()
-    console.log(datap)
+    // //  console.log(datap)
     this.html = Eta.render(list,{global:this.main,posts:datap.posts})
-    console.log(this.html)
-    console.log(this.DOM.holder)
+    // //  console.log(this.html)
+    // //  console.log(this.DOM.holder)
     this.DOM.holder.innerHTML = this.html
     
 
@@ -167,7 +167,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       for(let el of this.DOM.holder.querySelectorAll('.list')){
-        console.log(el)
+        // //  console.log(el)
         el.addEventListener('click',()=>this.modalFn(el))
       }
       this.emit('linkseventlisteners')

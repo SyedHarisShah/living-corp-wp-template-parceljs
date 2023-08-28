@@ -19,7 +19,7 @@ export default class extends Page {
   async generate(content) {
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/job/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log(data)
+    // //  console.log(data)
     this.job = {
       id:content.dataset.id,
       template:'job',
@@ -27,7 +27,7 @@ export default class extends Page {
       url:window.location.href
     }
     var html = Eta.render(template,{global:this.main,data:data,footer:this.footer})
-    console.log(html)
+    // //  console.log(html)
     document.querySelector('#content').innerHTML += html
     this.DOM = {
       el:document.querySelector('main:not(.old)')
@@ -69,14 +69,14 @@ export default class extends Page {
     else{
       this.textExpand = () =>{
         this.isVisible = 0
-        console.log(this.sticks)
+        // //  console.log(this.sticks)
         this.DOM.clicktext.classList.add('act')
         this.timeline = gsap.timeline(({paused:true}))
         // .to(this.sticks[0].stick.son,{duration:.6,y:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)+'px'},'a')
         // .to(this.sticks[0].stick,{duration:.6,current:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight),target:'+='+(this.DOM.holdtext.clientHeight - this.DOM.hidetext.clientHeight)},'a')
         .to(this.DOM.hidetext,{height:this.DOM.holdtext.clientHeight+'px',duration:.6,
           onUpdate:()=>{
-            console.log(this.sticks)
+            // //  console.log(this.sticks)
           },
           onComplete:()=>{
             this.isVisible = 1

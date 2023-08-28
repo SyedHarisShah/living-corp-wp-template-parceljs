@@ -28,7 +28,7 @@ export default class {
       this.tweens.push(tw)
     }
     this.active = 0
-    console.log(isActive)
+    // //  console.log(isActive)
     if(isActive==2){
       this.active = 2
     }
@@ -106,7 +106,7 @@ export default class {
     else{
       this.pos=num
     }
-    console.log(this.pos+'asa')
+    // //  console.log(this.pos+'asa')
 
     this.elsleft[this.pos].classList.add('active')
     this.elsimages[this.pos].classList.add('active')

@@ -165,7 +165,7 @@ export default class {
 
     this.bg = new Mesh(this.gl, { geometry, program })
     this.bg.setParent(this.scene);
-    console.log(this.bg)
+    // //  console.log(this.bg)
     this.tl.to(this.bg.program.uniforms.uProgress,{value:1,duration:3,ease:Power2.easeInOut},1)
     //this.tl.to(this.bg.program.uniforms.uColor,{value:1,duration:3,ease:Power2.easeInOut},1)
     this.tl.to(this.bg.program.uniforms.uSoft,{value:.5,duration:1,ease:Power2.easeInOut},1)
@@ -210,11 +210,11 @@ export default class {
     this.scale = this.screen.height / 1500
 
     if(this.bg){
-      console.log('res')
+      // //  console.log('res')
       // this.bg.scale.y = this.viewport.height * (this.screen.height * this.scale) / this.screen.height
-      // console.log(this.bg.scale.x)
+      // //  console.log(this.bg.scale.x)
       // this.bg.scale.x = this.viewport.width * (this.screen.width * this.scale) / this.screen.width
-      // console.log(this.bg.scale.x)
+      // //  console.log(this.bg.scale.x)
     }
   }
 
@@ -223,7 +223,7 @@ export default class {
   }
 
   onTouchMove (event) {
-    // console.log(event.offsetX - this.screen.width/2)
+    // //  console.log(event.offsetX - this.screen.width/2)
     // this.time.x += Math.abs(( event.clientX - this.screen.width/2)*.003)
     // this.time.y += Math.abs(( event.clientY - this.screen.height/2)*.003)
 
@@ -256,7 +256,7 @@ export default class {
     this.velocity.x = deltaX / delta;
     this.velocity.y = deltaY / delta;
     // Flag update to prevent hanging velocity values when not moving
-    // console.log(this.velocity.x)
+    // //  console.log(this.velocity.x)
   }
 
   onTouchUp (event) {
@@ -275,7 +275,7 @@ export default class {
       // this.bg.program.uniforms.uTimeX.value = 0
     }
     // this.speed *=0.9
-    // console.log(this.speed)
+    // //  console.log(this.speed)
     // this.velocity.needsUpdate = false
     this.renderer.render({
       scene: this.scene,
@@ -288,8 +288,8 @@ export default class {
 
     // this.bg.program.uniforms.uTime.value += .022
     this.bg.program.uniforms.uTime.value += 1
-    // console.log((Math.sin(this.bg.program.uniforms.uTime.value** 0.0006)));
-    // console.log(Math.sin(-this.bg.program.uniforms.uTime.value * 0.01))
+    // //  console.log((Math.sin(this.bg.program.uniforms.uTime.value** 0.0006)));
+    // //  console.log(Math.sin(-this.bg.program.uniforms.uTime.value * 0.01))
 
   }
 }

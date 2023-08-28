@@ -2,6 +2,6 @@ doctype html
 include src/pug🧱🧱🧱/basic/basic
 html
   +head
-  body(data-js="http://165.227.64.123:8126/")
+  body(data-js=process.env.PUBLIC_URL)
     
     script(sync type="module" src="./src/app.js")

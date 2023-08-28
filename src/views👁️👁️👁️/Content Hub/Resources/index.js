@@ -27,7 +27,7 @@ export default class extends Page {
     // const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/resources/')
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
-    console.log(data)
+    // //  console.log(data)
 
     if(this?.main?.user){
       if (!this?.main?.user?.acf?.is_content_hub_user) {
@@ -109,13 +109,13 @@ export default class extends Page {
   }
   
   async getJson(url){
-    console.log(url)
+    // //  console.log(url)
     const posts = await fetch(url)
     const datap = await posts.json()
-    console.log(datap)
+    // //  console.log(datap)
     this.html = Eta.render(list,{global:this.main,posts:datap.posts})
-    console.log(this.html)
-    console.log(this.DOM.holder)
+    // //  console.log(this.html)
+    // //  console.log(this.DOM.holder)
     this.DOM.holder.innerHTML = this.html
     
 
@@ -156,7 +156,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       for(let el of this.DOM.holder.querySelectorAll('.list')){
-        console.log(el)
+        // //  console.log(el)
         el.addEventListener('click',()=>this.modalFn(el))
       }
       this.emit('linkseventlisteners')

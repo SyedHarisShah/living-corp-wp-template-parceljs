@@ -23,7 +23,7 @@ export default class extends Page {
   async generate(content) {
     var html = ''
 
-    console.log(this.main)
+    // //  console.log(this.main)
     
     const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     const data = await response.json()
@@ -44,7 +44,7 @@ export default class extends Page {
     
     html = Eta.render(template,{global:this.main,data:data,footer:this.footer})
 
-    // console.log(html)
+    // //  console.log(html)
     document.querySelector('#content').innerHTML += html
 
     this.DOM = {
@@ -209,7 +209,7 @@ export default class extends Page {
       this.indexlist = index
       if(index!=-1){
 
-        // console.log(this.indexlist)
+        // //  console.log(this.indexlist)
         this.DOM.listimg[this.indexlist].classList.add('act')
         this.DOM.listel[this.indexlist].classList.add('act')
       }
@@ -267,7 +267,7 @@ export default class extends Page {
 
             }
             else if(id=='v'){
-              console.log('stahp')
+              // //  console.log('stahp')
               // this.intro.stop()
             }
             else if(id=="t"){
@@ -300,7 +300,7 @@ export default class extends Page {
               this.slidetext = this.anims[pos]
             }
             else if(id=='v'){
-              console.log('start')
+              // //  console.log('start')
               // this.intro.start()
             }
             else if(id=='s'){
@@ -371,7 +371,7 @@ export default class extends Page {
         if(this.isVisible == 0){
           return false
         }
-        // console.log(entry.isIntersecting+' '+entry.target.dataset.el)
+        // //  console.log(entry.isIntersecting+' '+entry.target.dataset.el)
         if(entry.boundingClientRect.y > 100){
           this.slideList(entry.target.dataset.el)
         }

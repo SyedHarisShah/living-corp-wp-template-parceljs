@@ -31,7 +31,7 @@ export default class {
       this.check.check()
       if(!this.DOM.el.querySelector('.err')){
 
-        console.log('no error')
+        // //  console.log('no error')
         fetch(document.body.dataset.js+'/wp-json/csskiller/v1/mailchimp/?email='+this.field.DOM.npt.value+'&list='+this.field.DOM.npt.dataset.list,{
             method: 'get',
             headers : {
@@ -47,11 +47,11 @@ export default class {
           })
       }
       else{
-        console.log('error')
+        // //  console.log('error')
       }
 
     }
-    console.log(this.field.DOM.btn)
+    // //  console.log(this.field.DOM.btn)
     this.field.DOM.btn.addEventListener('click',this.clickFn)
   }
   removeEvents() {

@@ -27,14 +27,14 @@ export default class extends Page {
    * Animations.
    */
   async generate(content) {
-    //${"http://165.227.64.123:8126/"}/wp-json/wp/v2/podcast/40?acf_format=standard
+    //${process.env.PUBLIC_URL}/wp-json/wp/v2/podcast/40?acf_format=standard
     // const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/pages/'+content.dataset.id+'?acf_format=standard')
     // const response = await fetch(this.main.acf.base+'/wp-json/wp/v2/podcast/'+content.dataset.id+'?acf_format=standard')
     // const data = await response.json()
-    // console.log(data)
+    // //  console.log(data)
     let html = ''
     this.type = content.dataset.type
-    console.log(this.type)
+    // //  console.log(this.type)
     if(this.type=='podcast'){
       
       
@@ -81,7 +81,7 @@ export default class extends Page {
     else if(this.type=='network'){
       html = Eta.render(network,{global:this.main,footer:this.footer})
       document.querySelector('#content').innerHTML += html
-      console.log(html)
+      // //  console.log(html)
       this.DOM = {
         el:document.querySelector('main:not(.old)')
   
@@ -94,7 +94,7 @@ export default class extends Page {
     else if(this.type=='show'){
       html = Eta.render(show,{global:this.main,footer:this.footer})
       document.querySelector('#content').innerHTML += html
-      console.log(html)
+      // //  console.log(html)
       this.DOM = {
         el:document.querySelector('main:not(.old)')
   
@@ -103,8 +103,8 @@ export default class extends Page {
       await this.getPosts(true,-1,-1,1)
       
     }
-    // console.log(data)
-    // console.log(html)
+    // //  console.log(data)
+    // //  console.log(html)
     
     this.DOM.watchers = this.DOM.el.querySelectorAll('.iO')
     this.font = parseFloat(getComputedStyle(document.documentElement).fontSize)
@@ -155,7 +155,7 @@ export default class extends Page {
 
 
   async getJson(url,isNew){
-    console.log(url)
+    // //  console.log(url)
     const posts = await fetch(url)
     const datap = await posts.json()
 
@@ -196,7 +196,7 @@ export default class extends Page {
     ]).then(() => {
       this.DOM.holder.classList.remove('load')
       if(isNew == true && this.DOM.pages){
-        console.log(this.max)
+        // //  console.log(this.max)
         for(let i = 1;i<=this.max;i++){
           if(i == page){
             this.DOM.pages.innerHTML += '<div class="pgel mouseHover act"><div class="pgel_t">'+i+'</div></div>'
@@ -291,7 +291,7 @@ export default class extends Page {
         if(!entry.isIntersecting){
           if(this.anims[pos].active==true && this.anims[pos].animated==1){
             if(id=='s'){
-              // console.log(this.anims[pos])
+              // //  console.log(this.anims[pos])
               this.anims[pos].stick.active = 0
               this.movestick = null
             }
