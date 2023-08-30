@@ -1,6 +1,7 @@
 import icons from "../../../js🧠🧠🧠/basic/icons🔰";
 import discover_eta from 'bundle-text:./discover.eta'
 import playlists_swiper_eta from 'bundle-text:./../Templates/Playlist/playlists.eta'
+import sponsor_playlists_swiper_eta from 'bundle-text:./../Templates/Playlist/sponsor-playlist.eta'
 import modules_eta from 'bundle-text:./../Templates/Module/modules.eta'
 import * as Eta from 'eta'
 import { Swiper } from 'swiper'
@@ -21,6 +22,7 @@ const load = async () => {
     document.querySelectorAll("#discover-link").forEach((x) => x.classList.add("player-page-tab--active"));
 
     getPlaylists();
+    getSponsorPlaylist();
     getModules();
 }
 
@@ -67,6 +69,26 @@ const getPlaylists = async () => {
     setupSwiper();
 
     parent.regPlaylistClick();
+}
+
+const getSponsorPlaylist = async () => {
+    const sponsorPlaylistsCont = document.querySelector('.sponsor-playlists');
+    const params = new URLSearchParams();
+    params.set("userid", parent.main.user.user.ID);
+
+    sponsorPlaylistsCont.innerHTML = parent.loading;
+
+    const url = `/wp-json/sdv/player/v1/get-sponsor-playlists?${params}`;
+
+    const sponsorPlaylistsResp = await fetch(url);
+    const playlists = await sponsorPlaylistsResp.json();
+
+    const html = Eta.render(sponsor_playlists_swiper_eta, {global: parent.main, playlists});
+    sponsorPlaylistsCont.innerHTML = html;
+    
+    setupSwiper();
+
+    parent.regModuleClick();
 }
 
 const setupSwiper = () => {

@@ -570,9 +570,20 @@ html.smooth {
     line-height: 1.5;
     font-size: 1.15rem;
 
-    ol, ul {
+    ol {
       list-style: auto;
       white-space: initial;
+      margin-left: 15px;
+    }
+
+    ul {
+      list-style: disc;
+      white-space: initial;
+      margin-left: 15px;
+    }
+
+    ol li, ul li {
+      margin-bottom: 10px;
     }
 
     span {
@@ -589,6 +600,22 @@ html.smooth {
     text-transform: none;
     grid-area: transcript;
     margin-top: 2rem;
+
+    ol {
+      list-style: auto;
+      white-space: initial;
+      margin-left: 15px;
+    }
+
+    ul {
+      list-style: disc;
+      white-space: initial;
+      margin-left: 15px;
+    }
+
+    ol li, ul li {
+      margin-bottom: 10px;
+    }
 
     &.expanded-transcript {
 

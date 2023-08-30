@@ -8,5 +8,7 @@
     <div class="swiper-button-next mouseHover"></div>
 </div>
 
+<div class="sponsor-playlists"></div>
+
 <h2>Top Modules</h2>
 <div class="player-page__content-modules swiper"></div>

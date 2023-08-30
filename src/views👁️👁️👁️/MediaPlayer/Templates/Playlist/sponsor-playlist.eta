@@ -1,0 +1,31 @@
+<% if(it.playlists && Object.entries(it.playlists).length > 0){ %>
+    <% Object.values(it.playlists).forEach((playlist,i) => { %>
+        <% if(playlist.sponsor !== null){ %>
+            <h2><%~playlist.sponsor.post_title%> Playlists</h2>
+            
+            <div class="player-page__content-playlists player-page__content-playlists--swiper swiper">
+                <div class="swiper-wrapper">
+                    <% if(playlist.modules && Object.entries(playlist.modules).length > 0){ %>
+                    <% Object.values(playlist.modules).forEach((module,i) => { %>
+
+                    <div class="player-playlist mouseHover p-m" id="playlist-<%~ i%>" data-id="<%~module['module'].ID%>" data-href="<%~module['module'].link%>">
+                        <div class="player-playlist__image<%~playlist.user ? '--user-playlist' : ''%>">
+                            <img src="<%~playlist.user ? it?.global?.sponsor?.icon : module['module'].img%>">
+                            <% if (playlist.user) { %>
+                                <h2><%~module['module'].post_title%></h2>
+                            <% } %>
+                        </div>
+                        <div class="player-playlist__details">
+                            <span class="player-playlist__title"><%~module['module'].post_title%></span>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                    <% } %>
+                </div>
+                <div class="swiper-button-prev mouseHover"></div>
+                <div class="swiper-button-next mouseHover"></div>
+            </div>
+        <% } %>
+    <% }) %>
+<% } %>
