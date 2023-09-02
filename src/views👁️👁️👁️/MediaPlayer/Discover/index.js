@@ -76,7 +76,7 @@ const getSponsorPlaylist = async () => {
     const params = new URLSearchParams();
     params.set("userid", parent.main.user.user.ID);
 
-    sponsorPlaylistsCont.innerHTML = parent.loading;
+    // sponsorPlaylistsCont.innerHTML = parent.loading;
 
     const url = `/wp-json/sdv/player/v1/get-sponsor-playlists?${params}`;
 
