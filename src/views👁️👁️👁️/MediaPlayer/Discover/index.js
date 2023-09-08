@@ -30,7 +30,7 @@ const getModules = async () => {
     const modulesCont = document.querySelector('.player-page__content-modules');
     const params = new URLSearchParams();
 
-    params.set("userid", parent.main.user.user.ID);
+    params.set("userid", parent.main?.user?.user?.ID);
     params.set("popular", true);
 
     parent.addFiltersToParams(params);
@@ -52,7 +52,7 @@ const getModules = async () => {
 const getPlaylists = async () => {
     const playlistsCont = document.querySelector('.player-page__content-playlists .swiper-wrapper');
     const params = new URLSearchParams();
-    params.set("userid", parent.main.user.user.ID);
+    params.set("userid", parent.main?.user?.user?.ID);
     
     // parent.addFiltersToParams(params);
 
@@ -74,21 +74,21 @@ const getPlaylists = async () => {
 const getSponsorPlaylist = async () => {
     const sponsorPlaylistsCont = document.querySelector('.sponsor-playlists');
     const params = new URLSearchParams();
-    params.set("userid", parent.main.user.user.ID);
+    params.set("userid", parent.main?.user?.user?.ID);
 
     // sponsorPlaylistsCont.innerHTML = parent.loading;
 
     const url = `/wp-json/sdv/player/v1/get-sponsor-playlists?${params}`;
 
     const sponsorPlaylistsResp = await fetch(url);
-    const playlists = await sponsorPlaylistsResp.json();
+    const sponsors = await sponsorPlaylistsResp.json();
 
-    const html = Eta.render(sponsor_playlists_swiper_eta, {global: parent.main, playlists});
+    const html = Eta.render(sponsor_playlists_swiper_eta, {global: parent.main, sponsors});
     sponsorPlaylistsCont.innerHTML = html;
     
     setupSwiper();
 
-    parent.regModuleClick();
+    parent.regPlaylistClick();
 }
 
 const setupSwiper = () => {

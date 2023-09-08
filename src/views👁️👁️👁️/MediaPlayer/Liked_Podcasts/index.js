@@ -24,7 +24,7 @@ const load = async () => {
 const getModules = async () => {
     const modulesCont = document.querySelector('.player-page__content-modules');
     const params = new URLSearchParams();
-    params.set("userid", parent.main.user.user.ID);
+    params.set("userid", parent.main?.user?.user?.ID);
 
     parent.addFiltersToParams(params);
 
