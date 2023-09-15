@@ -74,7 +74,8 @@ const getPlaylists = async () => {
 const getSponsorPlaylist = async () => {
     const sponsorPlaylistsCont = document.querySelector('.sponsor-playlists');
     const params = new URLSearchParams();
-    params.set("userid", parent.main?.user?.user?.ID);
+    params.set("email", parent?.main?.user?.user?.data?.user_email);
+    // params.set("userid", parent.main?.user?.user?.ID);
 
     // sponsorPlaylistsCont.innerHTML = parent.loading;
 
