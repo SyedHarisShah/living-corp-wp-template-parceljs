@@ -6,6 +6,8 @@
     <ul class="mp-dropmenu" aria-label="Modify Playlist">
         <li id="edit-playlist-name">Edit Playlist Name</li>
         <li id="delete-this-playlist">Delete This Playlist</li>
-        <li id="share-this-playlist">Share This Playlist</li>
+        <% if (it?.global?.user?.acf?.allow_share_playlist) { %>
+            <li id="share-this-playlist">Share This Playlist</li>
+        <% } %>
     </ul>
 </span>

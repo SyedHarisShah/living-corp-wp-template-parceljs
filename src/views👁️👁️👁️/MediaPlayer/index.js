@@ -95,7 +95,7 @@ export default class extends Page {
     await this.getUserPlaylists();
 
     this.main.user = this.main.user || {};
-    html = Eta.render(player,{global:this.main,footer:this.footer, filters, user_playlists: this.user_playlists})
+    html = Eta.render(player,{global:this.main, footer:this.footer, filters, user_playlists: this.user_playlists})
     document.querySelector('#content').innerHTML += html;
 
     const seekbar = document.querySelector(".media-player__seek-bar");
@@ -1273,7 +1273,7 @@ export default class extends Page {
     this.DOM.title.innerHTML = podcast.title;
     this.DOM.byline.innerHTML = podcast.byline;
     this.updateLikeButton(podcast);
-    // audioLib.play();
+    if(this.embed) audioLib.play();
   }
 
   prev (e) {

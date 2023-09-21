@@ -1283,6 +1283,7 @@ html.smooth {
 
     &__menuBtn,
     &__likeBtn {
+      display: none;
       background: none;
       grid-area: btn;
 
@@ -1579,7 +1580,13 @@ html.smooth {
     }
   }
 
-  .player-header,
+  .player-header {
+    &__search,
+    &__profile {
+      display: none !important;
+    }
+  }
+
   .player-page__filters,
   .player-page__nav,
   .footer {
@@ -1729,6 +1736,19 @@ html.smooth {
 html.embed {
   body {
     overflow-y: auto;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  #content .player-archive {
+    padding-top: 0px;
+  }
+
+  #content .player-archive .player-header .player-header__logo img {
+    margin-block: initial;
+    margin-left: 0px;
   }
 
   #content[data-child=module] .player-page {
