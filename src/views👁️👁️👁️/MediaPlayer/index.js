@@ -937,6 +937,7 @@ export default class extends Page {
     const likeBtns = document.querySelectorAll('.module-like-btn');
     const menuBtns = document.querySelectorAll('.module-menu-btn');
     const menuRemoveBtns = document.querySelectorAll('.module-remove-menu-btn');
+    const menuDetailBtns = document.querySelectorAll('.module-detail-menu-btn');
     const readTranscriptBtn = document.querySelector('.module-read-transcript');
 
     readTranscriptBtn?.addEventListener('click', (e) => {
@@ -1060,6 +1061,30 @@ export default class extends Page {
           menu.classList.add('stickout');
 
           document.addEventListener('click', hideMenu);
+        }
+      });
+    })
+
+    menuDetailBtns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e?.stopPropagation();
+        const module = btn.parentElement;
+        
+        const detail = module.querySelector('.mp-detailmenu');
+        const hideMenu = () => {
+          module.style.height = 'unset';
+          detail.style.display = 'none';
+          module.classList.remove("show-detail");
+        };
+    
+        if(detail.style.display === 'block'){ // hide
+          hideMenu();
+          document.removeEventListener('click', hideMenu);
+        } else { // show
+          module.style.height = '305px';
+          detail.style.display = 'block';
+          module.classList.add("show-detail");
+          document.removeEventListener('click', hideMenu);
         }
       });
     })

@@ -43,6 +43,7 @@ import play from 'bundle-text:/src/svg🔰🔰🔰/player/play.svg'
 import pause from 'bundle-text:/src/svg🔰🔰🔰/player/pause.svg'
 import playbtn from 'bundle-text:/src/svg🔰🔰🔰/player/playbtn.svg'
 import downarrow from 'bundle-text:/src/svg🔰🔰🔰/downarrow.svg'
+import droparrow from 'bundle-text:/src/svg🔰🔰🔰/droparrow.svg'
 import check from 'bundle-text:/src/svg🔰🔰🔰/check.svg'
 import menu_2 from 'bundle-text:/src/svg🔰🔰🔰/menu-2.svg'
 import search_2 from 'bundle-text:/src/svg🔰🔰🔰/search-2.svg'
@@ -93,6 +94,7 @@ const icons = {
   playbtn,
   close,
   downarrow,
+  droparrow,
   check,
   menu_2,
   search_2,

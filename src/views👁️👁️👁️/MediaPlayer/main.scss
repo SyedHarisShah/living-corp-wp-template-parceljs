@@ -58,7 +58,7 @@ html.smooth {
     grid-area: logo;
 
     img {
-      margin-block: auto;
+      margin-block: initial;
       margin-left: 2rem;
     }
   }
@@ -1172,6 +1172,22 @@ html.smooth {
       filter: brightness(0) invert(1);
     }
   }
+
+  &__menuDetailBtn {
+    display: none;
+    background-color: #FF6699;
+    border-radius: 100%;
+    padding: 0.25rem;
+    position: relative;
+
+    svg {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  &__detail {
+    display: none;
+  }
 }
 
 .player-playlist,
@@ -1282,8 +1298,8 @@ html.smooth {
     }
 
     &__menuBtn,
+    &__menuDetailBtn,
     &__likeBtn {
-      display: none;
       background: none;
       grid-area: btn;
 
@@ -1755,10 +1771,32 @@ html.embed {
     display: none;
   }
 
+  .show-detail {
+    .player-module {
+      &__details {
+        width: 16rem !important;
+        position: relative;
+        left: -21rem;
+      }
+
+      &__length-num {
+        position: relative;
+        right: 16px;
+      }
+      
+    }
+  }
+
   #close-mp-btn,
   .module-menu-btn,
+  .module-like-btn,
+  .module-remove-menu-btn,
   .mouse {
     display: none;
+  }
+
+  .module-detail-menu-btn {
+    display: flex;
   }
 
   .mouseHover {
