@@ -1783,6 +1783,16 @@ html.embed {
         position: relative;
         right: 16px;
       }
+
+      &-page {
+        &__about {
+          width: 155% !important;
+
+          h2, span {
+            width: unset;
+          }
+        }
+      }
       
     }
   }

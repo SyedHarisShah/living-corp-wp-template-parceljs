@@ -1081,7 +1081,7 @@ export default class extends Page {
           hideMenu();
           document.removeEventListener('click', hideMenu);
         } else { // show
-          module.style.height = '305px';
+          module.style.height = 'auto';
           detail.style.display = 'block';
           module.classList.add("show-detail");
           document.removeEventListener('click', hideMenu);

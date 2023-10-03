@@ -21,17 +21,11 @@
 
             <span class="player-module__menuDetailBtn mouseHover module-detail-menu-btn"><%~it.icons.droparrow%></span>
 
-            <div class="player-module__detail mp-detailmenu" style="width: 128%; margin-top: 10px;">
-                <div class="player-module-page__banner">
-                    <img class="player-module-page__img" src="<%~ x.img%>">
-                    <h1 class="player-module-page__title"><%~ x.post_title %></h1>
-                    <span class="player-module-page__byline"><%~ x.byline %></span>
-                    <span class="player-module-page__summary"><%~ x.summary %></span>
-
-                    <div class="player-module-page__info">
-                        <span><%~ it.icons.play %> <%~ x.plays %></span>
-                        <span><%~ it.formatDate(x.post_date)%></span>
-                        <span><%~ it.formatDuration(x.duration)%></span>
+            <div class="player-module__detail mp-detailmenu" style="width: 128%;">
+                <div class="player-module-page__content">
+                    <div class="player-module-page__about">
+                        <h2>About this module</h2>
+                        <span><%~ x.post_content %></span>
                     </div>
                 </div>
             </div>
