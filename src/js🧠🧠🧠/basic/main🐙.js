@@ -18,6 +18,7 @@ import Network from '/src/views👁️👁️👁️/Network🟡'
 import Article from '/src/views👁️👁️👁️/Article🔵'
 import Tag from '/src/views👁️👁️👁️/Tag'
 import MediaPlayer from '/src/views👁️👁️👁️/MediaPlayer'
+import SharedPlayer from '/src/views👁️👁️👁️/SharedPlayer'
 import Job from '/src/views👁️👁️👁️/Job🟣'
 import Jobs from '/src/views👁️👁️👁️/Job🟣🟣🟣'
 import Apply from '/src/views👁️👁️👁️/Apply🟣'
@@ -96,6 +97,7 @@ class App {
     this.pages.set('error404', new error404(this.main,this.footer.string))
     this.pages.set('tag', new Tag(this.main,this.footer.string))
     this.pages.set('player', new MediaPlayer(this.main,this.footer.string))
+    this.pages.set('shared-player', new SharedPlayer(this.main,this.footer.string))
     this.pages.set('content-hub', new ContentHub(this.main,this.footer.string))
     this.pages.set('ch-actions', new Actions(this.main,this.footer.string))
     this.pages.set('ch-ceos', new CEOs(this.main,this.footer.string))

@@ -26,6 +26,16 @@
       </div>
     </div>
   </section>
+  <% if(it.data.acf.url_video){ %>
+  <section class="m-podcast">
+    <div class="info">
+      <video class="video" controls>
+        <source src="<%~ it.data.acf.url_video %>">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+  <% } %>
   <section class="m-podcast">
     <div class="image"><img src="<%~ it.data.acf.image_podcast %>"></div>
     <div class="info">

@@ -1,0 +1,18 @@
+<main class="emailpage">
+  <section>
+    <img src="<%~ it.global.acf.template %>/public/notlogged.png">
+    <div class="c-vw">
+      <div class="box">
+        <h2 class="tit1">NEED EMAIL ADDRESS TO ACCESS THIS CONTENT</h2>
+
+        <div class="field field-email">
+          <input class="field_npt emailRequire mouseHover evt" placeholder="Your Email*">
+          <div class="field_err">Wrong Format : name@example.com</div>
+        </div>
+
+        <button class="btn mouseHover" id="submit_email"><div class="btn_t">SUBMIT</div></button>
+      </div>
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

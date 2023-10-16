@@ -1,5 +1,6 @@
 <div class="player-page__content-banner"><img src="<%~ it?.global?.sponsor?.banner%>"></div>
 
+<% if(it.global?.user) { %>
 <h2>Global Playlists</h2>
 <div class="player-page__content-playlists player-page__content-playlists--swiper swiper">
     <div class="swiper-wrapper">
@@ -7,6 +8,7 @@
     <div class="swiper-button-prev mouseHover"></div>
     <div class="swiper-button-next mouseHover"></div>
 </div>
+<% } %>
 
 <div class="sponsor-playlists"></div>
 
