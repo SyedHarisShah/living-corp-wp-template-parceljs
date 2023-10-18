@@ -29,10 +29,7 @@
   <% if(it.data.acf.url_video){ %>
   <section class="m-podcast">
     <div class="info">
-      <video class="video" controls>
-        <source src="<%~ it.data.acf.url_video %>">
-        Your browser does not support the video tag.
-      </video>
+      <iframe class="video" src="<%~ it.data.acf.url_video %>"></iframe>
     </div>
   </section>
   <% } %>
