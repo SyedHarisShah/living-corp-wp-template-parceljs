@@ -16,6 +16,12 @@
     </div>
 </div>
 
+<% if(it.module.video_src){ %>
+    <div class="player-module-page__video">
+        <iframe src="<%~ it.module.video_src %>"></iframe>
+    </div>
+<% } %>
+
 <div class="player-module-page__content">
     <div class="player-module-page__about">
         <h2>About this module</h2>

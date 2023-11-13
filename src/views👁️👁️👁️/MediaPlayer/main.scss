@@ -528,6 +528,16 @@ html.smooth {
     }
   }
 
+  &__video {
+    margin: 15px auto;
+
+    iframe{
+      width: 100%;
+      height: 50vh;
+      object-fit: fill;
+    }
+  }
+
   &__content {
     display: grid;
     grid-template-areas: "about related"
@@ -1785,11 +1795,21 @@ html.embed {
       }
 
       &-page {
+        &__video {
+          iframe {
+            height: 25vh;
+          }
+        }
+
         &__about {
           width: 155% !important;
-
+          
           h2, span {
             width: unset;
+          }
+
+          ul {
+            overflow-wrap: anywhere;
           }
         }
       }
