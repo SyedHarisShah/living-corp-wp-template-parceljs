@@ -628,3 +628,14 @@ html.search-active{
     }
   }
 }
+
+html.is_shared{
+  .nav{
+    &_box{
+      display: none;
+    }
+  }
+  .player-archive {
+    padding-top: unset;
+  }
+}

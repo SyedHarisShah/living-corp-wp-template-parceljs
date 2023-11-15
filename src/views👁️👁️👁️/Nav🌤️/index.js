@@ -19,6 +19,13 @@ export default class extends Component {
   }
 
   async generate () {
+    let url_href = window.location.href;
+		const is_shared_player = url_href.includes("shared-player");
+
+    if(is_shared_player) {
+      document.documentElement.classList.add('is_shared')
+    }
+
     const string = Eta.render(template,{global:this.main})
     document.querySelector('body').insertAdjacentHTML('afterbegin',string)
     this.DOM = {
