@@ -79,6 +79,8 @@ export default class extends Page {
     const sponsor = await sponsorResp.json();
     this.main.sponsor = sponsor;
 
+    document.documentElement.classList.add('no-nav');
+
     if (isEmbed) {
       document.documentElement.classList.add('embed');
       document.documentElement.classList.remove('smooth');

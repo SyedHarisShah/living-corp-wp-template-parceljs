@@ -48,3 +48,19 @@
     }
   }
 }
+
+html.is_shared{
+  .player-module {
+    &__date {
+      display: none;
+    }
+
+    &-page {
+      &__info {
+        span:nth-child(2) {
+          display: none;
+        }
+      }
+    }
+  }
+}

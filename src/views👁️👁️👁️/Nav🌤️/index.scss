@@ -629,7 +629,7 @@ html.search-active{
   }
 }
 
-html.is_shared{
+html.is_shared, html.no-nav{
   .nav{
     &_box{
       display: none;

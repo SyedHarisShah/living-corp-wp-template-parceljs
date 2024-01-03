@@ -14,6 +14,7 @@ const init = (par_this) => {
 
 const load = async () => {
     const global = parent?.main;
+    const spId = parent?.spId || 0;
     const html = Eta.render(discover_eta, {global});
     if(parent) parent.DOM.content.innerHTML = html;
     else return;
@@ -22,7 +23,7 @@ const load = async () => {
     document.querySelectorAll("#discover-link").forEach((x) => x.classList.add("player-page-tab--active"));
 
     getPlaylists();
-    getSponsorPlaylist();
+    getSponsorPlaylist(spId);
     getModules();
 }
 
@@ -71,7 +72,7 @@ const getPlaylists = async () => {
     parent.regPlaylistClick();
 }
 
-const getSponsorPlaylist = async () => {
+const getSponsorPlaylist = async (spId) => {
     const sponsorPlaylistsCont = document.querySelector('.sponsor-playlists');
     const params = new URLSearchParams();
     const email = parent?.main?.user ? parent?.main?.user?.user?.data?.user_email : parent?.email;
@@ -80,7 +81,12 @@ const getSponsorPlaylist = async () => {
 
     // sponsorPlaylistsCont.innerHTML = parent.loading;
 
-    const url = `/wp-json/sdv/player/v1/get-sponsor-playlists?${params}`;
+    let url = `/wp-json/sdv/player/v1/get-sponsor-playlists?${params}`;
+
+    if(spId) {
+        params.set("spId", spId);
+        url = `/wp-json/sdv/player/v1/get-sponsor-playlists-by-id?${params}`;
+    }
 
     const sponsorPlaylistsResp = await fetch(url);
     const sponsors = await sponsorPlaylistsResp.json();

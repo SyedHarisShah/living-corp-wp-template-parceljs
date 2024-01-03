@@ -2,6 +2,7 @@ import Page from '../../js🧠🧠🧠/defaults/Page'
 import player from 'bundle-text:./template.eta'
 import audioLib from '../MediaPlayer/audioLib'
 import emailRequired from 'bundle-text:./emailRequired.eta'
+import emailNotAvailable from 'bundle-text:./emailNotAvailable.eta'
 import discover from '../MediaPlayer/Discover'
 import browse from '../MediaPlayer/Browse'
 import playlist_page from '../MediaPlayer/Playlists'
@@ -25,6 +26,9 @@ export default class extends Page {
     this.playerPage = content.dataset.child || 'discover';
     this.main.title = content.dataset.title;
     this.postid = content.dataset.postid;
+    this.spId = content.dataset.spid || 0;
+
+    document.documentElement.classList.add('is_shared')
 
     window.history.replaceState({...window.history.state, postid: this.postid}, document.title, window.location.href);
     
@@ -69,11 +73,25 @@ export default class extends Page {
     }
 
     if(this.email) params.set('email', this.email);
+    if(this.spId) params.set('spId', this.spId);
 
     // if(isEmbed) params.set('spId', page_params.get('spId'));
 
-    const sponsorResp = await fetch(`/wp-json/sdv/player/v1/get-sponsor?${params}`);
+    const sponsorResp = this.spId ? await fetch(`/wp-json/sdv/player/v1/get-sponsor-id?${params}`) : await fetch(`/wp-json/sdv/player/v1/get-sponsor?${params}`);
     const sponsor = await sponsorResp.json();
+
+    if(sponsor.id === 0) {
+      html = Eta.render(emailNotAvailable,{global:this.main,footer:this.footer})
+      document.querySelector('#content').innerHTML += html;
+      this.DOM = {
+        el: document.querySelector('main:not(.old)'),
+        submit_email: document.getElementById('submit_email')
+      };
+
+      this.DOM.submit_email.addEventListener("click", this.submit_email);
+      return;
+    }
+
     this.main.sponsor = sponsor;
 
     // if (isEmbed) {
