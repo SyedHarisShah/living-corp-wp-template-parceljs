@@ -10,7 +10,7 @@
 
     <div class="player-header__profile">
       <div class="player-header__profile-img"><img src="<%~ it?.global?.sponsor?.icon %>"/></div>
-      <span class="player-header__profile-name">Guest</span>
+      <span class="player-header__profile-name"><%~ it.global.user?.acf?.firstname%></span>
       <span class="player-header__profile-email"><%~ it.global.email%></span>
     </div>
   </section>
@@ -27,6 +27,38 @@
           <span class="player-page-btn--icon"><%~it.global.icons.book%></span>
           <span class="player-page-btn--text">Browse</span>
         </span>
+
+        <span id="playlists-link" class="player-page__nav-link mouseHover" data-href="playlists">
+          <span class="player-page-btn--icon"><%~it.global.icons.history%></span>
+          <span class="player-page-btn--text">Playlists</span>
+        </span>
+      </div>
+
+      <div class="player-page__nav-buttons">
+        <span class="player-page__nav-link mouseHover" data-href="create-playlist">
+          <span class="player-page-btn--icon"><%~it.global.icons.plus%></span>
+          <span class="player-page-btn--text">Create Playlist</span>
+        </span>
+
+        <span class="player-page__nav-link mouseHover" data-href="liked-podcasts">
+          <span class="player-page-btn--icon"><%~it.global.icons.heart%></span>
+          <span class="player-page-btn--text">Liked Modules</span>
+        </span>
+      </div>
+
+      <div class="player-page__nav-playlists">
+        <% Object.entries(it.user_playlists).forEach(([key, playlist]) => { %>
+          <span id="<%~ key%>" class="mouseHover" data-href="<%~ playlist.link%>">
+            <span class="player-page-btn--input" id="input-playlist-name"><input type="text" placeholder="Custom Playlist"></span>
+            <span class="player-page-btn--text"><%~ playlist.name%></span>
+            <span class="player-page-btn--icon share-user-pl-btn" id="share-icon"><%~it.global.icons.menu%></span>
+            <span class="player-page-btn--icon save-pl-btn" id="close-icon"><%~it.global.icons.check%></span>
+            <ul class="mp-dropmenu" aria-label="Modify Playlist">
+              <li id="edit-playlist-name">Edit Playlist Name</li>
+              <li id="delete-this-playlist">Delete This Playlist</li>
+            </ul>
+          </span>
+        <% }) %>
       </div>
     </div>
 
@@ -163,6 +195,16 @@
               </div>
             </div>
           </div>
+        </span>
+        <span class="mp-btn mouseHover" id="like-btn"><%~ it.global.icons.heart %></span>
+        <span class="mp-btn mouseHover" id="share-btn"><%~ it.global.icons.share %></span>
+        <span class="mp-btn mouseHover" id="menu-btn">
+          <%~ it.global.icons.menu %>
+          <ul class="mp-menu" id="menu-list" aria-label="Add to playlist">
+            <% Object.entries(it.user_playlists).forEach(([key, playlist]) => { %>
+              <li id="<%~ key%>-add"><%~ playlist.name%></li>
+            <% }) %>
+          </ul>
         </span>
       </div>
     </section>  

@@ -1,8 +1,8 @@
 import Page from '../../js🧠🧠🧠/defaults/Page'
 import player from 'bundle-text:./template.eta'
 import audioLib from '../MediaPlayer/audioLib'
+import icons from "../../js🧠🧠🧠/basic/icons🔰";
 import emailRequired from 'bundle-text:./emailRequired.eta'
-import emailNotAvailable from 'bundle-text:./emailNotAvailable.eta'
 import discover from '../MediaPlayer/Discover'
 import browse from '../MediaPlayer/Browse'
 import playlist_page from '../MediaPlayer/Playlists'
@@ -10,14 +10,17 @@ import playlist_single from '../MediaPlayer/Playlist Single'
 import module_single from '../MediaPlayer/Module Single'
 import liked_podcasts from '../MediaPlayer/Liked_Podcasts'
 import search_podcasts from '../MediaPlayer/Search'
-// import noaccess from 'bundle-text:/src/views👁️👁️👁️/404/noaccess.eta'
+import new_playlist from 'bundle-text:../MediaPlayer/Templates/Playlist/new-playlist.eta'
+import delete_dialog from 'bundle-text:../MediaPlayer/Templates/Playlist/delete-confirmation.eta'
+import notallowed from 'bundle-text:/src/views👁️👁️👁️/404/notallowed.eta'
+import notlogged from 'bundle-text:/src/views👁️👁️👁️/404/notlogged.eta'
 
 import * as Eta from 'eta'
 import { getLoadingWheel } from '../Login🥸/LinkedinLogin/Dialog'
 
 export default class extends Page {
-  constructor (main,footer) {
-    super(main,footer)
+  constructor(main, footer) {
+    super(main, footer)
   }
 
   async generate(content) {
@@ -30,8 +33,8 @@ export default class extends Page {
 
     document.documentElement.classList.add('is_shared')
 
-    window.history.replaceState({...window.history.state, postid: this.postid}, document.title, window.location.href);
-    
+    window.history.replaceState({ ...window.history.state, postid: this.postid }, document.title, window.location.href);
+
     this.lsAvail = true;
     try {
       localStorage.getItem("sign_LC");
@@ -45,63 +48,72 @@ export default class extends Page {
       index: parseInt(this.lsAvail ? localStorage?.getItem("index") : 0),
       itemScrolling: "",
       playing: false, // only used for pausing while seeking
-      filters: {cats: [], tags: [], topics: []}
+      filters: { cats: [], tags: [], topics: [] }
+    }
+
+    if (!this.email) {
+      html = Eta.render(emailRequired, { global: this.main, footer: this.footer })
+      document.querySelector('#content').innerHTML += html;
+      this.DOM = {
+        el: document.querySelector('main:not(.old)'),
+        submit_email: document.getElementById('submit_email')
+      };
+
+      this.DOM.submit_email.addEventListener("click", this.submit_email);
+      return;
     }
 
     // get filters
     const filtersResp = await fetch('/wp-json/sdv/player/v1/get-filters');
     const filters = await filtersResp.json();
     this.main.banner_image = this.main.acf?.player_banner_image;
-    
+
     // get branding
     let params = new URLSearchParams();
 
-    if(this?.main?.user) {
-      window.location.href = '/learn';
+    if (this.spId) params.set('spId', this.spId);
+    if (this.email) {
+      params.set('email', this.email);
+      const checkUserExists = await fetch(`/wp-json/sdv/player/v1/check-user-exists?email=${this.email}`);
+      const getUser = await checkUserExists.json();
+
+      if (getUser) {
+        this.main.user = getUser;
+
+      } else {
+        await this.register();
+
+      }
     }
-
-    if(!this.email) {
-      html = Eta.render(emailRequired,{global:this.main,footer:this.footer})
-      document.querySelector('#content').innerHTML += html;
-      this.DOM = {
-        el: document.querySelector('main:not(.old)'),
-        submit_email: document.getElementById('submit_email')
-      };
-
-      this.DOM.submit_email.addEventListener("click", this.submit_email);
-      return;
-    }
-
-    if(this.email) params.set('email', this.email);
-    if(this.spId) params.set('spId', this.spId);
-
-    // if(isEmbed) params.set('spId', page_params.get('spId'));
 
     const sponsorResp = this.spId ? await fetch(`/wp-json/sdv/player/v1/get-sponsor-id?${params}`) : await fetch(`/wp-json/sdv/player/v1/get-sponsor?${params}`);
     const sponsor = await sponsorResp.json();
 
-    if(sponsor.id === 0) {
-      html = Eta.render(emailNotAvailable,{global:this.main,footer:this.footer})
+    if (this?.main?.user?.user?.ID && sponsor.id === 0) {
+      html = Eta.render(notallowed, { global: this.main, footer: this.footer })
       document.querySelector('#content').innerHTML += html;
       this.DOM = {
         el: document.querySelector('main:not(.old)'),
-        submit_email: document.getElementById('submit_email')
+        refresh_page: document.getElementById('refresh_page')
       };
 
-      this.DOM.submit_email.addEventListener("click", this.submit_email);
+      this.DOM.refresh_page.addEventListener("click", () => { window.location.reload(); });
       return;
     }
 
+    if (!this?.main?.user?.user?.ID && sponsor.id === 0) {
+      html = Eta.render(notlogged, { global: this.main, footer: this.footer })
+      document.querySelector('#content').innerHTML += html;
+      this.DOM = { el: document.querySelector('main:not(.old)') };
+      return;
+    }
+
+    await this.getUserPlaylists();
+
     this.main.sponsor = sponsor;
 
-    // if (isEmbed) {
-    //   document.documentElement.classList.add('embed');
-    //   document.documentElement.classList.remove('smooth');
-    //   document.documentElement.classList.add('touch');
-    // }
-
     this.main.email = this.email;
-    html = Eta.render(player,{global:this.main, footer:this.footer, filters})
+    html = Eta.render(player, { global: this.main, footer: this.footer, filters, user_playlists: this.user_playlists })
     document.querySelector('#content').innerHTML += html;
 
     const seekbar = document.querySelector(".media-player__seek-bar");
@@ -140,6 +152,8 @@ export default class extends Page {
       volProgress: volSlider.querySelector("#volume-progress"),
       volHandle: volSlider.querySelector("#volume-handle"),
       // right buttons
+      likeBtn: document.getElementById('like-btn'),
+      menuBtn: document.getElementById('menu-btn'),
       menuList: document.getElementById('menu-list'),
       snackbar: document.getElementById('snackbar'),
       content: document.querySelector('.player-page__content'),
@@ -149,10 +163,10 @@ export default class extends Page {
 
     this.updateButtons();
 
-    if(this.state.shuffle) this.shuffledPlaylist = this.shufflePlaylist();
-    
+    if (this.state.shuffle) this.shuffledPlaylist = this.shufflePlaylist();
+
     this.font = parseFloat(getComputedStyle(document.documentElement).fontSize)
-    
+
     await this.loadImages()
     await this.createAnimations()
 
@@ -165,7 +179,7 @@ export default class extends Page {
     search_podcasts.init(this);
     this.addEvents();
     audioLib.init(this.DOM);
-    
+
     if (!localStorage.getItem('playlist')) {
       this.DOM.mediaPlayer?.classList.add('hidden');
     }
@@ -175,10 +189,8 @@ export default class extends Page {
 
   submit_email() {
     const email = document.querySelector('.emailRequire').value;
-    // console.log('this.email: ', this.email)
-    // console.log('this.email Check: ', this.validateEmail(this.email));
-  
-    if(this.validateEmail(email)){
+
+    if (this.validateEmail(email)) {
       this.email = email;
 
       this.generate(content);
@@ -188,7 +200,7 @@ export default class extends Page {
     }
   }
 
-  validateEmail(email){
+  validateEmail(email) {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
@@ -197,9 +209,9 @@ export default class extends Page {
   addFiltersToParams(params) {
     const filters = this.state.filters;
 
-    if(filters.cats.length > 0) params.set("cats", filters.cats.join(','));
-    if(filters.tags.length > 0) params.set("tags", filters.tags.join('|'));
-    if(filters.topics.length > 0) params.set("topics", filters.topics.join('|'));
+    if (filters.cats.length > 0) params.set("cats", filters.cats.join(','));
+    if (filters.tags.length > 0) params.set("tags", filters.tags.join('|'));
+    if (filters.topics.length > 0) params.set("topics", filters.topics.join('|'));
 
     return params;
   }
@@ -224,15 +236,15 @@ export default class extends Page {
     if (bannerImgMobile && icon) {
       bannerImgMobile.src = icon;
     };
-    
+
     // set color
-    if(color) document.getElementById('content')?.style?.setProperty('--brand-color', color);
+    if (color) document.getElementById('content')?.style?.setProperty('--brand-color', color);
   }
 
   search(e) {
     const searchTerm = e.target.value;
 
-    if(!searchTerm) return;
+    if (!searchTerm) return;
     this.search_term = searchTerm.trim();
     this.search_term_tax = false;
 
@@ -242,14 +254,14 @@ export default class extends Page {
     params.delete("tax");
     this.DOM.searchBars?.forEach(x => x.blur());
 
-    window.history.pushState({'player_href': 'search'}, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
+    window.history.pushState({ 'player_href': 'search' }, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
     this.lastload = search_podcasts.load;
     this.lastload();
   }
 
-  addLinkEvents(){
+  addLinkEvents() {
     const goBack = () => {
-      if(window.history.state?.player_href && document.querySelector('.media-player')){
+      if (window.history.state?.player_href && document.querySelector('.media-player')) {
         const link = window.history.state?.player_href;
 
         this.postid = window.history.state?.postid || this.postid;
@@ -275,6 +287,10 @@ export default class extends Page {
             this.lastload = module_single.load;
             this.lastload();
             break;
+          case 'liked-podcasts':
+            this.lastload = liked_podcasts.load;
+            this.lastload();
+            break;
           case 'search':
             this.lastload = search_podcasts.load;
             this.lastload();
@@ -289,9 +305,9 @@ export default class extends Page {
     window.addEventListener('popstate', goBack);
 
     const changeLink = (elem) => {
-      if(elem.classList.contains('player-page-tab--active')) return;
+      if (elem.classList.contains('player-page-tab--active')) return;
       const link = elem.dataset.href;
-      if(!link) return;
+      if (!link) return;
 
       let url;
 
@@ -311,21 +327,140 @@ export default class extends Page {
           this.lastload();
           url = this.main.acf.playlists_page_link;
           break;
+        case 'liked-podcasts':
+          this.lastload = liked_podcasts.load;
+          this.lastload();
+          url = this.main.acf.liked_podcasts_page_link;
+          break;
+        case 'create-playlist':
+          this.createPlaylist();
         default:
           break;
       }
 
-      if(url) window.history.pushState({'player_href': link}, document.title, url);
+      if (url) window.history.pushState({ 'player_href': link }, document.title, url);
     }
 
     document.querySelectorAll('.player-page__nav-link').forEach((x) => x.addEventListener('click', () => changeLink(x)));
+  }
+
+  createPlaylist() {
+    const playlists = document.querySelector('.player-page__nav-playlists');
+    const html = Eta.render(new_playlist, { icons });
+    const newPlElem = document.createElement('div');
+    playlists.prepend(newPlElem);
+    newPlElem.outerHTML = html
+
+    const newPlaylist = document.querySelector('.player-page__nav-new-playlist');
+    const input = newPlaylist.querySelector('input');
+    const text = newPlaylist.querySelector('.player-page-btn--text');
+    const shareicon = newPlaylist.querySelector('.player-page-btn--icon');
+    const close = newPlaylist.querySelector('#close-icon');
+
+    input.focus();
+
+    const create2 = (e) => { if (e.code == 'Enter') create() };
+
+    const create = async () => {
+      close.removeEventListener('mousedown', create);
+      input.removeEventListener('blur', create);
+      input.removeEventListener('keydown', create2);
+
+      if (!newPlaylist) return;
+      newPlaylist.classList.remove('player-page__nav-new-playlist');
+      newPlaylist.classList.remove('pl-adding');
+      let name = input.value;
+      shareicon.style.display = null;
+
+      const params = new URLSearchParams();
+      params.set("userid", this.main.user?.user?.ID);
+      params.set("name", name);
+
+      const url = `/wp-json/sdv/player/v1/create-user-playlist?${params}`;
+
+      const resp = await fetch(url, { method: 'POST' });
+      const [num, upid] = await resp.json();
+
+      if (num === 'unauthorized') newPlaylist.remove();
+      else if (!name) {
+        name = `Custom Playlist #${num + 1}`;
+      }
+
+      text.innerHTML = name;
+
+      newPlaylist.id = `playlist_${num}`;
+      newPlaylist.dataset.href = `/playlist/?upid=${upid}`;
+      shareicon.addEventListener('click', (e) => this.shareUserPlaylist(e, shareicon))
+      newPlaylist.addEventListener('click', () => this.clickUserPlaylist(newPlaylist));
+      //add to playlist menu
+      this.DOM.menuList.innerHTML = `<li id="playlist_${num}-add">${name}</li>` + this.DOM.menuList.innerHTML;
+
+      close.removeEventListener('mousedown', create);
+
+      this.refreshPlaylistPage();
+    }
+
+    close.addEventListener('mousedown', create);
+    input.addEventListener('blur', create);
+    input.addEventListener('keydown', create2);
+  }
+
+  async addToPlaylist(e, id) {
+    if (e.target?.id?.startsWith('playlist_')) {
+      const params = new URLSearchParams();
+
+      id = id || this.currentPodcast().id;
+      params.set("userid", this.main.user?.user?.ID);
+      params.set("playlist_key", e.target.id.split('-')[0]);
+      params.set("podcast_id", id);
+
+      const url = `/wp-json/sdv/player/v1/add-to-user-playlist?${params}`;
+
+      const resp = await fetch(url, { method: 'POST' });
+
+      if (await resp.json() === true) {
+        this.showSnackbar("Added to playlist");
+        this.refreshPlaylistPage();
+      }
+    }
+  }
+
+  async removeFromPlaylist(upid, id) {
+    if (!upid || !id) return;
+
+    const params = new URLSearchParams();
+
+    const elm = document.querySelector(`[data-href="/playlist/?upid=${upid}"]`);
+
+    params.set("userid", this.main.user?.user?.ID);
+    params.set("playlist_key", elm?.id.split('-')[0]);
+    params.set("podcast_id", id);
+
+    const url = `/wp-json/sdv/player/v1/remove-from-user-playlist?${params}`;
+
+    const resp = await fetch(url, { method: 'POST' });
+
+    if (await resp.json() === true) {
+      this.showSnackbar("Removed from playlist");
+      this.refreshPlaylistPage();
+    }
+  }
+
+  refreshPlaylistPage() {
+    if (document.querySelector('.player-page-tab--active')?.dataset.href === 'playlists') {
+      this.lastload = playlist_page.load;
+      this.lastload();
+    } else if (window.location.href.includes('playlist')) {
+      this.lastload();
+    }
   }
 
   isSinglePlaylist() {
     return this.DOM?.mediaPlayer?.classList.contains('single-playlist');
   }
 
-  mpNav () {
+  mpNav() {
+    const menuBtn = document.querySelector(".nav_burger-mp-mobile");
     const searchBtn = document.querySelector(".nav_search-mp-mobile");
     const menuElem = document.querySelector(".player-page__nav-mobile");
     const searchElem = document.querySelector(".player-header__search-mobile");
@@ -334,8 +469,14 @@ export default class extends Page {
       menuElem?.classList.remove('active');
       searchElem?.classList.toggle('active');
     }
+    const showMenu = () => {
+      searchElem?.classList.remove('active');
+      menuElem?.classList.toggle('active');
+    }
 
+    menuBtn?.removeEventListener('click', showMenu);
     searchBtn?.removeEventListener('click', showSearch);
+    menuBtn?.addEventListener('click', showMenu);
     searchBtn?.addEventListener('click', showSearch);
   }
 
@@ -355,24 +496,29 @@ export default class extends Page {
     this.DOM.volSlider.addEventListener('click', audioLib.volumeOnBar);
     this.DOM.volCtrl.addEventListener('click', (e) => e.stopPropagation());
     this.DOM.volHandle.addEventListener('mousemove', this.volumeHandle);
+    this.DOM.menuBtn.addEventListener('click', this.togglePlaylistMenu);
+    this.DOM.menuList.addEventListener('click', this.addToPlaylist);
+    this.regUserPlaylistClick();
     this.mpNav();
-    this.show();
 
-    this.DOM.seekHandle.addEventListener('mousemove', this.seekHandle)    
+    this.DOM.seekHandle.addEventListener('mousemove', this.seekHandle)
     this.DOM.seekHandle.addEventListener('mousedown', () => {
-      this.updateState({playing: !this.DOM.player.paused});
-      if(this.state.playing) audioLib.play();
+      this.updateState({ playing: !this.DOM.player.paused });
+      if (this.state.playing) audioLib.play();
     });
     document.addEventListener('mousemove', this.docSliderHandler);
     document.addEventListener('mouseup', () => {
-      if(this.state.playing) {
+      if (this.state.playing) {
         audioLib.play();
-        this.updateState({playing: false});
+        this.updateState({ playing: false });
       }
     })
 
     // search
     this.DOM.searchBars?.forEach(x => x.addEventListener('keydown', (e) => { if (e.code == 'Enter') this.search(e) }));
+
+    //share user playlist
+    document.querySelectorAll(".share-user-pl-btn").forEach((btn) => btn.addEventListener('click', (e) => this.shareUserPlaylist(e, btn)));
 
     //tags/cats/topics
     document.querySelectorAll(".player-page__filters:not(.player-page__filters--modules) .player-page__filter-item").forEach(this.setupFilters);
@@ -398,10 +544,10 @@ export default class extends Page {
     };
 
     const isMobile = document.documentElement.classList.contains('touch');
-    
+
     const isEmbedPlaylist = document.querySelector('html.embed #content[data-child=playlist]');
 
-    if(isMobile && !isEmbedPlaylist) {
+    if (isMobile && !isEmbedPlaylist) {
       this.DOM.mediaPlayer.addEventListener('click', this.expandPlayer);
       this.DOM.banner_close.addEventListener('click', (e) => {
         e?.stopPropagation();
@@ -411,28 +557,189 @@ export default class extends Page {
     }
   }
 
-  currentPodcast(){
+  shareUserPlaylist(e, btn) {
+    // this is now the menu
+    const menu = btn.parentElement.querySelector('.mp-dropmenu');
+
+    const editPlaylist = (playlist) => {
+      playlist.classList.add('pl-adding');
+
+      const close = playlist.querySelector('#close-icon');
+      const input = playlist.querySelector('input');
+      const text = playlist.querySelector('.player-page-btn--text');
+
+      const save2 = (e) => { if (e.code == 'Enter') save() };
+
+      const save = async () => {
+        close?.removeEventListener('mousedown', save);
+        input?.removeEventListener('blur', save);
+        input?.removeEventListener('keydown', save2);
+
+        if (!playlist) return;
+        const pl_id = playlist.id;
+
+        playlist.classList.remove('pl-adding');
+
+        let name = input.value;
+
+        if (!name || text.innerHTML === name) return;
+
+        const params = new URLSearchParams();
+        params.set("userid", this.main.user?.user?.ID);
+        params.set("playlist_key", pl_id);
+        params.set("name", name);
+
+        text.innerHTML = "Saving...";
+
+        const url = `/wp-json/sdv/player/v1/edit-user-playlist?${params}`;
+
+        const resp = await fetch(url, { method: 'POST' });
+        const res = await resp.json();
+
+        if (res === 'unauthorized') return;
+
+        const addToPl = document.getElementById("menu-list").querySelector(`#${pl_id}-add`);
+        if (addToPl) addToPl.innerHTML = name;
+        text.innerHTML = name;
+
+        this.refreshPlaylistPage();
+      }
+
+      close.addEventListener('mousedown', save);
+      input.addEventListener('blur', save);
+      input.addEventListener('keydown', save2);
+
+      setTimeout(() => input.focus(), 500);
+    }
+
+    const deletePlaylist = (playlist) => {
+      // show popup
+      const html = Eta.render(delete_dialog, { name: playlist.querySelector('.player-page-btn--text')?.innerHTML });
+      let dialog = document.createElement('div');
+
+      document.body.append(dialog);
+      dialog.outerHTML = html;
+      const dialog_bg = document.getElementById('delete-conf-dialog-background');
+      dialog = document.getElementById('delete-conf-dialog');
+
+      const closeDialog = () => {
+        dialog.remove();
+        dialog_bg.remove();
+      }
+
+      const confirmDelete = async () => {
+        if (!playlist) return;
+        const pl_id = playlist.id;
+
+        // remove playlist
+
+        if (window.location.pathname + window.location.search === playlist.dataset.href) document.getElementById("playlists-link").click();
+
+        document.getElementById("menu-list").querySelector(`#${pl_id}-add`)?.remove();
+        playlist.remove();
+
+        // delete request
+        const params = new URLSearchParams();
+        params.set("userid", this.main.user?.user?.ID);
+        params.set("playlist_key", pl_id);
+
+        const url = `/wp-json/sdv/player/v1/delete-user-playlist?${params}`;
+        closeDialog();
+
+        const resp = await fetch(url, { method: 'POST' });
+        const res = await resp.json();
+
+        if (res === 'unauthorized') return;
+
+        this.refreshPlaylistPage();
+      }
+
+      const cancel_btn = dialog.querySelector('#cancel-conf-btn');
+      cancel_btn.addEventListener('click', closeDialog);
+      dialog_bg.addEventListener('click', closeDialog);
+
+      const del_btn = dialog.querySelector('#delete-conf-btn');
+      del_btn.addEventListener('click', confirmDelete);
+    }
+
+    if (!menu.dataset.events) {
+      menu.dataset.events = true;
+      const editBtn = menu.querySelector('#edit-playlist-name');
+      editBtn.addEventListener('click', () => editPlaylist(btn.parentElement));
+
+      const deleteBtn = menu.querySelector('#delete-this-playlist');
+      deleteBtn.addEventListener('click', () => deletePlaylist(btn.parentElement));
+    }
+
+    const hideMenu = () => {
+      menu.style.display = 'none';
+      document.removeEventListener('click', hideMenu);
+    };
+
+    if (menu.style.display === 'unset') { // hide
+      menu.style.display = 'none';
+      menu.classList.remove('stickout');
+      document.removeEventListener('click', hideMenu);
+    
+    } else { // show
+      document.querySelectorAll('.mp-menu, .mp-dropmenu, .mp-removemenu')?.forEach(el => el.style.display = 'none');
+      menu.style.display = 'unset';
+      menu.classList.add('stickout');
+    
+      document.addEventListener('click', hideMenu);
+      e?.stopPropagation();
+    }
+
+    // this.share(window.location.origin + btn.parentElement.dataset.href, true);
+  }
+
+  currentPodcast() {
     const index = this.state.index;
     const playlist = this.state.shuffle ? this.shuffledPlaylist : this.playlist;
 
     return playlist[index];
   }
 
-  async playPlaylist(id, ismodule = false) {
-    if(!id && !ismodule) return;
+  togglePlaylistMenu(e, forceHide = false) {
+    const menuList = this.DOM.menuList;
+    const menuBtn = this.DOM.menuBtn;
 
-    //  console.log('id, ismodule');
-    //  console.log(id, ismodule);
+    if (forceHide || menuList.style.display === "block") {
+      menuList.style.display = "none";
+      menuBtn.classList.add("mp-btn");
+      document.removeEventListener('click', this.togglePlaylistMenu);
+    }
+    else {
+      document.querySelectorAll('.mp-menu, .mp-dropmenu, .mp-removemenu')?.forEach(el => el.style.display = 'none');
+      menuList.style.display = "block";
+      menuBtn.classList.remove("mp-btn");
+      document.addEventListener('click', () => this.togglePlaylistMenu(e, true));
+      e?.stopPropagation();
+    }
+  }
+
+  async getUserPlaylists() {
+    const params = new URLSearchParams();
+    params.set("userid", this.main.user?.user?.ID);
+
+    const url = `/wp-json/sdv/player/v1/get-user-playlists?${params}`;
+
+    const resp = await fetch(url);
+    this.user_playlists = await resp.json();
+  }
+
+  async playPlaylist(id, ismodule = false) {
+    if (!id && !ismodule) return;
 
     const params = new URLSearchParams();
     params.set("id", id);
 
-    
+
     const url = `/wp-json/sdv/player/v1/get-playlist?${params}`;
     let playlist = this.nextPlaylist;
     this.nextPlaylist = [];
 
-    if(!ismodule){
+    if (!ismodule) {
       const resp = await fetch(url);
       const respJson = await resp.json();
       playlist = respJson?.modules;
@@ -441,7 +748,7 @@ export default class extends Page {
     this.playlist = [];
 
     if (playlist) {
-      for(const module of playlist){
+      for (const module of playlist) {
         const podcast = {
           title: module.title || module.post_title,
           byline: module.byline,
@@ -452,45 +759,83 @@ export default class extends Page {
           link: module.link,
           img: module.img,
         };
-  
+
         this.playlist.push(podcast);
       }
     }
 
-    this.updateState({index: 0});
+    this.updateState({ index: 0 });
 
-    if(this.state.shuffle) this.shuffledPlaylist = this.shufflePlaylist();
-    
+    if (this.state.shuffle) this.shuffledPlaylist = this.shufflePlaylist();
+
     this.load(this.playlist[0]);
   }
 
-  regModuleClick(){
+  regModuleClick() {
     document.querySelectorAll('.p-m').forEach((module) => {
       module.addEventListener('click', (e) => {
-        //  console.log('opening module page');
         this.postid = module.dataset.id;
 
-        window.history.pushState({'player_href': 'module', postid: this.postid}, document.title, module.dataset.href);
+        window.history.pushState({ 'player_href': 'module', postid: this.postid }, document.title, module.dataset.href);
         this.lastload = module_single.load;
         this.lastload();
       });
     });
   }
 
-  regPlaylistClick(){
+  regUserPlaylistClick() {
+    document.querySelectorAll('.player-page__nav-playlists span.mouseHover').forEach(pl => {
+      pl.querySelector('input').addEventListener('click', (e) => e.stopPropagation());
+      this.clickUserPlaylist(pl);
+    });
+  }
+
+  clickUserPlaylist(playlist) {
+    let clickCount = 0;
+
+    const showPlaylist = (playlist) => {
+
+      window.history.pushState({ 'player_href': 'playlist' }, document.title, playlist.dataset.href);
+      this.lastload = playlist_single.load;
+      this.lastload();
+    }
+
+    playlist.addEventListener('mousedown', (e) => {
+      if (['svg', 'path', 'ul', 'li'].includes(e.target.tagName.toLowerCase()) || e.target.id === 'share-icon') {
+        return;
+      }
+
+      showPlaylist(playlist);
+      // clickCount++;
+
+      // if (("which" in e && e.which == 3) || ("button" in e && e.button == 2)) {
+      //   editPlaylist(playlist); // right-click
+      //   clickCount = 0;
+      // }
+      // else if (clickCount === 1) {
+      //   setTimeout(() => {
+      //     if (clickCount === 1) showPlaylist(playlist); // single-click
+      //     else if (clickCount === 2) editPlaylist(playlist); // double-click
+
+      //     clickCount = 0;
+      //   }, 300);
+      // }
+    });
+  }
+
+  regPlaylistClick() {
     document.querySelectorAll('.player-playlist').forEach((playlist) => {
       playlist.addEventListener('click', (e) => {
-        //  console.log('opening playlist page');
         this.postid = playlist.dataset.id;
 
-        window.history.pushState({'player_href': 'playlist', postid: this.postid}, document.title, playlist.dataset.href);
+        window.history.pushState({ 'player_href': 'playlist', postid: this.postid }, document.title, playlist.dataset.href);
         this.lastload = playlist_single.load;
         this.lastload();
       });
     });
   }
 
-  regModuleFilters(module){
+  regModuleFilters(module) {
     const genFilterElem = (filters, filter, type, i) => {
       const filterElem = document.createElement('span');
       filterElem.id = `${type}-${i}`;
@@ -507,31 +852,31 @@ export default class extends Page {
     const cats = document.querySelector('.player-page__filter-items--cats');
     cats.innerHTML = '';
 
-    if(module?.cats){
+    if (module?.cats) {
       module?.cats
-      ?.map(x => new Object({id: x.term_id, name: x.name}))
-      ?.forEach((cat, i) => genFilterElem(cats, cat, 'cat', i));
+        ?.map(x => new Object({ id: x.term_id, name: x.name }))
+        ?.forEach((cat, i) => genFilterElem(cats, cat, 'cat', i));
     }
-    
+
     // add tags
     const tags = document.querySelector('.player-page__filter-items--tags');
     tags.innerHTML = '';
 
-    if(module?.tags){
+    if (module?.tags) {
       module?.tags
-      ?.map(x => new Object({id: x.ID, name: x.post_title}))
-      ?.forEach((tag, i) => genFilterElem(tags, tag, 'tag', i));
+        ?.map(x => new Object({ id: x.ID, name: x.post_title }))
+        ?.forEach((tag, i) => genFilterElem(tags, tag, 'tag', i));
     }
-    
+
 
     // add topics
     const topics = document.querySelector('.player-page__filter-items--topics');
     topics.innerHTML = '';
 
-    if(module?.topics){
+    if (module?.topics) {
       module?.topics
-      ?.map(x => new Object({id: x.ID, name: x.post_title}))
-      ?.forEach((topic, i) => genFilterElem(topics, topic, 'topic', i));
+        ?.map(x => new Object({ id: x.ID, name: x.post_title }))
+        ?.forEach((topic, i) => genFilterElem(topics, topic, 'topic', i));
     }
 
     const moduleFilterBtns = document.querySelectorAll(".player-page__filters--modules .player-page__filter-item");
@@ -543,11 +888,11 @@ export default class extends Page {
         const params = new URLSearchParams(window.location.search);
         params.set("term", this.search_term);
         params.set("tax", this.search_term_tax);
-        this.DOM.searchBars?.forEach((x)=>x.blur());
+        this.DOM.searchBars?.forEach((x) => x.blur());
         // clear selected cats
         const actClass = "player-page__filter-item--active";
-        document.querySelectorAll(`.${actClass}`).forEach((filter)=>filter.classList.remove(actClass));
-        this.state.filters = {cats: [], tags: [], topics: []};
+        document.querySelectorAll(`.${actClass}`).forEach((filter) => filter.classList.remove(actClass));
+        this.state.filters = { cats: [], tags: [], topics: [] };
 
         window.history.pushState({
           "player_href": "search"
@@ -558,8 +903,12 @@ export default class extends Page {
     })
   }
 
-  regModuleButtons(){
+  regModuleButtons() {
     const playBtns = document.querySelectorAll('.module-play-btn');
+    const likeBtns = document.querySelectorAll('.module-like-btn');
+    const menuBtns = document.querySelectorAll('.module-menu-btn');
+    const menuRemoveBtns = document.querySelectorAll('.module-remove-menu-btn');
+    const menuDetailBtns = document.querySelectorAll('.module-detail-menu-btn');
     const readTranscriptBtn = document.querySelector('.module-read-transcript');
 
     readTranscriptBtn?.addEventListener('click', (e) => {
@@ -573,12 +922,12 @@ export default class extends Page {
         e?.stopPropagation();
         const parent = btn.parentElement;
 
-        if(btn.dataset.fetch){
+        if (btn.dataset.fetch) {
           const params = new URLSearchParams();
           params.set("id", parent.dataset.id || 0);
-      
+
           const url = `/wp-json/sdv/player/v1/get-module?${params}`;
-      
+
           const postsResp = await fetch(url);
           const module = (await postsResp.json());
           this.nextPlaylist = [module];
@@ -587,16 +936,138 @@ export default class extends Page {
         this.playPlaylist(parent.dataset.id, true);
       });
     })
+
+    likeBtns.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e?.stopPropagation();
+        const parent = btn.parentElement;
+        const liked = parent.dataset.liked === 'true';
+
+        this.updateLikeButton({ liked: !liked }, btn);
+
+        if (this.currentPodcast()?.id == parent.dataset?.id) {
+          this.currentPodcast().liked = !liked;
+          this.updateLikeButton(this.currentPodcast());
+        }
+
+        parent.dataset.liked = await this.like(parent.dataset.id, liked);
+      });
+    })
+
+    menuBtns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e?.stopPropagation();
+        const parent = btn.parentElement;
+        const currMenu = parent.querySelector(".mp-menu");
+
+        const hideMenu = () => {
+          const currMenu = parent.querySelector(".mp-menu")?.remove();
+          if (currMenu) currMenu.remove();
+          document.removeEventListener('click', hideMenu);
+        };
+
+        if (currMenu) {
+          currMenu.remove();
+          document.removeEventListener('click', hideMenu);
+
+          return;
+        }
+
+        document.querySelectorAll('.mp-menu, .mp-dropmenu, .mp-removemenu')?.forEach(el => el.style.display = 'none');
+        document.addEventListener('click', hideMenu);
+
+        // duplicate menu list
+        const newList = document.getElementById('menu-list').cloneNode(true);
+        newList.id = '';
+        newList.style.display = "block";
+
+        // attach to menu btn
+        btn.appendChild(newList);
+
+        // attach events
+        newList.addEventListener('click', (e) => this.addToPlaylist(e, parent.dataset.id));
+      });
+    })
+
+    menuRemoveBtns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e?.stopPropagation();
+        const module = btn.parentElement;
+        const menu = module.querySelector('.mp-removemenu');
+
+        const hideMenu = () => {
+          menu.style.display = 'none';
+          document.removeEventListener('click', hideMenu);
+        };
+
+        if (!menu.dataset.events) {
+          menu.dataset.events = true;
+
+          const cancel_btn = menu.querySelector('#cancel-from-playlist');
+          cancel_btn.addEventListener('click', e => {
+            hideMenu()
+            e?.stopPropagation();
+          });
+
+          const remove_btn = menu.querySelector('#remove-from-playlist');
+          remove_btn.addEventListener('click', (e) => {
+            hideMenu();
+            const params = new URLSearchParams(window.location.search);
+
+            const upid = params.get("upid");
+
+            this.removeFromPlaylist(upid, module.dataset.id);
+            e?.stopPropagation();
+          });
+        }
+
+        if (menu.style.display === 'unset') { // hide
+          menu.style.display = 'none';
+          menu.classList.remove('stickout');
+          document.removeEventListener('click', hideMenu);
+        } else { // show
+          document.querySelectorAll('.mp-menu, .mp-dropmenu, .mp-removemenu')?.forEach(el => el.style.display = 'none');
+          menu.style.display = 'unset';
+          menu.classList.add('stickout');
+
+          document.addEventListener('click', hideMenu);
+        }
+      });
+    })
+
+    menuDetailBtns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e?.stopPropagation();
+        const module = btn.parentElement;
+
+        const detail = module.querySelector('.mp-detailmenu');
+        const hideMenu = () => {
+          module.style.height = 'unset';
+          detail.style.display = 'none';
+          module.classList.remove("show-detail");
+        };
+
+        if (detail.style.display === 'block') { // hide
+          hideMenu();
+          document.removeEventListener('click', hideMenu);
+        } else { // show
+          module.style.height = 'auto';
+          detail.style.display = 'block';
+          module.classList.add("show-detail");
+          document.removeEventListener('click', hideMenu);
+        }
+      });
+    })
   }
-  
+
   setupFilters(x) {
     x.addEventListener("click", async () => {
       const classname = "player-page__filter-item--active";
       let key;
 
-      if(x.id.includes("cat")) key = "cats";
-      if(x.id.includes("tag")) key = "tags";
-      if(x.id.includes("topic")) key = "topics";
+      if (x.id.includes("cat")) key = "cats";
+      if (x.id.includes("tag")) key = "tags";
+      if (x.id.includes("topic")) key = "topics";
 
       const filterArr = this.state.filters[key];
 
@@ -614,14 +1085,14 @@ export default class extends Page {
 
       // clearTimeout(this.filterChanged);
       this.lastload();
-  
+
       // this.filterChanged = setTimeout(() => snackbar.classList.remove("snackbar--visible"), 2500);
     });
   }
 
-  docSliderHandler(e){
+  docSliderHandler(e) {
     if (e.buttons == 1) {
-      switch(this.state.itemScrolling){
+      switch (this.state.itemScrolling) {
         case "volume":
           this.volumeHandle(e);
           break;
@@ -632,7 +1103,7 @@ export default class extends Page {
           break;
       }
     }
-    else this.updateState({itemScrolling: ""});
+    else this.updateState({ itemScrolling: "" });
   }
 
   volumeHandle(e) {
@@ -642,11 +1113,11 @@ export default class extends Page {
       const y = this.DOM.volSlider.getBoundingClientRect().bottom - e.pageY;
       const height = this.DOM.volSlider.clientHeight;
 
-      let percent = y/height;
+      let percent = y / height;
       percent = percent <= 1 ? percent : 1;
       percent = percent >= 0 ? percent : 0;
       audioLib.volumeOnHandle(percent);
-      this.updateState({itemScrolling: "volume"});
+      this.updateState({ itemScrolling: "volume" });
     }
   }
 
@@ -657,20 +1128,20 @@ export default class extends Page {
       const x = e.pageX - this.DOM.seekbar.offsetLeft;
       const width = this.DOM.seekbar.clientWidth;
 
-      let percent = x/width;
+      let percent = x / width;
       percent = percent <= 1 ? percent : 1;
       percent = percent >= 0 ? percent : 0;
       audioLib.seekOnHandle(percent);
-      this.updateState({itemScrolling: "seek"});
+      this.updateState({ itemScrolling: "seek" });
     }
   }
 
   // volume
-  toggleVolControls (e, forceHide = false) {
+  toggleVolControls(e, forceHide = false) {
     const volCtrl = this.DOM.volCtrl;
     const volBtn = this.DOM.volBtn;
 
-    if(forceHide || volCtrl.style.display === "block") {
+    if (forceHide || volCtrl.style.display === "block") {
       volCtrl.style.display = "none";
       volBtn.classList.add("mp-btn");
       document.removeEventListener('click', this.toggleVolControls);
@@ -683,18 +1154,56 @@ export default class extends Page {
     }
   }
 
-  updateButtons () {
+  async like(id, liked = false) {
+    const index = this.state.index;
+    let podcast;
+    const params = new URLSearchParams();
+
+    params.set("userid", this.main.user?.user?.ID);
+
+    if (!id) {
+      podcast = this.playlist[index];
+      id = podcast.id;
+      liked = podcast.liked;
+      podcast.liked = !podcast.liked;
+      this.updateLikeButton(podcast);
+    }
+
+    params.set('podcast_id', id);
+    params.set('remove', liked);
+
+    const url = `/wp-json/sdv/player/v1/like-podcast?${params}`;
+
+    await fetch(url, { method: 'POST' });
+
+    return !liked;
+  }
+
+  updateButtons() {
     const loop = this.state.loop;
     const loopBtn = this.DOM.loopBtn;
 
-    if(loop) loopBtn.classList.add("mp-btn--active");
+    if (loop) loopBtn.classList.add("mp-btn--active");
     else loopBtn.classList.remove("mp-btn--active");
 
     const shuffle = this.state.shuffle;
     const shuffleBtn = this.DOM.shuffleBtn;
 
-    if(shuffle) shuffleBtn.classList.add("mp-btn--active");
+    if (shuffle) shuffleBtn.classList.add("mp-btn--active");
     else shuffleBtn.classList.remove("mp-btn--active");
+  }
+
+  updateLikeButton({ liked }, btn) {
+    const likeBtn = btn || this.DOM.likeBtn;
+
+    if (liked) {
+      likeBtn.innerHTML = icons.heart_filled;
+      likeBtn.classList.add("heart--filled");
+    }
+    else {
+      likeBtn.innerHTML = icons.heart;
+      likeBtn.classList.remove("heart--filled");
+    }
   }
 
   // snackbar
@@ -704,21 +1213,21 @@ export default class extends Page {
     snackbar.style.display = 'unset';
 
     setTimeout(() => {
-      if(message) snackbar.innerHTML = message;
+      if (message) snackbar.innerHTML = message;
       snackbar.classList.add("snackbar--visible");
-  
+
       this.snackbarShowing = setTimeout(() => snackbar.classList.remove("snackbar--visible"), 3000)
       setTimeout(() => snackbar.style.display = 'none', 3500)
     }, 100)
   }
 
   // audio
-  replay(){
-    if(this.state.loop) audioLib.play();
+  replay() {
+    if (this.state.loop) audioLib.play();
     else this.next();
   }
 
-  load (podcast) {
+  load(podcast) {
     setTimeout(() => {
       this.DOM.mediaPlayer.style.height = null;
       this.DOM.mediaPlayer.style.overflow = 'unset';
@@ -733,9 +1242,11 @@ export default class extends Page {
 
     this.DOM.title.innerHTML = podcast.title;
     this.DOM.byline.innerHTML = podcast.byline;
+    this.updateLikeButton(podcast);
+    // audioLib.play();
   }
 
-  prev (e) {
+  prev(e) {
     e?.stopPropagation();
     const index = this.state.index;
     const playlist = this.state.shuffle ? this.shuffledPlaylist : this.playlist;
@@ -744,40 +1255,40 @@ export default class extends Page {
     const podcast = playlist[prevIndex];
 
     this.load(podcast);
-    this.updateState({index: prevIndex});
+    this.updateState({ index: prevIndex });
   }
 
-  next (e) {
+  next(e) {
     e?.stopPropagation();
-    if(this.isSinglePlaylist()) return;
+    if (this.isSinglePlaylist()) return;
     const index = this.state.index;
     const playlist = this.state.shuffle ? this.shuffledPlaylist : this.playlist;
     const nextIndex = (index + 1) % playlist.length;
-  
+
     const podcast = playlist[nextIndex];
 
     this.load(podcast);
-    this.updateState({index: nextIndex});
+    this.updateState({ index: nextIndex });
   }
 
-  loop () {
-    if(this.isSinglePlaylist()) return;
+  loop() {
+    if (this.isSinglePlaylist()) return;
     const loop = !this.state.loop;
     const btn = this.DOM.loopBtn;
 
-    if(loop) btn.classList.add("mp-btn--active");
+    if (loop) btn.classList.add("mp-btn--active");
     else btn.classList.remove("mp-btn--active");
 
-    this.updateState({loop});
+    this.updateState({ loop });
   }
 
-  shuffle () {
-    if(this.isSinglePlaylist()) return;
+  shuffle() {
+    if (this.isSinglePlaylist()) return;
     const shuffle = !this.state.shuffle;
     let index = 0;
     const btn = this.DOM.shuffleBtn;
 
-    if(shuffle) {
+    if (shuffle) {
       btn.classList.add("mp-btn--active");
       this.shuffledPlaylist = this.shufflePlaylist();
     }
@@ -787,12 +1298,12 @@ export default class extends Page {
       index = this.playlist.findIndex(x => x.src === podcast.src);
     }
 
-    this.updateState({shuffle, index});
+    this.updateState({ shuffle, index });
   }
 
   shufflePlaylist() {
     const array = this.playlist?.slice();
-  
+
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -807,16 +1318,16 @@ export default class extends Page {
   }
 
   // utils
-  updateState (state) {
-    for(const [key, value] of Object.entries(state)){
+  updateState(state) {
+    for (const [key, value] of Object.entries(state)) {
       this.state[key] = value
     }
 
     localStorage.setItem('loop', this.state.loop);
     localStorage.setItem('shuffle', this.state.shuffle);
   }
-  
-  formatDate (dateStr) {
+
+  formatDate(dateStr) {
     const date = new Date(dateStr);
     const year = date.getFullYear();
     const month = date.toLocaleString('default', { month: 'short' });
@@ -825,7 +1336,7 @@ export default class extends Page {
   }
 
   formatDuration(duration, mmhh = false) {
-    if (mmhh){
+    if (mmhh) {
       const minutes = Math.floor(duration / 60);
       const seconds = Math.floor(duration % 60);
       return `${minutes}:${seconds.toString().padStart(2, "0")}`;
@@ -836,7 +1347,7 @@ export default class extends Page {
     else return Math.floor(duration / 3600) + ' Hrs';
   }
 
-  async ajaxImages(){
+  async ajaxImages() {
     let newpage = document.createElement("template")
     newpage.innerHTML = this.html
 
@@ -844,12 +1355,12 @@ export default class extends Page {
     const promises = []
     paths.forEach((path) => {
       promises.push(new Promise((resolve, reject) => {
-          const img = new Image();
+        const img = new Image();
 
-          img.onload = ()=>resolve(path)
-          img.onerror = ()=>reject(path)
-          
-          img.src = path.src
+        img.onload = () => resolve(path)
+        img.onerror = () => reject(path)
+
+        img.src = path.src
       }))
     })
     return Promise.resolve()
@@ -858,13 +1369,13 @@ export default class extends Page {
 
   }
 
-  async blocksClick (type){
+  async blocksClick(type) {
     this.DOM.holder.classList.add('load')
     await this.timeout(600)
-    if(type=='block'){
+    if (type == 'block') {
       this.DOM.holder.classList.add('blocks')
     }
-    else{
+    else {
       this.DOM.holder.classList.remove('blocks')
 
     }
@@ -872,24 +1383,24 @@ export default class extends Page {
     this.resizeLimit()
   }
 
-  async loadImages(){
+  async loadImages() {
     let paths = Array.from(this.DOM.el.querySelectorAll('img'))
     const promises = []
     paths.forEach((path) => {
       promises.push(new Promise((resolve, reject) => {
-          const img = new Image();
+        const img = new Image();
 
-          img.onload = ()=>resolve(path)
-          img.onerror = ()=>reject(path)
-          
-          img.src = path.src
+        img.onload = () => resolve(path)
+        img.onerror = () => reject(path)
+
+        img.src = path.src
       }))
     })
     let videos = Array.from(this.DOM.el.querySelectorAll('video.wait'))
-    if(videos){
+    if (videos) {
       Promise.all(videos).then(values => {
-        for(let vid of values){
-            vid.play();
+        for (let vid of values) {
+          vid.play();
         }
       });
     }
@@ -898,89 +1409,87 @@ export default class extends Page {
 
 
   }
-  
-  callBacks(){
+
+  callBacks() {
     this.sticks = []
-    this.callback = (entries,observer) =>{
-      entries.forEach(entry=>{
-        if(!entry.target.dataset.pos){
+    this.callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.target.dataset.pos) {
           return false
         }
         const pos = entry.target.dataset.pos
         const id = this.anims[pos].id.substring(0, 1);
-        if(id=='l'){
+        if (id == 'l') {
 
         }
-        if(!entry.isIntersecting){
-          if(this.anims[pos].active==true && this.anims[pos].animated==1){
-            if(id=='s'){
-              // console.log(this.anims[pos])
+        if (!entry.isIntersecting) {
+          if (this.anims[pos].active == true && this.anims[pos].animated == 1) {
+            if (id == 's') {
               this.anims[pos].stick.active = 0
               this.movestick = null
             }
-            else if(id=='v'){
-
+            else if (id == 'v') {
               clearInterval(this.clockInt)
             }
-            else if(id=="t"){
-              
+            else if (id == "t") {
+
               this.anims[pos].stick.active = 0
               this.movetext = null
             }
 
-            else if(id=='c'){
+            else if (id == 'c') {
               document.documentElement.classList.remove('white-menu')
             }
-            else if(id=='l'){
+            else if (id == 'l') {
               document.documentElement.classList.remove('logohide-menu')
             }
-            else if(id=='q'){
+            else if (id == 'q') {
               document.documentElement.classList.remove('quick-menu')
             }
-            else if(id=='e'){
+            else if (id == 'e') {
               this.anims[pos].classel.stop()
               this.slidetext = null
-              
+
             }
           }
           this.anims[pos].active = false
         }
-        else if(entry.isIntersecting){
-          if(this.anims[pos].active==false && this.anims[pos].animated==1){
-            if(id=='e'){
+        else if (entry.isIntersecting) {
+          if (this.anims[pos].active == false && this.anims[pos].animated == 1) {
+            if (id == 'e') {
               this.anims[pos].classel.start()
               this.slidetext = this.anims[pos]
             }
-            else if(id=='v'){
+            else if (id == 'v') {
               this.clockStart(this.anims[pos].el.parentNode.querySelector('.time'))
             }
-            else if(id=='s'){
+            else if (id == 's') {
               this.anims[pos].stick.active = 1
               this.movestick = this.anims[pos]
             }
-            else if(id=='t'){
+            else if (id == 't') {
               this.anims[pos].stick.active = 1
               this.movetext = this.anims[pos]
             }
-            
-            else if(id=='c'){
+
+            else if (id == 'c') {
               document.documentElement.classList.add('white-menu')
             }
-            else if(id=='l'){
+            else if (id == 'l') {
               document.documentElement.classList.add('logohide-menu')
             }
-            else if(id=='q'){
+            else if (id == 'q') {
               document.documentElement.classList.add('quick-menu')
             }
           }
           this.anims[pos].active = true
-          if(this.anims[pos].animated==2){
-            this.makeAnim(this.anims[pos],(entry.boundingClientRect.y).toFixed(0),entry.intersectionRatio)
+          if (this.anims[pos].animated == 2) {
+            this.makeAnim(this.anims[pos], (entry.boundingClientRect.y).toFixed(0), entry.intersectionRatio)
           }
-          else if(this.anims[pos].animated==0){
-            if(entry.intersectionRatio > 0.8){
+          else if (this.anims[pos].animated == 0) {
+            if (entry.intersectionRatio > 0.8) {
               entry.target.classList.add('inview')
-              if(this.anims[pos].classel!=null){
+              if (this.anims[pos].classel != null) {
                 this.anims[pos].classel.start()
               }
               this.observer.unobserve(entry.target)
@@ -989,116 +1498,116 @@ export default class extends Page {
         }
       })
     }
-    
-    if(this.main.isTouch){
+
+    if (this.main.isTouch) {
       this.optionsob = {
-        root:document.body,
-        threshold:this.buildThresholdList(500)
+        root: document.body,
+        threshold: this.buildThresholdList(500)
       };
     }
-    else{
+    else {
       this.optionsob = {
-        root:null,
-        threshold:this.buildThresholdList(500)
+        root: null,
+        threshold: this.buildThresholdList(500)
       };
     }
-    this.observer = new IntersectionObserver(this.callback,this.optionsob)
-    if(this.DOM.watchers){
-      this.DOM.watchers.forEach((el)=>{
+    this.observer = new IntersectionObserver(this.callback, this.optionsob)
+    if (this.DOM.watchers) {
+      this.DOM.watchers.forEach((el) => {
         this.observer.observe(el)
       })
     }
   }
 
-  createAnimations () {
-    if(this.DOM.watchers){
-      for(let[index,anim] of this.DOM.watchers.entries()){
+  createAnimations() {
+    if (this.DOM.watchers) {
+      for (let [index, anim] of this.DOM.watchers.entries()) {
         let vocal = ''
         let animated = 0
         let stick = null
         let classel = null
         let gsapanim = null
         let delay = 0
-        if(anim.classList.contains('iO-stck')){
+        if (anim.classList.contains('iO-stck')) {
           animated = 1
           stick = {
-            parent:this.DOM.el.querySelector('#stck'+anim.dataset.stck),
-            son:this.DOM.el.querySelector('#stck'+anim.dataset.stck+' .stck_main'),
-            active:0,
-            current:0,
-            target:0,
-            pos:0,
-            prog:0,
-            limit:0
+            parent: this.DOM.el.querySelector('#stck' + anim.dataset.stck),
+            son: this.DOM.el.querySelector('#stck' + anim.dataset.stck + ' .stck_main'),
+            active: 0,
+            current: 0,
+            target: 0,
+            pos: 0,
+            prog: 0,
+            limit: 0
           }
-          
-          vocal ='s'+index
-          
+
+          vocal = 's' + index
+
         }
-        else if(anim.classList.contains('iO-time')){
-          
-          vocal ='v'+index
+        else if (anim.classList.contains('iO-time')) {
+
+          vocal = 'v' + index
           animated = 1
         }
-        else{
+        else {
 
-          vocal ='n'+index
+          vocal = 'n' + index
         }
         anim.dataset.pos = index
         let animobj = {
           el: anim,
           pos: index,
           stick: stick,
-          id: vocal+'s',
-          animated:animated,
-          gsapanim:gsapanim,
-          classel:classel,
+          id: vocal + 's',
+          animated: animated,
+          gsapanim: gsapanim,
+          classel: classel,
           active: false
         };
         this.anims.push(animobj)
-        
+
       }
     }
   }
-  makeAnim(anim,y,ratio){
+  makeAnim(anim, y, ratio) {
     const id = anim.id.substring(0, 1);
     let prog = 0
     //HAY que hacer algo con esto, que si no tiene el tamaño de la pantalla,peta
-    if(y < 0){
-      prog = 1-(ratio/2)
+    if (y < 0) {
+      prog = 1 - (ratio / 2)
     }
-    else{
-      prog = (ratio/2)
+    else {
+      prog = (ratio / 2)
     }
-    if(id=='p' || id=='h' || id=='f'){
+    if (id == 'p' || id == 'h' || id == 'f') {
       anim.gsapanim.progress(prog)
     }
   }
-  onResize(){
-    
+  onResize() {
+
     return super.onResize()
   }
-  
-  
-  smoothScroll(){
-    if(this.isVisible==1){
+
+
+  smoothScroll() {
+    if (this.isVisible == 1) {
       super.smoothScroll()
     }
-    
+
   }
 
-  mobileScroll(){
-    if(this.isAutoScroll==0){
-      
+  mobileScroll() {
+    if (this.isAutoScroll == 0) {
+
     }
   }
 
-  modifyNav(show = false){
+  modifyNav(show = false) {
     const accountBtn = document.querySelector('.nav_buttons #my-account-btn');
     const searchBtn = document.querySelector('.nav_search');
     const mpNav = document.querySelector('.nav-mp-mobile');
     const navBtn = document.querySelector('.nav_burger');
-    
+
     if (!show) {
       // hide items
       searchBtn.style.maxHeight = '0%';
@@ -1118,17 +1627,19 @@ export default class extends Page {
     }
   }
 
-  async show () {
+  async show() {
     this.timeout(1)
-    window.history.replaceState({'player_href': this.playerPage}, document.title, window.location.href);
+    window.history.replaceState({ 'player_href': this.playerPage }, document.title, window.location.href);
 
     this.modifyNav();
-    
+
     // load the current loaded pages playlist
     if (this.playerPage === "browse") {
       this.lastload = browse.load;
     } else if (this.playerPage === "playlists") {
       this.lastload = playlist_page.load;
+    } else if (this.playerPage === "liked-podcasts") {
+      this.lastload = liked_podcasts.load;
     } else if (this.playerPage === "playlist") {
       this.lastload = playlist_single.load;
     } else if (this.playerPage === "module") {
@@ -1146,12 +1657,29 @@ export default class extends Page {
     return super.show()
   }
 
-  async hide () {
+  async hide() {
     this.isVisible = 0
     document.removeEventListener('popstate', this.collapsePlayer);
 
     this.modifyNav(true);
 
     return super.hide()
+  }
+
+  async register() {
+    let formdata = new FormData();
+    const firstName = (this.email).split('@')[0];
+    formdata.set('email', this.email);
+    formdata.set('first_name', firstName)
+    formdata.set('last_name', '')
+    formdata.set('pronoun', '')
+
+    const registerRes = await fetch(this.main.acf.base + '/wp-json/csskiller/v1/register', {
+      method: 'post',
+      body: formdata
+    })
+    const registerUser = await registerRes.json();
+
+    this.main.user = registerUser;
   }
 }
