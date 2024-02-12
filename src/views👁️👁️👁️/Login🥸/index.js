@@ -130,8 +130,8 @@ export default class extends Page {
         else if(index==3){
           
           const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/logout/')
-          this.main.user = false
-          document.documentElement.classList.add('logged')
+          this.main.user = false;
+          document.documentElement.classList.remove('logged')
           this.emit('globalchange')
           this.emit('gotohome')
         }

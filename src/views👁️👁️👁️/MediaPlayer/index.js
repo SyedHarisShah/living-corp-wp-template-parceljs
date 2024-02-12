@@ -256,16 +256,32 @@ export default class extends Page {
   // }
 
   search(e) {
+    const params = new URLSearchParams(window.location.search);
+
+    const moduleFilterBtns = document.querySelectorAll(".player-page__filter-item--active");
+
+    moduleFilterBtns.forEach(btn => {
+      const actClass = "player-page__filter-item--active";
+      btn.classList.remove(actClass);
+    })
+
+    params.delete("tax");
+
+    this.state.filters = {cats: [], tags: [], topics: []};
+
     const searchTerm = e.target.value;
 
-    if(!searchTerm) return;
+    if(!searchTerm) {
+      this.lastload = discover.load;
+      this.lastload();
+      params.delete("term");
+      return;
+    }
     this.search_term = searchTerm.trim();
     this.search_term_tax = false;
 
-    const params = new URLSearchParams(window.location.search);
     params.set('term', this.search_term);
 
-    params.delete("tax");
     this.DOM.searchBars?.forEach(x => x.blur());
 
     window.history.pushState({'player_href': 'search'}, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
@@ -361,7 +377,7 @@ export default class extends Page {
 
   createPlaylist() {
     const playlists = document.querySelector('.player-page__nav-playlists');
-    const html = Eta.render(new_playlist, {icons});
+    const html = Eta.render(new_playlist, {global:this.main, icons});
     const newPlElem = document.createElement('div');
     playlists.prepend(newPlElem);
     newPlElem.outerHTML = html
@@ -533,7 +549,7 @@ export default class extends Page {
 
     // search
     this.DOM.searchBars?.forEach(x => x.addEventListener('keydown', (e) => { if (e.code == 'Enter') this.search(e) }));
-
+    
     //share user playlist
     document.querySelectorAll(".share-user-pl-btn").forEach((btn) => btn.addEventListener('click', (e) => this.shareUserPlaylist(e, btn)));
 
@@ -919,7 +935,7 @@ export default class extends Page {
         const params = new URLSearchParams(window.location.search);
         params.set("term", this.search_term);
         params.set("tax", this.search_term_tax);
-        this.DOM.searchBars?.forEach((x)=>x.blur());
+        this.DOM.searchBars?.forEach((x)=>{x.value = ''; x.blur();});
         // clear selected cats
         const actClass = "player-page__filter-item--active";
         document.querySelectorAll(`.${actClass}`).forEach((filter)=>filter.classList.remove(actClass));

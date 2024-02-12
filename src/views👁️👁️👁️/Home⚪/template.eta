@@ -227,7 +227,7 @@
             <h2 class="tit1"><%~ title %></h2>
             <h3 class="tit4"><%~ text %> </h3>
             <a  class="btn mouseHover" href="<%~ it.global.acf.support %>">
-              <div class="btn_t">Support</div>
+              <div class="btn_t">Support Us</div>
             </a>
           </div>
         </div>

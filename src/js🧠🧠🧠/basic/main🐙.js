@@ -137,9 +137,9 @@ class App {
     })
     this.pages.get('login').on('gotohome',()=>{
       let url = this.main.acf.home
-      if(process.env.APP_ENV=='local'){
-        url='http://localhost:1234/index.html'
-      }
+      // if(process.env.APP_ENV=='local'){
+      //   url='http://localhost:1234/index.html'
+      // }
       this.onChange({
         url: url,
         id: '',
@@ -503,7 +503,6 @@ class App {
 
 
     this.page = this.newpage
-
 
   }
   async onRequest ({ push, response, url, id }) {

@@ -242,6 +242,13 @@ export default class extends Page {
   }
 
   search(e) {
+    const moduleFilterBtns = document.querySelectorAll(".player-page__filter-item--active");
+
+    moduleFilterBtns.forEach(btn => {
+      const actClass = "player-page__filter-item--active";
+      btn.classList.remove(actClass);
+    })
+    
     const searchTerm = e.target.value;
 
     if (!searchTerm) return;

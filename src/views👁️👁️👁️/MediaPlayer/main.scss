@@ -1041,17 +1041,19 @@ html.smooth {
     margin-bottom: 15px !important;
 
     &--user-playlist {
-      align-items: center;
-      aspect-ratio: 1;
       background-color: var(--brand-color);
       border: none;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin: 1.25rem;
+      align-items: center;
+      margin: 2.25rem;
       // overflow: hidden;
-      padding: 1rem;
+      padding: 2rem;
+      word-break: break-all;
+      width: 220px;
+      height: 260px;
 
       h2 {
         color: #fff;
@@ -1061,6 +1063,10 @@ html.smooth {
         text-align: center;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+      }
+
+      img {
+        width: 100px;
       }
     }
 

@@ -72,7 +72,8 @@ export default class extends EventEmitter {
         this.main.user = datalog
         // //  console.log('login is made')
         // //  console.log(this.main)
-        this.emit('login')
+        // this.emit('login')
+        window.location.reload();
       }
       
   }

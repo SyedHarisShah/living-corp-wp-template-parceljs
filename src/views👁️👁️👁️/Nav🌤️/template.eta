@@ -111,7 +111,7 @@
             <div class="nav_log_l">My account</div>
           </a>
           <a class="nav_sup mouseHover" href="<%~ it.global.acf.support %>">
-            <div class="nav_sup_t">Support</div>
+            <div class="nav_sup_t">Support Us</div>
           </a>
         </div>
       </div>
