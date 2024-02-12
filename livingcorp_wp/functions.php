@@ -18,6 +18,8 @@ require_once(locate_template('/dev/ajax.php'));
 require_once(locate_template('/dev/user.php'));
 require_once(locate_template('/dev/json.php'));
 require_once(locate_template('/dev/jsoncalls.php'));
+require_once(locate_template('/dev/player.php'));
+require_once(locate_template('/dev/content-hub.php'));
 //require_once(locate_template('/dev/acf.php'));
 //add_action( 'wp_enqueue_scripts', 'js_scripts' );
 
@@ -34,8 +36,7 @@ require_once(locate_template('/dev/jsoncalls.php'));
 //     );
 // }
 
-//add_theme_support( 'post-thumbnails',array('post','page','experiencia') );
-
+add_theme_support('post-thumbnails', ['module', 'playlist']);
 // register_nav_menus( array(
 //   'header' => 'Header menu'
 // ) );
@@ -209,7 +210,109 @@ add_action('admin_menu', 'remove_comment_support');
 
 function remove_comment_support() {
     remove_post_type_support( 'post', 'comments' );
-    remove_post_type_support( 'page', 'comments' );
+    remove_post_type_support( 'post', 'comments' );
+    remove_post_type_support( 'sponsor', 'editor' );
 }
+
+// acf
+// load acf json
+function json_load_point( $paths ) {
+    unset($paths[0]);
+
+    $paths[] = get_template_directory() . '/acf-json';
+    
+    return $paths; 
+}
+
+add_filter('acf/settings/load_json', __NAMESPACE__ . '\json_load_point');
+
+
+// save acf json
+function json_save_point( $path ) {
+    $path = get_template_directory() . '/acf-json';
+          
+    return $path;
+}
+
+add_filter('acf/settings/save_json', __NAMESPACE__ . '\json_save_point');
+
+function sdv_create_page($title, $slug = "", $content = "", $parentSlug = "") {
+    $args = array(
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'title' => $title,
+        'posts_per_page' => 1
+    );
+    
+    $check_page_exist = new \WP_Query($args);
+    
+    $slug = !empty($slug) ? $slug : $title;
+    $parent = 0;
+
+    if(!empty($parentSlug)){
+        $parent = get_page_by_path($parentSlug);
+        $parent = !empty($parent) ? $parent->ID : 0;
+    }
+
+    if(empty($check_page_exist)) {
+        $page_id = wp_insert_post([
+            'comment_status' => 'close',
+            'ping_status'    => 'close',
+            'post_author'    => 1,
+            'post_title'     => $title,
+            'post_name'      => strtolower(str_replace(' ', '-', trim($slug))),
+            'post_status'    => 'publish',
+            'post_content'   => $content,
+            'post_type'      => 'page',
+            'post_parent'    => $parent,
+        ]);
+    }
+}
+
+// sdv_create_page("Discover", "player");
+// sdv_create_page("Browse Podcasts", "browse", "", "player");
+// sdv_create_page("Your Playlists", "playlists", "", "player");
+// sdv_create_page("Liked Podcasts", "liked-podcasts", "", "player");
+// sdv_create_page("Search Podcasts", "search-podcasts", "", "player");
+
+// sdv_create_page("Content Hub", "content-hub");
+// sdv_create_page("Actions", "actions", "", "content-hub");
+// sdv_create_page("CEO's", "ceos", "", "content-hub");
+// sdv_create_page("Media", "media", "", "content-hub");
+// sdv_create_page("Resources", "resources", "", "content-hub");
+// sdv_create_page("Purpose", "purpose", "", "content-hub");
+// sdv_create_page("Latest News", "news", "", "content-hub");
+
+function sdv_only_offload_mp3( $abort, $post_id, $metadata ) {
+	// only offload mp3.
+	$file = get_post_meta($post_id, '_wp_attached_file', true);
+	$extension = is_string($file) ? pathinfo($file, PATHINFO_EXTENSION) : false;
+
+	if (is_string($extension) && !in_array($extension, ['mp3', 'wav'])) {
+		$abort = true; // abort the upload
+	}
+
+	return $abort;
+}
+	
+add_filter( 'as3cf_pre_upload_attachment', 'sdv_only_offload_mp3', 10, 3 );
+
+function sdv_get_theme_version() {
+    $theme = wp_get_theme();
+    $version = uniqid();
+
+    if (!empty($theme)) {
+        $version = $theme->Version;
+    }
+
+    return $version;
+}
+
+function lc_replace_repeater_field( $where ) {
+    $where = str_replace( "meta_key = 'allowed_users_$", "meta_key LIKE 'allowed_users_%", $where );
+    return $where;
+}
+
+add_filter( 'posts_where', 'lc_replace_repeater_field' );
 
 ?>

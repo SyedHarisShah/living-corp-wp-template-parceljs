@@ -1,9 +1,38 @@
 <?php
+require_once(ABSPATH.'wp-admin/includes/user.php');
 add_action( 'rest_api_init', function () {
 
 register_rest_route( 'csskiller/v1', '/login/', array(
         'methods' => 'POST',
         'callback' => 'get_rest_login',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+register_rest_route( 'csskiller/v1', '/linkedin-login/', array(
+        'methods' => 'POST',
+        'callback' => 'get_rest_linkedin_login',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+register_rest_route( 'csskiller/v1', '/linkedin-register/', array(
+        'methods' => 'POST',
+        'callback' => 'get_rest_linkedin_register',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+register_rest_route( 'csskiller/v1', '/linkedin-connect/', array(
+        'methods' => 'POST',
+        'callback' => 'get_rest_linkedin_connect',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+register_rest_route( 'csskiller/v1', '/linkedin-disconnect/', array(
+        'methods' => 'POST',
+        'callback' => 'get_rest_linkedin_disconnect',
         //'permission_callback' => function () {
         //  return current_user_can( 'administrator' );
         //}
@@ -19,6 +48,14 @@ register_rest_route( 'csskiller/v1', '/getuser/', array(
 register_rest_route( 'csskiller/v1', '/mailchimp/', array(
         'methods' => 'GET',
         'callback' => 'get_mailchimp',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+	
+	register_rest_route( 'csskiller/v1', '/klaviyo/', array(
+        'methods' => 'GET',
+        'callback' => 'get_klaviyo',
         //'permission_callback' => function () {
         //  return current_user_can( 'administrator' );
         //}
@@ -60,6 +97,14 @@ register_rest_route( 'csskiller/v1', '/mailchimp/', array(
         //}
     ) );
 	
+	register_rest_route( 'csskiller/v1', '/add-interest/', array(
+        'methods' => 'POST',
+        'callback' => 'set_interest',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+	
 	register_rest_route( 'csskiller/v1', '/logout/', array(
         'methods' => 'GET',
         'callback' => 'set_logout',
@@ -67,6 +112,15 @@ register_rest_route( 'csskiller/v1', '/mailchimp/', array(
         //  return current_user_can( 'administrator' );
         //}
     ) );
+
+	register_rest_route( 'csskiller/v1', '/delete-account/', array(
+        'methods' => 'POST',
+        'callback' => 'set_delete_account',
+        //'permission_callback' => function () {
+        //  return current_user_can( 'administrator' );
+        //}
+    ) );
+
 	register_rest_route( 'csskiller/v1', '/recoverpass/', array(
         'methods' => 'GET',
         'callback' => 'do_password_reset',
@@ -91,10 +145,35 @@ register_rest_route( 'csskiller/v1', '/mailchimp/', array(
 } );
 function get_rest_user($request){
 	$acf=get_fields('user_'.get_current_user_id());
-		$nonce = wp_create_nonce("wp_rest");
-	$us = wp_get_current_user();
-    $return = array('user' => $us,
+	$nonce = wp_create_nonce("wp_rest");
+	$user = wp_get_current_user();
+	$linkedin_id = get_user_meta($user->ID, 'linkedin_id', true);
+	$linkedin_id = !empty($linkedin_id) ? $linkedin_id : '';
+
+	$topics = get_field('field_6282282955654', 'user_'.$user->ID);
+	$topics_arr = explode(",", $topics);
+	$tags_arr = [];
+
+	foreach($topics_arr as $topic){
+		global $wpdb;
+
+		$sql = "SELECT p.post_name
+		  	FROM $wpdb->posts p LEFT JOIN $wpdb->postmeta pm
+		  	ON ( p.ID = pm.post_id AND pm.meta_key = 'topics_a' )
+        	WHERE pm.meta_value LIKE '%$topic%' and p.post_type = 'tag'";
+	
+		$arr = $wpdb->get_col($sql);
+
+		$tags_arr = array_unique(array_merge($tags_arr, $arr), SORT_REGULAR);
+	}
+	
+	// update topics
+	$tags = !empty($tags_arr) ? $tags_arr : [];
+
+    $return = array('user' => $user,
 					'nonce'=> $nonce,
+					'linkedin_id'=> $linkedin_id,
+					'tags'=> $tags,
 				'acf' => $acf);
 		return new WP_REST_Response($return, 200);
 }
@@ -128,12 +207,347 @@ function get_rest_login($request){
             return $user;
 	   }
 	else{
+		$linkedin_id = get_user_meta($user->ID, 'linkedin_id', true);
+		$linkedin_id = !empty($linkedin_id) ? $linkedin_id : '';
+
 		$acf=get_fields('user_'.$user->ID);
             return array('user' => $user,
 				'acf' => $acf,
-                'nonce' => $nonce);
+                'nonce' => $nonce,
+				'linkedin_id'=> $linkedin_id
+			);
 	}
 
+}
+
+function get_rest_linkedin_login($request){
+	$api_url = "https://api.linkedin.com";
+
+	//get access token
+    $request_args = array(
+        'method'      => 'POST',
+        'timeout'     => 20,
+        'headers'     => [
+			'Content-Type' => 'application/x-www-form-urlencoded',
+        ],
+		'body' => $_POST
+    );
+
+    $request = wp_remote_post("${api_url}/oauth/v2/accessToken", $request_args );
+	$status_code = $request['response']['code'];
+	$access_token = json_decode(wp_remote_retrieve_body( $request ), true);
+	$access_token = isset($access_token['access_token']) ? $access_token['access_token'] : '';
+
+	//is auth code valid?
+	if($status_code !== 200 || empty($access_token)){
+		return new WP_REST_Response("invalid_auth", 401);
+	}
+
+	//get profile
+    $request_args = array(
+        'method'      => 'GET',
+        'timeout'     => 20,
+        'headers'     => [
+			'Authorization' => "Bearer $access_token",
+        ],
+    );
+
+    $request = wp_remote_get("${api_url}/v2/me", $request_args );
+    $response = is_wp_error( $request ) ? [] : json_decode(wp_remote_retrieve_body( $request ), true);
+
+	//profile data retrieved now handle errors
+
+	//check if user with linkedin id exists and has linkedin connected
+	$linkedin_id = $response['id'];
+
+	global $wpdb;
+    $db_prefix = $wpdb->prefix;
+
+	//check linkedin_id and get user_id
+	$user_id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM $wpdb->usermeta where meta_key = 'linkedin_id' and meta_value = '%s'", $linkedin_id));
+    $user_id = !empty($user_id) ? $user_id : 0;
+
+	if(empty($user_id)){
+		return new WP_REST_Response("account_doesnt_exist", 401);
+	}
+
+	//get email
+	$email = $wpdb->get_var($wpdb->prepare("SELECT user_email FROM $wpdb->users where ID = '%d'", $user_id));
+    $email = !empty($email) ? sanitize_email($email) : "";
+
+	if(empty($email)){
+		return new WP_REST_Response("account_doesnt_exist", 401);
+	}
+
+	//log in without password return auth'd user
+	$user = get_user_by('email', $email );
+	
+	if(is_wp_error($user)){
+		return new WP_REST_Response($user, 401);
+	}
+
+	$nonce = wp_create_nonce("wp_rest");
+	wp_clear_auth_cookie();
+	wp_set_current_user($user->ID);
+	wp_set_auth_cookie($user->ID);
+	$acf=get_fields('user_'.$user->ID);
+
+	return new WP_REST_Response(['user' => $user, 'acf' => $acf,'nonce' => $nonce,'linkedin_id'=> $linkedin_id], 200);
+}
+
+function get_rest_linkedin_register($request){
+	$api_url = "https://api.linkedin.com";
+
+	//get access token
+    $request_args = array(
+        'method'      => 'POST',
+        'timeout'     => 20,
+        'headers'     => [
+			'Content-Type' => 'application/x-www-form-urlencoded',
+        ],
+		'body' => $_POST
+    );
+
+    $request = wp_remote_post("${api_url}/oauth/v2/accessToken", $request_args );
+	$status_code = $request['response']['code'];
+	$access_token = json_decode(wp_remote_retrieve_body( $request ), true);
+	$access_token = isset($access_token['access_token']) ? $access_token['access_token'] : '';
+
+	//is auth code valid?
+	if($status_code !== 200 || empty($access_token)){
+		return new WP_REST_Response("invalid_auth", 401);
+	}
+
+	//get email (only for sign up not needed for login)
+    $request_args = array(
+        'method'      => 'GET',
+        'timeout'     => 20,
+        'headers'     => [
+			'Authorization' => "Bearer $access_token",
+        ],
+    );
+
+    $request = wp_remote_get("${api_url}/v2/emailAddress?q=members&projection=(elements*(handle~))", $request_args );
+    $emailAddress = is_wp_error( $request ) ? [] : json_decode(wp_remote_retrieve_body( $request ), true)['elements'][0]['handle~']['emailAddress'];
+
+	//get profile
+    $request_args = array(
+        'method'      => 'GET',
+        'timeout'     => 20,
+        'headers'     => [
+			'Authorization' => "Bearer $access_token",
+        ],
+    );
+
+    $request = wp_remote_get("${api_url}/v2/me", $request_args );
+    $response = is_wp_error( $request ) ? [] : json_decode(wp_remote_retrieve_body( $request ), true);
+
+	// add email to response
+	$response['emailAddress'] = $emailAddress;
+
+	//profile data retrieved now handle errors
+
+	//check if user with linkedin id exists
+	$linkedin_id = $response['id'];
+
+	global $wpdb;
+    $db_prefix = $wpdb->prefix;
+
+	//check linkedin_id and get user_id
+	$user_id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM $wpdb->usermeta where meta_key = 'linkedin_id' and meta_value = '%s'", $linkedin_id));
+    $user_id = !empty($user_id) ? $user_id : 0;
+
+	if(!empty($user_id)){
+		return new WP_REST_Response("account_already_exists", 401);
+	}
+
+	//get email
+	$email = $wpdb->get_var($wpdb->prepare("SELECT user_email FROM $wpdb->users where ID = '%d'", $user_id));
+    $email = !empty($email) ? sanitize_email($email) : "";
+
+	if(!empty($email)){
+		return new WP_REST_Response("email_already_exists", 401);
+	}
+
+	$email = $response['emailAddress'];
+	$first = $response['localizedFirstName'];
+	$last = $response['localizedLastName'];
+
+	//sign up user with linkedin info return auth'd user	
+	if(email_exists($request['email'])){
+		return new WP_REST_Response("email_already_exists", 401);
+	}
+
+	$pass = wp_generate_password();
+	$userdata = [
+		'user_login'    =>   $email,
+		'user_email'    =>   $email,
+		'user_pass'     => 	 $pass,
+		'first_name'    =>   $first,
+		'last_name'     =>   $last,
+	];
+
+	$user = wp_insert_user( $userdata );
+
+	if ( is_wp_error($user) ){
+		return new WP_REST_Response("error_signing_up", 401);
+	}
+
+	$us = get_user_by('email',$email)->user_login;
+	
+	prepare_email($email, $pass);
+	$nonce = wp_create_nonce("wp_rest");
+	
+	$creds['user_login'] = $us;
+	$creds['user_password'] =  $pass;
+	$creds['remember'] = true;
+	$user = wp_signon($creds, true);
+
+	if (is_wp_error($user)){
+		return new WP_REST_Response("error_signing_up", 401);
+	}
+
+	update_field('field_627f6ec02ba4f', '', 'user_'.$user->ID);
+	update_field('field_62841ef93fc75', $first, 'user_'.$user->ID);
+	update_field('field_62841f053fc76', $last, 'user_'.$user->ID);
+	update_field('field_6282280b55653', false, 'user_'.$user->ID);
+	update_user_meta($user->ID, 'linkedin_id', $linkedin_id);
+	$acf=get_fields('user_'.$user->ID);
+
+	subscribe_all_lists($email);
+
+	return new WP_REST_Response(['user' => $user, 'acf' => $acf, 'nonce' => $nonce, 'linkedin_id'=> $linkedin_id], 200);
+}
+
+
+function get_rest_linkedin_connect($request){
+	$api_url = "https://api.linkedin.com";
+
+	//get access token
+    $request_args = array(
+        'method'      => 'POST',
+        'timeout'     => 20,
+        'headers'     => [
+			'Content-Type' => 'application/x-www-form-urlencoded',
+        ],
+		'body' => $_POST
+    );
+
+    $request = wp_remote_post("${api_url}/oauth/v2/accessToken", $request_args );
+	$status_code = $request['response']['code'];
+	$access_token = json_decode(wp_remote_retrieve_body( $request ), true);
+	$access_token = isset($access_token['access_token']) ? $access_token['access_token'] : '';
+
+	//is auth code valid?
+	if($status_code !== 200 || empty($access_token)){
+		return new WP_REST_Response("invalid_auth", 401);
+	}
+
+	//get profile
+    $request_args = array(
+        'method'      => 'GET',
+        'timeout'     => 20,
+        'headers'     => [
+			'Authorization' => "Bearer $access_token",
+        ],
+    );
+
+    $request = wp_remote_get("${api_url}/v2/me", $request_args );
+    $response = is_wp_error( $request ) ? [] : json_decode(wp_remote_retrieve_body( $request ), true);
+
+	//profile data retrieved now handle errors
+
+	if(!isset($response['id'])){
+		return new WP_REST_Response("linkedin_api_error", 401);
+	}
+
+	//start checking if user with linkedin id exists and has linkedin connected
+	$linkedin_id = $response['id'];
+
+	global $wpdb;
+    $db_prefix = $wpdb->prefix;
+
+	//check if linkedin_id is connected
+	$user_id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM $wpdb->usermeta where meta_key = 'linkedin_id' and meta_value = '%s'", $linkedin_id));
+    $user_id = !empty($user_id) ? $user_id : 0;
+
+	//linkedin already connected to a user
+	if(!empty($user_id)){
+		return new WP_REST_Response("linkedin_connected_to_user", 401);
+	}
+
+	//check if user already has linkedin_id
+    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : "";
+
+	if(empty($email)){
+		return new WP_REST_Response("email_not_provided", 401);
+	}
+
+	$user_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->users where user_email = '%s'", $email));
+
+	if(empty($user_id)){
+		//error
+		return new WP_REST_Response("account_not_found", 401);
+	}
+
+	//is there an existing id connected to this account?
+	$id_linked = $wpdb->get_var($wpdb->prepare("SELECT meta_value FROM $wpdb->usermeta where meta_key = 'linkedin_id' and user_id = '%d'", $meta_value));
+
+	if(!empty($id_linked)){
+		return new WP_REST_Response("linkedin_exists_for_this_user", 401);
+	}
+
+	//set user meta for user
+	update_user_meta($user_id, 'linkedin_id', $linkedin_id);
+	
+	return new WP_REST_Response(json_encode($response), 200);
+}
+
+function get_rest_linkedin_disconnect($request){
+	//check if user already has linkedin_id
+	$email = isset($_POST['email']) ? sanitize_email($_POST['email']) : "";
+	$success = false;
+
+	if(empty($email)){
+		return new WP_REST_Response("email_not_provided", 401);
+	}	
+
+	if($userid > 0){
+		$user_login = get_user_by('email', $email)->user_login;
+		$creds = [];
+		$creds['user_login'] =  $user_login;
+		$creds['user_password'] = urldecode($_POST["pass"]);
+		$user = wp_signon($creds, true);
+
+		//authentication success
+		if (is_wp_error($user)){
+			return new WP_REST_Response("incorrect_password", 401);
+		}
+	}
+
+	global $wpdb;
+    $db_prefix = $wpdb->prefix;
+
+	//check if linkedin_id is connected
+	$user_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->users where user_email = '%s'", $email));
+
+	if(empty($user_id)){
+		return new WP_REST_Response("account_not_found", 401);
+	}
+
+	$linkedin_id = $wpdb->get_var($wpdb->prepare("SELECT meta_value FROM $wpdb->usermeta where meta_key = 'linkedin_id' and user_id = '%d'", $user_id));
+    $linkedin_id = !empty($linkedin_id) ? $linkedin_id : '';
+
+	//linkedin not connected to a user
+	if(empty($linkedin_id)){
+		//error
+		return new WP_REST_Response("linkedin_not_connected_to_user", 401);
+	}
+
+	//remove user meta for user
+	$success = delete_user_meta($user_id, 'linkedin_id');
+
+	return new WP_REST_Response($success, 200);
 }
 
 function get_mailchimp() {
@@ -179,7 +593,86 @@ function get_mailchimp() {
 	}
 }
 
+// helper
+// subscribe an email to all lists
+function subscribe_all_lists($email) {
+	// get all lists
+	$args= [
+		'post_type' => 'list',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+	];
+  
+	$wp_query= new WP_query($args);
+  
+	$lists = [];
+  
+	if ($wp_query->have_posts()):
+		while ($wp_query->have_posts()):
+			$wp_query->the_post();
+  
+			$list = get_field('mailchimp_id');
+  
+			array_push($lists,$list);
+		endwhile;
+	endif;
+	
+	$_GET['email'] = $email;
 
+	foreach ($lists as $list) {
+		$_GET['list'] = $list;
+
+		try{
+			// sub to each list
+			get_mailchimp()->data['body'];
+		}
+		catch(Exception $e){}
+	}
+
+	return new WP_REST_Response(true, 200);
+}
+
+function get_klaviyo() {
+    // Block spam bots
+    
+ 
+    // Configure --------------------------------------
+ 
+    $api_key = '03fb47ab9900e747c89f1491bb2c126d-us13';
+    $list_id = $_GET['list'];
+ 	$email = $_GET['email'];
+ 	$name = $_GET['name'];
+ 	$code = $_GET['code'];
+    // STOP Configuring -------------------------------
+ 
+    $msg = 'error';
+    $api_endpoint = 'https://<dc>.api.mailchimp.com/3.0/';
+    list(, $datacenter) = explode( '-', $api_key );
+    $api_endpoint = str_replace( '<dc>', $datacenter, $api_endpoint );
+    $url = 'https://a.klaviyo.com/api/v2/list/VtLrXi/subscribe?api_key=pk_faca289aec201da661ccde451b467f6018';
+
+    $request_args = array(
+        'method'      => 'POST',
+        'timeout'     => 20,
+        'headers'     => array(
+		'Accept' => 'application/json',
+		'Content-Type' => 'application/json',
+        ),
+        'body'        => '{"profiles":[{"email":"'.$email.'","First Name":"'.$name.'","Promotion Code": "'.$code.'"}]}',
+    );
+    $request = wp_remote_post( $url, $request_args );
+    $subscribe = is_wp_error( $request ) ? false : json_decode( wp_remote_retrieve_body( $request ) );
+    if ( $subscribe ) {
+        if ( isset( $subscribe->title ) && 'Member Exists' == $subscribe->title ) {
+            $msg = 'exists';
+        } elseif ( 'subscribed' == $subscribe->status ) {
+            $msg = 'success';
+        }
+		return new WP_REST_Response($request, 200);
+    }else{
+		return new WP_REST_Response($request, 200);
+	}
+}
 
 
 
@@ -295,19 +788,66 @@ function get_register($request){
 					return false;
 			   }
 			else{
-        update_field('field_627f6ec02ba4f',$request['pronoun'],'user_'.$user->ID);
-        update_field('field_62841ef93fc75',$request['first_name'],'user_'.$user->ID);
-        update_field('field_62841f053fc76',$request['last_name'],'user_'.$user->ID);
-        update_field('field_6282280b55653',false,'user_'.$user->ID);
-        $acf=get_fields('user_'.$user->ID);
+				update_field('field_627f6ec02ba4f',$request['pronoun'],'user_'.$user->ID);
+				update_field('field_62841ef93fc75',$request['first_name'],'user_'.$user->ID);
+				update_field('field_62841f053fc76',$request['last_name'],'user_'.$user->ID);
+				update_field('field_6282280b55653',false,'user_'.$user->ID);
+				$acf=get_fields('user_'.$user->ID);
 
-        return array('acf'=> $acf,'user' => $user,
-          'nonce' => $nonce);
+				update_user_meta($user->ID, 'linkedin_id', '');
+				subscribe_all_lists($request['email']);
+
+				return array('acf'=> $acf,'user' => $user, 'nonce' => $nonce, 'linkedin_id'=> '');
 			}
-
 		}
 	}
 	
+}
+
+function set_interest($request){
+	$userid = $_POST['userid'];
+	$tag = $_POST['tag'];
+	$remove = isset($_POST['remove']) ? true : false;
+	
+	$user = get_user_by('ID', $userid);
+
+	if(!$user){
+		return new WP_REST_Response('unauthorized', 401);
+	}
+
+	$tagid = strval(get_page_by_path($tag, OBJECT, 'tag')->ID);
+	$topics = get_field('field_6282282955654', 'user_'.$userid);
+	$topics_arr = explode(",", $topics);
+	$tag_as_topics = get_field('field_623b2eacd4e26', $tagid);
+
+	foreach($tag_as_topics as $tag){
+		$tag = strval($tag);
+		
+		if(!$remove){
+			// add topics as interests
+			if(!in_array($tag, $topics_arr)){
+				array_push($topics_arr, $tag);
+			}
+		}
+		else{
+			// remove topics as interests
+			if(in_array($tag, $topics_arr)){
+				$key = array_search($tag, $topics_arr);
+
+				if ($key !== false) {
+					unset($topics_arr[$key]);
+				}
+			}
+		}
+	}
+	
+	// update topics
+	$topics = implode(',', $topics_arr);
+	update_field('field_6282282955654', $topics, 'user_'.$userid);
+
+	$acf=get_fields('user_'.$userid);
+    $return = array('acf' => $acf);
+	return new WP_REST_Response($return, 200);
 }
 
 function set_preferences($request){
@@ -381,6 +921,25 @@ function set_edit($request){
 function set_logout($request){
 	wp_logout();
 	return new WP_REST_Response(false, 200);
+}
+
+function set_delete_account($request){
+	$userid = isset($request['userid']) ? $request['userid'] : 0;
+	$success = false;
+
+	if($userid > 0){
+		$user_login = get_user_by('ID', $userid)->user_login;
+		$creds['user_login'] =  $user_login;
+		$creds['user_password'] =  urldecode($request["pass"]);
+		$user = wp_signon( $creds, true );
+
+		//authentication success
+		if (!is_wp_error($user)){
+			$success = wp_delete_user($userid);
+		}
+	}
+
+	return new WP_REST_Response($success, 200);
 }
 
 
