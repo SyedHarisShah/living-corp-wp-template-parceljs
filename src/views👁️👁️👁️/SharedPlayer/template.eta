@@ -51,11 +51,14 @@
           <span id="<%~ key%>" class="mouseHover" data-href="<%~ playlist.link%>">
             <span class="player-page-btn--input" id="input-playlist-name"><input type="text" placeholder="Custom Playlist"></span>
             <span class="player-page-btn--text"><%~ playlist.name%></span>
-            <span class="player-page-btn--icon share-user-pl-btn" id="share-icon"><%~it.global.icons.menu%></span>
-            <span class="player-page-btn--icon save-pl-btn" id="close-icon"><%~it.global.icons.check%></span>
+            <span class="player-page-btn--icon share-user-pl-btn" id="share-icon" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"><%~it.global.icons.menu%></span>
+            <span class="player-page-btn--icon save-pl-btn" id="close-icon" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"><%~it.global.icons.check%></span>
             <ul class="mp-dropmenu" aria-label="Modify Playlist">
               <li id="edit-playlist-name">Edit Playlist Name</li>
               <li id="delete-this-playlist">Delete This Playlist</li>
+              <% if (it?.global?.user?.acf?.allow_share_playlist) { %>
+                <li id="share-this-playlist">Share This Playlist</li>
+              <% } %>
             </ul>
           </span>
         <% }) %>
@@ -97,7 +100,14 @@
 
         <div class="player-page__filter-items">
           <% it.filters.cats.forEach(({id, name},i) => { %>
-            <span id="cat-<%~i%>" data-id="<%~id%>" class="player-page__filter-item mouseHover"><%~name%></span>
+            <span
+              id="cat-<%~i%>"
+              data-id="<%~id%>"
+              class="player-page__filter-item mouseHover"
+              style="color: <%~ it?.global?.sponsor?.tagColor %>; border-color: <%~ it?.global?.sponsor?.tagColor %>;"
+            >
+              <%~name%>
+            </span>
           <% }) %>
         </div>
       </div>
@@ -107,7 +117,14 @@
 
         <div class="player-page__filter-items">
           <% it.filters.tags.forEach(({id, name},i) => { %>
-            <span id="tag-<%~i%>" data-id="<%~id%>" class="player-page__filter-item mouseHover"><%~name%></span>
+            <span
+              id="tag-<%~i%>"
+              data-id="<%~id%>"
+              class="player-page__filter-item mouseHover"
+              style="color: <%~ it?.global?.sponsor?.tagColor %>; border-color: <%~ it?.global?.sponsor?.tagColor %>;"
+            >
+              <%~name%>
+            </span>
           <% }) %>
         </div>
       </div>
@@ -117,7 +134,14 @@
 
         <div class="player-page__filter-items">
           <% it.filters.topics.forEach(({id, name},i) => { %>
-            <span id="topic-<%~i%>" data-id="<%~id%>" class="player-page__filter-item mouseHover"><%~name%></span>
+            <span
+              id="topic-<%~i%>"
+              data-id="<%~id%>"
+              class="player-page__filter-item mouseHover"
+              style="color: <%~ it?.global?.sponsor?.tagColor %>; border-color: <%~ it?.global?.sponsor?.tagColor %>;"
+            >
+              <%~name%>
+            </span>
           <% }) %>
         </div>
       </div>
@@ -160,7 +184,7 @@
 
       <div class="media-player__buttons media-player__buttons-1">
         <span class="mp-btn mouseHover" id="prev-btn"><%~ it.global.icons.rewind %></span>
-        <span class="mp-btn mouseHover" id="play-btn"><%~ it.global.icons.play %></span>
+        <span class="mp-btn mouseHover" id="play-btn" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"><%~ it.global.icons.play %></span>
         <span class="mp-btn mouseHover" id="next-btn"><%~ it.global.icons.rewind %></span>
         <span class="mp-btn mouseHover" id="loop-btn"><%~ it.global.icons.loop %></span>
         <span class="mp-btn mouseHover" id="shuffle-btn"><%~ it.global.icons.shuffle %></span>
@@ -180,7 +204,7 @@
 
         <div class="media-player__seek-bar">
           <div id="progress">
-            <span class="mouseHover" id="handle"></span>
+            <span class="mouseHover" id="handle" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"></span>
           </div>
         </div>
       </div>
@@ -190,8 +214,8 @@
           <%~ it.global.icons.volume %>
           <div id="volume-control" class="volume-btn-control">
             <div id="volume-slider">
-              <div id="volume-progress">
-                <span class="mouseHover" id="volume-handle"></span>
+              <div id="volume-progress" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>">
+                <span class="mouseHover" id="volume-handle" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"></span>
               </div>
             </div>
           </div>

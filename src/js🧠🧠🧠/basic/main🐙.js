@@ -49,7 +49,7 @@ class App {
   constructor (main) {
     AutoBind(this)
     this.content = document.querySelector('#content')
-    
+    // console.log('App: ', main);
     
     this.main = main
     this.main.colors = ['#DF80AC','#E5855E','#895434']
@@ -112,9 +112,9 @@ class App {
     this.pages.get('login').on('reset',()=>{
       let url = window.location
       // //  console.log('letsmakethelog')
-      if(process.env.APP_ENV=='local'){
-        url='http://localhost:1234/login.html'
-      }
+      // if(process.env.APP_ENV=='local'){
+      //   url='http://localhost:1234/login.html'
+      // }
       // this.onChange({
       //   url: url,
       //   id: '',
@@ -126,9 +126,9 @@ class App {
     })
     this.pages.get('apply').on('toJob',(content)=>{
       
-      if(process.env.APP_ENV=='local'){
-        content.url='http://localhost:1234/job.html'
-      }
+      // if(process.env.APP_ENV=='local'){
+      //   content.url='http://localhost:1234/job.html'
+      // }
       this.toJob({
         content:content
         
@@ -137,6 +137,7 @@ class App {
     })
     this.pages.get('login').on('gotohome',()=>{
       let url = this.main.acf.home
+      document.documentElement.classList.remove('is_shared')
       // if(process.env.APP_ENV=='local'){
       //   url='http://localhost:1234/index.html'
       // }
@@ -242,9 +243,9 @@ class App {
 
     this.intro.on('tochange',()=>{
       let url = this.main.acf.login
-      if(process.env.APP_ENV=='local'){
-        url='http://localhost:1234/login.html'
-      }
+      // if(process.env.APP_ENV=='local'){
+      //   url='http://localhost:1234/login.html'
+      // }
       this.onChange({
         url: url,
         id: '',
@@ -262,9 +263,9 @@ class App {
     this.nav.on('search',()=>{
       let url = this.main.acf.search+'?search='+this.nav.field.DOM.npt.value
       this.nav.closeSearchFn()
-      if(process.env.APP_ENV=='local'){
-        url='http://localhost:1234/search.html'
-      }
+      // if(process.env.APP_ENV=='local'){
+      //   url='http://localhost:1234/search.html'
+      // }
       this.onChange({
         url: url,
         id: '',

@@ -69,11 +69,11 @@ export default class extends EventEmitter {
         },3300)
       }
       else{
-        this.main.user = datalog
+        this.main.user = datalog;
         // //  console.log('login is made')
-        // //  console.log(this.main)
+        //  console.log('onLogin: ', this.main)
         // this.emit('login')
-        window.location.reload();
+        window.location.href = this.main.acf.login;
       }
       
   }

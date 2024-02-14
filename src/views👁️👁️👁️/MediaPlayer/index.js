@@ -28,6 +28,9 @@ export default class extends Page {
     this.playerPage = content.dataset.child || 'discover';
     this.main.title = content.dataset.title;
     this.postid = content.dataset.postid;
+    this.main.gotoplayer = false;
+
+    // console.log("main: ", this.main);
 
     window.history.replaceState({...window.history.state, postid: this.postid}, document.title, window.location.href);
 
@@ -262,6 +265,8 @@ export default class extends Page {
 
     moduleFilterBtns.forEach(btn => {
       const actClass = "player-page__filter-item--active";
+      btn.style.color = this.main?.sponsor?.tagColor;
+      btn.style.backgroundColor = 'transparent';
       btn.classList.remove(actClass);
     })
 
@@ -890,6 +895,8 @@ export default class extends Page {
       filterElem.dataset.type = type;
       filterElem.classList.add("player-page__filter-item");
       filterElem.classList.add("mouseHover");
+      filterElem.style.color = this.main?.sponsor?.tagColor;
+      filterElem.style.borderColor = this.main?.sponsor?.tagColor;
       filterElem.innerHTML = filter.name;
 
       filters.appendChild(filterElem);
@@ -938,7 +945,10 @@ export default class extends Page {
         this.DOM.searchBars?.forEach((x)=>{x.value = ''; x.blur();});
         // clear selected cats
         const actClass = "player-page__filter-item--active";
-        document.querySelectorAll(`.${actClass}`).forEach((filter)=>filter.classList.remove(actClass));
+        document.querySelectorAll(`.${actClass}`).forEach((filter)=>{
+          filter.style.backgroundColor = 'transparent';
+          filter.classList.remove(actClass)
+        });
         this.state.filters = {cats: [], tags: [], topics: []};
 
         window.history.pushState({
@@ -1122,11 +1132,17 @@ export default class extends Page {
       if (x.classList.contains(classname)) {
         x.classList.remove(classname);
 
+        x.style.color = this.main?.sponsor?.tagColor;
+        x.style.backgroundColor = 'transparent';
+
         let index = filterArr.indexOf(x.dataset.id);
         if (index !== -1) filterArr.splice(index, 1)
       }
       else {
         x.classList.add(classname);
+
+        x.style.color = '#000000';
+        x.style.backgroundColor = this.main?.sponsor?.tagColor;
 
         filterArr.push(x.dataset.id);
       }

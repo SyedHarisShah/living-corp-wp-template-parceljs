@@ -33,7 +33,11 @@ export default class extends Page {
     Eta.templates.define("li_dialog", Eta.compile(li_dialog))
 
     if(document.documentElement.classList.contains('logged')){
-      // //  console.log(this.main)
+      // console.log('login-main: ', this.main);
+      if(this.main.gotoplayer) {
+        window.location.href = '/learn';
+        return;
+      }
       const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/topic/')
       const data = await response.json()
       if(this.main.user.acf.topics){
@@ -132,6 +136,7 @@ export default class extends Page {
           const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/logout/')
           this.main.user = false;
           document.documentElement.classList.remove('logged')
+          document.documentElement.classList.remove('is_shared')
           this.emit('globalchange')
           this.emit('gotohome')
         }
@@ -409,6 +414,8 @@ export default class extends Page {
     else{
       const urlParams = new URLSearchParams(window.location.search)
       const loginpar = urlParams.get('login')
+
+      document.documentElement.classList.remove('is_shared')
       
       // const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/list/')
       // const data = await response.json()

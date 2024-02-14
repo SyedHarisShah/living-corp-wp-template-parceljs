@@ -11,6 +11,7 @@
         </div>
 
         <button class="btn mouseHover" id="submit_email"><div class="btn_t">SUBMIT</div></button>
+        <a class="btn mouseHover" href="<%~ it.global.acf.login %>"><div class="btn_t">ADMIN LOGIN</div></a>
       </div>
     </div>
   </section>

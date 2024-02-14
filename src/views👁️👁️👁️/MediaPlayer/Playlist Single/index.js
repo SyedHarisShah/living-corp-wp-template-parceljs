@@ -48,7 +48,7 @@ const getModules = async () => {
     const posts = result.modules;
     parent.nextPlaylist = posts;
 
-    const html = Eta.render(modules_eta, {posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
+    const html = Eta.render(modules_eta, {global: parent.main, posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
     modulesCont.innerHTML = html;
     document.getElementById("podcast-name").innerHTML = result.post_title;
     parent.regModuleClick();
@@ -80,7 +80,7 @@ const getModulesUser = async (upid) => {
     const posts = result.modules || [];
     parent.nextPlaylist = posts;
 
-    const html = Eta.render(user_modules_eta, {posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
+    const html = Eta.render(user_modules_eta, {global: parent.main, posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
     modulesCont.innerHTML = html;
     document.getElementById("podcast-name").innerHTML = result.post_title;
 

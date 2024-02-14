@@ -1,8 +1,20 @@
 <span class="player-page__nav-new-playlist pl-adding mouseHover">
     <span class="player-page-btn--input" id="input-playlist-name"><input type="text" placeholder="Custom Playlist"></span>
     <span class="player-page-btn--text">Saving...</span>
-    <span class="player-page-btn--icon share-user-pl-btn" id="share-icon" style="display: none"><%~it.icons.menu%></span>
-    <span class="player-page-btn--icon save-pl-btn" id="close-icon"><%~it.icons.check%></span>
+    <span
+        class="player-page-btn--icon share-user-pl-btn"
+        id="share-icon"
+        style="display: none; background-color: <%~ it?.global?.sponsor?.buttonColor %>"
+    >
+        <%~it.icons.menu%>
+    </span>
+    <span
+        class="player-page-btn--icon save-pl-btn"
+        id="close-icon"
+        style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"
+    >
+        <%~it.icons.check%>
+    </span>
     <ul class="mp-dropmenu" aria-label="Modify Playlist">
         <li id="edit-playlist-name">Edit Playlist Name</li>
         <li id="delete-this-playlist">Delete This Playlist</li>

@@ -12,7 +12,7 @@
             <span class="player-module__length"><%~ it.formatDuration(x.duration)%></span>
             <span class="player-module__length-num"><%~ it.formatDuration(x.duration, true)%></span>
             <span class="player-module__likeBtn mouseHover module-like-btn"><%~ x.liked ? it.icons.heart_filled : it.icons.heart%></span>
-            <span class="player-module__menuBtn mouseHover module-remove-menu-btn"><%~it.icons.menu%></span>
+            <span class="player-module__menuBtn mouseHover module-remove-menu-btn" style="background-color: <%~ it?.global?.sponsor?.buttonColor %>"><%~it.icons.menu%></span>
 
             <ul class="mp-removemenu" aria-label="Remove from playlist">
               <li id="remove-from-playlist">Remove</li>

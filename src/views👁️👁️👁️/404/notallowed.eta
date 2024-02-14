@@ -4,7 +4,7 @@
     <div class="c-vw">
       <div class="box">
         <h2 class="tit1">YOU ARE NOT ALLOWED TO ACCESS THIS PLAYER</h2>
-        <button class="btn mouseHover" id="refresh_page"><div class="btn_t">TRY AGAIN</div></button>
+        <button class="btn mouseHover" id="refresh_page"><div class="btn_t">BACK TO HOME</div></button>
       </div>
     </div>
   </section>

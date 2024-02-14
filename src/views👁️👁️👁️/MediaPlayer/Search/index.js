@@ -42,7 +42,7 @@ const getModules = async () => {
     const posts = await postsResp.json();
     parent.nextPlaylist = posts;
 
-    const html = Eta.render(modules_eta, {posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
+    const html = Eta.render(modules_eta, {global: parent.main, posts, icons, formatDate: parent.formatDate, formatDuration: parent.formatDuration});
     modulesCont.innerHTML = html;
     let text = `${posts.length} Results for "${parent.search_term}"`;
     if (tax) text = `${tax}: "${parent.search_term}"`;

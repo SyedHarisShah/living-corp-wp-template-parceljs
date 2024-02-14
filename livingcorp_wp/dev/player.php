@@ -75,6 +75,8 @@ function get_sponsor_by_id($request) {
                 if($sponsor_id){
                     $sponsor->id = $sponsor_id;
                     $sponsor->color = get_field('brand_color', $sponsor_id);
+                    $sponsor->buttonColor = get_field('button_color', $sponsor_id);
+                    $sponsor->tagColor = get_field('tags_color', $sponsor_id);
                     $sponsor->icon = get_field('brand_icon', $sponsor_id);
                     $sponsor->logo = get_field('brand_logo', $sponsor_id);
                     $sponsor->banner = get_field('brand_banner_image', $sponsor_id);
@@ -116,6 +118,8 @@ function sdv_get_sponsor($request) {
                         $sponsor = new stdClass();
                         $sponsor->id = $sponsor_id;
                         $sponsor->color = get_field('brand_color', $sponsor_id);
+                        $sponsor->buttonColor = get_field('button_color', $sponsor_id);
+                        $sponsor->tagColor = get_field('tags_color', $sponsor_id);
                         $sponsor->icon = get_field('brand_icon', $sponsor_id);
                         $sponsor->logo = get_field('brand_logo', $sponsor_id);
                         $sponsor->banner = get_field('brand_banner_image', $sponsor_id);
@@ -127,6 +131,8 @@ function sdv_get_sponsor($request) {
         $sponsor = new stdClass();
         $sponsor->id = $spId;
         $sponsor->color = get_field('brand_color', $spId);
+        $sponsor->buttonColor = get_field('button_color', $spId);
+        $sponsor->tagColor = get_field('tags_color', $spId);
         $sponsor->icon = get_field('brand_icon', $spId);
         $sponsor->logo = get_field('brand_logo', $spId);
         $sponsor->banner = get_field('brand_banner_image', $spId);

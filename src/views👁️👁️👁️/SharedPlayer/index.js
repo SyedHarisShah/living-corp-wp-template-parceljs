@@ -30,8 +30,15 @@ export default class extends Page {
     this.main.title = content.dataset.title;
     this.postid = content.dataset.postid;
     this.spId = content.dataset.spid || 0;
+    this.main.gotoplayer = true;
 
-    document.documentElement.classList.add('is_shared')
+    // console.log('shared-main: ', this.main);
+
+    document.documentElement.classList.add('is_shared');
+
+    if(this.main?.user){
+      this.email = this?.main?.user?.user?.data?.user_email;
+    }
 
     window.history.replaceState({ ...window.history.state, postid: this.postid }, document.title, window.location.href);
 
@@ -97,7 +104,7 @@ export default class extends Page {
         refresh_page: document.getElementById('refresh_page')
       };
 
-      this.DOM.refresh_page.addEventListener("click", () => { window.location.reload(); });
+      this.DOM.refresh_page.addEventListener("click", () => { window.location.href = this.main.acf.home; });
       return;
     }
 
@@ -242,26 +249,37 @@ export default class extends Page {
   }
 
   search(e) {
+    const params = new URLSearchParams(window.location.search);
+
     const moduleFilterBtns = document.querySelectorAll(".player-page__filter-item--active");
 
     moduleFilterBtns.forEach(btn => {
       const actClass = "player-page__filter-item--active";
+      btn.style.color = this.main?.sponsor?.tagColor;
+      btn.style.backgroundColor = 'transparent';
       btn.classList.remove(actClass);
     })
-    
+
+    params.delete("tax");
+
+    this.state.filters = {cats: [], tags: [], topics: []};
+
     const searchTerm = e.target.value;
 
-    if (!searchTerm) return;
+    if(!searchTerm) {
+      this.lastload = discover.load;
+      this.lastload();
+      params.delete("term");
+      return;
+    }
     this.search_term = searchTerm.trim();
     this.search_term_tax = false;
 
-    const params = new URLSearchParams(window.location.search);
     params.set('term', this.search_term);
 
-    params.delete("tax");
     this.DOM.searchBars?.forEach(x => x.blur());
 
-    window.history.pushState({ 'player_href': 'search' }, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
+    window.history.pushState({'player_href': 'search'}, document.title, `${this.main.acf.search_podcasts_page_link}?${params}`);
     this.lastload = search_podcasts.load;
     this.lastload();
   }
@@ -353,7 +371,7 @@ export default class extends Page {
 
   createPlaylist() {
     const playlists = document.querySelector('.player-page__nav-playlists');
-    const html = Eta.render(new_playlist, { icons });
+    const html = Eta.render(new_playlist, { global:this.main, icons });
     const newPlElem = document.createElement('div');
     playlists.prepend(newPlElem);
     newPlElem.outerHTML = html
@@ -850,6 +868,8 @@ export default class extends Page {
       filterElem.dataset.type = type;
       filterElem.classList.add("player-page__filter-item");
       filterElem.classList.add("mouseHover");
+      filterElem.style.color = this.main?.sponsor?.tagColor;
+      filterElem.style.borderColor = this.main?.sponsor?.tagColor;
       filterElem.innerHTML = filter.name;
 
       filters.appendChild(filterElem);
@@ -895,10 +915,13 @@ export default class extends Page {
         const params = new URLSearchParams(window.location.search);
         params.set("term", this.search_term);
         params.set("tax", this.search_term_tax);
-        this.DOM.searchBars?.forEach((x) => x.blur());
+        this.DOM.searchBars?.forEach((x)=>{x.value = ''; x.blur();});
         // clear selected cats
         const actClass = "player-page__filter-item--active";
-        document.querySelectorAll(`.${actClass}`).forEach((filter) => filter.classList.remove(actClass));
+        document.querySelectorAll(`.${actClass}`).forEach((filter) => {
+          filter.style.backgroundColor = 'transparent';
+          filter.classList.remove(actClass)
+        });
         this.state.filters = { cats: [], tags: [], topics: [] };
 
         window.history.pushState({
@@ -1081,11 +1104,17 @@ export default class extends Page {
       if (x.classList.contains(classname)) {
         x.classList.remove(classname);
 
+        x.style.color = this.main?.sponsor?.tagColor;
+        x.style.backgroundColor = 'transparent';
+
         let index = filterArr.indexOf(x.dataset.id);
         if (index !== -1) filterArr.splice(index, 1)
       }
       else {
         x.classList.add(classname);
+
+        x.style.color = '#000000';
+        x.style.backgroundColor = this.main?.sponsor?.tagColor;
 
         filterArr.push(x.dataset.id);
       }
