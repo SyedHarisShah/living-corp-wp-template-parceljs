@@ -36,7 +36,7 @@
         <a class="mouseHover Ssp" href="<%~ it.global.acf.spotify %>"><%~ it.global.icons.spotify %></a>
         <a class="mouseHover Spl" style="display:none!important" href="<%~ it.global.acf.playmusic %>"><%~ it.global.icons.triangulo %></a>
         <a class="mouseHover Sst" href="<%~ it.global.acf.stitcher %>"><%~ it.global.icons.cuadraditos %></a>
-        <a class="mouseHover Ssl" href="<%~ it.global.acf.slack %>"><%~ it.global.icons.slack %></a>
+        <a class="mouseHover Sds" href="<%~ it.global.acf.slack %>"><%~ it.global.icons.discord %></a>
         <a class="mouseHover Sig" href="<%~ it.global.acf.instagram %>"><%~ it.global.icons.ig %></a>
         <a class="mouseHover Sin" href="<%~ it.global.acf.linkedin %>"><%~ it.global.icons.in %></a>
         <a class="mouseHover Sfb" href="<%~ it.global.acf.facebook %>"><%~ it.global.icons.fb %></a>

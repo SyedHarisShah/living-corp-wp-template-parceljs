@@ -11,6 +11,7 @@ import spotify from 'bundle-text:/src/svg🔰🔰🔰/social/spotify.svg'
 import triangulo from 'bundle-text:/src/svg🔰🔰🔰/social/triangulo.svg'
 import cuadraditos from 'bundle-text:/src/svg🔰🔰🔰/social/cuadraditos.svg'
 import slack from 'bundle-text:/src/svg🔰🔰🔰/social/slack.svg'
+import discord from 'bundle-text:/src/svg🔰🔰🔰/social/discord.svg'
 import tw from 'bundle-text:/src/svg🔰🔰🔰/social/tw.svg'
 import ig from 'bundle-text:/src/svg🔰🔰🔰/social/ig.svg'
 import lin from 'bundle-text:/src/svg🔰🔰🔰/social/in.svg'
@@ -62,6 +63,7 @@ const icons = {
   triangulo:triangulo,
   cuadraditos:cuadraditos,
   slack:slack,
+  discord:discord,
   tw:tw,
   ig:ig,
   in:lin,
