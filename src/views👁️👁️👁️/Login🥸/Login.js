@@ -72,8 +72,11 @@ export default class extends EventEmitter {
         this.main.user = datalog;
         // //  console.log('login is made')
         //  console.log('onLogin: ', this.main)
-        // this.emit('login')
-        window.location.href = this.main.acf.login;
+        if(this.main?.gotoSharedPlayer) {
+          window.location.href = this.main?.sharedPlayerLink;
+        } else {
+          window.location.href = this.main.acf.login;
+        } 
       }
       
   }

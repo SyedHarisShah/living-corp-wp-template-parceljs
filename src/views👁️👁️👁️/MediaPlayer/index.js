@@ -28,7 +28,8 @@ export default class extends Page {
     this.playerPage = content.dataset.child || 'discover';
     this.main.title = content.dataset.title;
     this.postid = content.dataset.postid;
-    this.main.gotoplayer = false;
+    this.main.gotoSharedPlayer = false;
+    this.main.sharedPlayerLink = '';
 
     // console.log("main: ", this.main);
 

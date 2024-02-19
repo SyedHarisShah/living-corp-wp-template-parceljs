@@ -33,11 +33,6 @@ export default class extends Page {
     Eta.templates.define("li_dialog", Eta.compile(li_dialog))
 
     if(document.documentElement.classList.contains('logged')){
-      // console.log('login-main: ', this.main);
-      if(this.main.gotoplayer) {
-        window.location.href = '/learn';
-        return;
-      }
       const response = await fetch(this.main.acf.base+'/wp-json/csskiller/v1/topic/')
       const data = await response.json()
       if(this.main.user.acf.topics){
@@ -486,7 +481,7 @@ export default class extends Page {
     
     
     await this.loadImages()
-    await this.createAnimations()
+    this.createAnimations()
 
 
     

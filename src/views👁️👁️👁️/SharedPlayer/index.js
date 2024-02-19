@@ -30,7 +30,8 @@ export default class extends Page {
     this.main.title = content.dataset.title;
     this.postid = content.dataset.postid;
     this.spId = content.dataset.spid || 0;
-    this.main.gotoplayer = true;
+    this.main.gotoSharedPlayer = true;
+    this.main.sharedPlayerLink = window.location.href;
 
     // console.log('shared-main: ', this.main);
 
