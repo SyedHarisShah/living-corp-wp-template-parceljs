@@ -275,17 +275,17 @@ function getUserPlaylistById($request){
     $post->user = true;
 
     if(!empty($playlist['podcasts'])){    
-        $args = [
-            'post_type' => 'module',
-            'fields' => 'ids',
-            'posts_per_page' => -1,
-            'meta_query' => [$taxargs],
-            'post__in' => $playlist['podcasts'],
-        ];
+        // $args = [
+        //     'post_type' => 'module',
+        //     'fields' => 'ids',
+        //     'posts_per_page' => -1,
+        //     'meta_query' => [$taxargs],
+        //     'post__in' => $playlist['podcasts'],
+        // ];
     
-        $query = new WP_Query($args);
+        // $query = new WP_Query($args);
     
-        foreach($query->posts as $id){
+        foreach($playlist['podcasts'] as $id){
             array_push($post->modules, sdv_get_module($id, false, $userid));
         }
     }
@@ -1234,7 +1234,9 @@ function sdv_get_playlist($id, $ignoreModules = false, $ignoreSponsor = false, $
                 $module['module']->summary = get_field('module_summary', $moduleID) ?? '';
                 $module['module']->transcript = get_field('module_transcript', $moduleID) ?? '';
                 $module['module']->img = sdv_get_image($moduleID);
+                $module['module']->module_type = get_field('module_type', $id) ?? 'audio';
                 $module['module']->src = get_field('module_src', $moduleID);
+                // $module['module']->video_src = get_field('module_video_src', $moduleID);
                 $liked_podcasts = get_user_meta($userid, "liked_podcasts", true);
                 $module['module']->liked = in_array($moduleID, $liked_podcasts);
                 $module['module']->plays = sdv_get_plays($moduleID);
@@ -1294,7 +1296,9 @@ function sdv_get_module($id, $ignoreTax = false, $userid){
     $post->byline = get_field('module_byline', $id) ?? '';
     $post->summary = get_field('module_summary', $id) ?? '';
     $post->transcript = get_field('module_transcript', $id) ?? '';
+    $post->module_type = get_field('module_type', $id) ?? 'audio';
     $post->src = get_field('module_src', $id);
+    $post->video_src = get_field('module_video_src', $id) ?? '';
     $post->img = sdv_get_image($id);
     $post->plays = sdv_get_plays($id);
     if(!is_null($userid) && $userid !== 'undefined') {

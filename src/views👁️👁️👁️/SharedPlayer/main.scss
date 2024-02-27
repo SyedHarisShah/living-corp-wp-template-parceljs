@@ -51,7 +51,8 @@
 
 html.is_shared{
   .player-module {
-    &__date {
+    &__date,
+    &__type {
       display: none;
     }
 

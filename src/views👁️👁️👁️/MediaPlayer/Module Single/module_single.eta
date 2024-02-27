@@ -6,7 +6,7 @@
 
     <div class="player-module-page__info">
         <span><%~ it.icons.play %> <%~ it.module.plays %></span>
-        <span><%~ it.formatDate(it.module.post_date)%></span>
+        <span><%~ it.module.module_type%></span>
         <span><%~ it.formatDuration(it.module.duration)%></span>
     </div>
 

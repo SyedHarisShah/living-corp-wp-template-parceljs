@@ -8,7 +8,7 @@
             </div>
             <span class="player-module__playBtn module-play-btn" data-fetch="true"><%~it.icons.playbtn%></span>
             <span class="player-module__plays"><%~it.icons.play%><%~x.plays%></span>
-            <span class="player-module__date"><%~ it.formatDate(x.post_date)%></span>
+            <span class="player-module__type"><%~ x.module_type%></span>
             <span class="player-module__length"><%~ it.formatDuration(x.duration)%></span>
             <span class="player-module__length-num"><%~ it.formatDuration(x.duration, true)%></span>
             <span class="player-module__likeBtn mouseHover module-like-btn"><%~ x.liked ? it.icons.heart_filled : it.icons.heart%></span>
