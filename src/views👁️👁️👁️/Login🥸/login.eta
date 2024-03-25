@@ -101,7 +101,13 @@
                   <div class="btn btnLogin mouseHover" style="--main:#E5855E;--base:#FEF9F3">
                     <div class="btn_t">Log in</div>
                   </div>
-                  <%if(it.global.acf.linkedin_api.client_id || it.global.acf.linkedin_api.client_secret){%>
+                  
+                  <%if(it.global.acf.default_sso_setting.idp_id && it.global.acf.default_sso_setting.redirect_url){%>
+                    <div class="btn_t text-divider"><span>OR</span></div>
+                    <a class="btn mouseHover" style="--main:#0E76A8;--base:#FEF9F3" href="<%~ it.global.acf.base %>?option=saml_user_login&idp=<%~ it.global.acf.default_sso_setting.idp_id %>&redirect_to=<%~ it.global.acf.default_sso_setting.redirect_url %>" target="_blank"><div class="btn_t">Log in with SSO</div></a>
+                  <% } %>
+
+                  <%if(it.global.acf.linkedin_api.client_id && it.global.acf.linkedin_api.client_secret){%>
                     <div class="btn btnLILogin mouseHover" style="--main:#0E76A8;--base:#FEF9F3">
                       <div class="btn_t">Log in with <span class="btnLILogin--icons"><%~ it.global.icons.in %> <%~ it.global.icons.in %></span></div>
                     </div>

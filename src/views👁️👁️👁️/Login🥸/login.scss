@@ -286,7 +286,28 @@
 
       }
       .login_btn_cont{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         text-align: center;
+
+        .text-divider{
+          margin-top: 3rem;
+          &::before{
+            content: "";
+            background-color: #5a5a5a;
+            width: 100%;
+            height: 2px;
+            display: block;
+            position: relative;
+            top: 0.8rem;
+            z-index: -1;
+          }
+          span {
+            background-color: #fef9f3;
+            padding: 6px 10px;
+          }
+        }
       }
     }
   }

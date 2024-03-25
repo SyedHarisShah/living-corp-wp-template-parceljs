@@ -65,22 +65,31 @@ function get_sponsor_by_id($request) {
             //     )
             // )
         );
-        
-        $the_query = new WP_Query( $args );
-        
-        if($the_query->have_posts()) {
-            foreach($the_query->posts as $post) {
-                $sponsor_id = $post->ID;
+    } else if (!empty($spId)) {
+        $args = array(
+            'p' => $spId,
+            'post_type' => 'sponsor'
+        );
+    }
 
-                if($sponsor_id){
-                    $sponsor->id = $sponsor_id;
-                    $sponsor->color = get_field('brand_color', $sponsor_id);
-                    $sponsor->buttonColor = get_field('button_color', $sponsor_id);
-                    $sponsor->tagColor = get_field('tags_color', $sponsor_id);
-                    $sponsor->icon = get_field('brand_icon', $sponsor_id);
-                    $sponsor->logo = get_field('brand_logo', $sponsor_id);
-                    $sponsor->banner = get_field('brand_banner_image', $sponsor_id);
-                }
+    $the_query = new WP_Query( $args );
+        
+    if($the_query->have_posts()) {
+        foreach($the_query->posts as $post) {
+            $sponsor_id = $post->ID;
+
+            if($sponsor_id){
+                $sponsor->id = $sponsor_id;
+                $sponsor->color = get_field('brand_color', $sponsor_id);
+                $sponsor->buttonColor = get_field('button_color', $sponsor_id);
+                $sponsor->tagColor = get_field('tags_color', $sponsor_id);
+                $sponsor->icon = get_field('brand_icon', $sponsor_id);
+                $sponsor->logo = get_field('brand_logo', $sponsor_id);
+                $sponsor->banner = get_field('brand_banner_image', $sponsor_id);
+                $sponsor->idp = get_field('brand_saml_sso_idp', $sponsor_id);
+                $sponsor->pageDescription = get_field('brand_page_description', $sponsor_id);
+                $sponsor->backgroundColor = get_field('brand_background_color', $sponsor_id);
+                $sponsor->ssoButtonColor = get_field('brand_sso_button_color', $sponsor_id);
             }
         }
     }
@@ -123,6 +132,10 @@ function sdv_get_sponsor($request) {
                         $sponsor->icon = get_field('brand_icon', $sponsor_id);
                         $sponsor->logo = get_field('brand_logo', $sponsor_id);
                         $sponsor->banner = get_field('brand_banner_image', $sponsor_id);
+                        $sponsor->idp = get_field('brand_saml_sso_idp', $sponsor_id);
+                        $sponsor->pageDescription = get_field('brand_page_description', $sponsor_id);
+                        $sponsor->backgroundColor = get_field('brand_background_color', $sponsor_id);
+                        $sponsor->ssoButtonColor = get_field('brand_sso_button_color', $sponsor_id);
                     }
                 }
             }
@@ -136,6 +149,10 @@ function sdv_get_sponsor($request) {
         $sponsor->icon = get_field('brand_icon', $spId);
         $sponsor->logo = get_field('brand_logo', $spId);
         $sponsor->banner = get_field('brand_banner_image', $spId);
+        $sponsor->idp = get_field('brand_saml_sso_idp', $spId);
+        $sponsor->pageDescription = get_field('brand_page_description', $spId);
+        $sponsor->backgroundColor = get_field('brand_background_color', $spId);
+        $sponsor->ssoButtonColor = get_field('brand_sso_button_color', $spId);
     }
     
     if (!$sponsor) {

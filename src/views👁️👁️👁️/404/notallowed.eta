@@ -1,4 +1,4 @@
-<main class="emailpage">
+<main class="errorpage">
   <section>
     <img src="<%~ it.global.acf.template %>/public/notlogged.png">
     <div class="c-vw">

@@ -1,0 +1,51 @@
+<style>
+
+.shared-login section { background: <%~ it.global.sponsor.backgroundColor %>; }
+.shared-login .text-divider span { background-color: <%~ it.global.sponsor.backgroundColor %> }
+.shared-login .sso-btn .btn::after { background: <%~ it.global.sponsor.ssoButtonColor %> }
+
+</style>
+
+<main class="shared-login">
+  <section>
+    <img src="<%~ it.global.acf.template %>/public/images/shared/1.png">
+    <div class="top-title">
+      <h2 class="tit1"><%~ it.global.sponsor.pageDescription %></h2>
+    </div>
+    <div class="c-vw">
+      <div class="box">
+        <div class="field field-email">
+          <input class="field_npt emailRequire mouseHover evt" placeholder="Your Email*">
+          <div class="field_err">Wrong Format : name@example.com</div>
+        </div>
+
+        <div class="login-btns">
+          <button class="btn mouseHover" id="submit_email"><div class="btn_t">SUBMIT</div></button>
+          <a class="btn mouseHover" href="<%~ it.global.acf.login %>"><div class="btn_t">ADMIN LOGIN</div></a>
+        </div>
+
+        <% if(it.global.sponsor.idp) { %>
+
+        <div class="btn_t text-divider"><span>OR</span></div>
+
+        <div class="sso-btn">
+          <a
+            class="btn mouseHover"
+            href="<%~ it.global.acf.base %>?option=saml_user_login&idp=<%~ it.global.sponsor.idp %>&redirect_to=<%~ it.global.sharedPlayerLink %>"
+            target="_blank"
+          >
+            <div class="btn_t">Log in with SSO</div>
+          </a>
+        </div>
+
+        <% } %>
+        
+      </div>
+    </div>
+
+    <div class="sponsor-logo">
+      <img src="<%~ it.global.sponsor.logo %>">
+    </div>
+  </section>
+  <%~ it.footer %>
+</main>

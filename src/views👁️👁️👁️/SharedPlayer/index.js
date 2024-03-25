@@ -2,7 +2,7 @@ import Page from '../../js🧠🧠🧠/defaults/Page'
 import player from 'bundle-text:./template.eta'
 import audioLib from '../MediaPlayer/audioLib'
 import icons from "../../js🧠🧠🧠/basic/icons🔰";
-import emailRequired from 'bundle-text:./emailRequired.eta'
+import sharedLogin from 'bundle-text:./sharedLogin.eta'
 import discover from '../MediaPlayer/Discover'
 import browse from '../MediaPlayer/Browse'
 import playlist_page from '../MediaPlayer/Playlists'
@@ -33,8 +33,6 @@ export default class extends Page {
     this.main.gotoSharedPlayer = true;
     this.main.sharedPlayerLink = window.location.href;
 
-    // console.log('shared-main: ', this.main);
-
     document.documentElement.classList.add('is_shared');
 
     if(this.main?.user){
@@ -59,8 +57,19 @@ export default class extends Page {
       filters: { cats: [], tags: [], topics: [] }
     }
 
+    // get branding
+    let params = new URLSearchParams();
+
+    if (this.spId) params.set('spId', this.spId);
+
+    const sponsorRes = this.spId ? await fetch(`/wp-json/sdv/player/v1/get-sponsor-id?${params}`) : await fetch(`/wp-json/sdv/player/v1/get-sponsor?${params}`);
+    const sponsor_detail = await sponsorRes.json();
+    this.main.sponsor = sponsor_detail;
+
+    console.log('shared-main: ', this.main);
+
     if (!this.email) {
-      html = Eta.render(emailRequired, { global: this.main, footer: this.footer })
+      html = Eta.render(sharedLogin, { global: this.main, footer: this.footer })
       document.querySelector('#content').innerHTML += html;
       this.DOM = {
         el: document.querySelector('main:not(.old)'),
@@ -76,10 +85,6 @@ export default class extends Page {
     const filters = await filtersResp.json();
     this.main.banner_image = this.main.acf?.player_banner_image;
 
-    // get branding
-    let params = new URLSearchParams();
-
-    if (this.spId) params.set('spId', this.spId);
     if (this.email) {
       params.set('email', this.email);
       const checkUserExists = await fetch(`/wp-json/sdv/player/v1/check-user-exists?email=${this.email}`);
